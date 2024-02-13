@@ -1,6 +1,6 @@
 ---
 name: Feature template
-about: Suggest an idea for this project
+about: feature 작업사항 작성
 title: "[Feat]: 설명 작성"
 labels: ''
 assignees: ''
