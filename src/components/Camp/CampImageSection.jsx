@@ -17,21 +17,20 @@ const Section = styled.section`
 `;
 
 const H2 = styled.h2`
-  font-size: ${props => (props.size ? props.size : '1.5625rem')};
+  font-size: 1.5625rem;
   color: ${props => (props.color ? theme.colors[props.color] : theme.colors.white)};
-  text-align: ${props => (props.align ? props.align : 'center')};
+  text-align: center;
   padding: ${props => (props.padding ? props.padding : '')};
   font-weight: bold;
 `;
 
 const P = styled.p`
-  font-size: ${props => (props.size ? props.size : '1.25rem')};
+  font-size: 1.5rem;
   color: ${props => (props.color ? theme.colors[props.color] : theme.colors.white)};
-  word-break: keep-all;
-  grid-area: desc;
-  line-height: 1.3;
-  text-align: ${props => (props.align ? props.align : '')};
+  text-align: center;
   padding: ${props => (props.padding ? props.padding : '')};
+  letter-spacing: -0.05em;
+  font-weight: bold;
 `;
 
 function CampImageSection({img, title, label1 = '', label2 = '', label3 = ''}) {
