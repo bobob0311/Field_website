@@ -36,9 +36,9 @@ type=button
   border: none;
   border-radius: 5rem;
   font-weight: bold;
-  font-family: "SUIT-Regular";
   font-size: .9375rem;
   word-break: keep-all;
+  box-shadow: 0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.3);
 `;
 
 const TitleH2 = styled.h2`
