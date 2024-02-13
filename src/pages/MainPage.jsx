@@ -3,6 +3,8 @@ import backgroundImage from './../../public/fieldIntro1.png';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 import theme from '../theme';
+import ThreeDCube from '../components/ThreeDCube';
+import AnimationExample from '../components/AnimationExample';
 
 function MainPage() {
   const Header = styled.header`
@@ -92,10 +94,8 @@ function MainPage() {
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
       url(${props => props.src});
     background-color: ${theme.colors.blue};
-    padding: 2rem;
+    padding: 2rem 1rem;
     background-position: center;
-    width: 80%;
-    height: auto;
     aspect-ratio: 1/1.3;
     border-radius: 0.625rem;
     ${props => props.border && 'border: 2px solid white;'}
@@ -128,14 +128,13 @@ function MainPage() {
       <Header />
       <AccessibilityHidden>메인페이지</AccessibilityHidden>
       <TitleContainer>
-        <H2>Let&lsquo;s lead the industry </H2>
-        <H2>To a broader FIELD</H2>
+        <AnimationExample text='Lets Lead The Industry To A Broader FIELD' />
         <Figure position='absolute'>
           <Icon src='./../../public/scrollDown.png' alt='아래로 스크롤하세요' />
           <IconFigcaption>아래로 스크롤하세요</IconFigcaption>
         </Figure>
       </TitleContainer>
-
+      <ThreeDCube />
       <MainSection>
         <H2 margin='5rem 0 10rem 0'>OUR GOAL</H2>
         <H3>꿈과 비전, 생각을 공유하는</H3>
@@ -245,10 +244,10 @@ function MainPage() {
                   대해서도 많은 것을 배울 수 있었습니다.
                 </P>
                 <WriterContainer>
-                  <P color='yellow' size='1.3rem'>
+                  <P color='yellow' size='1.2rem'>
                     숭실대학교 산업정보시스템공학과
                   </P>
-                  <P color='yellow' size='1.3rem'>
+                  <P color='yellow' size='1.2rem'>
                     15기 기획부 정영훈
                   </P>
                 </WriterContainer>
@@ -269,10 +268,10 @@ function MainPage() {
                   대해서도 많은 것을 배울 수 있었습니다.
                 </P>
                 <WriterContainer>
-                  <P color='yellow' size='1.3rem'>
+                  <P color='yellow' size='1.2rem'>
                     숭실대학교 산업정보시스템공학과
                   </P>
-                  <P color='yellow' size='1.3rem'>
+                  <P color='yellow' size='1.2rem'>
                     15기 기획부 정영훈
                   </P>
                 </WriterContainer>
