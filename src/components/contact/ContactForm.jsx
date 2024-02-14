@@ -86,8 +86,8 @@ export default function ContactForm() {
     email: email ? email.current.value : '',
     phoneNumber: phoneNumber ? phoneNumber.current.value : '',
     title: title ? title.current.value : '',
+    content: content ? content.current.value : '',
   };
-  console.log(submittedData);
 
   return (
     <Form>
