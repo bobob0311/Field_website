@@ -2,7 +2,7 @@ import {Route, Routes} from 'react-router-dom';
 import {ThemeProvider} from 'styled-components';
 import GlobalStyle from './GlobalStyle';
 import './index.css';
-import MainPage from './pages/MainPage';
+import MainPage from './pages/mainPage';
 import theme from './theme';
 import CampPage from './pages/CampPage';
 
