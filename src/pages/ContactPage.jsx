@@ -1,7 +1,5 @@
-import ContactAgree from '../components/contact/ContactAgree';
-import ContactText from '../components/contact/ContactText';
-import ContactForm from '../components/contact/ContactForm';
 import styled from 'styled-components';
+import ContactForm from '../components/contact/ContactForm';
 
 const ContactSection = styled.section`
   margin: 0 10%;
