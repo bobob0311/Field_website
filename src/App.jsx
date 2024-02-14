@@ -1,10 +1,11 @@
-import { Route, Routes } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
+import {Route, Routes} from 'react-router-dom';
+import {ThemeProvider} from 'styled-components';
 import GlobalStyle from './GlobalStyle';
 import './index.css';
 import Layout from './layout/Layout';
 import MainPage from './pages/MainPage';
 import theme from './theme';
+import ContactPage from './pages/ContactPage';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path='/' element={<MainPage />} />
+          <Route path='/contact' element={<ContactPage />} />
         </Route>
       </Routes>
     </ThemeProvider>
