@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import backgroundImage from './../../public/fieldIntro1.png';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import 'swiper/swiper-bundle.css';
-import theme from '../theme';
-import ThreeDCube from '../components/ThreeDCube';
+import backgroundImage from '../../public/fieldIntro1.png';
 import AnimationExample from '../components/AnimationExample';
+import ThreeDCube from '../components/ThreeDCube';
+import theme from '../theme';
 
 function MainPage() {
   const Header = styled.header`
@@ -38,6 +38,9 @@ function MainPage() {
   `;
 
   const H3 = styled.h3`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     font-size: 1.5rem;
     margin: ${props => props.margin || '0'};
   `;
@@ -137,8 +140,10 @@ function MainPage() {
       <ThreeDCube />
       <MainSection>
         <H2 margin='5rem 0 10rem 0'>OUR GOAL</H2>
-        <H3>꿈과 비전, 생각을 공유하는</H3>
-        <H3>교류의 장을 만든다</H3>
+        <H3>
+          <span>꿈과 비전, 생각을 공유하는</span>
+          <span>교류의 장을 만든다</span>
+        </H3>
         <Image src='./../../public/fieldLogo.png' alt='필드 로고' margin='10rem 0 10rem 0' />
       </MainSection>
       <MainSection>
@@ -196,7 +201,7 @@ function MainPage() {
         <H2 margin='0 10%'>인적, 학술적 교류를</H2>
         <H2 margin='0 10%'>실현하는 다양한 활동들</H2>
         <SwiperContainer margin='2rem 0'>
-          <Swiper slidesPerView={1.2} spaceBetween={20} centeredSlides={true}>
+          <Swiper slidesPerView={1.2} spaceBetween={20} centeredSlides='true'>
             <SwiperSlide>
               <Card src={backgroundImage}>
                 <CardTitle>LT</CardTitle>
@@ -229,7 +234,7 @@ function MainPage() {
       </section>
       <H2>How was your FIELD?</H2>
       <SwiperContainer margin='2rem 0'>
-        <Swiper slidesPerView={1.2} spaceBetween={20} centeredSlides={true}>
+        <Swiper slidesPerView={1.2} spaceBetween={20} centeredSlides='true'>
           <SwiperSlide>
             <Card border>
               <Article>
