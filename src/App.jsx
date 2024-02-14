@@ -6,6 +6,7 @@ import Layout from './layout/Layout';
 import MainPage from './pages/MainPage';
 import theme from './theme';
 import ContactPage from './pages/ContactPage';
+import CampPage from './pages/CampPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path='/' element={<MainPage />} />
+          <Route path='/camp' element={<CampPage />} />
           <Route path='/contact' element={<ContactPage />} />
         </Route>
       </Routes>
