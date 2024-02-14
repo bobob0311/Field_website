@@ -2,66 +2,6 @@ import styled from 'styled-components';
 import {useRef} from 'react';
 import theme from '../../theme';
 
-export default function ContactForm() {
-  const enteredData = {
-    type: useRef(),
-    name: useRef(),
-    email: useRef(),
-    phoneNumber: useRef(),
-    content: useRef(),
-    title: useRef(),
-  };
-
-  const submittedData = {
-    type: enteredData.type.current ? enteredData.type.current.value : '',
-    name: enteredData.name.current ? enteredData.name.current.value : '',
-    email: enteredData.email.current ? enteredData.email.current.value : '',
-    phoneNumber: enteredData.phoneNumber.current ? enteredData.phoneNumber.current.value : '',
-    content: enteredData.content.current ? enteredData.content.current.value : '',
-    title: enteredData.title.current ? enteredData.title.current.value : '',
-  };
-  console.log(submittedData);
-
-  return (
-    <Form>
-      <TypeLabel>
-        문의 유형
-        <TypeSelect ref={enteredData.type} autoComplete='off'>
-          <Option value='후원'>후원</Option>
-          <Option value='문의'>문의</Option>
-          <Option value='기타'>기타</Option>
-        </TypeSelect>
-      </TypeLabel>
-
-      <InputLabel name='name' ref={enteredData.name} autoComplete='name'>
-        이름 (회사)
-        <Input />
-      </InputLabel>
-
-      <InputLabel name='phonenumber' ref={enteredData.phoneNumber} autoComplete='tel'>
-        연락처
-        <Input />
-      </InputLabel>
-
-      <InputLabel name='email' ref={enteredData.email} autoComplete='email'>
-        Email
-        <Input />
-      </InputLabel>
-
-      <InputLabel name='title' ref={enteredData.title} autoComplete='off'>
-        제목
-        <Input />
-      </InputLabel>
-
-      <InputLabel>
-        내용
-        <TextArea name='content' rows={20} ref={enteredData.content} autoComplete='off' />
-      </InputLabel>
-      <SummitButton>SEND</SummitButton>
-    </Form>
-  );
-}
-
 const Form = styled.form`
   padding: 3% 1%;
   background: ${theme.colors.white};
@@ -70,7 +10,7 @@ const Form = styled.form`
 
 const InputLabel = styled.label`
   font-size: 1.25rem;
-  margin-top: 1rem;
+  margin: 1rem 0 0 0;
   display: block;
   color: ${theme.colors.black};
   font-weight: bold;
@@ -92,7 +32,7 @@ const TypeSelect = styled.select`
   font-size: 1rem;
   font-weight: 500;
   border-bottom: 0.1rem solid black;
-  margin-left: 0.5rem;
+  margin: 0 0 0 0.5rem;
   height: 1.5rem;
   padding: 0.3rem 0 0 0.2rem;
   width: 3.8rem;
@@ -112,7 +52,7 @@ const Input = styled.input`
 const TextArea = styled.textarea`
   width: 100%;
   border: none;
-  margin-top: 0.8rem;
+  margin: 0.8rem 0 0 0;
   box-sizing: border-box;
   border-radius: 0.7rem;
   border: 0.15rem solid ${theme.colors.black};
@@ -134,3 +74,57 @@ const SummitButton = styled.button`
 `;
 
 const Option = styled.option``;
+
+export default function ContactForm() {
+  const {
+    current: {type, name, email, phoneNumber, content, title},
+  } = useRef({});
+
+  const submittedData = {
+    type: type ? type.current.value : '',
+    name: name ? name.current.value : '',
+    email: email ? email.current.value : '',
+    phoneNumber: phoneNumber ? phoneNumber.current.value : '',
+    title: title ? title.current.value : '',
+  };
+  console.log(submittedData);
+
+  return (
+    <Form>
+      <TypeLabel>
+        문의 유형
+        <TypeSelect ref={type} autoComplete='off'>
+          <Option value='후원'>후원</Option>
+          <Option value='문의'>문의</Option>
+          <Option value='기타'>기타</Option>
+        </TypeSelect>
+      </TypeLabel>
+
+      <InputLabel name='name' ref={name} autoComplete='name'>
+        이름 (회사)
+        <Input />
+      </InputLabel>
+
+      <InputLabel name='phonenumber' ref={phoneNumber} autoComplete='tel'>
+        연락처
+        <Input />
+      </InputLabel>
+
+      <InputLabel name='email' ref={email} autoComplete='email'>
+        Email
+        <Input />
+      </InputLabel>
+
+      <InputLabel name='title' ref={title} autoComplete='off'>
+        제목
+        <Input />
+      </InputLabel>
+
+      <InputLabel>
+        내용
+        <TextArea name='content' rows={20} ref={content} autoComplete='off' />
+      </InputLabel>
+      <SummitButton type='submit'>SEND</SummitButton>
+    </Form>
+  );
+}
