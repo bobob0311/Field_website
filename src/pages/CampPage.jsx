@@ -1,10 +1,11 @@
 import React from 'react';
 import CampMainSection from '../components/Camp/CampMainSection';
 import CampIntroSection from '../components/Camp/CampIntroSection';
+import CampImageSection from '../components/Camp/CampImageSection';
+import CampTopicSection from '../components/Camp/CampTopicSection';
 import Camp1 from '../assets/camp1.png';
 import Camp2 from '../assets/camp2.png';
 import Camp3 from '../assets/camp3.png';
-import CampImageSection from '../components/Camp/CampImageSection';
 
 function CampPage() {
   return (
@@ -30,6 +31,7 @@ function CampPage() {
         firstLine='산업공학과 출신 기업인,'
         secondLine='교수님과 소통하세요'
       />
+      <CampTopicSection />
     </main>
   );
 }

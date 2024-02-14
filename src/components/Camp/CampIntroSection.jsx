@@ -12,6 +12,8 @@ const H3 = styled.h3`
   font-size: 1.625rem;
   margin: ${props => (props.margin ? props.margin : '2.5rem 0 0 0')};
   text-align: center;
+  font-family: Nanum Myeongjo;
+  font-weight: bold;
 `;
 
 const Dl = styled.dl``;
