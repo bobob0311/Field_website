@@ -32,13 +32,19 @@ const P = styled.p`
   font-weight: bold;
 `;
 
+const Div = styled.div`
+  margin: ${props => (props.margin ? props.margin : '')};
+`;
+
 function CampImageSection({img, title, firstLine = '', secondLine = '', thirdLine = ''}) {
   return (
     <Section src={img}>
       <H2 padding='0 10% 2rem 10%'>{title}</H2>
-      <P padding='0 10% 1rem 10%'>{firstLine}</P>
-      <P padding='0 10% 1rem 10%'>{secondLine}</P>
-      <P padding='0 10% 1rem 10%'>{thirdLine}</P>
+      <P padding='0 10% 1rem 10%'>
+        <Div margin='0 0 1rem 0'>{firstLine}</Div>
+        <Div margin='0 0 1rem 0'>{secondLine}</Div>
+        <Div margin='0 0 1rem 0'>{thirdLine}</Div>
+      </P>
     </Section>
   );
 }
