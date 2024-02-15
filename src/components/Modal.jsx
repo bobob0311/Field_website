@@ -6,8 +6,8 @@ import theme from '../theme';
 const ModalBackground = styled.section`
   position: fixed;
   top: 25%;
-  left: 25%;
-  width: 50%;
+  left: 12.5%;
+  width: 75%;
   height: 25%;
   background: rgba(0, 0, 0, 0.35);
   border: solid;
@@ -28,14 +28,15 @@ const CloseButton = styled.img`
 
 const Ul = styled.ul`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 2rem;
 `;
 
 const Li = styled.li`
   font-size: 1rem;
   text-align: center;
-  margin: 0.75rem 1.5rem;
-  color: theme.colors.yellow;
+  color: ${theme.colors.yellow};
+  margin: 1rem 0 0 0;
 `;
 
 function Modal({titleData, showModal, setShowModal}) {
@@ -47,7 +48,7 @@ function Modal({titleData, showModal, setShowModal}) {
       <ButtonWrapper>
         <CloseButton onClick={() => setShowModal(false)} src={modalCloseIcon} />
       </ButtonWrapper>
-      <Ul>{titleData ? titleData.map(item => <Li>{item}</Li>) : ''}</Ul>
+      <Ul>{titleData ? titleData.map(item => <Li type='disc'>{item} Field Camp</Li>) : ''}</Ul>
     </ModalBackground>
   );
 }

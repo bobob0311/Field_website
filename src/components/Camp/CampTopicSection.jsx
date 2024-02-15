@@ -1,42 +1,47 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import modalIcon from '../../assets/modalIcon.png';
-import Modal from '../Modal';
+import ModalSection from '../ModalSection';
+import theme from '../../theme';
+import fieldImg from '../../assets/Group 19.png';
+import Button from '../Button';
 
 const Section = styled.section`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   margin: ${props => (props.margin ? props.margin : '0 10% 0 10% ')};
   text-align: center;
   align-items: center;
+  gap: 0.25rem;
 `;
 
-const H2 = styled.h2`
-  font-size: 1.5625rem;
-  color: white;
-  font-family: Nanum Myeongjo;
-  font-weight: bold;
+const Figure = styled.figure`
+  display: flex;
+  flex-direction: column;
+  justify-item: center;
+  item-align: center;
 `;
 
-const IconImg = styled.img`
-  width: auto;
-  height: auto;
+const Img = styled.img`
+  width: full;
+  height: full;
+`;
+
+const Figcaption = styled.figcaption`
+  text-align: center;
+  color: ${props => (props.color ? theme.colors[props.color] : theme.colors.red)};
+  font-size: 1.25rem;
 `;
 
 function CampTopicSection() {
-  const [showModal, setShowModal] = useState(false);
-  const lst = [2022, 2023];
   return (
     <Section>
-      <IconImg
-        src={modalIcon}
-        alt='모달창 아이콘'
-        onClick={() => {
-          setShowModal(true);
-        }}
-      />
-      <H2>역대 FIELD CAMP</H2>
-      <Modal titleData={lst} showModal={showModal} setShowModal={setShowModal} />
+      <ModalSection title='역대 FIELD CAMP' font='Nanum Myeongjo' />
+      <Figure>
+        <Img alt='필드 캠프 사진' src={fieldImg} />
+        <Figcaption>1st topic</Figcaption>
+      </Figure>
+      <Button label='주제에 대해 더 알아보기' />
     </Section>
   );
 }
