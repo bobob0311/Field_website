@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import ContactForm from '../components/contact/ContactForm';
-
+import theme from '../theme';
 const ContactSection = styled.section`
   margin: 0 10%;
 `;
