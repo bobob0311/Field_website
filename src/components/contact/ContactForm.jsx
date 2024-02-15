@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import {useRef, useState} from 'react';
+import PocketBase from 'pocketbase';
 import theme from '../../theme';
 import ContactModal from './ContactModal';
 
@@ -140,12 +141,40 @@ export default function ContactForm() {
     content: useRef(null),
     title: useRef(null),
   };
-
+  const [error, setError] = useState();
+  const [isLoading, setIsLoading] = useState();
   const [isOpen, setIsOpen] = useState(false);
   const [isValid, setIsValid] = useState(false);
   const [validationState, setValidationState] = useState(initialValidationState);
   const emailValid = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   const phoneValid = /^[0-9]{9,11}$/;
+
+  async function SendMessage({type, name, email, phoneNumber, content, title}) {
+    const pb = new PocketBase(import.meta.env.VITE_REACT_APP_URL);
+    const data = {
+      Name: name,
+      Type: type,
+      Phone: phoneNumber,
+      Email: email,
+      Title: title,
+      Content: content,
+    };
+
+    setIsLoading(true);
+
+    await pb
+      .collection('Message')
+      .create(data)
+      .then(() => {
+        setError(false);
+      })
+      .catch(() => {
+        setError(true);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
 
   const Validation = submittedData => {
     let isEveryThingValid = false;
@@ -155,8 +184,9 @@ export default function ContactForm() {
     const isEmailValid = emailValid.test(submittedData.email);
     const isTitleValid = submittedData.title.trim() !== '';
     const isContentValid = submittedData.content.trim() !== '';
-
-    setIsValid(isContentValid && isEmailValid && isTitleValid && isPhoneValid && isNameValid);
+    isEveryThingValid =
+      isContentValid && isEmailValid && isTitleValid && isPhoneValid && isNameValid;
+    setIsValid(isEveryThingValid);
 
     setValidationState(prevState => ({
       ...prevState,
@@ -184,12 +214,15 @@ export default function ContactForm() {
 
     const validationResult = Validation(submittedData);
     // validationResult가 참이면 db에 data저장
-
-    console.log(submittedData);
+    if (validationResult) {
+      SendMessage(submittedData);
+    }
   };
 
   function modalCloseHandler() {
     setIsOpen(false);
+    setError(false);
+    window.location.reload();
   }
 
   return (
@@ -268,7 +301,14 @@ export default function ContactForm() {
           </SubmitButton>
         </Form>
       </ContactSection>
-      {isOpen && <ContactModal valid={isValid} onClose={() => modalCloseHandler()} />}
+      {isOpen && (
+        <ContactModal
+          valid={isValid}
+          onClose={() => modalCloseHandler()}
+          loading={isLoading}
+          error={error}
+        />
+      )}
     </>
   );
 }

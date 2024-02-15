@@ -16,6 +16,22 @@ const slideDownAnimation = keyframes`
   }
 `;
 
+const spin = keyframes`
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+
+const LoadingSpin = styled.div`
+  margin: 1rem auto 0;
+  width: 2rem;
+  height: 2rem;
+  border: 0.2rem solid transparent;
+  border-top-color: ${theme.colors.black};
+  border-radius: 50%;
+  animation: ${spin} 0.5s linear infinite;
+`;
+
 const ModalBackground = styled.section`
   position: fixed;
   width: 100%;
@@ -71,14 +87,34 @@ const ModalP = styled.p`
 const portalElement = document.getElementById('modal');
 
 export default function ContactModal(props) {
-  const {valid, onClose} = props;
+  const {valid, onClose, loading, error} = props;
 
   let content;
-  if (valid) {
+  if (loading) {
+    content = (
+      <>
+        <LoadingSpin />
+        <ModalP mg='3rem 0 0 0'>저장중입니다 잠시만 기다려주세요.</ModalP>
+      </>
+    );
+  } else if (error) {
+    content = (
+      <>
+        <ModalP mg='2.2rem 0 0 0'>실행에 실패하였습니다.</ModalP>
+        <ModalP mg='0.7rem 0 0 0'>잠시 후 다시 시도해주세요.</ModalP>
+        <ModalButton type='button' onClick={onClose}>
+          확인하기
+        </ModalButton>
+      </>
+    );
+  } else if (valid) {
     content = (
       <>
         <ModalP mg='2.2rem 0 0 0'>소중한 의견 감사합니다.</ModalP>
         <ModalP mg='0.7rem 0 0 0'>추후에 메일로 연락드리겠습니다.</ModalP>
+        <ModalButton type='button' onClick={onClose}>
+          확인하기
+        </ModalButton>
       </>
     );
   } else {
@@ -86,6 +122,9 @@ export default function ContactModal(props) {
       <>
         <ModalP mg='2.2rem 0 0 0'>올바르지 않는 형식입니다.</ModalP>
         <ModalP mg='0.7rem 0 0 0'>체크된 항목을 확인해주세요</ModalP>
+        <ModalButton type='button' onClick={onClose}>
+          확인하기
+        </ModalButton>
       </>
     );
   }
@@ -93,12 +132,7 @@ export default function ContactModal(props) {
   function MessageBox() {
     return (
       <ModalBackground>
-        <Modal>
-          {content}
-          <ModalButton type='button' onClick={onClose}>
-            확인하기
-          </ModalButton>
-        </Modal>
+        <Modal>{content}</Modal>
       </ModalBackground>
     );
   }
