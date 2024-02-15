@@ -95,7 +95,8 @@ const ButtonImg = styled.img`
 `;
 const Img = styled.img`
   height: 1.8rem;
-  margin: 0 0 0 0.2rem;
+  margin: 0 0.4rem 0 0rem;
+  padding: 0.2rem 0 0 0;
 `;
 const VerticalCenter = styled.div`
   display: flex;
@@ -115,7 +116,8 @@ const Notice = styled.span`
     position: absolute;
     margin: 0;
     font-size: 1.5rem;
-    bottom: -0.5rem;
+    left: ${props => (props.left ? props.left : '')};
+    top: 0.2rem;
   }
 `;
 
@@ -138,18 +140,21 @@ export default function ContactForm() {
   };
 
   const [validationState, setValidationState] = useState(initialValidationState);
+  const emailValid = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  const phoneValid = /^[0-9]{9,11}$/;
 
   const Validation = submittedData => {
     let isEveryThingValid = false;
 
     const isNameValid = submittedData.name.trim() !== '';
-    const isPhoneValid = true; // 전화번호 유효성 검사 넣기
-    const isEmailValid = true; // 이메일 유효성 검사 넣기
+    const isPhoneValid = phoneValid.test(submittedData.phoneNumber);
+    const isEmailValid = emailValid.test(submittedData.email);
     const isTitleValid = submittedData.title.trim() !== '';
     const isContentValid = submittedData.content.trim() !== '';
 
     isEveryThingValid =
       isContentValid && isEmailValid && isTitleValid && isPhoneValid && isNameValid;
+    console.log(isEveryThingValid);
 
     setValidationState(prevState => ({
       ...prevState,
@@ -184,37 +189,43 @@ export default function ContactForm() {
     <ContactSection>
       <Form onSubmit={enterdDataHandler}>
         <InputLabel>
+          {validationState.isNameValid === false ? <Notice left='8.5rem' /> : null}
           <VerticalCenter>
-            이름 (회사)
             <Img src='happy.png' alt='웃는 아이콘' />
-            {!validationState.isNameValid ? <Notice /> : null}
+            이름 (회사)
           </VerticalCenter>
           <Input type='text' name='name' ref={enteredData.name} autoComplete='name' />
         </InputLabel>
 
         <InputLabel>
+          {validationState.isPhoneValid === false ? <Notice left='6rem' /> : null}
           <VerticalCenter>
-            연락처
             <Img src='Phone.png' alt='핸드폰 아이콘' />
-            {!validationState.isPhoneValid ? <Notice /> : null}
+            연락처
           </VerticalCenter>
-          <Input type='tel' name='phonenumber' ref={enteredData.phoneNumber} autoComplete='tel' />
+          <Input
+            placeholder='01012345678'
+            type='tel'
+            name='phonenumber'
+            ref={enteredData.phoneNumber}
+            autoComplete='tel'
+          />
         </InputLabel>
 
         <InputLabel>
+          {validationState.isEmailValid === false ? <Notice left='5.6rem' /> : null}
           <VerticalCenter>
-            Email
             <Img src='Message.png' alt='메세지 아이콘' />
-            {!validationState.isEmailValid ? <Notice /> : null}
+            Email
           </VerticalCenter>
           <Input type='email' name='email' ref={enteredData.email} autoComplete='email' />
         </InputLabel>
 
         <InputLabel>
+          {validationState.isTitleValid === false ? <Notice left='4.8rem' /> : null}
           <VerticalCenter>
-            제목
             <Img src='Check.png' alt='체크모양 아이콘' />
-            {!validationState.isTitleValid ? <Notice /> : null}
+            제목
           </VerticalCenter>
           <Input type='text' name='title' ref={enteredData.title} autoComplete='off' />
         </InputLabel>
@@ -226,14 +237,13 @@ export default function ContactForm() {
             <Option value='문의'>문의</Option>
             <Option value='기타'>기타</Option>
           </TypeSelect>
-          {!validationState.name ? <Notice /> : null}
         </TypeLabel>
 
         <InputLabel>
+          {validationState.isContentValid === false ? <Notice left='4.8rem' /> : null}
           <VerticalCenter>
-            내용
             <Img src='Chat_alt_3.png' alt='대화창 아이콘' width={30} />
-            {!validationState.isContentValid ? <Notice /> : null}
+            내용
           </VerticalCenter>
           <TextArea
             placeholder='내용을 입력하세요.'
