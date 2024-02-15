@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import {useRef, useState} from 'react';
 import theme from '../../theme';
+import ContactModal from './ContactModal';
 
 const ContactSection = styled.section`
   background: ${theme.colors.white};
@@ -44,6 +45,7 @@ const TypeSelect = styled.select`
   padding: 0 0 0 0.5rem;
   width: 7.3rem;
   height: 2.4rem;
+  z-index: 0;
 `;
 
 const Input = styled.input`
@@ -139,6 +141,8 @@ export default function ContactForm() {
     title: useRef(null),
   };
 
+  const [isOpen, setIsOpen] = useState(false);
+  const [isValid, setIsValid] = useState(false);
   const [validationState, setValidationState] = useState(initialValidationState);
   const emailValid = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   const phoneValid = /^[0-9]{9,11}$/;
@@ -152,9 +156,7 @@ export default function ContactForm() {
     const isTitleValid = submittedData.title.trim() !== '';
     const isContentValid = submittedData.content.trim() !== '';
 
-    isEveryThingValid =
-      isContentValid && isEmailValid && isTitleValid && isPhoneValid && isNameValid;
-    console.log(isEveryThingValid);
+    setIsValid(isContentValid && isEmailValid && isTitleValid && isPhoneValid && isNameValid);
 
     setValidationState(prevState => ({
       ...prevState,
@@ -170,6 +172,7 @@ export default function ContactForm() {
 
   const enterdDataHandler = event => {
     event.preventDefault();
+    setIsOpen(true);
     const submittedData = {
       type: enteredData.type.current.value,
       name: enteredData.name.current.value,
@@ -185,80 +188,87 @@ export default function ContactForm() {
     console.log(submittedData);
   };
 
+  function modalCloseHandler() {
+    setIsOpen(false);
+  }
+
   return (
-    <ContactSection>
-      <Form onSubmit={enterdDataHandler}>
-        <InputLabel>
-          {validationState.isNameValid === false ? <Notice left='8.5rem' /> : null}
-          <VerticalCenter>
-            <Img src='happy.png' alt='웃는 아이콘' />
-            이름 (회사)
-          </VerticalCenter>
-          <Input type='text' name='name' ref={enteredData.name} autoComplete='name' />
-        </InputLabel>
+    <>
+      <ContactSection>
+        <Form onSubmit={enterdDataHandler}>
+          <InputLabel>
+            {validationState.isNameValid === false ? <Notice left='8.5rem' /> : null}
+            <VerticalCenter>
+              <Img src='happy.png' alt='웃는 아이콘' />
+              이름 (회사)
+            </VerticalCenter>
+            <Input type='text' name='name' ref={enteredData.name} autoComplete='name' />
+          </InputLabel>
 
-        <InputLabel>
-          {validationState.isPhoneValid === false ? <Notice left='6rem' /> : null}
-          <VerticalCenter>
-            <Img src='Phone.png' alt='핸드폰 아이콘' />
-            연락처
-          </VerticalCenter>
-          <Input
-            placeholder='01012345678'
-            type='tel'
-            name='phonenumber'
-            ref={enteredData.phoneNumber}
-            autoComplete='tel'
-          />
-        </InputLabel>
+          <InputLabel>
+            {validationState.isPhoneValid === false ? <Notice left='6rem' /> : null}
+            <VerticalCenter>
+              <Img src='Phone.png' alt='핸드폰 아이콘' />
+              연락처
+            </VerticalCenter>
+            <Input
+              placeholder='01012345678'
+              type='tel'
+              name='phonenumber'
+              ref={enteredData.phoneNumber}
+              autoComplete='tel'
+            />
+          </InputLabel>
 
-        <InputLabel>
-          {validationState.isEmailValid === false ? <Notice left='5.6rem' /> : null}
-          <VerticalCenter>
-            <Img src='Message.png' alt='메세지 아이콘' />
-            Email
-          </VerticalCenter>
-          <Input type='email' name='email' ref={enteredData.email} autoComplete='email' />
-        </InputLabel>
+          <InputLabel>
+            {validationState.isEmailValid === false ? <Notice left='5.6rem' /> : null}
+            <VerticalCenter>
+              <Img src='Message.png' alt='메세지 아이콘' />
+              Email
+            </VerticalCenter>
+            <Input type='email' name='email' ref={enteredData.email} autoComplete='email' />
+          </InputLabel>
 
-        <InputLabel>
-          {validationState.isTitleValid === false ? <Notice left='4.8rem' /> : null}
-          <VerticalCenter>
-            <Img src='Check.png' alt='체크모양 아이콘' />
-            제목
-          </VerticalCenter>
-          <Input type='text' name='title' ref={enteredData.title} autoComplete='off' />
-        </InputLabel>
+          <InputLabel>
+            {validationState.isTitleValid === false ? <Notice left='4.8rem' /> : null}
+            <VerticalCenter>
+              <Img src='Check.png' alt='체크모양 아이콘' />
+              제목
+            </VerticalCenter>
+            <Input type='text' name='title' ref={enteredData.title} autoComplete='off' />
+          </InputLabel>
 
-        <TypeLabel>
-          <TypeSelect ref={enteredData.type} autoComplete='off'>
-            <Option value='선택하지않음'>문의유형</Option>
-            <Option value='후원'>후원</Option>
-            <Option value='문의'>문의</Option>
-            <Option value='기타'>기타</Option>
-          </TypeSelect>
-        </TypeLabel>
+          <TypeLabel>
+            <TypeSelect ref={enteredData.type} autoComplete='off'>
+              <Option value='선택하지않음'>문의유형</Option>
+              <Option value='후원'>후원</Option>
+              <Option value='문의'>문의</Option>
+              <Option value='기타'>기타</Option>
+            </TypeSelect>
+          </TypeLabel>
 
-        <InputLabel>
-          {validationState.isContentValid === false ? <Notice left='4.8rem' /> : null}
-          <VerticalCenter>
-            <Img src='Chat_alt_3.png' alt='대화창 아이콘' width={30} />
-            내용
-          </VerticalCenter>
-          <TextArea
-            placeholder='내용을 입력하세요.'
-            name='content'
-            rows={20}
-            ref={enteredData.content}
-            autoComplete='off'
-          />
-        </InputLabel>
+          <InputLabel>
+            {validationState.isContentValid === false ? <Notice left='4.8rem' /> : null}
+            <VerticalCenter>
+              <Img src='Chat_alt_3.png' alt='대화창 아이콘' width={30} />
+              내용
+            </VerticalCenter>
+            <TextArea
+              placeholder='내용을 입력하세요.'
+              name='content'
+              rows={20}
+              ref={enteredData.content}
+              autoComplete='off'
+            />
+          </InputLabel>
 
-        <SubmitButton type='submit'>
-          SEND
-          <ButtonImg src='right_up_arrow.png' alt='제출 화살표' />
-        </SubmitButton>
-      </Form>
-    </ContactSection>
+          <SubmitButton type='submit'>
+            SEND
+            <ButtonImg src='right_up_arrow.png' alt='제출 화살표' />
+          </SubmitButton>
+        </Form>
+      </ContactSection>
+      {isOpen && <ContactModal valid={isValid} onClose={() => modalCloseHandler()} />}
+    </>
   );
 }
