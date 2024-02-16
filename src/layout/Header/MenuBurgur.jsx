@@ -1,5 +1,5 @@
 import styled, {keyframes, css} from 'styled-components';
-import theme from '../theme';
+import theme from '../../theme';
 
 const downRight = keyframes`
   0% {

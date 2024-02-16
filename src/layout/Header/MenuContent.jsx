@@ -1,6 +1,6 @@
 import styled, {keyframes} from 'styled-components';
-import {useLocation, useNavigate} from 'react-router-dom';
-import theme from '../theme';
+import {useLocation} from 'react-router-dom';
+import theme from '../../theme';
 
 const slideDownAnimation = keyframes`
   0% {
@@ -14,14 +14,14 @@ const slideDownAnimation = keyframes`
   }
 `;
 
-const HeaderBackground = styled.div`
+const HeaderContactSection = styled.div`
   position: fixed;
-  top: 0;
+  top: 4.5rem;
   left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 2;
+  z-index: 1;
 `;
 
 const HeaderContent = styled.nav`
@@ -29,12 +29,11 @@ const HeaderContent = styled.nav`
   width: 100%;
   top: 4.5rem;
   display: flex;
+  z-index: 2;
   flex-direction: column;
   background: #141414;
-
   animation: ${slideDownAnimation} 0.3s ease-in-out;
   padding: 0.5rem 0;
-  z-index: 10;
 `;
 
 const MenuContainer = styled.ul`
@@ -65,7 +64,8 @@ const MenuLink = styled.a`
   line-height: 200%;
 `;
 
-export default function MenuContent() {
+export default function MenuContent(props) {
+  const {onClose} = props;
   const Menus = [
     {title: 'ABOUT FIELD', link: 'about'},
     {title: 'FIELD CAMP', link: 'camp'},
@@ -76,7 +76,7 @@ export default function MenuContent() {
 
   const location = useLocation();
   return (
-    <HeaderBackground>
+    <HeaderContactSection onClick={onClose}>
       <HeaderContent>
         <MenuContainer activeLink={location.pathname.replace('/', '')}>
           {Menus.map(Menu => (
@@ -88,6 +88,6 @@ export default function MenuContent() {
           ))}
         </MenuContainer>
       </HeaderContent>
-    </HeaderBackground>
+    </HeaderContactSection>
   );
 }
