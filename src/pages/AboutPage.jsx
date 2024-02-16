@@ -32,11 +32,14 @@ const H2 = styled.h2`
 `;
 
 const H3 = styled.h3`
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
+  width: 100%;
   margin: ${props => props.margin || '0'};
+  text-align: center;
+  border: 2px solid white;
+  border-radius: 1rem;
+  padding: 1rem 0;
 `;
 
 const FlexCenter = styled.div`
@@ -95,7 +98,6 @@ const MainSection = styled.section`
   margin: 0 10%;
   display: flex;
   flex-direction: column;
-  align-items: center;
 `;
 
 const Ul = styled.ul`
@@ -116,6 +118,7 @@ const Card = styled.article`
   border: 2px solid white;
   padding: 0 1rem;
   border-radius: 1rem;
+  margin: ${props => props.margin || '0'};
 `;
 
 const Dt = styled.dt`
@@ -164,6 +167,20 @@ const CardHashTagUl = styled.ul`
 
 const CardHashTagLi = styled.li`
   font-size: 1.1rem;
+`;
+
+const ActivityUl = styled.ul`
+  display: flex;
+  flex-direction: column;
+  margin: ${props => props.margin || '0'};
+  gap: 0.5rem;
+  border: 2px solid white;
+  border-radius: 1rem;
+  padding: 1rem 2rem;
+`;
+
+const ActivityLi = styled.li`
+  font-size: 1.25rem;
 `;
 
 function AboutPage() {
@@ -277,7 +294,7 @@ function AboutPage() {
         </Ul>
       </MainSection>
       <MainSection>
-        <H2>부서소개</H2>
+        <H2 margin='2rem 0'>부서소개</H2>
         <Image width='100%' src='./../../public/fieldIntro1.png' alt='' />
         <div>
           <button type='button'>기획부</button>
@@ -285,7 +302,7 @@ function AboutPage() {
           <button type='button'>컴페</button>
           <button type='button'>홍보</button>
         </div>
-        <Card>
+        <Card margin='2rem 0'>
           <Dl>
             <Dt>기획부</Dt>
             <Dd>FIELD 인적, 학술적 교류를 활성화하기 위한 컨텐츠를 기획하고 진행, 총괄하는 부서</Dd>
@@ -307,15 +324,13 @@ function AboutPage() {
             <CardHashTagLi>#즐거움이공존하는이곳</CardHashTagLi>
           </CardHashTagUl>
         </Card>
-        <div>
-          <h4>What&apos;s Activity Planning Department</h4>
-          <ul>
-            <li>Field 유튜브</li>
-            <li>Field 유튜브</li>
-            <li>Field 유튜브</li>
-            <li>Field 유튜브</li>
-          </ul>
-        </div>
+        <H3>What&apos;s Activity Planning Department</H3>
+        <ActivityUl margin='2rem 0'>
+          <ActivityLi>- Field 유튜브</ActivityLi>
+          <ActivityLi>- Field 유튜브</ActivityLi>
+          <ActivityLi>- Field 유튜브</ActivityLi>
+          <ActivityLi>- Field 유튜브</ActivityLi>
+        </ActivityUl>
       </MainSection>
     </>
   );
