@@ -1,4 +1,6 @@
+import React from 'react';
 import styled from 'styled-components';
+import DepartmentIntro from '../components/About/DepartmentIntro';
 import theme from '../theme';
 
 const Header = styled.header`
@@ -29,17 +31,6 @@ const H2 = styled.h2`
   font-size: 1.875rem;
   margin: ${props => props.margin || '0'};
   text-align: center;
-`;
-
-const H3 = styled.h3`
-  align-items: center;
-  font-size: 1.25rem;
-  width: 100%;
-  margin: ${props => props.margin || '0'};
-  text-align: center;
-  border: 2px solid white;
-  border-radius: 1rem;
-  padding: 1rem 0;
 `;
 
 const FlexCenter = styled.div`
@@ -110,77 +101,6 @@ const Ul = styled.ul`
 
 const Li = styled.li`
   width: 40%;
-`;
-
-const Card = styled.article`
-  display: flex;
-  flex-direction: column;
-  border: 2px solid white;
-  padding: 0 1rem;
-  border-radius: 1rem;
-  margin: ${props => props.margin || '0'};
-`;
-
-const Dt = styled.dt`
-  font-size: 1.5rem;
-`;
-
-const Dd = styled.dd`
-  font-size: 1rem;
-`;
-
-const Dl = styled.dl`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin: 1rem 0;
-`;
-
-const CardUl = styled.ul`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
-const CardKeyWordLi = styled.li`
-  padding: 0;
-  margin: ${props => props.margin || '0'};
-`;
-
-const CardKeyWordSpan = styled.span`
-  display: inline-block;
-  background-color: ${props => (props.color ? theme.colors[props.color] : '')};
-  padding: 0.7rem 2rem;
-  text-align: center;
-  border: 2px solid white;
-  border-radius: 1rem;
-`;
-
-const CardHashTagUl = styled.ul`
-  margin: ${props => props.margin || '0'};
-  display: flex;
-  flex-direction: column;
-  color: ${theme.colors.yellow};
-  gap: 0.5rem;
-  font-weight: bold;
-`;
-
-const CardHashTagLi = styled.li`
-  font-size: 1.1rem;
-`;
-
-const ActivityUl = styled.ul`
-  display: flex;
-  flex-direction: column;
-  margin: ${props => props.margin || '0'};
-  gap: 0.5rem;
-  border: 2px solid white;
-  border-radius: 1rem;
-  padding: 1rem 2rem;
-`;
-
-const ActivityLi = styled.li`
-  font-size: 1.25rem;
 `;
 
 function AboutPage() {
@@ -294,43 +214,7 @@ function AboutPage() {
         </Ul>
       </MainSection>
       <MainSection>
-        <H2 margin='2rem 0'>부서소개</H2>
-        <Image width='100%' src='./../../public/fieldIntro1.png' alt='' />
-        <div>
-          <button type='button'>기획부</button>
-          <button type='button'>대협</button>
-          <button type='button'>컴페</button>
-          <button type='button'>홍보</button>
-        </div>
-        <Card margin='2rem 0'>
-          <Dl>
-            <Dt>기획부</Dt>
-            <Dd>FIELD 인적, 학술적 교류를 활성화하기 위한 컨텐츠를 기획하고 진행, 총괄하는 부서</Dd>
-          </Dl>
-          <CardUl>
-            <CardKeyWordLi margin='0 0 0 40%'>
-              <CardKeyWordSpan color='yellow'>대인관계능력</CardKeyWordSpan>
-            </CardKeyWordLi>
-            <CardKeyWordLi margin='0 0 0 5%'>
-              <CardKeyWordSpan color='red'>리더쉽</CardKeyWordSpan>
-            </CardKeyWordLi>
-            <CardKeyWordLi margin='0 0 0 35%'>
-              <CardKeyWordSpan color='blue'>창의력</CardKeyWordSpan>
-            </CardKeyWordLi>
-          </CardUl>
-          <CardHashTagUl margin='1rem 0'>
-            <CardHashTagLi>#FIELD열정맨</CardHashTagLi>
-            <CardHashTagLi>#FIELD에너지</CardHashTagLi>
-            <CardHashTagLi>#즐거움이공존하는이곳</CardHashTagLi>
-          </CardHashTagUl>
-        </Card>
-        <H3>What&apos;s Activity Planning Department</H3>
-        <ActivityUl margin='2rem 0'>
-          <ActivityLi>- Field 유튜브</ActivityLi>
-          <ActivityLi>- Field 유튜브</ActivityLi>
-          <ActivityLi>- Field 유튜브</ActivityLi>
-          <ActivityLi>- Field 유튜브</ActivityLi>
-        </ActivityUl>
+        <DepartmentIntro />
       </MainSection>
     </>
   );
