@@ -1,10 +1,19 @@
 import styled from 'styled-components';
 import {Swiper, SwiperSlide} from 'swiper/react';
+import PocketBase from 'pocketbase';
 import 'swiper/swiper-bundle.css';
 import backgroundImage from '../../public/fieldIntro1.png';
 import AnimationExample from '../components/AnimationExample';
 import ThreeDCube from '../components/ThreeDCube';
 import theme from '../theme';
+
+const pb = new PocketBase('https://field.pockethost.io');
+
+const review = await pb.collection('Review').getFullList();
+
+console.log(review);
+
+const firstReview = review[0];
 
 function MainPage() {
   const Header = styled.header`
@@ -235,54 +244,24 @@ function MainPage() {
       <H2>How was your FIELD?</H2>
       <SwiperContainer margin='2rem 0'>
         <Swiper slidesPerView={1.2} spaceBetween={20} centeredSlides='true'>
-          <SwiperSlide>
-            <Card border>
-              <Article>
-                <H3 margin='2rem 0 0 0'>Q. 가장 기억에 남는 활동에 대해 말해주세요</H3>
-                <P margin='2rem 0'>
-                  필드를 통해 적절한 주제를 만들고 다듬는 스킬, 한 문제에서 발생할 수 있는 다양한
-                  문제점들을 찾고 적절한 해결책을 제시하는 법, 짧은 시간 내에 다각도로 판단하는
-                  시야를 배울 수 있었습니다. 더불어 캠프 주제들을 공부하며 해당 분야에 대해 심도
-                  있는 지식을 얻을 수 있었습니다. 산업공학은 팀으로 구성되어 진행되는 프로젝트들이
-                  많고, 다양한 분야의 사람들과의 협업 기회가 많은 만큼 서로 간의 소통 능력이 중요한
-                  요소입니다. 필드의 컴페티션 부서 일원으로서 다양한 프로젝트들을 진행하며 팀워킹에
-                  대해서도 많은 것을 배울 수 있었습니다.
-                </P>
-                <WriterContainer>
-                  <P color='yellow' size='1.2rem'>
-                    숭실대학교 산업정보시스템공학과
-                  </P>
-                  <P color='yellow' size='1.2rem'>
-                    15기 기획부 정영훈
-                  </P>
-                </WriterContainer>
-              </Article>
-            </Card>
-          </SwiperSlide>
-          <SwiperSlide>
-            <Card border>
-              <Article>
-                <H3 margin='2rem 0 0 0'>Q. 가장 기억에 남는 활동에 대해 말해주세요</H3>
-                <P margin='2rem 0'>
-                  필드를 통해 적절한 주제를 만들고 다듬는 스킬, 한 문제에서 발생할 수 있는 다양한
-                  문제점들을 찾고 적절한 해결책을 제시하는 법, 짧은 시간 내에 다각도로 판단하는
-                  시야를 배울 수 있었습니다. 더불어 캠프 주제들을 공부하며 해당 분야에 대해 심도
-                  있는 지식을 얻을 수 있었습니다. 산업공학은 팀으로 구성되어 진행되는 프로젝트들이
-                  많고, 다양한 분야의 사람들과의 협업 기회가 많은 만큼 서로 간의 소통 능력이 중요한
-                  요소입니다. 필드의 컴페티션 부서 일원으로서 다양한 프로젝트들을 진행하며 팀워킹에
-                  대해서도 많은 것을 배울 수 있었습니다.
-                </P>
-                <WriterContainer>
-                  <P color='yellow' size='1.2rem'>
-                    숭실대학교 산업정보시스템공학과
-                  </P>
-                  <P color='yellow' size='1.2rem'>
-                    15기 기획부 정영훈
-                  </P>
-                </WriterContainer>
-              </Article>
-            </Card>
-          </SwiperSlide>
+          {review.map(item => (
+            <SwiperSlide>
+              <Card border>
+                <Article>
+                  <H3 margin='2rem 0 0 0'>Q. {item.firstQuestion}</H3>
+                  <P margin='2rem 0'>{item.firstAnswer}</P>
+                  <WriterContainer>
+                    <P color='yellow' size='1.2rem'>
+                      {item.school}
+                    </P>
+                    <P color='yellow' size='1.2rem'>
+                      {item.author}
+                    </P>
+                  </WriterContainer>
+                </Article>
+              </Card>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </SwiperContainer>
     </>
