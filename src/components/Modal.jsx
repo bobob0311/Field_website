@@ -1,17 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
+import {useSelector, useDispatch} from 'react-redux';
+import {setDataCampYear} from '../redux/campYearSlice';
 import modalCloseIcon from '../assets/modalClose.png';
 import theme from '../theme';
 
 const ModalBackground = styled.section`
   position: fixed;
   top: 25%;
-  left: 12.5%;
-  width: 75%;
-  height: 25%;
-  background: rgba(0, 0, 0, 0.35);
+  width: full;
+  height: full;
+  background: rgba(0, 0, 0, 0.5);
   border: solid;
-  border-radius: 1.875rem;
+  border-radius: 1.25rem;
 `;
 
 const ButtonWrapper = styled.div`
@@ -36,19 +37,47 @@ const Li = styled.li`
   font-size: 1rem;
   text-align: center;
   color: ${theme.colors.yellow};
-  margin: 1rem 0 0 0;
+  margin: 1rem 1rem;
+  ::marker {
+    padding: 0;
+    margin: 0;
+  }
 `;
 
 function Modal({titleData, showModal, setShowModal}) {
+  const dispatch = useDispatch();
+
   if (!showModal) {
     return null;
   }
+
   return (
     <ModalBackground>
       <ButtonWrapper>
         <CloseButton onClick={() => setShowModal(false)} src={modalCloseIcon} />
       </ButtonWrapper>
-      <Ul>{titleData ? titleData.map(item => <Li type='disc'>{item} Field Camp</Li>) : ''}</Ul>
+      <Ul>
+        {titleData
+          ? titleData.map((item, idx) => (
+              <Li
+                key={idx}
+                type='disc'
+                onClick={() => {
+                  dispatch(setDataCampYear(item)); // 클릭된 항목의 값을 dispatch
+                }}
+              >
+                {item} Field Camp
+              </Li>
+            ))
+          : ''}
+        <Li
+          onClick={event => {
+            dispatch(setDataCampYear(event.target.innerText)); // 클릭된 항목의 값을 dispatch
+          }}
+        >
+          2021
+        </Li>
+      </Ul>
     </ModalBackground>
   );
 }

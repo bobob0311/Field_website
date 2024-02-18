@@ -6,9 +6,9 @@ import Modal from './Modal';
 const IconWrapper = styled.div`
   display: flex;
   justify-content: center;
-  item-align: center;
+  align-items: center;
   gap: 0.25rem;
-  margin: ${props => (props.margin ? props.margin : '2rem 0 ')};
+  margin: ${props => (props.margin ? props.margin : '2rem 0 1rem 0 ')};
 `;
 
 const IconImg = styled.img`
@@ -23,9 +23,8 @@ const H2 = styled.h2`
   font-weight: bold;
 `;
 
-function ModalSection({title, color, font, fontSize}) {
+function ModalSection({title, color, font, fontSize, timeDatalst}) {
   const [showModal, setShowModal] = useState(false);
-  const lst = [2022, 2023];
   return (
     <IconWrapper>
       <IconImg
@@ -38,7 +37,7 @@ function ModalSection({title, color, font, fontSize}) {
       <H2 font={font} color={color} size={fontSize}>
         {title}
       </H2>
-      <Modal titleData={lst} showModal={showModal} setShowModal={setShowModal} />
+      <Modal titleData={timeDatalst} showModal={showModal} setShowModal={setShowModal} />
     </IconWrapper>
   );
 }
