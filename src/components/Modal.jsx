@@ -32,7 +32,7 @@ const CloseButton = styled.img`
 
 const Ul = styled.ul`
   display: flex;
-  justify-content: start;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 5%;
   overflow: auto; // 스크롤 가능하도록 설정
@@ -42,10 +42,9 @@ const Ul = styled.ul`
 
 const Li = styled.li`
   font-size: 1rem;
-  text-align: center;
   width: 38%;
   color: ${theme.colors.yellow};
-  margin: 1rem 1rem;
+  margin: 1rem 0;
   cursor: pointer;
 `;
 
@@ -85,9 +84,9 @@ function Modal({titleData, showModal, setShowModal}) {
               {item} Field Camp
             </Li>
           ))}
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
+        <Li>2021 Field Camp</Li>
+        <Li>2025 Field camp</Li>
+        <Li>2026 Field camp</Li>
         <Li>2021 Field camp</Li>
         <Li>2021 Field camp</Li>
         <Li>2021 Field camp</Li>

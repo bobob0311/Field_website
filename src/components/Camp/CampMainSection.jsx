@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
 import backgroundImg from '../../assets/CampBackground.jpg';
 import scrollDown from '../../assets/transfer-down-light.svg';
 import theme from '../../theme';
@@ -66,7 +67,9 @@ function CampMainSection() {
         <TitleH2 padding='0rem 10% 0 10%'>팀원과 함께</TitleH2>
         <TitleH2 padding='0 10% 0 10%'>여러분의 열정을 보여주세요!!</TitleH2>
         <Figure bottom='1rem' position='absolute' left='50%' transform='translate(-50%)'>
-          <Button label='FIELD CAMP 지원하기' />
+          <Link to='https://linktr.ee/iefieldcamp'>
+            <Button label='FIELD CAMP 지원하기' />
+          </Link>
           <Img src={scrollDown} />
           <Figcaption>아래로 스크롤하세요</Figcaption>
         </Figure>

@@ -8,6 +8,7 @@ import CampPage from './pages/CampPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import RecruitPage from './pages/RecruitPage';
+import NewsPage from './pages/NewsPage';
 import Layout from './layout/Layout';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path='/about' element={<AboutPage />} />
           <Route path='/contact' element={<ContactPage />} />
           <Route path='/recruit' element={<RecruitPage />} />
+          <Route path='/news' element={<NewsPage />} />
         </Route>
       </Routes>
     </ThemeProvider>
