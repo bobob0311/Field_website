@@ -4,16 +4,15 @@ import theme from '../../theme';
 const FooterArea = styled.footer`
   display: flex;
   flex-direction: column;
-  margin: 1rem 0 0 0;
-  width: 90%;
+  margin: 2rem 0 0 0;
   background: #141414;
-  padding: 5%;
+  padding: 3% 5%;
 `;
 
 const FooterContent = styled.span`
   font-size: 0.625rem;
   margin: 0.3rem 0;
-  font-weight: 600;
+  font-weight: 900;
 `;
 
 const FooterImg = styled.img`
@@ -21,15 +20,8 @@ const FooterImg = styled.img`
   height: 2rem;
 `;
 
-const ContentWrapper = styled.p`
-  display: flex;
-  flex-direction: column;
-  margin: 0 0 0.5rem 0;
-`;
-
 const ImgWrapper = styled.div`
-  display: flex;
-  width: 30rem;
+  margin: 1rem 0 0 0;
 `;
 
 const ImgLink = styled.a`
@@ -40,28 +32,27 @@ const AddressLink = styled.a`
   text-decoration: none;
   color: ${theme.colors.white};
   font-size: 0.625rem;
-  font-weight: 600;
+  font-weight: 900;
 `;
 
 export default function Footer() {
   return (
     <FooterArea>
-      <ContentWrapper>
-        <FooterContent>FIELD (필드, 전국 대학생 산업공학도 동아리)</FooterContent>
-        <FooterContent>Copyrightⓒ2024.FIELD. All rights reserved.</FooterContent>
-        <address>
-          <AddressLink href='iefieldcamp24@gamil.com'>iefieldcamp24@gamil.com</AddressLink>
-        </address>
-      </ContentWrapper>
+      <FooterContent>FIELD (필드, 전국 대학생 산업공학도 동아리)</FooterContent>
+      <FooterContent>Copyrightⓒ2024.FIELD. All rights reserved.</FooterContent>
+      <address>
+        <AddressLink href='iefieldcamp24@gamil.com'>iefieldcamp24@gamil.com</AddressLink>
+      </address>
+
       <ImgWrapper>
-        <ImgLink href='/contact'>
-          <FooterImg src='KakaoTalk.png' alt='kakaotalk' />
+        <ImgLink href='https://www.youtube.com/@field2023' target='_blank'>
+          <FooterImg src='KakaoTalk.png' alt='kakaotalk 아이콘' />
         </ImgLink>
-        <ImgLink>
-          <FooterImg src='Instagram.png' alt='Instagram' />
+        <ImgLink href='instagram.com/iefield?igshid=MzRlODBiNWFlZA==' target='_blank'>
+          <FooterImg src='Instagram.png' alt='Instagram 아이콘' />
         </ImgLink>
-        <ImgLink>
-          <FooterImg src='Youtube.png' alt='Youtube' />
+        <ImgLink href='https://www.youtube.com/@field2023' target='_blank'>
+          <FooterImg src='Youtube.png' alt='Youtube 아이콘' />
         </ImgLink>
       </ImgWrapper>
     </FooterArea>
