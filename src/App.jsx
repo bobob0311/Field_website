@@ -6,6 +6,9 @@ import theme from './theme';
 import MainPage from './pages/mainPage';
 import CampPage from './pages/CampPage';
 import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
+import CampPage from './pages/CampPage';
+import RecruitPage from './pages/RecruitPage';
 
 function App() {
   return (
@@ -15,6 +18,8 @@ function App() {
         <Route path='/' element={<MainPage />} />
         <Route path='/camp' element={<CampPage />} />
         <Route path='/about' element={<AboutPage />} />
+        <Route path='/contact' element={<ContactPage />} />
+        <Route path='/recruit' element={<RecruitPage />} />
       </Routes>
     </ThemeProvider>
   );
