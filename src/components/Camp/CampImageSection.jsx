@@ -28,7 +28,7 @@ const P = styled.p`
   color: white;
   text-align: center;
   padding: ${props => (props.padding ? props.padding : '')};
-  letter-spacing: -0.05em;
+  letter-spacing: -0.1em;
   font-weight: bold;
 `;
 

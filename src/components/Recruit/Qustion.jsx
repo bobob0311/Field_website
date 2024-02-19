@@ -24,7 +24,7 @@ const P = styled.p`
 `;
 
 const DownImg = styled.img`
-  margin: 0 1rem 0 0;
+  margin: 0 0.5rem 0 0;
 `;
 
 const QueBox = styled.div`
@@ -44,7 +44,7 @@ export default function Question({qes, ans}) {
         <P fontSize='0.875rem' fontWeight='900'>
           {qes}
         </P>
-        <DownImg src='instagram.png' />
+        <DownImg src='Expand_down.png' />
       </QueBox>
       {toggle && <P>{ans}</P>}
     </Box>
