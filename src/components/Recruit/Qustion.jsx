@@ -14,12 +14,23 @@ const Box = styled.button`
 `;
 
 const P = styled.p`
+  width: 90%;
   font-size: ${props => (props.fontSize ? props.fontSize : '0.75rem')};
   font-weight: ${props => (props.fontWeight ? props.fontWeight : '700')};
   margin: 0.5rem 0 0.5rem 0;
   word-break: keep-all;
   text-indent: -0.5rem;
   padding: 0 0 0 1rem;
+`;
+
+const DownImg = styled.img`
+  margin: 0 1rem 0 0;
+`;
+
+const QueBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export default function Question({qes, ans}) {
@@ -29,9 +40,12 @@ export default function Question({qes, ans}) {
   }
   return (
     <Box onClick={() => toggleHandler()}>
-      <P fontSize='0.875rem' fontWeight='900'>
-        {qes}
-      </P>
+      <QueBox>
+        <P fontSize='0.875rem' fontWeight='900'>
+          {qes}
+        </P>
+        <DownImg src='instagram.png' />
+      </QueBox>
       {toggle && <P>{ans}</P>}
     </Box>
   );
