@@ -1,4 +1,4 @@
-import PocketBase from 'pocketbase';
+import {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import 'swiper/swiper-bundle.css';
@@ -16,10 +16,7 @@ import AnimationExample from '../components/AnimationExample';
 import ActivityIntro from '../components/Main/ActivityIntro';
 import theme from '../theme';
 import FieldIntro from '../components/Main/FieldIntro';
-
-const pb = new PocketBase(import.meta.env.VITE_API_URL);
-
-const review = await pb.collection('Review').getFullList();
+import {ReviewApi} from '../lib/Apiservice';
 
 const AccessibilityHidden = styled.h1`
   position: absolute;
@@ -124,6 +121,20 @@ const WriterContainer = styled.div`
 `;
 
 function MainPage() {
+  const [reviewData, setReviewData] = useState([]);
+  const getReview = async () => {
+    try {
+      const response = await ReviewApi();
+      setReviewData(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getReview();
+  }, []);
+
   return (
     <>
       <AccessibilityHidden>메인페이지</AccessibilityHidden>
@@ -219,7 +230,7 @@ function MainPage() {
       <H2 $margin='2rem 0'>How was your FIELD?</H2>
       <SwiperContainer $margin='2rem 0'>
         <Swiper slidesPerView={1.2} spaceBetween={20} centeredSlides='true'>
-          {review.map(item => (
+          {reviewData.map(item => (
             <SwiperSlide key={item.id}>
               <Card $border='true'>
                 <Article>

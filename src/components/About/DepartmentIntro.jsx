@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import theme from '../../theme';
+import {DepartmentApi} from '../../lib/Apiservice';
 
 const H2 = styled.h2`
   font-size: 1.875rem;
@@ -9,9 +10,11 @@ const H2 = styled.h2`
 `;
 
 const Image = styled.img`
-  margin: ${props => props.margin || '0'};
-  width: ${props => props.width || ''};
-  border-radius: ${props => props.radius || ''};
+  margin: 2rem 0 0 0;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1/0.8;
+  border-radius: 1rem;
 `;
 
 const Card = styled.article`
@@ -127,6 +130,20 @@ const FlexCenter = styled.div`
 `;
 
 function DepartmentIntro() {
+  const [departmentData, setDepartmentData] = useState([]); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  const imageUrl = `${import.meta.env.VITE_API_URL}/api/files/jopzyrph5gaoffm/`;
+  const getDepartmentData = async () => {
+    try {
+      const response = await DepartmentApi();
+      setDepartmentData(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getDepartmentData();
+  }, []);
   const [selectCategory, setSelectCategory] = useState('기획부');
   const category = ['기획부', '대외협력부', '컴페티션부', '홍보부'];
 
@@ -137,8 +154,6 @@ function DepartmentIntro() {
   return (
     <>
       <H2 margin='2rem 0'>부서소개</H2>
-      {/* 통신 */}
-      <Image width='100%' src='./../../public/fieldIntro1.png' alt='' />
       <ButtonWrapper>
         {category.map(item => (
           <Button
@@ -151,6 +166,11 @@ function DepartmentIntro() {
         ))}
       </ButtonWrapper>
       <CardContainer visible={selectCategory === '기획부'}>
+        <Image
+          width='100%'
+          src={`${imageUrl}${departmentData[0].id}/${departmentData[0].photo}`}
+          alt=''
+        />
         <Card margin='2rem 0'>
           <Dl>
             <Dt>기획부</Dt>
@@ -188,6 +208,11 @@ function DepartmentIntro() {
         </ActivityUl>
       </CardContainer>
       <CardContainer visible={selectCategory === '대외협력부'}>
+        <Image
+          width='100%'
+          src={`${imageUrl}${departmentData[1].id}/${departmentData[1].photo}`}
+          alt=''
+        />
         <Card margin='2rem 0'>
           <Dl>
             <Dt>대외협력부</Dt>
@@ -228,6 +253,11 @@ function DepartmentIntro() {
         </ActivityUl>
       </CardContainer>
       <CardContainer visible={selectCategory === '컴페티션부'}>
+        <Image
+          width='100%'
+          src={`${imageUrl}${departmentData[2].id}/${departmentData[2].photo}`}
+          alt=''
+        />
         <Card margin='2rem 0'>
           <Dl>
             <Dt>컴페티션부</Dt>
@@ -269,6 +299,11 @@ function DepartmentIntro() {
         </ActivityUl>
       </CardContainer>
       <CardContainer visible={selectCategory === '홍보부'}>
+        <Image
+          width='100%'
+          src={`${imageUrl}${departmentData[3].id}/${departmentData[3].photo}`}
+          alt=''
+        />
         <Card margin='2rem 0'>
           <Dl>
             <Dt>홍보부</Dt>
