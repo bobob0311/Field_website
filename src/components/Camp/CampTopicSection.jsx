@@ -87,7 +87,7 @@ function CampTopicSection() {
       <ModalSection title='역대 FIELD CAMP' font='Nanum Myeongjo' timeDatalst={campDataYear} />
       <H3>{campYear} FIELD CAMP</H3>
       {campFullData.map((camp, index) => (
-        <ButtonWrapper>
+        <ButtonWrapper key={camp.id}>
           <Figure key={index}>
             {camp.topic === '1st' ? (
               <Figcaption>{camp.topic} topic</Figcaption>
@@ -103,7 +103,7 @@ function CampTopicSection() {
                 />
               ))
             ) : (
-              <Img src={`${imageUrl}${camp.id}/${camp.file[0]}`} alt='camp-image-0' />
+              <Img key={camp.id} src={`${imageUrl}${camp.id}/${camp.file[0]}`} alt='camp-image-0' />
             )}
           </Figure>
           <Button

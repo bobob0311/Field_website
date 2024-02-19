@@ -28,7 +28,8 @@ const Dd = styled.dd`
   font-size: 1rem;
   margin: ${props => (props.margin ? props.margin : '0 0 2.5rem 0')};
   font-weight: 500;
-  line-height: 1.3;
+  line-height: 1.5;
+  word-break: keep-all;
 `;
 
 function CampIntroSection() {

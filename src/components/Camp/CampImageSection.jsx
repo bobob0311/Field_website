@@ -24,6 +24,9 @@ const H2 = styled.h2`
 `;
 
 const P = styled.p`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   font-size: 1.5rem;
   color: white;
   text-align: center;
@@ -32,7 +35,7 @@ const P = styled.p`
   font-weight: bold;
 `;
 
-const Div = styled.div`
+const Span = styled.span`
   margin: ${props => (props.margin ? props.margin : '')};
 `;
 
@@ -41,9 +44,9 @@ function CampImageSection({img, title, firstLine = '', secondLine = '', thirdLin
     <Section src={img}>
       <H2 padding='0 10% 2rem 10%'>{title}</H2>
       <P padding='0 10% 1rem 10%'>
-        <Div margin='0 0 1rem 0'>{firstLine}</Div>
-        <Div margin='0 0 1rem 0'>{secondLine}</Div>
-        <Div margin='0 0 1rem 0'>{thirdLine}</Div>
+        <Span margin='0 0 1rem 0'>{firstLine}</Span>
+        <Span margin='0 0 1rem 0'>{secondLine}</Span>
+        <Span margin='0 0 1rem 0'>{thirdLine}</Span>
       </P>
     </Section>
   );
