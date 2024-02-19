@@ -1,8 +1,10 @@
 @import url(//fonts.googleapis.com/earlyaccess/nanumbrushscript.css);
+@import url(//fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
 
 @font-face {
   font-family: 'SUIT-Regular';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2')
+    format('woff2');
   font-weight: normal;
   font-style: normal;
 }
@@ -67,6 +69,9 @@ body {
 }
 
 .nanumbrushscript * {
- font-family: 'Nanum Brush Script', cursive;
+  font-family: 'Nanum Brush Script', cursive;
 }
 
+.nanummyeongjo * {
+  font-family: 'Nanum Myeongjo', serif;
+}
