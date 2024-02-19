@@ -7,9 +7,8 @@ import theme from '../../theme';
 import Button from '../Button';
 
 const H1 = styled.h1`
-  position: ${props => (props.position ? props.position : '')};
-  bottom: ${props => (props.bottom ? props.bottom : '')};
-  top: ${props => (props.top ? props.top : '')};
+  position: absolute;
+  top: 5rem;
   font-size: 1.875rem;
   text-align: center;
 `;

@@ -3,19 +3,19 @@ import styled from 'styled-components';
 import theme from '../theme';
 
 const Button = styled.button`
-  background-color: transparent;
+  background-color: black;
   color: white;
-  margin: 0rem;
   cursor: pointer;
   width: 25%;
-  border: 1px solid white;
+  border: none;
+  border-radius: 1rem;
   font-size: 0.8rem;
-
+  font: suit;
   ${props =>
     props.isActive &&
     `
-    background-color: ${theme.colors.blue};
-    color: blue;
+    background-color: ${theme.colors.gray};
+    color: white;
   `}
 `;
 
