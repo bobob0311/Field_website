@@ -19,6 +19,7 @@ const Section = styled.section`
 const H2 = styled.h2`
   font-size: 1rem;
   font-weight: bold;
+  font-family: SUIT-Heavy;
   margin: 0 0 1rem 0;
 `;
 

@@ -34,7 +34,7 @@ const Ul = styled.ul`
   display: flex;
   justify-content: start;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 5%;
   overflow: auto; // 스크롤 가능하도록 설정
   max-height: 300px; // 예시로 300px로 설정. 적절한 값으로 조절하세요.
   width: 100%; // 전체 너비를 사용하도록 설정
@@ -43,13 +43,10 @@ const Ul = styled.ul`
 const Li = styled.li`
   font-size: 1rem;
   text-align: center;
+  width: 38%;
   color: ${theme.colors.yellow};
   margin: 1rem 1rem;
   cursor: pointer;
-  ::marker {
-    padding: 0;
-    margin: 0;
-  }
 `;
 
 function Modal({titleData, showModal, setShowModal}) {
