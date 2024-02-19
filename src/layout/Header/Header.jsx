@@ -45,6 +45,7 @@ const MenuButton = styled.button`
   appearance: none;
   background: none;
   border: none;
+  padding: 0;
 `;
 
 export default function Header() {
