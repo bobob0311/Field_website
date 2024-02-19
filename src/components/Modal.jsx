@@ -8,7 +8,7 @@ import theme from '../theme';
 const ModalBackground = styled.section`
   position: fixed;
   top: 25%;
-  width: full;
+  width: 75%;
   height: full;
   background: rgba(0, 0, 0, 0.5);
   border: solid;
@@ -70,13 +70,6 @@ function Modal({titleData, showModal, setShowModal}) {
               </Li>
             ))
           : ''}
-        <Li
-          onClick={event => {
-            dispatch(setDataCampYear(event.target.innerText)); // 클릭된 항목의 값을 dispatch
-          }}
-        >
-          2021
-        </Li>
       </Ul>
     </ModalBackground>
   );
