@@ -230,7 +230,7 @@ function DepartmentIntro() {
       <CardContainer visible={selectCategory === '컴페티션부'}>
         <Card margin='2rem 0'>
           <Dl>
-            <Dt>대외협력부</Dt>
+            <Dt>컴페티션부</Dt>
             <Dd>
               FIELD 내 진행하는 학술교류에 관한 업무와 FIELD CAMP 컴페티션에 대한 자료와 평가기준을
               만드는 부서

@@ -10,10 +10,6 @@ const pb = new PocketBase('https://field.pockethost.io');
 
 const review = await pb.collection('Review').getFullList();
 
-const Header = styled.header`
-  height: 10vh;
-  background-color: gray;
-`;
 const AccessibilityHidden = styled.h1`
   position: absolute;
   width: 1px;
@@ -132,7 +128,6 @@ const WriterContainer = styled.div`
 function MainPage() {
   return (
     <>
-      <Header />
       <AccessibilityHidden>메인페이지</AccessibilityHidden>
       <TitleContainer>
         <AnimationExample text='Lets Lead The Industry To A Broader FIELD' />

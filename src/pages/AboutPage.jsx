@@ -3,11 +3,6 @@ import styled from 'styled-components';
 import DepartmentIntro from '../components/About/DepartmentIntro';
 import theme from '../theme';
 
-const Header = styled.header`
-  height: 10vh;
-  background-color: gray;
-`;
-
 const AccessibilityHidden = styled.h1`
   position: absolute;
   width: 1px;
@@ -106,7 +101,6 @@ const Li = styled.li`
 function AboutPage() {
   return (
     <>
-      <Header />
       <AccessibilityHidden>어바웃 필드</AccessibilityHidden>
       <TitleContainer>
         <H2 margin='2rem 0'>전국 대학생 산업공학도 모임</H2>
