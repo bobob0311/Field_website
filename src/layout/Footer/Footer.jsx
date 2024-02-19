@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+import theme from '../../theme';
 
 const FooterArea = styled.footer`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   margin: 1rem 0 0 0;
   width: 90%;
   background: #141414;
@@ -16,23 +17,31 @@ const FooterContent = styled.span`
 `;
 
 const FooterImg = styled.img`
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2rem;
+  height: 2rem;
 `;
 
 const ContentWrapper = styled.p`
   display: flex;
   flex-direction: column;
+  margin: 0 0 0.5rem 0;
 `;
 
 const ImgWrapper = styled.div`
   display: flex;
-  align-items: center;
-  width: 40%;
-  justify-content: space-evenly;
+  width: 30rem;
 `;
 
-const ImgLink = styled.a``;
+const ImgLink = styled.a`
+  margin: 0 1rem 0 0;
+`;
+
+const AddressLink = styled.a`
+  text-decoration: none;
+  color: ${theme.colors.white};
+  font-size: 0.625rem;
+  font-weight: 600;
+`;
 
 export default function Footer() {
   return (
@@ -40,7 +49,9 @@ export default function Footer() {
       <ContentWrapper>
         <FooterContent>FIELD (필드, 전국 대학생 산업공학도 동아리)</FooterContent>
         <FooterContent>Copyrightⓒ2024.FIELD. All rights reserved.</FooterContent>
-        <FooterContent> Published 2008.</FooterContent>
+        <address>
+          <AddressLink href='iefieldcamp24@gamil.com'>iefieldcamp24@gamil.com</AddressLink>
+        </address>
       </ContentWrapper>
       <ImgWrapper>
         <ImgLink href='/contact'>
