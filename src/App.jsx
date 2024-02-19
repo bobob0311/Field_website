@@ -3,11 +3,10 @@ import {ThemeProvider} from 'styled-components';
 import GlobalStyle from './GlobalStyle';
 import './index.css';
 import theme from './theme';
-import MainPage from './pages/mainPage';
+import MainPage from './pages/MainPage';
 import CampPage from './pages/CampPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
-import CampPage from './pages/CampPage';
 import RecruitPage from './pages/RecruitPage';
 
 function App() {
