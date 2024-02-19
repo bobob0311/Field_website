@@ -8,7 +8,7 @@ const Section = styled.section`
   margin: ${props => (props.margin ? props.margin : '0 10% 0 10% ')};
 `;
 
-const H3 = styled.h3`
+const H2 = styled.h2`
   font-size: 1.625rem;
   margin: ${props => (props.margin ? props.margin : '2.5rem 0 0 0')};
   text-align: center;
@@ -35,7 +35,7 @@ const Dd = styled.dd`
 function CampIntroSection() {
   return (
     <Section>
-      <H3>FieldCamp 소개</H3>
+      <H2>FieldCamp 소개</H2>
       <Dl>
         <Dt color='red'>FieldCamp란</Dt>
         <Dd>

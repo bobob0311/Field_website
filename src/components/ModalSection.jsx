@@ -23,6 +23,18 @@ const H2 = styled.h2`
   font-weight: bold;
 `;
 
+const ModalBackground = styled.section`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+`;
+
 function ModalSection({title, color, font, fontSize, timeDatalst}) {
   const [showModal, setShowModal] = useState(false);
   return (
@@ -37,7 +49,15 @@ function ModalSection({title, color, font, fontSize, timeDatalst}) {
       <H2 font={font} color={color} size={fontSize}>
         {title}
       </H2>
-      <Modal titleData={timeDatalst} showModal={showModal} setShowModal={setShowModal} />
+      {showModal && (
+        <ModalBackground
+          onClick={() => {
+            setShowModal(false);
+          }}
+        >
+          <Modal titleData={timeDatalst} showModal={showModal} setShowModal={setShowModal} />
+        </ModalBackground>
+      )}
     </IconWrapper>
   );
 }

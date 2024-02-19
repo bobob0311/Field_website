@@ -29,7 +29,6 @@ const ContentWrapper = styled.p`
 
 const ImgWrapper = styled.div`
   display: flex;
-  width: 30rem;
 `;
 
 const ImgLink = styled.a`

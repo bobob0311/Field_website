@@ -67,7 +67,7 @@ function CampMainSection() {
         <TitleH2 padding='0 10% 0 10%'>여러분의 열정을 보여주세요!!</TitleH2>
         <Figure bottom='1rem' position='absolute' left='50%' transform='translate(-50%)'>
           <Button label='FIELD CAMP 지원하기' />
-          <Img src={scrollDown} alt='아래로 스크롤하세요' />
+          <Img src={scrollDown} />
           <Figcaption>아래로 스크롤하세요</Figcaption>
         </Figure>
       </TitleContainer>

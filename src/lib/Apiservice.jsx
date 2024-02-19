@@ -4,16 +4,8 @@ const pb = new PocketBase(import.meta.env.VITE_API_URL);
 
 pb.autoCancellation(false);
 
-export function CampApi(year) {
-  return pb.collection('camp').getFullList({
-    filter: `year=${year}`,
-  });
-}
-
-export function CampyearApi() {
-  return pb.collection('camp').getFullList({
-    expand: 'year',
-  });
+export function CampApi() {
+  return pb.collection('camp').getFullList({});
 }
 
 export function NewsApi(selectCategory) {
