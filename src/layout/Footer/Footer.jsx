@@ -16,8 +16,8 @@ const FooterContent = styled.span`
 `;
 
 const FooterImg = styled.img`
-  width: 2rem;
-  height: 2rem;
+  width: ${props => (props.width ? props.width : '2rem')};
+  height: ${props => (props.height ? props.height : '2rem')};
 `;
 
 const ImgWrapper = styled.div`
@@ -41,14 +41,16 @@ export default function Footer() {
       <FooterContent>FIELD (필드, 전국 대학생 산업공학도 동아리)</FooterContent>
       <FooterContent>Copyrightⓒ2024.FIELD. All rights reserved.</FooterContent>
       <address>
-        <AddressLink href='iefieldcamp24@gamil.com'>iefieldcamp24@gamil.com</AddressLink>
+        <AddressLink href='mailto:iefieldcamp24@gamil.com' target='_blank'>
+          iefieldcamp24@gamil.com
+        </AddressLink>
       </address>
 
       <ImgWrapper>
-        <ImgLink href='https://www.youtube.com/@field2023' target='_blank'>
-          <FooterImg src='KakaoTalk.png' alt='kakaotalk 아이콘' />
+        <ImgLink href='http://pf.kakao.com/_uwNxeK' target='_blank'>
+          <FooterImg src='KakaoTalk.png' alt='kakaotalk 아이콘' width='1.8rem' height='1.8rem' />
         </ImgLink>
-        <ImgLink href='instagram.com/iefield?igshid=MzRlODBiNWFlZA==' target='_blank'>
+        <ImgLink href='https://www.instagram.com/iefield/' target='_blank'>
           <FooterImg src='Instagram.png' alt='Instagram 아이콘' />
         </ImgLink>
         <ImgLink href='https://www.youtube.com/@field2023' target='_blank'>
