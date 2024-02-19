@@ -9,7 +9,7 @@ const Box = styled.button`
   border-radius: 0.65rem;
   color: ${theme.colors.black};
   width: 100%;
-  padding: 0.5rem 0;
+  height: ${props => (props.expanded === 'true' ? '8rem' : '4rem')};
   margin: 0 0 1.5rem 0;
 `;
 
@@ -19,8 +19,8 @@ const P = styled.p`
   font-weight: ${props => (props.fontWeight ? props.fontWeight : '700')};
   margin: 0.5rem 0 0.5rem 0;
   word-break: keep-all;
-  text-indent: -0.5rem;
-  padding: 0 0 0 1rem;
+  text-indent: -1rem;
+  padding: 0 0 0 1.5rem;
 `;
 
 const DownImg = styled.img`
@@ -39,7 +39,7 @@ export default function Question({qes, ans}) {
     setToggle(!toggle);
   }
   return (
-    <Box onClick={() => toggleHandler()}>
+    <Box expanded={toggle.toString()} onClick={() => toggleHandler()}>
       <QueBox>
         <P fontSize='0.875rem' fontWeight='900'>
           {qes}

@@ -33,3 +33,7 @@ export function NewsDetailApi(id) {
     expand: 'contents',
   });
 }
+
+export function RecruitApi() {
+  return pb.collection('Recruit').getFullList();
+}
