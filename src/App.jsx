@@ -16,10 +16,7 @@ function App() {
         <Route path='/' element={<MainPage />} />
         <Route path='/camp' element={<CampPage />} />
         <Route path='/contact' element={<ContactPage />} />
-<<<<<<< HEAD
-=======
         <Route path='/recruit' element={<RecruitPage />} />
->>>>>>> dev
       </Routes>
     </ThemeProvider>
   );

@@ -8,9 +8,9 @@ import theme from '../theme';
 const ModalBackground = styled.section`
   position: fixed;
   top: 25%;
-  width: 75%;
+  width: 80%;
   height: full;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 1);
   border: solid;
   border-radius: 1.25rem;
 `;
@@ -61,7 +61,6 @@ function Modal({titleData, showModal, setShowModal}) {
           ? titleData.map((item, idx) => (
               <Li
                 key={idx}
-                type='disc'
                 onClick={() => {
                   dispatch(setDataCampYear(item)); // 클릭된 항목의 값을 dispatch
                 }}
