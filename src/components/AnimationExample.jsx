@@ -43,6 +43,7 @@ function AnimationExample({text}) {
         >
           {wordsArray.map((word, idx) => (
             <motion.span
+              key={word}
               variants={{
                 visible: {opacity: 1, y: 0}, // visible 상태의 애니메이션 속성을 정의합니다.
                 hidden: {opacity: 0, y: 20}, // hidden 상태의 애니메이션 속성을 정의합니다.
