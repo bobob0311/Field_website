@@ -16,7 +16,7 @@ const MainHeaderWrapper = styled.div`
   position: inherit;
   align-items: center;
   height: 4.5rem;
-  padding: 0 5%;
+  padding: 0 7.5%;
   justify-content: space-between;
   z-index: 2;
 `;

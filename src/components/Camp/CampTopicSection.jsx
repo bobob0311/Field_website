@@ -10,7 +10,7 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: ${props => (props.margin ? props.margin : '0 10% 0 10% ')};
+  margin: 0 7.5%;
   text-align: center;
   align-items: center;
   gap: 0.25rem;
@@ -56,6 +56,7 @@ function CampTopicSection() {
   const campYear = useSelector(state => state.campYear.value);
 
   const imageUrl = `${import.meta.env.VITE_API_URL}/api/files/chlj2bc39fagbcf/`;
+
   const filterData = year => {
     setShowedCampData(campFullData.filter(camp => camp.year === year));
   };

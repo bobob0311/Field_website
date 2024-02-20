@@ -5,7 +5,7 @@ import theme from '../../theme';
 const Section = styled.section`
   display: flex;
   flex-direction: column;
-  margin: ${props => (props.margin ? props.margin : '0 10% 0 10% ')};
+  margin: 0 7.5%;
 `;
 
 const H2 = styled.h2`
