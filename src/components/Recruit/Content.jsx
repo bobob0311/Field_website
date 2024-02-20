@@ -145,12 +145,6 @@ export default function Content() {
 
   return (
     <>
-      <P $fontSize='1.5rem' $fontWeight='600' $color='white'>
-        지금은 모집기간이 아닙니다.
-      </P>
-      <P $color='white' $margin='1rem 0 100% 0'>
-        필드는 매년 1월에 새로운 멤버를 모집합니다.
-      </P>
       <Contanier subtitle='😀 지원자격' content='산업공학을 주/복수/부전공하는 대학생' />
       <ContanierWithContentBox subtitle='📆 모집 일정' content={recruitDate} />
       <Contanier subtitle='📚 활동 기간' content='매년 3월 ~ 12월 (10개월)' />

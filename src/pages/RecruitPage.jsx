@@ -2,16 +2,13 @@ import styled from 'styled-components';
 import Department from '../components/Recruit/Department';
 import Question from '../components/Recruit/Qustion';
 import Content from '../components/Recruit/Content';
-
-const RecruitSection = styled.section`
-  margin: 0 7.5%;
-`;
+import theme from '../theme';
 
 const Title = styled.h1`
   font-family: 'Goblin One';
   font-size: 1.875rem;
   text-align: center;
-  margin: 2rem 0;
+  padding: 2rem 0;
   font-weight: 300;
 `;
 
@@ -20,6 +17,19 @@ const SubTitle = styled.h2`
   text-align: center;
   margin: 0 0 1.5rem 0;
   font-weight: 800;
+`;
+
+const MainSection = styled.section`
+  height: 55vh;
+  background: linear-gradient(to bottom, #313131 60%, ${theme.colors.black} 100%);
+`;
+
+const P = styled.p`
+  font-size: ${props => (props.$fontSize ? props.$fontSize : '1rem')};
+  color: ${theme.colors.white};
+  font-weight: ${props => (props.$fontWeight ? props.$fontWeight : 300)};
+  text-align: center;
+  margin: ${props => (props.$margin ? props.$margin : '1rem 0')};
 `;
 
 export default function RecruitPage() {
@@ -53,8 +63,14 @@ export default function RecruitPage() {
 
   return (
     <main>
-      <RecruitSection>
-        <Title>RECRUIT</Title>
+      <section>
+        <MainSection>
+          <Title>RECRUIT</Title>
+          <P $fontSize='1.5rem' $fontWeight='600' $margin='5rem 0 2rem 0'>
+            지금은 모집기간이 아닙니다.
+          </P>
+          <P>필드는 매년 1월에 새로운 멤버를 모집합니다.</P>
+        </MainSection>
         <Content />
         <Department />
         <section>
@@ -63,7 +79,7 @@ export default function RecruitPage() {
             <Question key={item.id} qes={item.qes} ans={item.ans} />
           ))}
         </section>
-      </RecruitSection>
+      </section>
     </main>
   );
 }
