@@ -33,3 +33,10 @@ export function NewsDetailApi(id) {
     expand: 'contents',
   });
 }
+<<<<<<< HEAD
+=======
+
+export function RecruitApi() {
+  return pb.collection('Recruit').getFullList();
+}
+>>>>>>> 2f36381eee8a7381ba52443c127183008d2f7c73
