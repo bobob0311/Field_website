@@ -2,6 +2,10 @@ import {useState} from 'react';
 import styled from 'styled-components';
 import theme from '../../theme';
 
+const DepartmentSection = styled.section`
+  margin: 0 0 5rem 0;
+`;
+
 const SubTitle = styled.h2`
   font-size: 1.5rem;
   text-align: center;
@@ -20,6 +24,9 @@ const QuestionBox = styled.div`
   padding: 1rem 0 0.5rem 0.5rem;
   font-weight: 400;
 `;
+const BoxSize = styled.div`
+  width: 20rem;
+`;
 
 const Question = styled.h3`
   font-size: 1.2rem;
@@ -34,6 +41,7 @@ const Answer = styled.li`
   margin: 0 0 1rem 0.25rem;
   word-break: keep-all;
   text-indent: -1rem;
+  letter-spacing: -0.05rem;
   padding: 0 1rem 0 0.8rem;
 `;
 
@@ -125,14 +133,14 @@ const allDepartment = {
 function DepartmentBox({part, p, target}) {
   return (
     <QuestionBox>
-      <div>
+      <BoxSize>
         <Question>{`${allDepartment[part].department}${p}`}</Question>
         <ul>
           {allDepartment[part][target].map((item, index) => (
             <Answer key={index}>{`${index + 1}. ${item}`}</Answer>
           ))}
         </ul>
-      </div>
+      </BoxSize>
     </QuestionBox>
   );
 }
@@ -144,7 +152,7 @@ export default function Department() {
     setSelectedDepartment(name);
   }
   return (
-    <>
+    <DepartmentSection>
       <SubTitle>모집 분야</SubTitle>
       <ButtonWrapper $activelink={selectedDepartment}>
         <DepartmentButton name='planning' onClick={() => DepartmentHandler('planning')}>
@@ -162,6 +170,6 @@ export default function Department() {
       </ButtonWrapper>
       <DepartmentBox part={selectedDepartment} p='는 어떤 인재를 원하나요! 🔍' target='explain' />
       <DepartmentBox part={selectedDepartment} p='는 어떤 활동을 하나요! 💪' target='activity' />
-    </>
+    </DepartmentSection>
   );
 }

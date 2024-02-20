@@ -57,10 +57,12 @@ export default function RecruitPage() {
         <Title>RECRUIT</Title>
         <Content />
         <Department />
-        <SubTitle>자주 묻는 질문</SubTitle>
-        {QUSANS.map(item => (
-          <Question key={item.id} qes={item.qes} ans={item.ans} />
-        ))}
+        <section>
+          <SubTitle>자주 묻는 질문</SubTitle>
+          {QUSANS.map(item => (
+            <Question key={item.id} qes={item.qes} ans={item.ans} />
+          ))}
+        </section>
       </RecruitSection>
     </main>
   );
