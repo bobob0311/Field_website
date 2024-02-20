@@ -8,10 +8,11 @@ const RecruitSection = styled.section`
 `;
 
 const Title = styled.h1`
+  font-family: 'Goblin One';
   font-size: 1.875rem;
   text-align: center;
   margin: 2rem 0;
-  font-weight: 900;
+  font-weight: 300;
 `;
 
 const SubTitle = styled.h2`
@@ -53,8 +54,8 @@ export default function RecruitPage() {
         <Content />
         <Department />
         <SubTitle>자주 묻는 질문</SubTitle>
-        {QusAns.map(item => (
-          <Question qes={item.qes} ans={item.ans} />
+        {QusAns.map((item, index) => (
+          <Question key={index} qes={item.qes} ans={item.ans} />
         ))}
       </RecruitSection>
     </main>
