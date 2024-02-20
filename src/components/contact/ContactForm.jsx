@@ -23,7 +23,7 @@ const InputLabel = styled.label`
   margin: 1rem 0 0 0;
   display: block;
   color: ${theme.colors.black};
-  font-weight: bold;
+  font-weight: 900;
   padding: 0 1rem;
 `;
 
@@ -39,7 +39,7 @@ const TypeSelect = styled.select`
   appearance: none;
   border: 0.13rem solid ${theme.colors.black};
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 900;
   background: url('Expand_down.png') no-repeat 100% 10%;
   background-size: 2rem 2rem;
   border-radius: 0.7rem;
@@ -71,11 +71,12 @@ const TextArea = styled.textarea`
   border-radius: 0.7rem;
   border: 0.15rem solid ${theme.colors.black};
   background: none;
-  font-weight: 600;
+  font-weight: 700;
 `;
 
 const SubmitButton = styled.button`
   background: ${theme.colors.white};
+  font-family: 'SUIT';
   font-size: 1.25rem;
   color: ${theme.colors.black};
   appearance: none;
@@ -83,9 +84,9 @@ const SubmitButton = styled.button`
   border: 0.05rem solid ${theme.colors.black};
   border-radius: 1rem;
   margin: 1.5rem auto;
-  padding: 0.65rem 0.8rem 0.5rem 0.8rem;
+  padding: 0.65rem 0.8rem 0.7rem 0.8rem;
   display: block;
-  font-weight: 600;
+  font-weight: 900;
   box-shadow: 0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
@@ -93,7 +94,6 @@ const SubmitButton = styled.button`
 const ButtonImg = styled.img`
   widht: 1.5rem;
   height: 1.5rem;
-  padding: 0 0 0.1rem 0;
   margin: 0 0 0 0.1rem;
 `;
 const Img = styled.img`
@@ -150,7 +150,7 @@ export default function ContactForm() {
   const phoneValid = /^[0-9]{9,11}$/;
 
   async function SendMessage({type, name, email, phoneNumber, content, title}) {
-    const pb = new PocketBase(import.meta.env.VITE_REACT_APP_URL);
+    const pb = new PocketBase(import.meta.env.VITE_APP_URL);
     const data = {
       Name: name,
       Type: type,
@@ -213,7 +213,6 @@ export default function ContactForm() {
     };
 
     const validationResult = Validation(submittedData);
-    // validationResult가 참이면 db에 data저장
     if (validationResult) {
       SendMessage(submittedData);
     }
@@ -222,7 +221,11 @@ export default function ContactForm() {
   function modalCloseHandler() {
     setIsOpen(false);
     setError(false);
-    window.location.reload();
+    if (isValid && !error) window.location.reload();
+  }
+
+  function NumberInputHandler(e) {
+    e.target.value = e.target.value.replace(/\D/g, '');
   }
 
   return (
@@ -245,11 +248,15 @@ export default function ContactForm() {
               연락처
             </VerticalCenter>
             <Input
+              id='Num'
               placeholder='01012345678'
               type='tel'
               name='phonenumber'
               ref={enteredData.phoneNumber}
               autoComplete='tel'
+              onInput={e => NumberInputHandler(e)}
+              pattern='[0-9]{9,11}'
+              maxLength='11'
             />
           </InputLabel>
 
