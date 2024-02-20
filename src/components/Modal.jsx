@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import ReactDOM from 'react-dom'; // createPortal을 사용하기 위해 필요
 import {useDispatch} from 'react-redux';
-import {setDataCampYear} from '../redux/campYearSlice';
+import {setModalTitle} from '../redux/modalTitleSlice';
 import modalCloseIcon from '../assets/modalClose.png';
 import theme from '../theme';
 
@@ -77,7 +77,7 @@ function Modal({titleData, showModal, setShowModal}) {
             <Li
               key={item}
               onClick={() => {
-                dispatch(setDataCampYear(item));
+                dispatch(setModalTitle(item));
                 setShowModal(false); // 클릭된 항목의 값을 dispatch
               }}
             >

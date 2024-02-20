@@ -9,8 +9,8 @@ const Button = styled.button`
   width: 25%;
   border: none;
   border-radius: 1rem;
-  font-size: 0.8rem;
-  font: suit;
+  font-size: 1rem;
+  font-family: inherit;
   ${props =>
     props.isActive &&
     `

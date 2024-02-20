@@ -9,6 +9,7 @@ import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import RecruitPage from './pages/RecruitPage';
 import NewsPage from './pages/NewsPage';
+import NewsDetailPage from './pages/NewsDetailPage';
 import Layout from './layout/Layout';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path='/contact' element={<ContactPage />} />
           <Route path='/recruit' element={<RecruitPage />} />
           <Route path='/news' element={<NewsPage />} />
+          <Route path='detail/:id' element={<NewsDetailPage />} />
         </Route>
       </Routes>
     </ThemeProvider>

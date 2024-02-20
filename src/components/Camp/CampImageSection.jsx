@@ -19,7 +19,8 @@ const H2 = styled.h2`
   font-size: 1.5625rem;
   color: white;
   text-align: center;
-  padding: ${props => (props.padding ? props.padding : '')};
+  padding: 0 10% 2rem 10%;
+  font-family: 'Goblin One';
   font-weight: bold;
 `;
 
@@ -30,23 +31,23 @@ const P = styled.p`
   font-size: 1.5rem;
   color: white;
   text-align: center;
-  padding: ${props => (props.padding ? props.padding : '')};
+  padding: 0 10% 1rem 10%;
   letter-spacing: -0.1em;
   font-weight: bold;
 `;
 
 const Span = styled.span`
-  margin: ${props => (props.margin ? props.margin : '')};
+  margin: 0 0 1rem 0;
 `;
 
 function CampImageSection({img, title, firstLine = '', secondLine = '', thirdLine = ''}) {
   return (
     <Section src={img}>
-      <H2 padding='0 10% 2rem 10%'>{title}</H2>
-      <P padding='0 10% 1rem 10%'>
-        <Span margin='0 0 1rem 0'>{firstLine}</Span>
-        <Span margin='0 0 1rem 0'>{secondLine}</Span>
-        <Span margin='0 0 1rem 0'>{thirdLine}</Span>
+      <H2>{title}</H2>
+      <P>
+        <Span>{firstLine}</Span>
+        <Span>{secondLine}</Span>
+        <Span>{thirdLine}</Span>
       </P>
     </Section>
   );

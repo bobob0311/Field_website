@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import modalIcon from '../assets/modalIcon.png';
 import Modal from './Modal';
+import theme from '../theme';
 
 const IconWrapper = styled.div`
   display: flex;

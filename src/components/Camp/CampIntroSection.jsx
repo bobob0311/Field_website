@@ -20,13 +20,14 @@ const Dl = styled.dl``;
 
 const Dt = styled.dt`
   font-size: 1.25rem;
-  margin: ${props => (props.margin ? props.margin : '2.5rem 0 1.25rem 0')};
+  margin: 2.5rem 0 1.25rem 0;
   color: ${props => (props.color ? theme.colors[props.color] : theme.colors.yellow)};
+  font-weight: bold;
 `;
 
 const Dd = styled.dd`
   font-size: 1rem;
-  margin: ${props => (props.margin ? props.margin : '0 0 2.5rem 0')};
+  margin: 0 0 2.5rem 0;
   font-weight: 500;
   line-height: 1.5;
   word-break: keep-all;
@@ -37,7 +38,7 @@ function CampIntroSection() {
     <Section>
       <H2>FieldCamp 소개</H2>
       <Dl>
-        <Dt color='red'>FieldCamp란</Dt>
+        <Dt color='red'>FIELD CAMP란</Dt>
         <Dd>
           FIELD CAMP는 대한산업공학회 주최, FIELD 주관의 전국 대학생 산업공학도 학술 및 인적 교류
           캠프로 여름방학 중 2박 3일간 진행됩니다. 지역적 한계로 교류가 어려운 전국의

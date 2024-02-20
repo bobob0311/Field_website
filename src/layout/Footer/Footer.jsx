@@ -22,7 +22,6 @@ const FooterImg = styled.img`
 
 const ImgWrapper = styled.div`
   display: flex;
-  width: 30rem;
 `;
 
 const ImgLink = styled.a`

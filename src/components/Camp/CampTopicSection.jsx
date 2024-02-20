@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import styled from 'styled-components';
 import ModalSection from '../ModalSection';
 import theme from '../../theme';
 import Button from '../Button';
 import {CampApi} from '../../lib/Apiservice';
+import {setModalTitle} from '../../redux/modalTitleSlice';
 
 const Section = styled.section`
   display: flex;
@@ -41,6 +42,7 @@ const Img = styled.img`
 const Figcaption = styled.figcaption`
   text-align: center;
   color: ${props => (props.color ? theme.colors[props.color] : theme.colors.red)};
+  font-family: 'Goblin One';
   font-size: 1.25rem;
 `;
 
@@ -53,7 +55,8 @@ function CampTopicSection() {
   const [campFullData, setCampFullData] = useState([]);
   const [showedCampData, setShowedCampData] = useState([]);
   const [expandedIndex, setExpandedIndex] = useState(null);
-  const campYear = useSelector(state => state.campYear.value);
+  const campYear = useSelector(state => state.modalTitle.value);
+  const dispatch = useDispatch();
 
   const imageUrl = `${import.meta.env.VITE_API_URL}/api/files/chlj2bc39fagbcf/`;
 
@@ -66,8 +69,10 @@ function CampTopicSection() {
       const response = await CampApi();
       const years = response.map(item => item.year);
       const uniqueYears = [...new Set(years)];
+      const maxYear = Math.max(...uniqueYears);
       setCampFullData(response);
       setCampDataYear(uniqueYears);
+      dispatch(setModalTitle(maxYear));
     } catch (err) {
       console.log(err);
     }

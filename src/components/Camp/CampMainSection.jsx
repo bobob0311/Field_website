@@ -9,6 +9,7 @@ import Button from '../Button';
 const H1 = styled.h1`
   position: absolute;
   top: 5rem;
+  font-family: 'Goblin One';
   font-size: 1.875rem;
   text-align: center;
 `;
