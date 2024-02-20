@@ -8,6 +8,7 @@ import {NewsApi, NewsMonthApi} from '../lib/Apiservice';
 import {setModalTitle} from '../redux/modalTitleSlice';
 import 'swiper/swiper-bundle.css';
 import NewsPagination from '../components/News/NewsPagination';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const NewsMain = styled.section`
   height: 67.9vh;
@@ -38,6 +39,7 @@ const ButtonWrapper = styled.div`
 function NewsPage() {
   const dispatch = useDispatch();
   const monthFieldTitle = useSelector(state => state.modalTitle.value);
+  const [loading, setLoading] = useState(true);
   const [showedMonthField, setShowedMonthField] = useState([]);
   const [selectCategory, setSelectCategory] = useState('월간필드');
   const categoryArr = ['월간필드', '취업/진로', 'FIELD', '공모전'];
@@ -55,6 +57,7 @@ function NewsPage() {
         dispatch(setModalTitle(title[title.length - 1]));
       }
       setNewsData(response);
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -64,6 +67,7 @@ function NewsPage() {
     try {
       const response = await NewsMonthApi(monthFieldTitle);
       setShowedMonthField(response[0]);
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -91,7 +95,8 @@ function NewsPage() {
           />
         ))}
       </ButtonWrapper>
-      {selectCategory === '월간필드' ? (
+      {loading && <LoadingSpinner />}
+      {!loading && selectCategory === '월간필드' ? (
         <>
           <ModalSection
             timeDatalst={newsData.map(item => item.title)}
@@ -100,7 +105,7 @@ function NewsPage() {
           />
           <SwiperContainer>
             <Swiper slidesPerView={1.2} spaceBetween={20} centeredSlides='true'>
-              {showedMonthField.photo ? (
+              {showedMonthField.photo &&
                 showedMonthField.photo.map(item => (
                   <SwiperSlide key={item}>
                     <Image
@@ -109,15 +114,12 @@ function NewsPage() {
                       alt={showedMonthField}
                     />
                   </SwiperSlide>
-                ))
-              ) : (
-                <div>로딩중</div>
-              )}
+                ))}
             </Swiper>
           </SwiperContainer>
         </>
       ) : (
-        <NewsPagination newsData={newsData} />
+        <NewsPagination newsData={newsData} category={selectCategory} />
       )}
     </NewsMain>
   );

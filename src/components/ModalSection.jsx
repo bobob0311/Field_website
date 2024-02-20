@@ -47,7 +47,14 @@ function ModalSection({title, color, font, fontSize, timeDatalst}) {
           setShowModal(true);
         }}
       />
-      <H2 font={font} color={color} size={fontSize}>
+      <H2
+        font={font}
+        color={color}
+        size={fontSize}
+        onClick={() => {
+          setShowModal(true);
+        }}
+      >
         {title}
       </H2>
       {showModal && (

@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {Pagination} from '@mui/material';
 import {Link} from 'react-router-dom';
+import LoadingSpinner from '../LoadingSpinner';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -27,45 +28,44 @@ const CustomPagination = styled(Pagination)`
   }
 `;
 
-function NewsPagination({newsData}) {
+function NewsPagination({newsData, category}) {
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const handlePageChange = page => {
     setCurrentPage(page);
   };
 
-  // 현재 페이지에 따른 뉴스 데이터 슬라이싱
   const currentItemPerPage = newsData.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage,
   );
 
-  return newsData.length > 0 ? (
-    <>
-      <Ul>
-        {currentItemPerPage.map(item => (
-          <Li key={item.id}>
-            <Link
-              style={{border: 'none', color: 'inherit', textDecoration: 'none'}}
-              to={`/detail/${item.newsId}`}
-            >
-              {item.title}
-            </Link>
-          </Li>
-        ))}
-      </Ul>
-      <PageWrapper>
-        <CustomPagination
-          count={Math.ceil(newsData.length / itemsPerPage)}
-          color='primary'
-          defaultPage={1}
-          page={currentPage} // 현재 페이지를 지정
-          onChange={handlePageChange}
-        />
-      </PageWrapper>
-    </>
-  ) : (
-    <div>asdasd</div>
+  return (
+    newsData.length > 0 && (
+      <>
+        <Ul>
+          {currentItemPerPage.map(item => (
+            <Li key={item.id}>
+              <Link
+                style={{border: 'none', color: 'inherit', textDecoration: 'none'}}
+                to={`/detail/${item.newsId}`}
+              >
+                {item.title}
+              </Link>
+            </Li>
+          ))}
+        </Ul>
+        <PageWrapper>
+          <CustomPagination
+            count={Math.ceil(newsData.length / itemsPerPage)}
+            color='primary'
+            defaultPage={1}
+            page={currentPage} // 현재 페이지를 지정
+            onChange={handlePageChange}
+          />
+        </PageWrapper>
+      </>
+    )
   );
 }
 
