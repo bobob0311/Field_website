@@ -25,7 +25,7 @@ const QuestionBox = styled.div`
   font-weight: 400;
 `;
 const BoxSize = styled.div`
-  width: 20rem;
+  width: 19rem;
 `;
 
 const Question = styled.h3`
@@ -42,7 +42,7 @@ const Answer = styled.li`
   word-break: keep-all;
   text-indent: -1rem;
   letter-spacing: -0.05rem;
-  padding: 0 1rem 0 0.8rem;
+  padding: 0 0 0 0.8rem;
 `;
 
 const ButtonWrapper = styled.div`

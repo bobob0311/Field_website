@@ -16,6 +16,8 @@ const ContentBox = styled.div`
   background: rgba(255, 255, 255, 0.7);
   border-radius: 0.65rem;
   padding: 0.5rem;
+  display: flex;
+  justify-content: center;
 `;
 
 const ContentWrapper = styled.section`
@@ -60,6 +62,9 @@ const AddressLink = styled.a`
   font-weight: 700;
   margin: 0 0.4rem 0 0;
 `;
+const BoxSize = styled.div`
+  width: 20rem;
+`;
 
 function Contanier({subtitle, content}) {
   return (
@@ -73,7 +78,9 @@ function ContanierWithContentBox({subtitle, content}) {
   return (
     <ContentWrapper>
       <SubTitle>{subtitle}</SubTitle>
-      <ContentBox>{content}</ContentBox>
+      <ContentBox>
+        <BoxSize>{content}</BoxSize>
+      </ContentBox>
     </ContentWrapper>
   );
 }
