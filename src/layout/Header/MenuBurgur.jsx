@@ -7,7 +7,7 @@ const downRight = keyframes`
     transform-origin: left top; 
   }
   100% {
-    transform: rotate(45deg) translate(11px,-13px);
+    transform: rotate(45deg) translate(10px,-12px);
     transform-origin: left top; 
   }
 `;
@@ -18,7 +18,7 @@ const upLeft = keyframes`
     transform-origin: left bottom; 
   }
   100% {
-    transform: rotate(-45deg) translate(11px,13px);
+    transform: rotate(-45deg) translate(10px,12px);
     transform-origin: left bottom;
   }
 `;
