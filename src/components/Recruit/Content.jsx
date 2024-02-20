@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import theme from '../../theme';
 
 const P = styled.p`
-  font-size: ${props => (props.fontSize ? props.fontSize : '1rem')};
-  color: ${props => (props.color ? theme.colors[props.color] : theme.colors.black)};
-  font-weight: ${props => (props.fontWeight ? props.fontWeight : 300)};
-  text-align: ${props => (props.textAlign ? props.textAlign : 'center')};
-  margin: ${props => (props.margin ? props.margin : '1rem 0')};
+  font-size: ${props => (props.$fontSize ? props.$fontSize : '1rem')};
+  color: ${props => (props.$color ? theme.colors[props.$color] : theme.colors.black)};
+  font-weight: ${props => (props.$fontWeight ? props.$fontWeight : 300)};
+  text-align: ${props => (props.$textAlign ? props.$textAlign : 'center')};
+  margin: ${props => (props.$margin ? props.$margin : '1rem 0')};
   word-break: keep-all;
 `;
 
@@ -32,7 +32,7 @@ const SubTitle = styled.h2`
 const OneLine = styled.span`
   display: block;
   margin: 0 0 0.2rem 0;
-  text-indent: ${props => (props.textIndent ? props.textIndent : '')};
+  text-indent: ${props => (props.$textIndent ? props.$textIndent : '')};
 `;
 
 const FlexRow = styled.div`
@@ -65,7 +65,7 @@ function Contanier({subtitle, content}) {
   return (
     <ContentWrapper>
       <SubTitle>{subtitle}</SubTitle>
-      <P color='white'>{content}</P>
+      <P $color='white'>{content}</P>
     </ContentWrapper>
   );
 }
@@ -80,7 +80,7 @@ function ContanierWithContentBox({subtitle, content}) {
 
 const APPLYMETHOD = (
   <>
-    <P fontWeight='700' margin='0.5rem 0 0.5rem 0'>
+    <P $fontWeight='700' $margin='0.5rem 0 0.5rem 0'>
       <OneLine>필드 리틀리 혹은 필드 블로그에서 지원서 </OneLine>
       <OneLine>다운로드 후 서류 작성하여 아래 이메일로 제출</OneLine>
     </P>
@@ -136,7 +136,7 @@ export default function Content() {
         <OneLine>
           💬2차 면접: {data[3]} ~ {data[4] ? data[4].slice(8) : ''}
         </OneLine>
-        <OneLine textIndent='4.8rem'>
+        <OneLine $textIndent='4.8rem'>
           {data[5]} ~ {data[6] ? data[6].slice(8) : ''}
         </OneLine>
       </DateP>
@@ -145,10 +145,10 @@ export default function Content() {
 
   return (
     <>
-      <P fontSize='1.5rem' fontWeight='600' color='white'>
+      <P $fontSize='1.5rem' $fontWeight='600' $color='white'>
         지금은 모집기간이 아닙니다.
       </P>
-      <P color='white' margin='1rem 0 100% 0'>
+      <P $color='white' $margin='1rem 0 100% 0'>
         필드는 매년 1월에 새로운 멤버를 모집합니다.
       </P>
       <Contanier subtitle='😀 지원자격' content='산업공학을 주/복수/부전공하는 대학생' />
