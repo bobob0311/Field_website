@@ -13,7 +13,6 @@ const MenuBar = styled.header`
 const MainHeaderWrapper = styled.div`
   display: flex;
   background: #141414;
-  position: inherit;
   align-items: center;
   height: 4.5rem;
   padding: 0 7.5%;

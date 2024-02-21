@@ -1,14 +1,15 @@
 import {Route, Routes} from 'react-router-dom';
 import {ThemeProvider} from 'styled-components';
+import Layout from './layout/Layout';
 import GlobalStyle from './GlobalStyle';
 import './index.css';
-import theme from './theme';
-import MainPage from './pages/MainPage';
-import CampPage from './pages/CampPage';
+
 import AboutPage from './pages/AboutPage';
+import CampPage from './pages/CampPage';
 import ContactPage from './pages/ContactPage';
+import MainPage from './pages/MainPage';
 import RecruitPage from './pages/RecruitPage';
-import Layout from './layout/Layout';
+import theme from './theme';
 
 function App() {
   return (
