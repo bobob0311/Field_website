@@ -16,14 +16,14 @@ const NewsMain = styled.section`
 
 const H1 = styled.h1`
   font-size: 1.875rem;
-  margin: 5rem 0 2.5rem 0;
+  margin: 2rem 0 2rem 0;
   font-family: 'Goblin one';
   text-align: center;
 `;
 
 const SwiperContainer = styled.div`
   width: 100%;
-  margin: 2rem 0;
+  margin: 3rem 0;
 `;
 
 const Image = styled.img`
@@ -102,6 +102,7 @@ function NewsPage() {
             timeDatalst={newsData.map(item => item.title)}
             title={monthFieldTitle}
             color='yellow'
+            margin='3rem 0'
           />
           <SwiperContainer>
             <Swiper slidesPerView={1.2} spaceBetween={20} centeredSlides='true'>

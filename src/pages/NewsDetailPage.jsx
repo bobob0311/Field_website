@@ -6,6 +6,7 @@ import fileIcon from '../assets/fileIcon.png';
 
 const Section = styled.section`
   margin: 0 7.5%;
+  height: 70vh;
 `;
 
 const H1 = styled.h1`

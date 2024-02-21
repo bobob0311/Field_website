@@ -21,7 +21,7 @@ const H2 = styled.h2`
   font-size: ${props => (props.size ? props.size : '1.625rem')};
   color: ${props => (props.color ? theme.colors[props.color] : 'white')};
   font-family: ${props => (props.font ? props.font : '')};
-  font-weight: bold;
+  font-weight: 900;
 `;
 
 const ModalBackground = styled.section`
@@ -36,10 +36,10 @@ const ModalBackground = styled.section`
   z-index: 1;
 `;
 
-function ModalSection({title, color, font, fontSize, timeDatalst}) {
+function ModalSection({title, color, font, fontSize, timeDatalst, margin}) {
   const [showModal, setShowModal] = useState(false);
   return (
-    <IconWrapper>
+    <IconWrapper margin={margin}>
       <IconImg
         src={modalIcon}
         alt='모달창 아이콘'

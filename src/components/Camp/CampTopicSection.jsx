@@ -111,9 +111,9 @@ function CampTopicSection() {
               <Img key={camp.id} src={`${imageUrl}${camp.id}/${camp.file[0]}`} alt='camp-image-0' />
             )}
             {camp.topic === '1st' ? (
-              <Figcaption>{camp.topic} topic</Figcaption>
+              <Figcaption>{camp.topic} TOPIC</Figcaption>
             ) : (
-              <Figcaption color='blue'>{camp.topic} topic</Figcaption>
+              <Figcaption color='blue'>{camp.topic} TOPIC</Figcaption>
             )}
           </Figure>
           <Button

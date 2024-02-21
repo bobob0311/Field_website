@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import styled from 'styled-components';
-import ReactDOM from 'react-dom'; // createPortal을 사용하기 위해 필요
+import ReactDOM from 'react-dom';
 import {useDispatch} from 'react-redux';
 import {setModalTitle} from '../redux/modalTitleSlice';
 import modalCloseIcon from '../assets/modalClose.png';
@@ -56,7 +56,6 @@ function Modal({titleData, showModal, setShowModal}) {
       document.body.style.overflow = 'hidden';
     }
 
-    // 클린업 함수: 모달이 닫힐 때 스크롤을 다시 활성화한다
     return () => {
       document.body.style.overflow = 'auto';
     };
