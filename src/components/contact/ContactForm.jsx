@@ -279,7 +279,7 @@ export default function ContactForm() {
           </InputLabel>
 
           <TypeLabel>
-            <TypeSelect ref={enteredData.type} autoComplete='off'>
+            <TypeSelect name='Type' ref={enteredData.type} autoComplete='off'>
               <Option value='선택하지않음'>문의유형</Option>
               <Option value='후원'>후원</Option>
               <Option value='문의'>문의</Option>
