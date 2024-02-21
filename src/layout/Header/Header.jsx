@@ -7,7 +7,7 @@ import MenuContent from './MenuContent';
 const MenuBar = styled.header`
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 5;
 `;
 
 const MainHeaderWrapper = styled.div`
@@ -17,7 +17,7 @@ const MainHeaderWrapper = styled.div`
   height: 4.5rem;
   padding: 0 7.5%;
   justify-content: space-between;
-  z-index: 2;
+  z-index: 10;
 `;
 
 const Home = styled.a`
@@ -28,14 +28,13 @@ const Home = styled.a`
 const HomeFigure = styled.figure`
   display: flex;
   align-items: center;
-  height: inherit;
 `;
 const HomeLogo = styled.img`
   height: 2.2rem;
 `;
 
 const HomeTitle = styled.figcaption`
-  margin: 0 0 0 0.4rem;
+  margin: 0.1rem 0 0 0.4rem;
   font-size: 2.2rem;
   font-weight: 900;
 `;
@@ -52,15 +51,20 @@ export default function Header() {
   function showHandler() {
     setIsOpen(!isOpen);
   }
+
+  const HomeDirection = (
+    <Home href='/'>
+      <HomeFigure>
+        <HomeLogo src='fieldLogo.png' />
+        <HomeTitle>FIELD</HomeTitle>
+      </HomeFigure>
+    </Home>
+  );
+
   return (
     <MenuBar>
       <MainHeaderWrapper>
-        <Home href='/'>
-          <HomeFigure>
-            <HomeLogo src='fieldLogo.png' />
-            <HomeTitle>FIELD</HomeTitle>
-          </HomeFigure>
-        </Home>
+        {HomeDirection}
         <MenuButton onClick={() => showHandler()}>
           <MenuBurgur open={isOpen} />
         </MenuButton>

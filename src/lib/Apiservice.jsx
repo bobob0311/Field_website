@@ -34,7 +34,6 @@ export function NewsDetailApi(id) {
   });
 }
 
-
 export function ReviewApi() {
   return pb.collection('Review').getFullList();
 }
@@ -51,4 +50,3 @@ export function DepartmentApi() {
 export function RecruitApi() {
   return pb.collection('Recruit').getFullList();
 }
-
