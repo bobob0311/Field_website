@@ -15,7 +15,7 @@ const MainHeaderWrapper = styled.div`
   background: #141414;
   align-items: center;
   height: 4.5rem;
-  padding: 0 5%;
+  padding: 0 7.5%;
   justify-content: space-between;
   z-index: 2;
 `;
@@ -44,6 +44,7 @@ const MenuButton = styled.button`
   appearance: none;
   background: none;
   border: none;
+  padding: 0;
 `;
 
 export default function Header() {

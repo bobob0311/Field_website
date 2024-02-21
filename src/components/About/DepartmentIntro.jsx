@@ -130,12 +130,31 @@ const FlexCenter = styled.div`
 `;
 
 function DepartmentIntro() {
-  const [departmentData, setDepartmentData] = useState([]); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  const [photos, setPhotos] = useState({
+    planning: '',
+    cooperation: '',
+    competition: '',
+    publicRelation: '',
+  });
+  // const [planningPhoto, setPlanningPhoto] = useState('');
+  // const [cooperationPhoto, setCooperationPhoto] = useState('');
+  // const [competitionPhoto, setCompetitionPhoto] = useState('');
+  // const [publicPhoto, setPublicPhoto] = useState('');
   const imageUrl = `${import.meta.env.VITE_API_URL}/api/files/jopzyrph5gaoffm/`;
+
   const getDepartmentData = async () => {
     try {
       const response = await DepartmentApi();
-      setDepartmentData(response);
+      // setPlanningPhoto(`${imageUrl}${response[0].id}/${response[0].photo}`);
+      // setCooperationPhoto(`${imageUrl}${response[1].id}/${response[1].photo}`);
+      // setCompetitionPhoto(`${imageUrl}${response[2].id}/${response[2].photo}`);
+      // setPublicPhoto(`${imageUrl}${response[3].id}/${response[3].photo}`);
+      setPhotos({
+        planning: `${imageUrl}${response[0].id}/${response[0].photo}`,
+        cooperation: `${imageUrl}${response[1].id}/${response[1].photo}`,
+        competition: `${imageUrl}${response[2].id}/${response[2].photo}`,
+        publicRelation: `${imageUrl}${response[3].id}/${response[3].photo}`,
+      });
     } catch (err) {
       console.log(err);
     }
@@ -144,6 +163,7 @@ function DepartmentIntro() {
   useEffect(() => {
     getDepartmentData();
   }, []);
+
   const [selectCategory, setSelectCategory] = useState('기획부');
   const category = ['기획부', '대외협력부', '컴페티션부', '홍보부'];
 
@@ -166,11 +186,7 @@ function DepartmentIntro() {
         ))}
       </ButtonWrapper>
       <CardContainer visible={selectCategory === '기획부'}>
-        <Image
-          width='100%'
-          src={`${imageUrl}${departmentData[0].id}/${departmentData[0].photo}`}
-          alt=''
-        />
+        <Image width='100%' src={photos.planning} alt='' />
         <Card margin='2rem 0'>
           <Dl>
             <Dt>기획부</Dt>
@@ -208,11 +224,7 @@ function DepartmentIntro() {
         </ActivityUl>
       </CardContainer>
       <CardContainer visible={selectCategory === '대외협력부'}>
-        <Image
-          width='100%'
-          src={`${imageUrl}${departmentData[1].id}/${departmentData[1].photo}`}
-          alt=''
-        />
+        <Image width='100%' src={photos.cooperation} alt='' />
         <Card margin='2rem 0'>
           <Dl>
             <Dt>대외협력부</Dt>
@@ -253,11 +265,7 @@ function DepartmentIntro() {
         </ActivityUl>
       </CardContainer>
       <CardContainer visible={selectCategory === '컴페티션부'}>
-        <Image
-          width='100%'
-          src={`${imageUrl}${departmentData[2].id}/${departmentData[2].photo}`}
-          alt=''
-        />
+        <Image width='100%' src={photos.competition} alt='' />
         <Card margin='2rem 0'>
           <Dl>
             <Dt>컴페티션부</Dt>
@@ -299,11 +307,7 @@ function DepartmentIntro() {
         </ActivityUl>
       </CardContainer>
       <CardContainer visible={selectCategory === '홍보부'}>
-        <Image
-          width='100%'
-          src={`${imageUrl}${departmentData[3].id}/${departmentData[3].photo}`}
-          alt=''
-        />
+        <Image width='100%' src={photos.publicRelation} alt='' />
         <Card margin='2rem 0'>
           <Dl>
             <Dt>홍보부</Dt>
