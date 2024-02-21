@@ -39,7 +39,6 @@ function NewsPagination({newsData, category}) {
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage,
   );
-  console.log(category, newsData.category);
   return (
     newsData.length > 0 &&
     newsData[0].category === category && (
