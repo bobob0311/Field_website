@@ -21,7 +21,7 @@ const ContentBox = styled.div`
 `;
 
 const ContentWrapper = styled.section`
-  margin: 5rem 0;
+  margin: 5rem 7.5% 5rem 7.5%;
 `;
 const SubTitle = styled.h2`
   font-size: 1.5rem;
@@ -52,7 +52,7 @@ const WhiteMessage = styled.img`
 const DateP = styled(P)`
   text-align: left;
   font-weight: 700;
-  letter-spacing: -1px;
+  letter-spacing: -1.5px;
 `;
 
 const AddressLink = styled.a`
@@ -108,7 +108,7 @@ export default function Content() {
   const [data, setData] = useState([]);
 
   async function RecuitData() {
-    const pb = new PocketBase(import.meta.env.VITE_APP_URL);
+    const pb = new PocketBase(import.meta.env.VITE_API_URL);
     try {
       const respone = await pb.collection('Recruit').getFullList();
       const formattedDateArray = respone.map(item => {
@@ -153,9 +153,9 @@ export default function Content() {
   return (
     <>
       <Contanier subtitle='😀 지원자격' content='산업공학을 주/복수/부전공하는 대학생' />
-      <ContanierWithContentBox subtitle='📆 모집 일정' content={recruitDate} />
-      <Contanier subtitle='📚 활동 기간' content='매년 3월 ~ 12월 (10개월)' />
       <ContanierWithContentBox subtitle='💎 지원 방법' content={APPLYMETHOD} />
+      <Contanier subtitle='📚 활동 기간' content='매년 3월 ~ 12월 (10개월)' />
+      <ContanierWithContentBox subtitle='📆 모집 일정' content={recruitDate} />
     </>
   );
 }
