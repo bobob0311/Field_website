@@ -3,6 +3,7 @@ import {ThemeProvider} from 'styled-components';
 import Layout from './layout/Layout';
 import GlobalStyle from './GlobalStyle';
 import './index.css';
+
 import AboutPage from './pages/AboutPage';
 import CampPage from './pages/CampPage';
 import ContactPage from './pages/ContactPage';

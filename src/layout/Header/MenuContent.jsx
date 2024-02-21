@@ -37,7 +37,6 @@ const HeaderContent = styled.nav`
 `;
 
 const MenuContainer = styled.ul`
-  padding: 0.5rem 0;
   ${props =>
     props.activeLink &&
     `
@@ -53,15 +52,14 @@ const OneMenu = styled.li`
 `;
 
 const MenuLink = styled.a`
+  font-family: 'Goblin One';
   display: block;
-  width: 100%;
   height: 100%;
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 1.5rem;
   text-decoration: none;
   color: ${theme.colors.white};
   padding: 0 0 0 5%;
-  line-height: 200%;
+  line-height: 270%;
 `;
 
 export default function MenuContent(props) {

@@ -47,20 +47,20 @@ const ButtonWrapper = styled.div`
     props.activelink &&
     `button[name="${props.activelink}"]{
     background: ${theme.colors.gray};
-    font-weight: 700;
+
   }
 `}
 `;
 
 const DepartmentButton = styled.button`
-  padding: 0.3rem;
+  padding: 0.3rem 0.5rem;
   font-size: 0.9rem;
   border-radius: 0.5rem;
   appearance: none;
   border: none;
   background: ${theme.colors.black};
   color: ${theme.colors.white};
-  font-weight: 500;
+  font-weight: 700;
 `;
 
 const allDepartment = {
