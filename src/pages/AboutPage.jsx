@@ -1,12 +1,8 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import DepartmentIntro from '../components/About/DepartmentIntro';
+import {ProfileApi} from '../lib/Apiservice';
 import theme from '../theme';
-
-const Header = styled.header`
-  height: 10vh;
-  background-color: gray;
-`;
 
 const AccessibilityHidden = styled.h1`
   position: absolute;
@@ -28,7 +24,7 @@ const TitleContainer = styled.section`
 `;
 
 const H2 = styled.h2`
-  font-size: 1.875rem;
+  font-size: 1.7rem;
   margin: ${props => props.margin || '0'};
   text-align: center;
 `;
@@ -83,6 +79,8 @@ const Image = styled.img`
   margin: ${props => props.margin || '0'};
   width: ${props => props.width || ''};
   border-radius: ${props => props.radius || ''};
+  height: auto;
+  aspect-ratio: 1/1.3;
 `;
 
 const MainSection = styled.section`
@@ -104,13 +102,30 @@ const Li = styled.li`
 `;
 
 function AboutPage() {
+  const [profileData, setProfileData] = useState([]);
+  const imageUrl = `${import.meta.env.VITE_API_URL}/api/files/i4n7e8c0u8882do/`;
+  const getProfile = async () => {
+    try {
+      const response = await ProfileApi();
+      setProfileData(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getProfile();
+  }, []);
+
+  const leader = profileData.slice(0, 2);
+  const depart = profileData.slice(2, 6);
+
   return (
     <>
-      <Header />
       <AccessibilityHidden>어바웃 필드</AccessibilityHidden>
       <TitleContainer>
         <H2 margin='2rem 0'>전국 대학생 산업공학도 모임</H2>
-        <P size='2.25rem'>
+        <P size='2.25rem' line='1.3'>
           <span>
             <FirstAlphabet color='red'>F</FirstAlphabet>uture
           </span>
@@ -145,72 +160,41 @@ function AboutPage() {
       <MainSection>
         <H2>16기 단장단과 함께 여러분의 꿈을 실현하세요.</H2>
         <Ul margin='2rem 0'>
-          <li>
-            <Figure>
-              <Image src='/profile1.png' alt='총기획단장' />
-              <Figcaption>
-                <P>16기 총기획단장</P>
-                <P>이민재</P>
-              </Figcaption>
-            </Figure>
-            <P>
-              안녕하세요! 16기 총기획단장 이민재입니다! FIELD가 앞으로도 지속적으로 전국
-              산업공학도들의 인적, 학술적 교류의 장이 될 수 있도록 열심히, 최선을 다해
-              활동하겠습니다. FIELD에 많은 관심 부탁드립니다.
-            </P>
-          </li>
-          <li>
-            <Figure>
-              <Image src='/profile1.png' alt='총기획단장' />
-              <Figcaption>
-                <P>16기 총기획단장</P>
-                <P>이민재</P>
-              </Figcaption>
-            </Figure>
-            <P>
-              안녕하세요! 16기 총기획단장 이민재입니다! FIELD가 앞으로도 지속적으로 전국
-              산업공학도들의 인적, 학술적 교류의 장이 될 수 있도록 열심히, 최선을 다해
-              활동하겠습니다. FIELD에 많은 관심 부탁드립니다.
-            </P>
-          </li>
+          {leader.map(item => (
+            <li>
+              <Figure>
+                <Image
+                  src={`${imageUrl}${item.id}/${item.photo}`}
+                  alt='총기획단장'
+                  width='50%'
+                  radius='50%'
+                />
+                <Figcaption margin='1rem 0'>
+                  <P>{item.department}</P>
+                  <P>{item.name}</P>
+                </Figcaption>
+              </Figure>
+              <P line='1.5'>{item.intro}</P>
+            </li>
+          ))}
         </Ul>
         <Ul>
-          <Li>
-            <Figure>
-              <Image src='/profile1.png' alt='총기획단장' />
-              <Figcaption>
-                <P>16기 총기획단장</P>
-                <P>이민재</P>
-              </Figcaption>
-            </Figure>
-          </Li>
-          <Li>
-            <Figure>
-              <Image src='/profile1.png' alt='총기획단장' />
-              <Figcaption>
-                <P>16기 총기획단장</P>
-                <P>이민재</P>
-              </Figcaption>
-            </Figure>
-          </Li>
-          <Li>
-            <Figure>
-              <Image src='/profile1.png' alt='총기획단장' />
-              <Figcaption>
-                <P>16기 총기획단장</P>
-                <P>이민재</P>
-              </Figcaption>
-            </Figure>
-          </Li>
-          <Li>
-            <Figure>
-              <Image src='/profile1.png' alt='총기획단장' />
-              <Figcaption>
-                <P>16기 총기획단장</P>
-                <P>이민재</P>
-              </Figcaption>
-            </Figure>
-          </Li>
+          {depart.map(item => (
+            <Li>
+              <Figure>
+                <Image
+                  src={`${imageUrl}${item.id}/${item.photo}`}
+                  alt='총기획단장'
+                  width='100%'
+                  radius='50%'
+                />
+                <Figcaption margin='1rem 0'>
+                  <P>{item.department}</P>
+                  <P>{item.name}</P>
+                </Figcaption>
+              </Figure>
+            </Li>
+          ))}
         </Ul>
       </MainSection>
       <MainSection>

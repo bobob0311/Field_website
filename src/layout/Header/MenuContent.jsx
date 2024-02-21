@@ -14,22 +14,18 @@ const slideDownAnimation = keyframes`
   }
 `;
 
-const HeaderContactSection = styled.div`
+const HeaderContentSection = styled.div`
   position: fixed;
   top: 4.5rem;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  height: calc(100vh - 4.5rem);
+  width: 100vw;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 1;
+  z-index: 2;
 `;
 
 const HeaderContent = styled.nav`
-  position: fixed;
-  width: 100%;
-  top: 4.5rem;
+  width: 100vw;
   display: flex;
-  z-index: 2;
   flex-direction: column;
   background: #141414;
   animation: ${slideDownAnimation} 0.3s ease-in-out;
@@ -37,11 +33,10 @@ const HeaderContent = styled.nav`
 `;
 
 const MenuContainer = styled.ul`
-  padding: 0.5rem 0;
   ${props =>
-    props.activeLink &&
+    props.className &&
     `
-    li a[name="${props.activeLink}"] {
+    li a[name="${props.className}"] {
       color: ${theme.colors.black};
       background: ${theme.colors.gray};
     }
@@ -53,15 +48,15 @@ const OneMenu = styled.li`
 `;
 
 const MenuLink = styled.a`
-  display: block;
-  width: 100%;
-  height: 100%;
-  font-size: 2rem;
-  font-weight: 600;
+  font-family: 'Goblin One';
+  display: flex;
+  align-items: center;
+  height: inherit;
+  width: 100vw;
+  font-size: 1.5rem;
   text-decoration: none;
   color: ${theme.colors.white};
   padding: 0 0 0 5%;
-  line-height: 200%;
 `;
 
 export default function MenuContent(props) {
@@ -76,9 +71,9 @@ export default function MenuContent(props) {
 
   const location = useLocation();
   return (
-    <HeaderContactSection onClick={onClose}>
+    <HeaderContentSection onClick={onClose}>
       <HeaderContent>
-        <MenuContainer activeLink={location.pathname.replace('/', '')}>
+        <MenuContainer className={location.pathname.replace('/', '')}>
           {Menus.map(Menu => (
             <OneMenu key={Menu.title}>
               <MenuLink name={Menu.link} href={`${Menu.link}`}>
@@ -88,6 +83,6 @@ export default function MenuContent(props) {
           ))}
         </MenuContainer>
       </HeaderContent>
-    </HeaderContactSection>
+    </HeaderContentSection>
   );
 }
