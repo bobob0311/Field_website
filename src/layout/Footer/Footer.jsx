@@ -22,7 +22,6 @@ const FooterImg = styled.img`
 
 const ImgWrapper = styled.div`
   margin: 1rem 0 0 0;
->>>>>>> fd2bb2c07d7d35103502ed360defe28fa1dd6e43
 `;
 
 const ImgLink = styled.a`
