@@ -21,7 +21,6 @@ const FooterImg = styled.img`
 `;
 
 const ImgWrapper = styled.div`
-
   display: flex;
   margin: 1rem 0 0 0;
 `;

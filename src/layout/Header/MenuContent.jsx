@@ -1,5 +1,5 @@
 import styled, {keyframes} from 'styled-components';
-import {useLocation} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import theme from '../../theme';
 
 const slideDownAnimation = keyframes`
@@ -76,9 +76,10 @@ export default function MenuContent(props) {
         <MenuContainer className={location.pathname.replace('/', '')}>
           {Menus.map(Menu => (
             <OneMenu key={Menu.title}>
-              <MenuLink name={Menu.link} href={`${Menu.link}`}>
+              <MenuLink name={Menu.link} href={`/${Menu.link}`}>
                 {Menu.title}
               </MenuLink>
+              {/* <Link to={`${Menu.link}`}>{Menu.title}</Link> */}
             </OneMenu>
           ))}
         </MenuContainer>

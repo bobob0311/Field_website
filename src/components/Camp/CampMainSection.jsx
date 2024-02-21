@@ -1,14 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
 import backgroundImg from '../../assets/CampBackground.jpg';
 import scrollDown from '../../assets/transfer-down-light.svg';
 import theme from '../../theme';
 import Button from '../Button';
 
 const H1 = styled.h1`
-  position: ${props => (props.position ? props.position : '')};
-  bottom: ${props => (props.bottom ? props.bottom : '')};
-  top: ${props => (props.top ? props.top : '')};
+  position: absolute;
+  top: 5rem;
+  font-family: 'Goblin One';
   font-size: 1.875rem;
   text-align: center;
 `;
@@ -23,7 +24,7 @@ const TitleContainer = styled.section`
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
     url(${props => props.src});
   background-position: center;
-  background-size: ${props => (props.size ? props.size : 'cover')};
+  background-size: cover;
   background-repeat: no-repeat;
 `;
 
@@ -63,11 +64,13 @@ function CampMainSection() {
         <H1 position='absolute' top='5rem'>
           FIELD CAMP
         </H1>
-        <TitleH2 padding='0rem 10% 0 10%'>팀원과 함께</TitleH2>
+        <TitleH2 padding='0 10% 0 10%'>팀원과 함께</TitleH2>
         <TitleH2 padding='0 10% 0 10%'>여러분의 열정을 보여주세요!!</TitleH2>
         <Figure bottom='1rem' position='absolute' left='50%' transform='translate(-50%)'>
-          <Button label='FIELD CAMP 지원하기' />
-          <Img src={scrollDown} alt='아래로 스크롤하세요' />
+          <Link to='https://linktr.ee/iefieldcamp'>
+            <Button label='FIELD CAMP 지원하기' />
+          </Link>
+          <Img src={scrollDown} />
           <Figcaption>아래로 스크롤하세요</Figcaption>
         </Figure>
       </TitleContainer>

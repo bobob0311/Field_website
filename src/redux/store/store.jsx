@@ -1,8 +1,8 @@
 import {configureStore} from '@reduxjs/toolkit';
-import campYearReducer from '../campYearSlice';
+import modalTitleReducer from '../modalTitleSlice';
 
 export const store = configureStore({
   reducer: {
-    campYear: campYearReducer,
+    modalTitle: modalTitleReducer,
   },
 });
