@@ -1,18 +1,18 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-export const modalTitleSlice = createSlice({
-  name: 'modalTitle',
+export const monthTitleSlice = createSlice({
+  name: 'monthTitle',
   initialState: {
     value: '',
   },
   reducers: {
-    setModalTitle: (state, action) => {
+    setMonthTitle: (state, action) => {
       Object.assign(state, {value: action.payload});
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const {setModalTitle} = modalTitleSlice.actions;
+export const {setMonthTitle} = monthTitleSlice.actions;
 
-export default modalTitleSlice.reducer;
+export default monthTitleSlice.reducer;

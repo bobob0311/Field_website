@@ -1,8 +1,10 @@
 import {configureStore} from '@reduxjs/toolkit';
-import modalTitleReducer from '../modalTitleSlice';
+import campTitleReducer from '../campTitleSlice';
+import monthTitleReducer from '../monthFieldSlice';
 
 export const store = configureStore({
   reducer: {
-    modalTitle: modalTitleReducer,
+    campTitle: campTitleReducer,
+    monthTitle: monthTitleReducer, // 올바른 reducer를 사용
   },
 });

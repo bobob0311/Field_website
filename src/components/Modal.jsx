@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import ReactDOM from 'react-dom';
 import {useDispatch} from 'react-redux';
-import {setModalTitle} from '../redux/modalTitleSlice';
 import modalCloseIcon from '../assets/modalClose.png';
 import theme from '../theme';
 
@@ -35,20 +34,20 @@ const Ul = styled.ul`
   justify-content: center;
   flex-wrap: wrap;
   gap: 5%;
-  overflow: auto; // 스크롤 가능하도록 설정
-  max-height: 300px; // 예시로 300px로 설정. 적절한 값으로 조절하세요.
-  width: 100%; // 전체 너비를 사용하도록 설정
+  overflow: auto;
+  max-height: 300px;
+  width: 100%;
 `;
 
 const Li = styled.li`
   font-size: 1rem;
-  width: 38%;
+  width: 45%;
   color: ${theme.colors.yellow};
   margin: 1rem 0;
   cursor: pointer;
 `;
 
-function Modal({titleData, showModal, setShowModal}) {
+function Modal({titleData, showModal, setShowModal, name = '', setModalItem}) {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -76,11 +75,11 @@ function Modal({titleData, showModal, setShowModal}) {
             <Li
               key={item}
               onClick={() => {
-                dispatch(setModalTitle(item));
-                setShowModal(false); // 클릭된 항목의 값을 dispatch
+                setShowModal(false);
+                dispatch(setModalItem(item)); // 클릭된 항목의 값을 dispatch
               }}
             >
-              {item} Field Camp
+              {item} {name}
             </Li>
           ))}
         <Li>2021 Field Camp</Li>

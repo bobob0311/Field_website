@@ -47,7 +47,7 @@ const OneMenu = styled.li`
   height: 4rem;
 `;
 
-const MenuLink = styled.a`
+const MenuLink = styled.p`
   font-family: 'Goblin One';
   display: flex;
   align-items: center;
@@ -76,8 +76,13 @@ export default function MenuContent(props) {
         <MenuContainer className={location.pathname.replace('/', '')}>
           {Menus.map(Menu => (
             <OneMenu key={Menu.title}>
-              <MenuLink name={Menu.link} href={`/${Menu.link}`}>
-                {Menu.title}
+              <MenuLink>
+                <Link
+                  to={`/${Menu.link}`}
+                  style={{border: 'none', color: 'inherit', textDecoration: 'none'}}
+                >
+                  {Menu.title}
+                </Link>
               </MenuLink>
               {/* <Link to={`${Menu.link}`}>{Menu.title}</Link> */}
             </OneMenu>

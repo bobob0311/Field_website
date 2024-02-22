@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import modalIcon from '../assets/modalIcon.png';
 import Modal from './Modal';
 import theme from '../theme';
+import {setCampTitle} from '../redux/campTitleSlice';
+import {setMonthTitle} from '../redux/monthFieldSlice';
 
 const IconWrapper = styled.div`
   display: flex;
@@ -36,8 +38,9 @@ const ModalBackground = styled.section`
   z-index: 1;
 `;
 
-function ModalSection({title, color, font, fontSize, timeDatalst, margin}) {
+function ModalSection({title, color, font, fontSize, timeDatalst, margin, name = ''}) {
   const [showModal, setShowModal] = useState(false);
+  const dispatchAction = title === '역대 FIELD CAMP' ? setCampTitle : setMonthTitle;
   return (
     <IconWrapper margin={margin}>
       <IconImg
@@ -63,7 +66,13 @@ function ModalSection({title, color, font, fontSize, timeDatalst, margin}) {
             setShowModal(false);
           }}
         >
-          <Modal titleData={timeDatalst} showModal={showModal} setShowModal={setShowModal} />
+          <Modal
+            titleData={timeDatalst}
+            showModal={showModal}
+            setShowModal={setShowModal}
+            name={name}
+            setModalItem={dispatchAction}
+          />
         </ModalBackground>
       )}
     </IconWrapper>
