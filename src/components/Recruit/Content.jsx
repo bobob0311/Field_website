@@ -122,7 +122,7 @@ const APPLYMETHOD = (
 
 export default function Content() {
   const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
   function dateFormatChange(date) {
@@ -142,19 +142,27 @@ export default function Content() {
   }
 
   async function RecuitData() {
+    setIsLoading(true);
     const pb = new PocketBase(import.meta.env.VITE_API_URL);
     try {
       const respone = await pb.collection('Recruit').getFullList();
       const dateArray = dateFormatChange(respone);
+      const localdateArray = {key: dateArray};
       setData(dateArray);
       setIsLoading(false);
+      localStorage.setItem('date', JSON.stringify(localdateArray));
     } catch {
       setIsError(true);
     }
   }
 
   useEffect(() => {
-    RecuitData();
+    const storedObject = JSON.parse(localStorage.getItem('date'));
+    if (!storedObject) {
+      RecuitData();
+    } else {
+      setData(storedObject.key);
+    }
   }, []);
 
   let recruitDate;
@@ -162,7 +170,7 @@ export default function Content() {
     recruitDate = (
       <>
         <P $fontWeight='900'>데이터를 불러오지 못했습니다</P>
-        <P $fontWeight='900'>새로고침을 통해 다시한번 시도해주세요</P>
+        <P $fontWeight='900'>새로고침을 통해 다시 한번 시도해주세요</P>
       </>
     );
   } else if (isLoading === false) {
