@@ -10,6 +10,7 @@ import MainPage from './pages/MainPage';
 import RecruitPage from './pages/RecruitPage';
 import NewsPage from './pages/NewsPage';
 import NewsDetailPage from './pages/NewsDetailPage';
+import theme from './theme';
 
 function App() {
   return (

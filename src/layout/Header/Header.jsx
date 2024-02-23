@@ -55,7 +55,7 @@ export default function Header() {
   const HomeDirection = (
     <Home href='/'>
       <HomeFigure>
-        <HomeLogo src='fieldLogo.png' />
+        <HomeLogo src='/fieldLogo.png' />
         <HomeTitle>FIELD</HomeTitle>
       </HomeFigure>
     </Home>

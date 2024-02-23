@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import theme from '../../theme';
 
 const DepartmentSection = styled.section`
-  margin: 0 0 5rem 0;
+  margin: 0 7.5%;
 `;
 
 const SubTitle = styled.h2`

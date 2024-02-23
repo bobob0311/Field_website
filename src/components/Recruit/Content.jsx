@@ -1,6 +1,6 @@
 import PocketBase from 'pocketbase';
 import {useEffect, useState} from 'react';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 import theme from '../../theme';
 
 const P = styled.p`
@@ -21,7 +21,7 @@ const ContentBox = styled.div`
 `;
 
 const ContentWrapper = styled.section`
-  margin: 5rem 0;
+  margin: 5rem 7.5% 5rem 7.5%;
 `;
 const SubTitle = styled.h2`
   font-size: 1.5rem;
@@ -52,7 +52,7 @@ const WhiteMessage = styled.img`
 const DateP = styled(P)`
   text-align: left;
   font-weight: 700;
-  letter-spacing: -1px;
+  letter-spacing: -1.5px;
 `;
 
 const AddressLink = styled.a`
@@ -64,6 +64,22 @@ const AddressLink = styled.a`
 `;
 const BoxSize = styled.div`
   width: 20rem;
+`;
+
+const spin = keyframes`
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+
+const LoadingSpin = styled.div`
+  margin: 1.5rem auto 1.5rem;
+  width: 5rem;
+  height: 5rem;
+  border: 0.2rem solid transparent;
+  border-top-color: ${theme.colors.black};
+  border-radius: 50%;
+  animation: ${spin} 0.5s linear infinite;
 `;
 
 function Contanier({subtitle, content}) {
@@ -106,56 +122,84 @@ const APPLYMETHOD = (
 
 export default function Content() {
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  function dateFormatChange(date) {
+    const formattedDateArray = date.map(item => {
+      const inputDate = new Date(item.Date);
+
+      const year = inputDate.getFullYear();
+      const month = String(inputDate.getMonth() + 1).padStart(2, '0');
+      const day = String(inputDate.getDate()).padStart(2, '0');
+
+      const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
+      const dayOfWeek = daysOfWeek[inputDate.getDay()];
+
+      return `${year}.${month}.${day} (${dayOfWeek})`;
+    });
+    return formattedDateArray;
+  }
 
   async function RecuitData() {
-    const pb = new PocketBase(import.meta.env.VITE_APP_URL);
+    setIsLoading(true);
+    const pb = new PocketBase(import.meta.env.VITE_API_URL);
     try {
       const respone = await pb.collection('Recruit').getFullList();
-      const formattedDateArray = respone.map(item => {
-        const inputDate = new Date(item.Date);
-
-        const year = inputDate.getFullYear();
-        const month = String(inputDate.getMonth() + 1).padStart(2, '0');
-        const day = String(inputDate.getDate()).padStart(2, '0');
-
-        const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
-        const dayOfWeek = daysOfWeek[inputDate.getDay()];
-
-        return `${year}.${month}.${day} (${dayOfWeek})`;
-      });
-      setData(formattedDateArray);
-    } catch (err) {
-      Error(err);
+      const dateArray = dateFormatChange(respone);
+      const localdateArray = {key: dateArray};
+      setData(dateArray);
+      setIsLoading(false);
+      localStorage.setItem('date', JSON.stringify(localdateArray));
+    } catch {
+      setIsError(true);
     }
   }
 
   useEffect(() => {
-    RecuitData();
+    const storedObject = JSON.parse(localStorage.getItem('date'));
+    if (!storedObject) {
+      RecuitData();
+    } else {
+      setData(storedObject.key);
+    }
   }, []);
 
-  const recruitDate = (
-    <>
-      <DateP>
-        📄서류 접수: {data[0]} ~ {data[1]}
-      </DateP>
-      <DateP>✅1차 서류 전형 합격자 발표: {data[2]}</DateP>
-      <DateP>
-        <OneLine>
-          💬2차 면접: {data[3]} ~ {data[4] ? data[4].slice(8) : ''}
-        </OneLine>
-        <OneLine $textIndent='4.8rem'>
-          {data[5]} ~ {data[6] ? data[6].slice(8) : ''}
-        </OneLine>
-      </DateP>
-    </>
-  );
+  let recruitDate;
+  if (isError === true) {
+    recruitDate = (
+      <>
+        <P $fontWeight='900'>데이터를 불러오지 못했습니다</P>
+        <P $fontWeight='900'>새로고침을 통해 다시 한번 시도해주세요</P>
+      </>
+    );
+  } else if (isLoading === false) {
+    recruitDate = (
+      <>
+        <DateP>
+          📄서류 접수: {data[0]} ~ {data[1]}
+        </DateP>
+        <DateP>✅1차 서류 전형 합격자 발표: {data[2]}</DateP>
+        <DateP>
+          <OneLine>
+            💬2차 면접: {data[3]} ~ {data[4] ? data[4].slice(8) : ''}
+          </OneLine>
+          <OneLine $textIndent='4.8rem'>
+            {data[5]} ~ {data[6] ? data[6].slice(8) : ''}
+          </OneLine>
+        </DateP>
+      </>
+    );
+  } else {
+    recruitDate = <LoadingSpin />;
+  }
 
   return (
     <>
       <Contanier subtitle='😀 지원자격' content='산업공학을 주/복수/부전공하는 대학생' />
-      <ContanierWithContentBox subtitle='📆 모집 일정' content={recruitDate} />
-      <Contanier subtitle='📚 활동 기간' content='매년 3월 ~ 12월 (10개월)' />
       <ContanierWithContentBox subtitle='💎 지원 방법' content={APPLYMETHOD} />
+      <Contanier subtitle='📚 활동 기간' content='매년 3월 ~ 12월 (10개월)' />
+      <ContanierWithContentBox subtitle='📆 모집 일정' content={recruitDate} />
     </>
   );
 }
