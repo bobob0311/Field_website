@@ -11,6 +11,7 @@ const MenuBar = styled.header`
 `;
 
 const MainHeaderWrapper = styled.div`
+  position: inherit;
   display: flex;
   background: #141414;
   align-items: center;
