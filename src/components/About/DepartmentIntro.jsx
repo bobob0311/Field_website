@@ -9,6 +9,11 @@ const H2 = styled.h2`
   text-align: center;
 `;
 
+const NanumH2 = styled(H2)`
+  font-family: 'Nanum Myeongjo', serif;
+  font-weight: 700;
+`;
+
 const Image = styled.img`
   margin: 2rem 0 0 0;
   width: 100%;
@@ -81,7 +86,9 @@ const ActivityUl = styled.ul`
   gap: 0.5rem;
   border: 2px solid white;
   border-radius: 1rem;
-  padding: 1rem 2rem;
+  padding: 1rem 0.3rem 1rem 1.3rem;
+  text-indent: -0.8rem;
+  word-break: keep-all;
 `;
 
 const ActivityLi = styled.li`
@@ -173,7 +180,7 @@ function DepartmentIntro() {
 
   return (
     <>
-      <H2 margin='2rem 0'>부서소개</H2>
+      <NanumH2 margin='2rem 0'>부서소개</NanumH2>
       <ButtonWrapper>
         {category.map(item => (
           <Button
@@ -187,7 +194,7 @@ function DepartmentIntro() {
       </ButtonWrapper>
       <CardContainer visible={selectCategory === '기획부'}>
         <Image width='100%' src={photos.planning} alt='' />
-        <Card margin='2rem 0'>
+        <Card margin='1rem 0'>
           <Dl>
             <Dt>기획부</Dt>
             <Dd>FIELD 인적, 학술적 교류를 활성화하기 위한 컨텐츠를 기획하고 진행, 총괄하는 부서</Dd>
@@ -216,7 +223,7 @@ function DepartmentIntro() {
             <span>Planning Department</span>
           </FlexCenter>
         </H3>
-        <ActivityUl margin='2rem 0'>
+        <ActivityUl margin='1rem 0'>
           <ActivityLi>- FIELD 유튜브 콘텐츠 기획 및 촬영</ActivityLi>
           <ActivityLi>- FIELD CAMP 레크레이션</ActivityLi>
           <ActivityLi>- 산공인의 밤 기획 및 총괄</ActivityLi>

@@ -7,7 +7,8 @@ const P = styled.p`
   margin: ${props => props.$margin || '0'};
   line-height: 1.5;
   color: ${props => (props.color ? theme.colors[props.color] : '')};
-  font-size: ${props => (props.size ? props.size : '1rem')};
+  font-size: 1.25rem;
+  font-weight: 900;
 `;
 
 const Card = styled.article`
@@ -18,7 +19,7 @@ const Card = styled.article`
   background-position: center;
   background-size: cover;
   object-fill: fill;
-  aspect-ratio: 1/1.3;
+  aspect-ratio: 1/1.2;
   border-radius: 0.625rem;
   ${props => props.$border && 'border: 2px solid white;'}
 `;
@@ -36,6 +37,7 @@ const CardTitle = styled(H3)`
   border: 1px solid white;
   border-radius: 0.625rem;
   padding: 0.5rem 2rem;
+  font-weight: 700;
 `;
 
 function ActivityIntro({backgroundImage, title, content}) {

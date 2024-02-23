@@ -44,12 +44,28 @@ const H2 = styled.h2`
   text-align: center;
 `;
 
+const GoblinH2 = styled(H2)`
+  font-family: 'Goblin One';
+  font-size: ${props => props.$size || '1.875rem'};
+`;
+
+const NanumH2 = styled(H2)`
+  font-family: 'Nanum Myeongjo', serif;
+`;
+
 const H3 = styled.h3`
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: 1.5rem;
   margin: ${props => props.$margin || '0'};
+`;
+
+const NanumH3 = styled(H3)`
+  font-family: 'Nanum Myeongjo', serif;
+  font-weight: 700;
+  gap: 2rem;
+  font-size: 1.625rem;
 `;
 
 const Figure = styled.figure`
@@ -80,7 +96,7 @@ const Image = styled.img`
 `;
 
 const MainSection = styled.section`
-  margin: 0 10%;
+  margin: 0 7.5%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -122,10 +138,17 @@ const WriterContainer = styled.div`
 
 function MainPage() {
   const [reviewData, setReviewData] = useState([]);
+
   const getReview = async () => {
     try {
-      const response = await ReviewApi();
-      setReviewData(response);
+      const localData = localStorage.getItem('reviewData');
+      if (localData) {
+        setReviewData(JSON.parse(localData));
+      } else {
+        const response = await ReviewApi();
+        setReviewData(response);
+        localStorage.setItem('reviewData', JSON.stringify(response));
+      }
     } catch (err) {
       console.log(err);
     }
@@ -141,16 +164,16 @@ function MainPage() {
       <TitleContainer>
         <AnimationExample text='Lets Lead The Industry To A Broader FIELD' />
         <Figure $position='absolute'>
-          <Icon src='./../../public/scrollDown.png' alt='아래로 스크롤하세요' />
+          <Icon src='./../../public/scrollDown.png' />
           <IconFigcaption>아래로 스크롤하세요</IconFigcaption>
         </Figure>
       </TitleContainer>
       <MainSection>
-        <H2 $margin='5rem 0 10rem 0'>OUR GOAL</H2>
-        <H3>
+        <GoblinH2 $margin='5rem 0 10rem 0'>OUR GOAL</GoblinH2>
+        <NanumH3>
           <span>꿈과 비전, 생각을 공유하는</span>
           <span>교류의 장을 만든다</span>
-        </H3>
+        </NanumH3>
         <Image src='./../../public/fieldLogo.png' alt='필드 로고' $margin='10rem 0 10rem 0' />
       </MainSection>
       <MainSection>
@@ -171,8 +194,8 @@ function MainPage() {
         />
       </MainSection>
       <section>
-        <H2 $margin='2rem 10% 0 10%'>인적, 학술적 교류를</H2>
-        <H2 $margin='0 10% 2rem 10%'>실현하는 다양한 활동들</H2>
+        <NanumH2 $margin='2rem 7.5% 1rem 7.5%'>인적, 학술적 교류를</NanumH2>
+        <NanumH2 $margin='0 7.5% 2rem 7.5%'>실현하는 다양한 활동들</NanumH2>
         <SwiperContainer $margin='2rem 0'>
           <Swiper slidesPerView={1.2} spaceBetween={20} centeredSlides='true'>
             <SwiperSlide>
@@ -227,7 +250,9 @@ function MainPage() {
           </Swiper>
         </SwiperContainer>
       </section>
-      <H2 $margin='2rem 0'>How was your FIELD?</H2>
+      <GoblinH2 $margin='2rem 0' $size='1.25rem'>
+        How was your FIELD?
+      </GoblinH2>
       <SwiperContainer $margin='2rem 0'>
         <Swiper slidesPerView={1.2} spaceBetween={20} centeredSlides='true'>
           {reviewData.map(item => (

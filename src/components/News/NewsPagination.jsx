@@ -4,6 +4,17 @@ import {Pagination} from '@mui/material';
 import {Link} from 'react-router-dom';
 import LoadingSpinner from '../LoadingSpinner';
 
+const AccessibilityHidden = styled.h2`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+`;
+
 const PageWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -45,14 +56,17 @@ function NewsPagination({newsData, category}) {
       <>
         <Ul>
           {currentItemPerPage.map(item => (
-            <Li key={item.id}>
-              <Link
-                style={{border: 'none', color: 'inherit', textDecoration: 'none'}}
-                to={`/detail/${item.newsId}`}
-              >
-                {item.title}
-              </Link>
-            </Li>
+            <>
+              <AccessibilityHidden>{item.title}</AccessibilityHidden>
+              <Li key={item.id}>
+                <Link
+                  style={{border: 'none', color: 'inherit', textDecoration: 'none'}}
+                  to={`/detail/${item.newsId}`}
+                >
+                  {item.title}
+                </Link>
+              </Li>
+            </>
           ))}
         </Ul>
         <PageWrapper>
