@@ -122,8 +122,8 @@ export default function TimeLine({data, height}) {
           strokeLinecap='round'
           strokeLinejoin='round'
         >
-          <path d={`M 160 1  v${MaxHeight + 25}`} />
-          <path d={`M 190  ${MaxHeight} l-30 30-30-30`} />
+          <path d={`M 160 1  v${MaxHeight + 50}`} />
+          <path d={`M 190  ${MaxHeight + 25} l-30 30-30-30`} />
         </svg>
       </Box>
     </SVGContanier>

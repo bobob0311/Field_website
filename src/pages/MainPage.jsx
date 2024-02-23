@@ -9,7 +9,7 @@ import ActivitySupport from '../../public/ActivitySupport.png';
 import ActivityYoutube from '../../public/ActivityYoutube.png';
 import ActivityInterview from '../../public/ActivityInterview.png';
 import ActivityIntroduce from '../../public/ActivityIntro.png';
-import FieldIntro1 from '../../public/fieldIntro1.png';
+import FieldIntro1 from '../../public/FieldIntro1.png';
 import FieldIntro2 from '../../public/FieldIntro2.png';
 import FieldIntro3 from '../../public/FieldIntro3.png';
 import AnimationExample from '../components/AnimationExample';
@@ -108,6 +108,7 @@ const P = styled.p`
   line-height: 1.5;
   color: ${props => (props.color ? theme.colors[props.color] : '')};
   font-size: ${props => (props.size ? props.size : '1rem')};
+  text-align: ${props => props.align || ''};
 `;
 
 const Card = styled.article`
@@ -116,9 +117,10 @@ const Card = styled.article`
   background-color: ${theme.colors.blue};
   padding: 2rem 1rem;
   background-position: center;
-  aspect-ratio: 1/1.3;
   border-radius: 0.625rem;
   ${props => props.$border && 'border: 2px solid white;'}
+  height: 30rem;
+  position: relative;
 `;
 
 const SwiperContainer = styled.div`
@@ -131,9 +133,12 @@ const Article = styled.article`
 `;
 
 const WriterContainer = styled.div`
+  width: 90%;
+  position: absolute;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  bottom: 1rem;
+  text-align: center;
 `;
 
 function MainPage() {
@@ -259,10 +264,8 @@ function MainPage() {
             <SwiperSlide key={item.id}>
               <Card $border='true'>
                 <Article>
-                  <H3 $margin='2rem 0 0 0'>{item.firstQuestion}</H3>
+                  <H3 $margin='1rem 0 2rem 0'>{item.firstQuestion}</H3>
                   <P $margin='2rem 0'>{item.firstAnswer}</P>
-                  <H3 $margin='2rem 0 0 0'>{item.secondQuestion}</H3>
-                  <P $margin='2rem 0'>{item.secondAnswer}</P>
                   <WriterContainer>
                     <P color='yellow' size='1.2rem'>
                       {item.school}
