@@ -92,7 +92,7 @@ const ActivityUl = styled.ul`
 `;
 
 const ActivityLi = styled.li`
-  font-size: 1.25rem;
+  font-size: 1rem;
 `;
 
 const Button = styled.button`
