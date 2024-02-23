@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import styled from 'styled-components';
 import {useDispatch, useSelector} from 'react-redux';
+import styled from 'styled-components';
 import {Swiper, SwiperSlide} from 'swiper/react';
+import 'swiper/swiper-bundle.css';
 import CategoryButton from '../components/CategoryButton';
+import LoadingSpinner from '../components/LoadingSpinner';
 import ModalSection from '../components/ModalSection';
+import NewsPagination from '../components/News/NewsPagination';
 import {NewsApi, NewsMonthApi} from '../lib/Apiservice';
 import {setMonthTitle} from '../redux/monthFieldSlice';
-import 'swiper/swiper-bundle.css';
-import NewsPagination from '../components/News/NewsPagination';
-import LoadingSpinner from '../components/LoadingSpinner';
 
 const NewsMain = styled.section`
   height: 67.9vh;

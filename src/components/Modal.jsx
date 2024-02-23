@@ -82,52 +82,6 @@ function Modal({titleData, showModal, setShowModal, name = '', setModalItem}) {
               {item} {name}
             </Li>
           ))}
-        <Li>2021 Field Camp</Li>
-        <Li>2025 Field camp</Li>
-        <Li>2026 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
-        <Li>2021 Field camp</Li>
       </Ul>
     </ModalContainer>,
     document.getElementById('modal'),

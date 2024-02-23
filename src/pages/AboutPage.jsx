@@ -20,13 +20,22 @@ const TitleContainer = styled.section`
   display: flex;
   flex-direction: column;
   position: relative;
-  margin: 0 10%;
+  margin: 0 7.5%;
 `;
 
 const H2 = styled.h2`
   font-size: 1.7rem;
   margin: ${props => props.margin || '0'};
   text-align: center;
+`;
+
+const NanumH2 = styled(H2)`
+  font-family: 'Nanum Myeongjo', serif;
+`;
+
+const GoblinH2 = styled(H2)`
+  font-family: 'Goblin One';
+  font-size: 1.875rem;
 `;
 
 const FlexCenter = styled.div`
@@ -69,6 +78,11 @@ const P = styled.p`
   font-size: ${props => (props.size ? props.size : '1rem')};
   display: flex;
   flex-direction: column;
+  font-weight: ${props => (props.weight ? props.weight : '')};
+`;
+
+const GoblinP = styled(P)`
+  font-family: 'Goblin One';
 `;
 
 const FirstAlphabet = styled.span`
@@ -84,7 +98,7 @@ const Image = styled.img`
 `;
 
 const MainSection = styled.section`
-  margin: 0 10%;
+  margin: 7.5%;
   display: flex;
   flex-direction: column;
 `;
@@ -124,8 +138,8 @@ function AboutPage() {
     <>
       <AccessibilityHidden>어바웃 필드</AccessibilityHidden>
       <TitleContainer>
-        <H2 margin='2rem 0'>전국 대학생 산업공학도 모임</H2>
-        <P size='2.25rem' line='1.3'>
+        <NanumH2 margin='2rem 0'>전국 대학생 산업공학도 모임</NanumH2>
+        <GoblinP size='2.25rem' line='1.5'>
           <span>
             <FirstAlphabet color='red'>F</FirstAlphabet>uture
           </span>
@@ -136,29 +150,29 @@ function AboutPage() {
             <FirstAlphabet color='yellow'>E</FirstAlphabet>ngineering
           </span>
           <span>
-            <FirstAlphabet color='blue'>L</FirstAlphabet>eaders
+            <FirstAlphabet color='blue'>L</FirstAlphabet>eaders&
           </span>
           <span>
             <FirstAlphabet color='blue'>D</FirstAlphabet>reamers
           </span>
-        </P>
-        <P line='1.5' margin='2rem 0 0 0'>
+        </GoblinP>
+        <P line='1.5' margin='2rem 0 0 0' size='1.3rem'>
           FIELD란, ‘Future Industrial Engineering Leaders and Dreamers’ 의 약자로, 미래의 핵심
           리더들이 될 산업 공학도들이 모여 서로의 꿈과 비전, 생각 등을 공유할 수 있는 교류의 장을
           만든다는 목표 아래 모인 &apos;전국 대학생 산업공학도 동아리&apos; 입니다.
         </P>
         <FlexCenter>
           <Figure position='absolute'>
-            <Icon src='/scrollDown.png' alt='아래로 스크롤하세요' />
+            <Icon src='/scrollDown.png' />
             <IconFigcaption>아래로 스크롤하세요</IconFigcaption>
           </Figure>
         </FlexCenter>
       </TitleContainer>
       <MainSection>
-        <H2>Road of FIELD</H2>
+        <GoblinH2>Road of FIELD</GoblinH2>
       </MainSection>
       <MainSection>
-        <H2>16기 단장단과 함께 여러분의 꿈을 실현하세요.</H2>
+        <NanumH2>16기 단장단과 함께 여러분의 꿈을 실현하세요.</NanumH2>
         <Ul margin='2rem 0'>
           {leader.map(item => (
             <li>
@@ -170,8 +184,8 @@ function AboutPage() {
                   radius='50%'
                 />
                 <Figcaption margin='1rem 0'>
-                  <P>{item.department}</P>
-                  <P>{item.name}</P>
+                  <P weight='900'>{item.department}</P>
+                  <P weight='900'>{item.name}</P>
                 </Figcaption>
               </Figure>
               <P line='1.5'>{item.intro}</P>
@@ -189,8 +203,8 @@ function AboutPage() {
                   radius='50%'
                 />
                 <Figcaption margin='1rem 0'>
-                  <P>{item.department}</P>
-                  <P>{item.name}</P>
+                  <P weight='900'>{item.department}</P>
+                  <P weight='900'>{item.name}</P>
                 </Figcaption>
               </Figure>
             </Li>

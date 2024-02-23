@@ -7,6 +7,7 @@ const H3 = styled.h3`
   align-items: center;
   font-size: 1.5rem;
   margin: ${props => props.$margin || '0'};
+  font-weight: 900;
 `;
 
 const Figure = styled.figure`
@@ -46,7 +47,7 @@ function FieldIntro({title, backgroundImage, content}) {
       <H3 $margin='0 0 2rem 0'>{title}</H3>
       <Image src={backgroundImage} alt='산업공학도' width='100%' radius='1.875rem' />
       <Figcaption $margin='2rem 0'>
-        <P>{content}</P>
+        <P size='1.125rem'>{content}</P>
       </Figcaption>
     </Figure>
   );
