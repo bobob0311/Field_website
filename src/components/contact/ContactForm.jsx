@@ -84,7 +84,7 @@ const SubmitButton = styled.button`
   border: 0.05rem solid ${theme.colors.black};
   border-radius: 1rem;
   margin: 1.5rem auto;
-  padding: 0.65rem 0.8rem 0.7rem 0.8rem;
+  padding: 0.65rem 1.4rem 0.7rem 1.4rem;
   display: block;
   font-weight: 900;
   box-shadow: 0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.3);
@@ -99,7 +99,7 @@ const ButtonImg = styled.img`
 const Img = styled.img`
   height: 1.8rem;
   margin: 0 0.4rem 0 0rem;
-  padding: 0.2rem 0 0 0;
+  padding: 0 0 0 0;
 `;
 const VerticalCenter = styled.div`
   display: flex;
@@ -119,8 +119,8 @@ const Notice = styled.span`
     position: absolute;
     margin: 0;
     font-size: 1.5rem;
-    left: ${props => (props.left ? props.left : '')};
-    top: 0.2rem;
+    left: ${props => (props.$left ? props.$left : '')};
+    top: -0.2rem;
   }
 `;
 
@@ -150,7 +150,7 @@ export default function ContactForm() {
   const phoneValid = /^[0-9]{9,11}$/;
 
   async function SendMessage({type, name, email, phoneNumber, content, title}) {
-    const pb = new PocketBase(import.meta.env.VITE_APP_URL);
+    const pb = new PocketBase(import.meta.env.VITE_API_URL);
     const data = {
       Name: name,
       Type: type,
@@ -233,7 +233,7 @@ export default function ContactForm() {
       <ContactSection>
         <Form onSubmit={enterdDataHandler}>
           <InputLabel>
-            {validationState.isNameValid === false ? <Notice left='8.5rem' /> : null}
+            {validationState.isNameValid === false ? <Notice $left='7.8rem' /> : null}
             <VerticalCenter>
               <Img src='happy.png' alt='웃는 아이콘' />
               이름 (회사)
@@ -242,7 +242,7 @@ export default function ContactForm() {
           </InputLabel>
 
           <InputLabel>
-            {validationState.isPhoneValid === false ? <Notice left='6rem' /> : null}
+            {validationState.isPhoneValid === false ? <Notice $left='5.5rem' /> : null}
             <VerticalCenter>
               <Img src='Phone.png' alt='핸드폰 아이콘' />
               연락처
@@ -261,7 +261,7 @@ export default function ContactForm() {
           </InputLabel>
 
           <InputLabel>
-            {validationState.isEmailValid === false ? <Notice left='5.6rem' /> : null}
+            {validationState.isEmailValid === false ? <Notice $left='5.5rem' /> : null}
             <VerticalCenter>
               <Img src='Message.png' alt='메세지 아이콘' />
               Email
@@ -270,7 +270,7 @@ export default function ContactForm() {
           </InputLabel>
 
           <InputLabel>
-            {validationState.isTitleValid === false ? <Notice left='4.8rem' /> : null}
+            {validationState.isTitleValid === false ? <Notice $left='4.5rem' /> : null}
             <VerticalCenter>
               <Img src='Check.png' alt='체크모양 아이콘' />
               제목
@@ -279,7 +279,7 @@ export default function ContactForm() {
           </InputLabel>
 
           <TypeLabel>
-            <TypeSelect ref={enteredData.type} autoComplete='off'>
+            <TypeSelect name='Type' ref={enteredData.type} autoComplete='off'>
               <Option value='선택하지않음'>문의유형</Option>
               <Option value='후원'>후원</Option>
               <Option value='문의'>문의</Option>
@@ -288,7 +288,7 @@ export default function ContactForm() {
           </TypeLabel>
 
           <InputLabel>
-            {validationState.isContentValid === false ? <Notice left='4.8rem' /> : null}
+            {validationState.isContentValid === false ? <Notice $left='4.5rem' /> : null}
             <VerticalCenter>
               <Img src='Chat_alt_3.png' alt='대화창 아이콘' width={30} />
               내용

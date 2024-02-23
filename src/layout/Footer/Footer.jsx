@@ -50,13 +50,13 @@ export default function Footer() {
 
       <ImgWrapper>
         <ImgLink href='http://pf.kakao.com/_uwNxeK' target='_blank'>
-          <FooterImg src='KakaoTalk.png' alt='kakaotalk 아이콘' width='1.8rem' height='1.8rem' />
+          <FooterImg src='/KakaoTalk.png' alt='kakaotalk 아이콘' width='1.8rem' height='1.8rem' />
         </ImgLink>
         <ImgLink href='https://www.instagram.com/iefield/' target='_blank'>
-          <FooterImg src='Instagram.png' alt='Instagram 아이콘' />
+          <FooterImg src='/Instagram.png' alt='Instagram 아이콘' />
         </ImgLink>
         <ImgLink href='https://www.youtube.com/@field2023' target='_blank'>
-          <FooterImg src='Youtube.png' alt='Youtube 아이콘' />
+          <FooterImg src='/Youtube.png' alt='Youtube 아이콘' />
         </ImgLink>
       </ImgWrapper>
     </FooterArea>
