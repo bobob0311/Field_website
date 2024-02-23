@@ -197,12 +197,7 @@ function AboutPage() {
           {leader.map(item => (
             <li>
               <Figure>
-                <Image
-                  src={`${imageUrl}${item.id}/${item.photo}`}
-                  alt='총기획단장'
-                  width='50%'
-                  radius='50%'
-                />
+                <Image src={`${imageUrl}${item.id}/${item.photo}`} width='50%' radius='50%' />
                 <Figcaption margin='1rem 0'>
                   <P weight='900'>{item.department}</P>
                   <P weight='900'>{item.name}</P>
@@ -216,12 +211,7 @@ function AboutPage() {
           {depart.map(item => (
             <Li>
               <Figure>
-                <Image
-                  src={`${imageUrl}${item.id}/${item.photo}`}
-                  alt='총기획단장'
-                  width='100%'
-                  radius='50%'
-                />
+                <Image src={`${imageUrl}${item.id}/${item.photo}`} width='100%' radius='50%' />
                 <Figcaption margin='1rem 0'>
                   <P weight='900'>{item.department}</P>
                   <P weight='900'>{item.name}</P>
