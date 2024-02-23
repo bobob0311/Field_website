@@ -5,7 +5,7 @@ import ModalSection from '../ModalSection';
 import theme from '../../theme';
 import Button from '../Button';
 import {CampApi} from '../../lib/Apiservice';
-import {setModalTitle} from '../../redux/modalTitleSlice';
+import {setCampTitle} from '../../redux/campTitleSlice';
 
 const Section = styled.section`
   display: flex;
@@ -17,7 +17,7 @@ const Section = styled.section`
   gap: 0.25rem;
 `;
 
-const H2 = styled.h2`
+const H3 = styled.h3`
   font-size: 1rem;
   font-weight: bold;
   font-family: SUIT-Heavy;
@@ -55,7 +55,7 @@ function CampTopicSection() {
   const [campFullData, setCampFullData] = useState([]);
   const [showedCampData, setShowedCampData] = useState([]);
   const [expandedIndex, setExpandedIndex] = useState(null);
-  const campYear = useSelector(state => state.modalTitle.value);
+  const campYear = useSelector(state => state.campTitle.value);
   const dispatch = useDispatch();
 
   const imageUrl = `${import.meta.env.VITE_API_URL}/api/files/chlj2bc39fagbcf/`;
@@ -72,7 +72,7 @@ function CampTopicSection() {
       const maxYear = Math.max(...uniqueYears);
       setCampFullData(response);
       setCampDataYear(uniqueYears);
-      dispatch(setModalTitle(maxYear));
+      dispatch(setCampTitle(maxYear));
     } catch (err) {
       console.log(err);
     }
@@ -94,8 +94,13 @@ function CampTopicSection() {
 
   return (
     <Section>
-      <ModalSection title='역대 FIELD CAMP' font='Nanum Myeongjo' timeDatalst={campDataYear} />
-      <H2>{campYear} FIELD CAMP</H2>
+      <ModalSection
+        title='역대 FIELD CAMP'
+        font='Nanum Myeongjo'
+        timeDatalst={campDataYear}
+        name='FIELD CAMP'
+      />
+      <H3>{campYear} FIELD CAMP</H3>
       {showedCampData.map((camp, index) => (
         <ButtonWrapper key={camp.id}>
           <Figure key={camp.id}>
@@ -111,9 +116,9 @@ function CampTopicSection() {
               <Img key={camp.id} src={`${imageUrl}${camp.id}/${camp.file[0]}`} alt='camp-image-0' />
             )}
             {camp.topic === '1st' ? (
-              <Figcaption>{camp.topic} topic</Figcaption>
+              <Figcaption>{camp.topic} TOPIC</Figcaption>
             ) : (
-              <Figcaption color='blue'>{camp.topic} topic</Figcaption>
+              <Figcaption color='blue'>{camp.topic} TOPIC</Figcaption>
             )}
           </Figure>
           <Button

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import {Pagination} from '@mui/material';
 import {Link} from 'react-router-dom';
@@ -39,33 +39,32 @@ function NewsPagination({newsData, category}) {
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage,
   );
-  return (
-    newsData.length > 0 &&
-    newsData[0].category === category && (
-      <>
-        <Ul>
-          {currentItemPerPage.map(item => (
-            <Li key={item.id}>
-              <Link
-                style={{border: 'none', color: 'inherit', textDecoration: 'none'}}
-                to={`/detail/${item.newsId}`}
-              >
-                {item.title}
-              </Link>
-            </Li>
-          ))}
-        </Ul>
-        <PageWrapper>
-          <CustomPagination
-            count={Math.ceil(newsData.length / itemsPerPage)}
-            color='primary'
-            defaultPage={1}
-            page={currentPage} // 현재 페이지를 지정
-            onChange={handlePageChange}
-          />
-        </PageWrapper>
-      </>
-    )
+  return newsData.length > 0 && newsData[0].category === category ? (
+    <>
+      <Ul>
+        {currentItemPerPage.map(item => (
+          <Li key={item.id}>
+            <Link
+              style={{border: 'none', color: 'inherit', textDecoration: 'none'}}
+              to={`/detail/${item.newsId}`}
+            >
+              {item.title}
+            </Link>
+          </Li>
+        ))}
+      </Ul>
+      <PageWrapper>
+        <CustomPagination
+          count={Math.ceil(newsData.length / itemsPerPage)}
+          color='primary'
+          defaultPage={1}
+          page={currentPage} // 현재 페이지를 지정
+          onChange={handlePageChange}
+        />
+      </PageWrapper>
+    </>
+  ) : (
+    <LoadingSpinner />
   );
 }
 
