@@ -13,7 +13,7 @@ const H2 = styled.h2`
   margin: ${props => (props.margin ? props.margin : '2.5rem 0 0 0')};
   text-align: center;
   font-family: Nanum Myeongjo;
-  font-weight: bold;
+  font-weight: 800;
 `;
 
 const Dl = styled.dl``;
@@ -22,7 +22,7 @@ const Dt = styled.dt`
   font-size: 1.25rem;
   margin: 2.5rem 0 1.25rem 0;
   color: ${props => (props.color ? theme.colors[props.color] : theme.colors.yellow)};
-  font-weight: bold;
+  font-family: 'SUIT-Heavy';
 `;
 
 const Dd = styled.dd`
@@ -36,7 +36,7 @@ const Dd = styled.dd`
 function CampIntroSection() {
   return (
     <Section>
-      <H2>FieldCamp 소개</H2>
+      <H2>FIELD CAMP 소개</H2>
       <Dl>
         <Dt color='red'>FIELD CAMP란</Dt>
         <Dd>

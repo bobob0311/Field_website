@@ -11,6 +11,7 @@ const MenuBar = styled.header`
 `;
 
 const MainHeaderWrapper = styled.div`
+  position: inherit;
   display: flex;
   background: #141414;
   align-items: center;
@@ -55,7 +56,7 @@ export default function Header() {
   const HomeDirection = (
     <Home href='/'>
       <HomeFigure>
-        <HomeLogo src='fieldLogo.png' />
+        <HomeLogo src='/fieldLogo.png' />
         <HomeTitle>FIELD</HomeTitle>
       </HomeFigure>
     </Home>

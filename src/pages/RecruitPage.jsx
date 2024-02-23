@@ -73,7 +73,7 @@ export default function RecruitPage() {
         </MainSection>
         <Content />
         <Department />
-        <section>
+        <section style={{margin: '0 7.5%'}}>
           <SubTitle>자주 묻는 질문</SubTitle>
           {QUSANS.map(item => (
             <Question key={item.id} qes={item.qes} ans={item.ans} />

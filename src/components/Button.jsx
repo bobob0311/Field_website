@@ -12,10 +12,9 @@ type=button
   border: none;
   border-radius: 5rem;
   font-family: SUIT;
-  font-weight: bold;
+  font-weight: 800;
   font-size: .9375rem;
   word-break: keep-all;
-  letter-spacing: 0.05em;
   box-shadow: 0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.3);
 `;
 
