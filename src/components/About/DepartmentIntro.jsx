@@ -101,6 +101,7 @@ const Button = styled.button`
   cursor: pointer;
   width: 25%;
   border: none;
+  padding: 0.375rem 0;
   border-radius: 1rem;
   font-size: 0.8rem;
 
