@@ -32,6 +32,8 @@ const H2 = styled.h2`
 
 const NanumH2 = styled(H2)`
   font-family: 'Nanum Myeongjo', serif;
+  line-height: 1.3;
+  word-break: keep-all;
 `;
 
 const GoblinH2 = styled(H2)`
@@ -189,7 +191,7 @@ function AboutPage() {
       </TitleContainer>
       <MainSection>
         <GoblinH2>Road of FIELD</GoblinH2>
-        <TimeLine data={data} height='80' />
+        <TimeLine data={data} height='100' />
       </MainSection>
       <MainSection>
         <NanumH2>16기 단장단과 함께 여러분의 꿈을 실현하세요.</NanumH2>
