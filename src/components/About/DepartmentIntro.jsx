@@ -143,25 +143,29 @@ function DepartmentIntro() {
     competition: '',
     publicRelation: '',
   });
-  // const [planningPhoto, setPlanningPhoto] = useState('');
-  // const [cooperationPhoto, setCooperationPhoto] = useState('');
-  // const [competitionPhoto, setCompetitionPhoto] = useState('');
-  // const [publicPhoto, setPublicPhoto] = useState('');
   const imageUrl = `${import.meta.env.VITE_API_URL}/api/files/jopzyrph5gaoffm/`;
 
   const getDepartmentData = async () => {
     try {
-      const response = await DepartmentApi();
-      // setPlanningPhoto(`${imageUrl}${response[0].id}/${response[0].photo}`);
-      // setCooperationPhoto(`${imageUrl}${response[1].id}/${response[1].photo}`);
-      // setCompetitionPhoto(`${imageUrl}${response[2].id}/${response[2].photo}`);
-      // setPublicPhoto(`${imageUrl}${response[3].id}/${response[3].photo}`);
-      setPhotos({
-        planning: `${imageUrl}${response[0].id}/${response[0].photo}`,
-        cooperation: `${imageUrl}${response[1].id}/${response[1].photo}`,
-        competition: `${imageUrl}${response[2].id}/${response[2].photo}`,
-        publicRelation: `${imageUrl}${response[3].id}/${response[3].photo}`,
-      });
+      const localData = localStorage.getItem('departmentData');
+      if (localData) {
+        const data = JSON.parse(localData);
+        setPhotos({
+          planning: `${imageUrl}${data[0].id}/${data[0].photo}`,
+          cooperation: `${imageUrl}${data[1].id}/${data[1].photo}`,
+          competition: `${imageUrl}${data[2].id}/${data[2].photo}`,
+          publicRelation: `${imageUrl}${data[3].id}/${data[3].photo}`,
+        });
+      } else {
+        const response = await DepartmentApi();
+        localStorage.setItem('departmentData', JSON.stringify(response));
+        setPhotos({
+          planning: `${imageUrl}${response[0].id}/${response[0].photo}`,
+          cooperation: `${imageUrl}${response[1].id}/${response[1].photo}`,
+          competition: `${imageUrl}${response[2].id}/${response[2].photo}`,
+          publicRelation: `${imageUrl}${response[3].id}/${response[3].photo}`,
+        });
+      }
     } catch (err) {
       console.log(err);
     }

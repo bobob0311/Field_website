@@ -9,7 +9,7 @@ import ActivitySupport from '../../public/ActivitySupport.png';
 import ActivityYoutube from '../../public/ActivityYoutube.png';
 import ActivityInterview from '../../public/ActivityInterview.png';
 import ActivityIntroduce from '../../public/ActivityIntro.png';
-import FieldIntro1 from '../../public/fieldIntro1.png';
+import FieldIntro1 from '../../public/FieldIntro1.png';
 import FieldIntro2 from '../../public/FieldIntro2.png';
 import FieldIntro3 from '../../public/FieldIntro3.png';
 import AnimationExample from '../components/AnimationExample';

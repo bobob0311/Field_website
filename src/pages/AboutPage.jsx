@@ -120,8 +120,14 @@ function AboutPage() {
   const imageUrl = `${import.meta.env.VITE_API_URL}/api/files/i4n7e8c0u8882do/`;
   const getProfile = async () => {
     try {
-      const response = await ProfileApi();
-      setProfileData(response);
+      const localData = localStorage.getItem('profileData');
+      if (localData) {
+        setProfileData(JSON.parse(localData));
+      } else {
+        const response = await ProfileApi();
+        setProfileData(response);
+        localStorage.setItem('profileData', JSON.stringify(response));
+      }
     } catch (err) {
       console.log(err);
     }
