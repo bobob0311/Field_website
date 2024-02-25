@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
+import {json, useNavigate, useParams} from 'react-router-dom';
 import styled from 'styled-components';
 import {NewsDetailApi} from '../lib/Apiservice';
 import fileIcon from '../assets/fileIcon.png';
@@ -69,20 +69,27 @@ function NewsDetailPage() {
   const navigate = useNavigate();
   const [detailNewsData, setDetailNewsData] = useState({});
   const [loading, setLoading] = useState(true);
+
+  const localDetailData = localStorage.getItem(id);
   const getDataDetail = async () => {
     try {
-      const response = await NewsDetailApi(id);
-      setDetailNewsData(response);
-      setLoading(false);
+      if (localDetailData) {
+        setDetailNewsData(JSON.parse(localDetailData));
+        setLoading(false);
+      } else {
+        const response = await NewsDetailApi(id);
+        localStorage.setItem(id, JSON.stringify(response));
+        setDetailNewsData(response);
+        setLoading(false);
+      }
     } catch (error) {
       console.log(error);
     }
   };
-  console.log(detailNewsData);
   const fileUrl = `${import.meta.env.VITE_API_URL}/api/files/damzbyg116zhar4/`;
 
   const handleBack = () => {
-    navigate(-1); // 뒤로가기
+    navigate(-1);
   };
 
   useEffect(() => {

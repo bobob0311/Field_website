@@ -75,7 +75,9 @@ export default function MenuContent(props) {
         <MenuContainer className={location.pathname.replace('/', '')}>
           {Menus.map(Menu => (
             <OneMenu key={Menu.title}>
-              <Link to={`/${Menu.link}`}>{Menu.title}</Link>
+              <Link name={Menu.link} to={`/${Menu.link}`}>
+                {Menu.title}
+              </Link>
             </OneMenu>
           ))}
         </MenuContainer>

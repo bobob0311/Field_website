@@ -18,7 +18,7 @@ const AccessibilityHidden = styled.h2`
 const PageWrapper = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center; /* 이 부분이 중앙 정렬을 담당합니다 */
+  align-items: center;
 `;
 
 const Ul = styled.ul`
@@ -35,7 +35,7 @@ const Li = styled.li`
 
 const CustomPagination = styled(Pagination)`
   .MuiPaginationItem-root {
-    color: white; /* 원하는 색상으로 변경 */
+    color: white;
   }
 `;
 
@@ -69,7 +69,7 @@ function NewsPagination({newsData, category}) {
           count={Math.ceil(newsData.length / itemsPerPage)}
           color='primary'
           defaultPage={1}
-          page={currentPage} // 현재 페이지를 지정
+          page={currentPage}
           onChange={handlePageChange}
         />
       </PageWrapper>
