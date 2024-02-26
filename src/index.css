@@ -16,11 +16,9 @@
     url('./fonts/goblin_one.svg#goblin_one') format('svg');
   /* Chrome < 4, Legacy iOS */
 }
-
 @font-face {
   font-family: 'SUIT-Regular';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2')
-    format('woff2');
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
@@ -74,13 +72,17 @@
 }
 
 @font-face {
-  font-family: 'SUIT';
+  font-family: 'SUIT-Heavy';
   font-weight: 900;
   src: url('./fonts//SUIT-Heavy.woff2') format('woff2');
 }
 
 body {
   margin: 0;
+  font-family: 'SUIT', sans-serif;
+}
+
+button {
   font-family: 'SUIT', sans-serif;
 }
 

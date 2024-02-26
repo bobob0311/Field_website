@@ -48,8 +48,8 @@ const Modal = styled.section`
   display: flex;
   flex-direction: column;
   background-color: ${theme.colors.white};
-  height: 20%;
-  width: 80%;
+  height: 12rem;
+  width: 85%;
   animation: ${slideDownAnimation} 0.5s ease-in-out;
   border-radius: 2rem;
   align-items: center;
@@ -82,6 +82,7 @@ const ModalP = styled.p`
   color: ${theme.colors.black};
   font-size: 1.2rem;
   font-weight: 800;
+  text-align: center;
 `;
 
 const portalElement = document.getElementById('modal');
@@ -120,8 +121,10 @@ export default function ContactModal(props) {
   } else {
     content = (
       <>
-        <ModalP mg='2.2rem 0 0 0'>올바르지 않는 형식입니다.</ModalP>
-        <ModalP mg='0.7rem 0 0 0'>체크된 항목을 확인해주세요</ModalP>
+        <div>
+          <ModalP mg='2.2rem 0 0 0'>올바르지 않는 형식입니다.</ModalP>
+          <ModalP mg='0.7rem 0 0 0'>체크된 항목을 확인해주세요</ModalP>
+        </div>
         <ModalButton type='button' onClick={onClose}>
           확인하기
         </ModalButton>

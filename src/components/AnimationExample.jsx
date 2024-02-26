@@ -8,6 +8,7 @@ const TextGenerateContainer = styled.div`
   font-weight: bold; // 폰트 굵기를 설정합니다.
   margin: 0 10%; // 좌우 여백을 설정합니다.
   text-align: center; // 텍스트를 가운데 정렬합니다.
+  line-height: 1.5;
 `;
 
 // 텍스트 애니메이션 예시를 담당하는 함수형 컴포넌트를 정의합니다.
