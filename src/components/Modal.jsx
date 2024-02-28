@@ -1,18 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
-import {useSelector, useDispatch} from 'react-redux';
-import {setDataCampYear} from '../redux/campYearSlice';
+import ReactDOM from 'react-dom';
+import {useDispatch} from 'react-redux';
 import modalCloseIcon from '../assets/modalClose.png';
 import theme from '../theme';
 
-const ModalBackground = styled.section`
+const ModalContainer = styled.section`
   position: fixed;
-  top: 25%;
+  top: 20%;
+  left: 10%;
   width: 80%;
-  height: full;
+  max-height: 70%;
   background: rgba(0, 0, 0, 1);
   border: solid;
   border-radius: 1.25rem;
+  z-index: 1000;
 `;
 
 const ButtonWrapper = styled.div`
@@ -30,47 +32,59 @@ const CloseButton = styled.img`
 const Ul = styled.ul`
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  flex-wrap: wrap;
+  gap: 5%;
+  overflow: auto;
+  max-height: 300px;
+  width: 100%;
 `;
 
 const Li = styled.li`
   font-size: 1rem;
-  text-align: center;
+  width: 45%;
   color: ${theme.colors.yellow};
-  margin: 1rem 1rem;
-  ::marker {
-    padding: 0;
-    margin: 0;
-  }
+  margin: 1rem 0;
+  cursor: pointer;
 `;
 
-function Modal({titleData, showModal, setShowModal}) {
+function Modal({titleData, showModal, setShowModal, name = '', setModalItem}) {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (showModal) {
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
 
   if (!showModal) {
     return null;
   }
 
-  return (
-    <ModalBackground>
+  return ReactDOM.createPortal(
+    <ModalContainer>
       <ButtonWrapper>
         <CloseButton onClick={() => setShowModal(false)} src={modalCloseIcon} />
       </ButtonWrapper>
       <Ul>
-        {titleData
-          ? titleData.map((item, idx) => (
-              <Li
-                key={idx}
-                onClick={() => {
-                  dispatch(setDataCampYear(item)); // 클릭된 항목의 값을 dispatch
-                }}
-              >
-                {item} Field Camp
-              </Li>
-            ))
-          : ''}
+        {titleData &&
+          titleData.map(item => (
+            <Li
+              key={item}
+              onClick={() => {
+                setShowModal(false);
+                dispatch(setModalItem(item)); // 클릭된 항목의 값을 dispatch
+              }}
+            >
+              {item} {name}
+            </Li>
+          ))}
       </Ul>
-    </ModalBackground>
+    </ModalContainer>,
+    document.getElementById('modal'),
   );
 }
 

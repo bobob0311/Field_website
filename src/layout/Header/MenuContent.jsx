@@ -1,5 +1,5 @@
 import styled, {keyframes} from 'styled-components';
-import {useLocation} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import theme from '../../theme';
 
 const slideDownAnimation = keyframes`
@@ -45,18 +45,17 @@ const MenuContainer = styled.ul`
 
 const OneMenu = styled.li`
   height: 4rem;
-`;
-
-const MenuLink = styled.a`
-  font-family: 'Goblin One';
-  display: flex;
-  align-items: center;
-  height: inherit;
-  width: 100vw;
-  font-size: 1.5rem;
-  text-decoration: none;
-  color: ${theme.colors.white};
-  padding: 0 0 0 5%;
+  a {
+    font-family: 'Goblin One';
+    display: flex;
+    align-items: center;
+    height: inherit;
+    width: 100vw;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: ${theme.colors.white};
+    padding: 0 0 0 5%;
+  }
 `;
 
 export default function MenuContent(props) {
@@ -76,9 +75,7 @@ export default function MenuContent(props) {
         <MenuContainer className={location.pathname.replace('/', '')}>
           {Menus.map(Menu => (
             <OneMenu key={Menu.title}>
-              <MenuLink name={Menu.link} href={`${Menu.link}`}>
-                {Menu.title}
-              </MenuLink>
+              <Link to={`/${Menu.link}`}>{Menu.title}</Link>
             </OneMenu>
           ))}
         </MenuContainer>

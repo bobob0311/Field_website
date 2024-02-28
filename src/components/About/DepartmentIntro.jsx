@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import theme from '../../theme';
+import {DepartmentApi} from '../../lib/Apiservice';
 
 const H2 = styled.h2`
   font-size: 1.875rem;
@@ -8,10 +9,17 @@ const H2 = styled.h2`
   text-align: center;
 `;
 
+const NanumH2 = styled(H2)`
+  font-family: 'Nanum Myeongjo', serif;
+  font-weight: 700;
+`;
+
 const Image = styled.img`
-  margin: ${props => props.margin || '0'};
-  width: ${props => props.width || ''};
-  border-radius: ${props => props.radius || ''};
+  margin: 2rem 0 0 0;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1/0.8;
+  border-radius: 1rem;
 `;
 
 const Card = styled.article`
@@ -78,11 +86,13 @@ const ActivityUl = styled.ul`
   gap: 0.5rem;
   border: 2px solid white;
   border-radius: 1rem;
-  padding: 1rem 2rem;
+  padding: 1rem 0.3rem 1rem 1.3rem;
+  text-indent: -0.8rem;
+  word-break: keep-all;
 `;
 
 const ActivityLi = styled.li`
-  font-size: 1.25rem;
+  font-size: 1rem;
 `;
 
 const Button = styled.button`
@@ -91,6 +101,7 @@ const Button = styled.button`
   cursor: pointer;
   width: 25%;
   border: none;
+  padding: 0.375rem 0;
   border-radius: 1rem;
   font-size: 0.8rem;
 
@@ -127,6 +138,44 @@ const FlexCenter = styled.div`
 `;
 
 function DepartmentIntro() {
+  const [photos, setPhotos] = useState({
+    planning: '',
+    cooperation: '',
+    competition: '',
+    publicRelation: '',
+  });
+  const imageUrl = `${import.meta.env.VITE_API_URL}/api/files/jopzyrph5gaoffm/`;
+
+  const getDepartmentData = async () => {
+    try {
+      const localData = localStorage.getItem('departmentData');
+      if (localData) {
+        const data = JSON.parse(localData);
+        setPhotos({
+          planning: `${imageUrl}${data[0].id}/${data[0].photo}`,
+          cooperation: `${imageUrl}${data[1].id}/${data[1].photo}`,
+          competition: `${imageUrl}${data[2].id}/${data[2].photo}`,
+          publicRelation: `${imageUrl}${data[3].id}/${data[3].photo}`,
+        });
+      } else {
+        const response = await DepartmentApi();
+        localStorage.setItem('departmentData', JSON.stringify(response));
+        setPhotos({
+          planning: `${imageUrl}${response[0].id}/${response[0].photo}`,
+          cooperation: `${imageUrl}${response[1].id}/${response[1].photo}`,
+          competition: `${imageUrl}${response[2].id}/${response[2].photo}`,
+          publicRelation: `${imageUrl}${response[3].id}/${response[3].photo}`,
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getDepartmentData();
+  }, []);
+
   const [selectCategory, setSelectCategory] = useState('기획부');
   const category = ['기획부', '대외협력부', '컴페티션부', '홍보부'];
 
@@ -136,9 +185,7 @@ function DepartmentIntro() {
 
   return (
     <>
-      <H2 margin='2rem 0'>부서소개</H2>
-      {/* 통신 */}
-      <Image width='100%' src='./../../public/fieldIntro1.png' alt='' />
+      <NanumH2 margin='2rem 0'>부서소개</NanumH2>
       <ButtonWrapper>
         {category.map(item => (
           <Button
@@ -151,7 +198,8 @@ function DepartmentIntro() {
         ))}
       </ButtonWrapper>
       <CardContainer visible={selectCategory === '기획부'}>
-        <Card margin='2rem 0'>
+        <Image width='100%' src={photos.planning} alt='' />
+        <Card margin='1rem 0'>
           <Dl>
             <Dt>기획부</Dt>
             <Dd>FIELD 인적, 학술적 교류를 활성화하기 위한 컨텐츠를 기획하고 진행, 총괄하는 부서</Dd>
@@ -180,7 +228,7 @@ function DepartmentIntro() {
             <span>Planning Department</span>
           </FlexCenter>
         </H3>
-        <ActivityUl margin='2rem 0'>
+        <ActivityUl margin='1rem 0'>
           <ActivityLi>- FIELD 유튜브 콘텐츠 기획 및 촬영</ActivityLi>
           <ActivityLi>- FIELD CAMP 레크레이션</ActivityLi>
           <ActivityLi>- 산공인의 밤 기획 및 총괄</ActivityLi>
@@ -188,6 +236,7 @@ function DepartmentIntro() {
         </ActivityUl>
       </CardContainer>
       <CardContainer visible={selectCategory === '대외협력부'}>
+        <Image width='100%' src={photos.cooperation} alt='' />
         <Card margin='2rem 0'>
           <Dl>
             <Dt>대외협력부</Dt>
@@ -228,9 +277,10 @@ function DepartmentIntro() {
         </ActivityUl>
       </CardContainer>
       <CardContainer visible={selectCategory === '컴페티션부'}>
+        <Image width='100%' src={photos.competition} alt='' />
         <Card margin='2rem 0'>
           <Dl>
-            <Dt>대외협력부</Dt>
+            <Dt>컴페티션부</Dt>
             <Dd>
               FIELD 내 진행하는 학술교류에 관한 업무와 FIELD CAMP 컴페티션에 대한 자료와 평가기준을
               만드는 부서
@@ -269,6 +319,7 @@ function DepartmentIntro() {
         </ActivityUl>
       </CardContainer>
       <CardContainer visible={selectCategory === '홍보부'}>
+        <Image width='100%' src={photos.publicRelation} alt='' />
         <Card margin='2rem 0'>
           <Dl>
             <Dt>홍보부</Dt>
