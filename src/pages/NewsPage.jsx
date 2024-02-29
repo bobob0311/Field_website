@@ -44,7 +44,7 @@ function NewsPage() {
   const [selectCategory, setSelectCategory] = useState('월간필드');
   const categoryArr = ['월간필드', '취업/진로', 'FIELD', '공모전'];
   const [newsData, setNewsData] = useState([]);
-  const imageUrl = `${import.meta.env.VITE_API_URL}/api/files/damzbyg116zhar4/`;
+  const imageUrl = `${VITE_API_URL}/api/files/damzbyg116zhar4/`;
   const handleButtonClick = item => {
     setSelectCategory(item);
   };
