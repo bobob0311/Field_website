@@ -71,7 +71,7 @@ const DepartmentButton = styled.button`
   font-weight: 600;
 `;
 
-const allDepartment = {
+const DEPARTMENTINFO = {
   planning: {
     department: '기획부',
     explain: [
@@ -134,9 +134,9 @@ function DepartmentBox({part, p, target}) {
   return (
     <QuestionBox>
       <BoxSize>
-        <Question>{`${allDepartment[part].department}${p}`}</Question>
+        <Question>{`${DEPARTMENTINFO[part].department}${p}`}</Question>
         <ul>
-          {allDepartment[part][target].map((item, index) => (
+          {DEPARTMENTINFO[part][target].map((item, index) => (
             <Answer key={index}>{`${index + 1}. ${item}`}</Answer>
           ))}
         </ul>
@@ -147,7 +147,6 @@ function DepartmentBox({part, p, target}) {
 
 export default function Department() {
   const [selectedDepartment, setSelectedDepartment] = useState('planning');
-
   function DepartmentHandler(name) {
     setSelectedDepartment(name);
   }
@@ -155,18 +154,11 @@ export default function Department() {
     <DepartmentSection>
       <SubTitle>모집 분야</SubTitle>
       <ButtonWrapper $activelink={selectedDepartment}>
-        <DepartmentButton name='planning' onClick={() => DepartmentHandler('planning')}>
-          기획부
-        </DepartmentButton>
-        <DepartmentButton name='external' onClick={() => DepartmentHandler('external')}>
-          대외협력부
-        </DepartmentButton>
-        <DepartmentButton name='competition' onClick={() => DepartmentHandler('competition')}>
-          컴페티션부
-        </DepartmentButton>
-        <DepartmentButton name='relation' onClick={() => DepartmentHandler('relation')}>
-          홍보부
-        </DepartmentButton>
+        {Object.keys(DEPARTMENTINFO).map(item => (
+          <DepartmentButton key={item} name={item} onClick={() => DepartmentHandler(item)}>
+            {DEPARTMENTINFO[item].department}
+          </DepartmentButton>
+        ))}
       </ButtonWrapper>
       <DepartmentBox part={selectedDepartment} p='는 어떤 인재를 원하나요! 🔍' target='explain' />
       <DepartmentBox part={selectedDepartment} p='는 어떤 활동을 하나요! 💪' target='activity' />
