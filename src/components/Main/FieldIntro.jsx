@@ -16,6 +16,7 @@ const Figure = styled.figure`
   align-items: center;
   position: ${props => props.$position || ''};
   bottom: 1rem;
+  margin: ${props => props.$margin || '0'};
 `;
 
 const Image = styled.img`
@@ -43,7 +44,7 @@ const Figcaption = styled.figcaption`
 
 function FieldIntro({title, backgroundImage, content}) {
   return (
-    <Figure>
+    <Figure $margin='8rem 0'>
       <H3 $margin='0 0 2rem 0'>{title}</H3>
       <Image src={backgroundImage} alt='산업공학도' width='100%' radius='1.875rem' />
       <Figcaption $margin='2rem 0'>

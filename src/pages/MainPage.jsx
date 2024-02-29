@@ -111,7 +111,7 @@ function MainPage() {
       <IntroSection />
       <FieldIntroSection />
       <ActivitySection />
-      <GoblinH2 $margin='2rem 0' $size='1.25rem'>
+      <GoblinH2 $margin='8rem 0 2rem 0' $size='1.25rem'>
         How was your FIELD?
       </GoblinH2>
       <SwiperContainer $margin='2rem 0'>
