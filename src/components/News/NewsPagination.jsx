@@ -31,6 +31,11 @@ const Li = styled.li`
   border: None;
   border-bottom: solid 0.0625rem;
   padding: 0.5rem 0;
+  a {
+    border: none;
+    color: inherit;
+    text-decoration: none;
+  }
 `;
 
 const CustomPagination = styled(Pagination)`
@@ -55,12 +60,7 @@ function NewsPagination({newsData, category}) {
       <Ul>
         {currentItemPerPage.map(item => (
           <Li key={item.id}>
-            <Link
-              style={{border: 'none', color: 'inherit', textDecoration: 'none'}}
-              to={`/detail/${item.newsId}`}
-            >
-              {item.title}
-            </Link>
+            <Link to={`/detail/${item.newsId}`}>{item.title}</Link>
           </Li>
         ))}
       </Ul>

@@ -11,12 +11,12 @@ import {NewsApi, NewsMonthApi} from '../lib/Apiservice';
 import {setMonthTitle} from '../redux/monthFieldSlice';
 
 const NewsMain = styled.section`
-  height: calc(100vh - 4.5rem);
+  height: calc(100vh - 4.5rem - 140.78px);
 `;
 
 const H1 = styled.h1`
   font-size: 1.875rem;
-  margin: 2rem 0 2rem 0;
+  padding: 2rem 0;
   font-family: 'Goblin one';
   text-align: center;
 `;

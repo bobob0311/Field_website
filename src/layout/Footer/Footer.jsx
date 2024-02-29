@@ -32,6 +32,8 @@ const ImgLink = styled.a`
 const AddressLink = styled.a`
   text-decoration: none;
   color: ${theme.colors.white};
+  padding: 0;
+  margin: 0.3rem 0;
   font-size: 0.625rem;
   font-weight: 900;
 `;
@@ -41,11 +43,9 @@ export default function Footer() {
     <FooterArea>
       <FooterContent>FIELD (필드, 전국 대학생 산업공학도 동아리)</FooterContent>
       <FooterContent>Copyrightⓒ2024.FIELD. All rights reserved.</FooterContent>
-      <address>
-        <AddressLink href='mailto:iefieldcamp24@gamil.com' target='_blank'>
-          iefieldcamp24@gamil.com
-        </AddressLink>
-      </address>
+      <AddressLink href='mailto:iefieldcamp24@gamil.com' target='_blank'>
+        iefieldcamp24@gamil.com
+      </AddressLink>
 
       <ImgWrapper>
         <ImgLink href='http://pf.kakao.com/_uwNxeK' target='_blank'>

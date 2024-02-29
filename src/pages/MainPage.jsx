@@ -82,6 +82,10 @@ const WriterContainer = styled.div`
   text-align: center;
 `;
 
+const FakeSection = styled.section`
+  margin: 2rem 0;
+`;
+
 function MainPage() {
   const [reviewData, setReviewData] = useState([]);
 
@@ -111,31 +115,35 @@ function MainPage() {
       <IntroSection />
       <FieldIntroSection />
       <ActivitySection />
-      <GoblinH2 $margin='8rem 0 2rem 0' $size='1.25rem'>
-        How was your FIELD?
-      </GoblinH2>
-      <SwiperContainer $margin='2rem 0'>
-        <Swiper slidesPerView={1.2} spaceBetween={20} centeredSlides='true'>
-          {reviewData.map(item => (
-            <SwiperSlide key={item.id}>
-              <Card $border='true'>
-                <Article>
-                  <H3 $margin='1rem 0 2rem 0'>{item.firstQuestion}</H3>
-                  <P $margin='2rem 0'>{item.firstAnswer}</P>
-                  <WriterContainer>
-                    <P color='yellow' size='1.2rem'>
-                      {item.school}
-                    </P>
-                    <P color='yellow' size='1.2rem'>
-                      {item.author}
-                    </P>
-                  </WriterContainer>
-                </Article>
-              </Card>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </SwiperContainer>
+      {/* 페이크 section 여기 일단 대충 보여줄려고 만든거니까 지우세요 */}
+      <FakeSection>
+        <GoblinH2 $margin='8rem 0 2rem 0' $size='1.25rem'>
+          How was your FIELD?
+        </GoblinH2>
+        <SwiperContainer $margin='2rem 0'>
+          <Swiper slidesPerView={1.2} spaceBetween={20} centeredSlides='true'>
+            {reviewData.map(item => (
+              <SwiperSlide key={item.id}>
+                <Card $border='true'>
+                  <Article>
+                    <H3 $margin='1rem 0 2rem 0'>{item.firstQuestion}</H3>
+                    <P $margin='2rem 0'>{item.firstAnswer}</P>
+                    <WriterContainer>
+                      <P color='yellow' size='1.2rem'>
+                        {item.school}
+                      </P>
+                      <P color='yellow' size='1.2rem'>
+                        {item.author}
+                      </P>
+                    </WriterContainer>
+                  </Article>
+                </Card>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </SwiperContainer>
+      </FakeSection>
+      {/* 지우세요 */}
     </>
   );
 }

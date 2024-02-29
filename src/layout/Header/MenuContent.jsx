@@ -21,6 +21,7 @@ const HeaderContentSection = styled.div`
   width: 100vw;
   background: rgba(0, 0, 0, 0.5);
   z-index: 2;
+  // margin: 0 7.5%;
 `;
 
 const HeaderContent = styled.nav`
@@ -54,7 +55,7 @@ const OneMenu = styled.li`
     font-size: 1.5rem;
     text-decoration: none;
     color: ${theme.colors.white};
-    padding: 0 0 0 5%;
+    padding: 0 7.5%;
   }
 `;
 
