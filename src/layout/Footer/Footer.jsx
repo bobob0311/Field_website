@@ -5,7 +5,7 @@ const FooterArea = styled.footer`
   display: flex;
   flex-direction: column;
   background: #141414;
-  padding: 2;
+  padding: 1rem 7.5%;
 `;
 
 const FooterContent = styled.span`
