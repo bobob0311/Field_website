@@ -1,25 +1,16 @@
 import styled from 'styled-components';
 import theme from '../theme';
 
-const SVGContanier = styled.div`
-  margin: 2rem 0 0 0;
-  display: flex;
-  justify-content: center;
-`;
-
-const Box = styled.div`
+const TimeLineDiv = styled.div`
   position: relative;
-  width: 370px;
-  color: white;
-  padding: 0 0 0 0.5rem;
+  width: 340px;
+  margin: 2rem auto 0;
 `;
 const DataBox = styled.div`
   font-size: 1.5rem;
   font-family: 'Goblin One';
   position: absolute;
   top: ${props => props.$height};
-  margin: 0;
-  box-sizing: content-box;
 `;
 const Data = styled.div`
   font-family: 'SUIT';
@@ -29,20 +20,20 @@ const Data = styled.div`
   width: 160px;
   word-break: keep-all;
   top: ${props => props.$top};
-  left: 200px;
+  left: 180px;
   &::before {
     color: red;
     position: absolute;
     content: '';
     padding: 0.8rem;
     border-radius: 50%;
-    left: -53px;
+    left: -49px;
     z-index: 1;
     background: ${theme.colors.yellow};
   }
 `;
-const Title = styled.span`
-  color: ${props => (props.$color ? props.$color : 'white')};
+const Title = styled.h3`
+  color: #F76363;
 `;
 
 const P = styled.p`
@@ -51,81 +42,63 @@ const P = styled.p`
   padding: 0.5rem 0 0 0;
 `;
 
-// 데이터 각각 넣어주는 방법
-
-// 이건 넣어드렸어요 ^^
-// const data = {
-//  day1: ['개회식', '레크레이션', 'OHT / 레고 AGB 실험실견학', '교수님과의 식사'],
-//  day2: ['컴페티션 예선', '컴페티션 본선', '산공인의 밤'],
-//  day3: ['시상식', '폐회식', '기념사진 촬영'],
-// };
-
-// 요긴 title하고 get으로 구분해서 넣어주세요
-// const data = {
-//  2008: [{title: 'FEILD의 시작', get: '서울대학교 KAIST, POSTECH에서 학술 및 인적 교류 시작'}],
-//  2009: [{title: '첫 FIELD CAMP 개최', get: 'ㅋㅋ'}],
-//  2016: ['대한산업공학회 산하공식단체 인준'],
-//  2017: ['전국단위 활동'],
-//  2018: ['고교방문 설명회 진행'],
-//  2022: ['FIELD 유튜브 개설'],
-//  2023: ['코로나 이후 FIELD'],
-// };
-
-// height는 점들의 간격입니다. 필드캠프는 80 연혁은 140정도면 적절 조절바람.
-
 export default function TimeLine({data, height}) {
   const dataLabel = Object.keys(data);
+  const contentStartPoint = 40;
 
   const arrayLength = dataLabel.reduce(
-    (acc, label) => {
-      acc.push(acc.length > 0 ? acc[acc.length - 1] + data[label].length : data[label].length);
-      return acc;
+    (dataLengthArray, label) => {
+      dataLengthArray.push(
+        dataLengthArray.length > 0
+          ? dataLengthArray[dataLengthArray.length - 1] + data[label].length
+          : data[label].length,
+      );
+      return dataLengthArray;
     },
     [0],
   );
   const count = arrayLength.pop();
-  const startPoint = arrayLength.map(value => value * height + 40);
-  const result = startPoint.map((item, index) => ({start: item, label: dataLabel[index]}));
+  const startPoint = arrayLength.map(value => value * height + contentStartPoint);
+  const result = startPoint.map((eachStartPoint, index) => ({
+    start: eachStartPoint,
+    label: dataLabel[index],
+  }));
 
   const MaxHeight = count * height;
 
   return (
-    <SVGContanier>
-      <Box>
-        {result.map(idx => (
-          <DataBox $height={`${idx.start}px`}>
-            {idx.label}
-            {data[idx.label].map((item, index) => (
-              <div>
-                {item.title || item.get ? (
-                  item.title && (
-                    <Data $top={`${index * height}px`}>
-                      <Title $color='#F76363'>{item.title}</Title>
-                      <P>{item.get}</P>
-                    </Data>
-                  )
-                ) : (
-                  <Data $top={`${index * height}px`}>{item}</Data>
-                )}
-              </div>
-            ))}
-          </DataBox>
-        ))}
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          viewBox={`0 0 380 ${MaxHeight + 100}`}
-          width='380'
-          height={`${MaxHeight + 100}`}
-          fill='none'
-          stroke='currentColor'
-          strokeWidth='6'
-          strokeLinecap='round'
-          strokeLinejoin='round'
-        >
-          <path d={`M 160 1  v${MaxHeight + 25}`} />
-          <path d={`M 190  ${MaxHeight} l-30 30-30-30`} />
-        </svg>
-      </Box>
-    </SVGContanier>
+    <TimeLineDiv>
+      {result.map(content => (
+        <DataBox $height={`${content.start}px`}>
+          {content.label}
+          {data[content.label].map((item, index) => (
+            <Data $top={`${index * height}px`}>
+              {item.title && item.get ? (
+                <>
+                  <Title>{item.title}</Title>
+                  <P>{item.get}</P>
+                </>
+              ) : (
+                <span>{item}</span>
+              )}
+            </Data>
+          ))}
+        </DataBox>
+      ))}
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        viewBox={`0 0 340 ${MaxHeight + 100}`}
+        width='340'
+        height={`${MaxHeight + 100}`}
+        fill='none'
+        stroke='currentColor'
+        strokeWidth='6'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      >
+        <path d={`M 145 1  v${MaxHeight + 50}`} />
+        <path d={`M 175  ${MaxHeight + 25} l-30 30-30-30`} />
+      </svg>
+    </TimeLineDiv>
   );
 }

@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import theme from '../../theme';
-import {DepartmentApi} from '../../lib/Apiservice';
 
 const H2 = styled.h2`
   font-size: 1.875rem;
@@ -14,20 +13,10 @@ const NanumH2 = styled(H2)`
   font-weight: 700;
 `;
 
-const Image = styled.img`
-  margin: 2rem 0 0 0;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1/0.8;
-  border-radius: 1rem;
-`;
-
 const Card = styled.article`
   display: flex;
   flex-direction: column;
-  border: 2px solid white;
   padding: 0 1rem;
-  border-radius: 1rem;
   margin: ${props => props.margin || '0'};
 `;
 
@@ -37,6 +26,8 @@ const Dt = styled.dt`
 
 const Dd = styled.dd`
   font-size: 1rem;
+  word-break: keep-all;
+  line-height: 1.2;
 `;
 
 const Dl = styled.dl`
@@ -92,7 +83,7 @@ const ActivityUl = styled.ul`
 `;
 
 const ActivityLi = styled.li`
-  font-size: 1.25rem;
+  font-size: 1rem;
 `;
 
 const Button = styled.button`
@@ -101,6 +92,7 @@ const Button = styled.button`
   cursor: pointer;
   width: 25%;
   border: none;
+  padding: 0.375rem 0;
   border-radius: 1rem;
   font-size: 0.8rem;
 
@@ -137,40 +129,6 @@ const FlexCenter = styled.div`
 `;
 
 function DepartmentIntro() {
-  const [photos, setPhotos] = useState({
-    planning: '',
-    cooperation: '',
-    competition: '',
-    publicRelation: '',
-  });
-  // const [planningPhoto, setPlanningPhoto] = useState('');
-  // const [cooperationPhoto, setCooperationPhoto] = useState('');
-  // const [competitionPhoto, setCompetitionPhoto] = useState('');
-  // const [publicPhoto, setPublicPhoto] = useState('');
-  const imageUrl = `${import.meta.env.VITE_API_URL}/api/files/jopzyrph5gaoffm/`;
-
-  const getDepartmentData = async () => {
-    try {
-      const response = await DepartmentApi();
-      // setPlanningPhoto(`${imageUrl}${response[0].id}/${response[0].photo}`);
-      // setCooperationPhoto(`${imageUrl}${response[1].id}/${response[1].photo}`);
-      // setCompetitionPhoto(`${imageUrl}${response[2].id}/${response[2].photo}`);
-      // setPublicPhoto(`${imageUrl}${response[3].id}/${response[3].photo}`);
-      setPhotos({
-        planning: `${imageUrl}${response[0].id}/${response[0].photo}`,
-        cooperation: `${imageUrl}${response[1].id}/${response[1].photo}`,
-        competition: `${imageUrl}${response[2].id}/${response[2].photo}`,
-        publicRelation: `${imageUrl}${response[3].id}/${response[3].photo}`,
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    getDepartmentData();
-  }, []);
-
   const [selectCategory, setSelectCategory] = useState('기획부');
   const category = ['기획부', '대외협력부', '컴페티션부', '홍보부'];
 
@@ -193,7 +151,6 @@ function DepartmentIntro() {
         ))}
       </ButtonWrapper>
       <CardContainer visible={selectCategory === '기획부'}>
-        <Image width='100%' src={photos.planning} alt='' />
         <Card margin='1rem 0'>
           <Dl>
             <Dt>기획부</Dt>
@@ -231,8 +188,7 @@ function DepartmentIntro() {
         </ActivityUl>
       </CardContainer>
       <CardContainer visible={selectCategory === '대외협력부'}>
-        <Image width='100%' src={photos.cooperation} alt='' />
-        <Card margin='2rem 0'>
+        <Card margin='1rem 0'>
           <Dl>
             <Dt>대외협력부</Dt>
             <Dd>
@@ -272,8 +228,7 @@ function DepartmentIntro() {
         </ActivityUl>
       </CardContainer>
       <CardContainer visible={selectCategory === '컴페티션부'}>
-        <Image width='100%' src={photos.competition} alt='' />
-        <Card margin='2rem 0'>
+        <Card margin='1rem 0'>
           <Dl>
             <Dt>컴페티션부</Dt>
             <Dd>
@@ -314,8 +269,7 @@ function DepartmentIntro() {
         </ActivityUl>
       </CardContainer>
       <CardContainer visible={selectCategory === '홍보부'}>
-        <Image width='100%' src={photos.publicRelation} alt='' />
-        <Card margin='2rem 0'>
+        <Card margin='1rem 0'>
           <Dl>
             <Dt>홍보부</Dt>
             <Dd>FIELD와 산업공학을 알리는 전반적인 홍보물을 기획하고 제작하는 부서</Dd>

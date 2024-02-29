@@ -11,6 +11,7 @@ import RecruitPage from './pages/RecruitPage';
 import NewsPage from './pages/NewsPage';
 import NewsDetailPage from './pages/NewsDetailPage';
 import theme from './theme';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path='/recruit' element={<RecruitPage />} />
           <Route path='/news' element={<NewsPage />} />
           <Route path='detail/:id' element={<NewsDetailPage />} />
+          <Route path='*' element={<NotFound />}></Route>
         </Route>
       </Routes>
     </ThemeProvider>

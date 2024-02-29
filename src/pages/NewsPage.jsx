@@ -11,7 +11,7 @@ import {NewsApi, NewsMonthApi} from '../lib/Apiservice';
 import {setMonthTitle} from '../redux/monthFieldSlice';
 
 const NewsMain = styled.section`
-  height: 67.9vh;
+  height: calc(100vh - 4.5rem);
 `;
 
 const H1 = styled.h1`

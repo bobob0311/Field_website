@@ -1,7 +1,7 @@
-import PocketBase from 'pocketbase';
 import {useEffect, useState} from 'react';
 import styled, {keyframes} from 'styled-components';
 import theme from '../../theme';
+import {LoadDateData} from '../../lib/Apiservice';
 
 const P = styled.p`
   font-size: ${props => (props.$fontSize ? props.$fontSize : '1rem')};
@@ -82,7 +82,7 @@ const LoadingSpin = styled.div`
   animation: ${spin} 0.5s linear infinite;
 `;
 
-function Contanier({subtitle, content}) {
+function InfoGroup({subtitle, content}) {
   return (
     <ContentWrapper>
       <SubTitle>{subtitle}</SubTitle>
@@ -90,6 +90,7 @@ function Contanier({subtitle, content}) {
     </ContentWrapper>
   );
 }
+
 function ContanierWithContentBox({subtitle, content}) {
   return (
     <ContentWrapper>
@@ -121,12 +122,12 @@ const APPLYMETHOD = (
 );
 
 export default function Content() {
-  const [data, setData] = useState([]);
+  const [dateData, setDateData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
   function dateFormatChange(date) {
-    const formattedDateArray = date.map(item => {
+    return date.map(item => {
       const inputDate = new Date(item.Date);
 
       const year = inputDate.getFullYear();
@@ -138,19 +139,21 @@ export default function Content() {
 
       return `${year}.${month}.${day} (${dayOfWeek})`;
     });
-    return formattedDateArray;
   }
 
-  async function RecuitData() {
+  function dateDataLocalStored(dateArray) {
+    const localdateArray = {key: dateArray};
+    localStorage.setItem('date', JSON.stringify(localdateArray));
+  }
+
+  async function initialSetup() {
     setIsLoading(true);
-    const pb = new PocketBase(import.meta.env.VITE_API_URL);
     try {
-      const respone = await pb.collection('Recruit').getFullList();
-      const dateArray = dateFormatChange(respone);
-      const localdateArray = {key: dateArray};
-      setData(dateArray);
+      const respone = await LoadDateData();
+      const fomattedDate = dateFormatChange(respone);
+      dateDataLocalStored(fomattedDate);
+      setDateData(fomattedDate);
       setIsLoading(false);
-      localStorage.setItem('date', JSON.stringify(localdateArray));
     } catch {
       setIsError(true);
     }
@@ -159,9 +162,9 @@ export default function Content() {
   useEffect(() => {
     const storedObject = JSON.parse(localStorage.getItem('date'));
     if (!storedObject) {
-      RecuitData();
+      initialSetup();
     } else {
-      setData(storedObject.key);
+      setDateData(storedObject.key);
     }
   }, []);
 
@@ -177,15 +180,15 @@ export default function Content() {
     recruitDate = (
       <>
         <DateP>
-          📄서류 접수: {data[0]} ~ {data[1]}
+          📄서류 접수: {dateData[0]} ~ {dateData[1]}
         </DateP>
-        <DateP>✅1차 서류 전형 합격자 발표: {data[2]}</DateP>
+        <DateP>✅1차 서류 전형 합격자 발표: {dateData[2]}</DateP>
         <DateP>
           <OneLine>
-            💬2차 면접: {data[3]} ~ {data[4] ? data[4].slice(8) : ''}
+            💬2차 면접: {dateData[3]} ~ {dateData[4] ? dateData[4].slice(8) : ''}
           </OneLine>
           <OneLine $textIndent='4.8rem'>
-            {data[5]} ~ {data[6] ? data[6].slice(8) : ''}
+            {dateData[5]} ~ {dateData[6] ? dateData[6].slice(8) : ''}
           </OneLine>
         </DateP>
       </>
@@ -196,9 +199,9 @@ export default function Content() {
 
   return (
     <>
-      <Contanier subtitle='😀 지원자격' content='산업공학을 주/복수/부전공하는 대학생' />
+      <InfoGroup subtitle='😀 지원자격' content='산업공학을 주/복수/부전공하는 대학생' />
       <ContanierWithContentBox subtitle='💎 지원 방법' content={APPLYMETHOD} />
-      <Contanier subtitle='📚 활동 기간' content='매년 3월 ~ 12월 (10개월)' />
+      <InfoGroup subtitle='📚 활동 기간' content='매년 3월 ~ 12월 (10개월)' />
       <ContanierWithContentBox subtitle='📆 모집 일정' content={recruitDate} />
     </>
   );

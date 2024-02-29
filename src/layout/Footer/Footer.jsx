@@ -4,9 +4,8 @@ import theme from '../../theme';
 const FooterArea = styled.footer`
   display: flex;
   flex-direction: column;
-  margin: 2rem 0 0 0;
   background: #141414;
-  padding: 3% 5%;
+  padding: 2;
 `;
 
 const FooterContent = styled.span`
