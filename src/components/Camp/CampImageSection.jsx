@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Section = styled.section`
-  height: 80vh;
+  height: calc(100vh - 4.5rem);
   display: flex;
   flex-direction: column;
   justify-content: center;

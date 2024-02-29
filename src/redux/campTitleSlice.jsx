@@ -12,7 +12,6 @@ export const campTitleSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const {setCampTitle} = campTitleSlice.actions;
 
 export default campTitleSlice.reducer;
