@@ -1,10 +1,7 @@
 import {useState} from 'react';
 import styled from 'styled-components';
 import theme from '../../theme';
-
-const DepartmentSection = styled.section`
-  margin: 0 7.5%;
-`;
+import ContentWrapper from './UI/ContentWrapper';
 
 const SubTitle = styled.h2`
   font-size: 1.5rem;
@@ -23,6 +20,7 @@ const QuestionBox = styled.div`
   margin: 0 0 2rem 0;
   padding: 1rem 0 0.5rem 0.5rem;
   font-weight: 400;
+  width: 100%;
 `;
 const BoxSize = styled.div`
   width: 19rem;
@@ -33,6 +31,7 @@ const Question = styled.h3`
   letter-spacing: -0.05rem;
   font-weight: 900;
   margin: 0 0 1.25rem 0;
+  width: 100%;
 `;
 
 const Answer = styled.li`
@@ -49,6 +48,8 @@ const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   margin: 0 0 1rem 0;
+  width: 100%;
+  max-width: 500px;
 
   ${props =>
     props.$activelink &&
@@ -151,7 +152,7 @@ export default function Department() {
     setSelectedDepartment(name);
   }
   return (
-    <DepartmentSection>
+    <ContentWrapper>
       <SubTitle>모집 분야</SubTitle>
       <ButtonWrapper $activelink={selectedDepartment}>
         {Object.keys(DEPARTMENTINFO).map(item => (
@@ -162,6 +163,6 @@ export default function Department() {
       </ButtonWrapper>
       <DepartmentBox part={selectedDepartment} p='는 어떤 인재를 원하나요! 🔍' target='explain' />
       <DepartmentBox part={selectedDepartment} p='는 어떤 활동을 하나요! 💪' target='activity' />
-    </DepartmentSection>
+    </ContentWrapper>
   );
 }

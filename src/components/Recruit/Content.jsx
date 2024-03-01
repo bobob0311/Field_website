@@ -2,12 +2,13 @@ import {useEffect, useState} from 'react';
 import styled, {keyframes} from 'styled-components';
 import theme from '../../theme';
 import {LoadDateData} from '../../lib/Apiservice';
+import ContentWrapper from './UI/ContentWrapper';
 
 const P = styled.p`
-  font-size: ${props => (props.$fontSize ? props.$fontSize : '1rem')};
+  font-size: 1rem;
   color: ${props => (props.$color ? theme.colors[props.$color] : theme.colors.black)};
-  font-weight: ${props => (props.$fontWeight ? props.$fontWeight : 300)};
-  text-align: ${props => (props.$textAlign ? props.$textAlign : 'center')};
+  font-weight: 700;
+  text-align: center;
   margin: ${props => (props.$margin ? props.$margin : '1rem 0')};
   word-break: keep-all;
 `;
@@ -15,14 +16,12 @@ const P = styled.p`
 const ContentBox = styled.div`
   background: rgba(255, 255, 255, 0.7);
   border-radius: 0.65rem;
-  padding: 0.5rem;
+  padding: 0.5rem 0;
   display: flex;
   justify-content: center;
+  width: 100%;
 `;
 
-const ContentWrapper = styled.section`
-  margin: 5rem 7.5% 5rem 7.5%;
-`;
 const SubTitle = styled.h2`
   font-size: 1.5rem;
   text-align: center;
@@ -63,7 +62,7 @@ const AddressLink = styled.a`
   margin: 0 0.4rem 0 0;
 `;
 const BoxSize = styled.div`
-  width: 20rem;
+  width: 100%;
 `;
 
 const spin = keyframes`
@@ -91,7 +90,7 @@ function InfoGroup({subtitle, content}) {
   );
 }
 
-function ContanierWithContentBox({subtitle, content}) {
+function InfoGroupWithBox({subtitle, content}) {
   return (
     <ContentWrapper>
       <SubTitle>{subtitle}</SubTitle>
@@ -104,7 +103,7 @@ function ContanierWithContentBox({subtitle, content}) {
 
 const APPLYMETHOD = (
   <>
-    <P $fontWeight='700' $margin='0.5rem 0 0.5rem 0'>
+    <P $margin='0.5rem 0 0.5rem 0'>
       <OneLine>필드 리틀리 혹은 필드 블로그에서 지원서 </OneLine>
       <OneLine>다운로드 후 서류 작성하여 아래 이메일로 제출</OneLine>
     </P>
@@ -168,41 +167,39 @@ export default function Content() {
     }
   }, []);
 
-  let recruitDate;
+  let recruitmentContent;
   if (isError === true) {
-    recruitDate = (
+    recruitmentContent = (
       <>
-        <P $fontWeight='900'>데이터를 불러오지 못했습니다</P>
-        <P $fontWeight='900'>새로고침을 통해 다시 한번 시도해주세요</P>
+        <P>데이터를 불러오지 못했습니다</P>
+        <P>새로고침을 통해 다시 한번 시도해주세요</P>
       </>
     );
   } else if (isLoading === false) {
-    recruitDate = (
+    recruitmentContent = (
       <>
-        <DateP>
-          📄서류 접수: {dateData[0]} ~ {dateData[1]}
-        </DateP>
-        <DateP>✅1차 서류 전형 합격자 발표: {dateData[2]}</DateP>
+        <DateP>{`📄 서류 접수: ${dateData[0]} ~ ${dateData[1]}`}</DateP>
+        <DateP>{`✅ 1차 서류 전형 합격자 발표: ${dateData[2]}`}</DateP>
         <DateP>
           <OneLine>
-            💬2차 면접: {dateData[3]} ~ {dateData[4] ? dateData[4].slice(8) : ''}
+            {`💬 2차 면접: ${dateData[3]} ~ ${dateData[4] ? dateData[4].slice(8) : ''}`}
           </OneLine>
           <OneLine $textIndent='4.8rem'>
-            {dateData[5]} ~ {dateData[6] ? dateData[6].slice(8) : ''}
+            {`${dateData[5]} ~ ${dateData[6] ? dateData[6].slice(8) : ''}`}
           </OneLine>
         </DateP>
       </>
     );
   } else {
-    recruitDate = <LoadingSpin />;
+    recruitmentContent = <LoadingSpin />;
   }
 
   return (
     <>
       <InfoGroup subtitle='😀 지원자격' content='산업공학을 주/복수/부전공하는 대학생' />
-      <ContanierWithContentBox subtitle='💎 지원 방법' content={APPLYMETHOD} />
+      <InfoGroupWithBox subtitle='💎 지원 방법' content={APPLYMETHOD} />
       <InfoGroup subtitle='📚 활동 기간' content='매년 3월 ~ 12월 (10개월)' />
-      <ContanierWithContentBox subtitle='📆 모집 일정' content={recruitDate} />
+      <InfoGroupWithBox subtitle='📆 모집 일정' content={recruitmentContent} />
     </>
   );
 }
