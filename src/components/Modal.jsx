@@ -76,7 +76,7 @@ function Modal({titleData, showModal, setShowModal, name = '', setModalItem}) {
               key={item}
               onClick={() => {
                 setShowModal(false);
-                dispatch(setModalItem(item)); // 클릭된 항목의 값을 dispatch
+                dispatch(setModalItem(item));
               }}
             >
               {item} {name}

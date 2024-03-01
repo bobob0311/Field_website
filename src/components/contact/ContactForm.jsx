@@ -39,6 +39,7 @@ const TypeSelect = styled.select`
   appearance: none;
   border: 0.13rem solid ${theme.colors.black};
   font-size: 1rem;
+  font-family: 'SUIT-Regular';
   font-weight: 900;
   background: url('Expand_down.png') no-repeat 100% 10%;
   background-size: 2rem 2rem;
@@ -70,6 +71,8 @@ const TextArea = styled.textarea`
   box-sizing: border-box;
   border-radius: 0.7rem;
   border: 0.15rem solid ${theme.colors.black};
+  font-family: 'SUIT-Regular';
+  font-size: 1rem;
   background: none;
   font-weight: 700;
 `;
@@ -108,6 +111,9 @@ const VerticalCenter = styled.div`
 
 const Option = styled.option`
   appearance: none;
+  font-family: 'SUIT-Regular';
+  font-weight: 900;
+  font-size: 1rem;
 `;
 
 const Notice = styled.span`

@@ -6,13 +6,14 @@ import styled from 'styled-components'; // styled-components를 불러옵니다.
 const TextGenerateContainer = styled.div`
   font-size: 1.7rem; // 폰트 크기를 설정합니다.
   font-weight: bold; // 폰트 굵기를 설정합니다.
-  margin: 0 10%; // 좌우 여백을 설정합니다.
   text-align: center; // 텍스트를 가운데 정렬합니다.
   line-height: 1.5;
+  font-family: 'Goblin One', cursive; // 폰트를 설정합니다.
+  margin: 5rem 0 10rem 0;
 `;
 
 // 텍스트 애니메이션 예시를 담당하는 함수형 컴포넌트를 정의합니다.
-function AnimationExample({text}) {
+function TextGenerator({text}) {
   const animationControl = useAnimation(); // 애니메이션을 제어하는 useAnimation 훅을 사용합니다.
   const wordsArray = text.split(' '); // 주어진 텍스트를 공백을 기준으로 분할하여 단어 배열로 만듭니다.
 
@@ -63,4 +64,4 @@ function AnimationExample({text}) {
   );
 }
 
-export default AnimationExample; // AnimationExample 컴포넌트를 내보냅니다.
+export default TextGenerator; // AnimationExample 컴포넌트를 내보냅니다.

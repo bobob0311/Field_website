@@ -7,7 +7,7 @@ const PageSection = styled.section`
 export default function NotFound() {
   return (
     <PageSection>
-      <div>현재 페이지는 존재하지 않는 페이지입니다.</div>
+      <p>현재 페이지는 존재하지 않는 페이지입니다.</p>
     </PageSection>
   );
 }

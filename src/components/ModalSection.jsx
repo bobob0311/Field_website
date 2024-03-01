@@ -11,7 +11,7 @@ const IconWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 0.25rem;
-  margin: ${props => (props.margin ? props.margin : '2rem 0 1rem 0 ')};
+  margin: ${props => (props.$margin ? props.$margin : '2rem 0 1rem 0 ')};
 `;
 
 const IconImg = styled.img`
@@ -20,9 +20,9 @@ const IconImg = styled.img`
 `;
 
 const H2 = styled.h2`
-  font-size: ${props => (props.size ? props.size : '1.625rem')};
-  color: ${props => (props.color ? theme.colors[props.color] : 'white')};
-  font-family: ${props => (props.font ? props.font : '')};
+  font-size: ${props => (props.$size ? props.$size : '1.625rem')};
+  color: ${props => (props.$color ? theme.colors[props.$color] : 'white')};
+  font-family: ${props => (props.$font ? props.$font : '')};
   font-weight: 900;
 `;
 
@@ -38,11 +38,11 @@ const ModalBackground = styled.section`
   z-index: 1;
 `;
 
-function ModalSection({title, color, font, fontSize, timeDatalst, margin, name = ''}) {
+function ModalSection({title, color, font, fontSize, timeDatalst, $margin, name = ''}) {
   const [showModal, setShowModal] = useState(false);
   const dispatchAction = title === '역대 FIELD CAMP' ? setCampTitle : setMonthTitle;
   return (
-    <IconWrapper margin={margin}>
+    <IconWrapper $margin={$margin}>
       <IconImg
         src={modalIcon}
         alt='모달창 아이콘'
@@ -51,9 +51,9 @@ function ModalSection({title, color, font, fontSize, timeDatalst, margin, name =
         }}
       />
       <H2
-        font={font}
-        color={color}
-        size={fontSize}
+        $font={font}
+        $color={color}
+        $size={fontSize}
         onClick={() => {
           setShowModal(true);
         }}
