@@ -30,7 +30,8 @@ const SubTitle = styled.h2`
   font-weight: 800;
 `;
 
-const OneLine = styled.div`
+const OneLine = styled.span`
+  display: block;
   margin: 0 0 0 0.2rem;
   text-indent: ${props => (props.$textIndent ? props.$textIndent : '')};
 `;

@@ -12,17 +12,14 @@ const SubTitle = styled.h2`
 
 const QuestionBox = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   background: rgba(255, 255, 255, 0.7);
   border-radius: 0.65rem;
   color: ${theme.colors.black};
   margin: 0 0 2rem 0;
-  padding: 1rem 0 0.5rem 0.5rem;
   font-weight: 400;
   width: 100%;
-`;
-const BoxSize = styled.div`
-  width: 19rem;
 `;
 
 const Question = styled.h3`
@@ -31,6 +28,7 @@ const Question = styled.h3`
   font-weight: 900;
   margin: 0 0 1.25rem 0;
   width: 100%;
+  padding: 1rem 0 0 7.5%;
 `;
 
 const Answer = styled.li`
@@ -40,6 +38,7 @@ const Answer = styled.li`
   word-break: keep-all;
   letter-spacing: -0.05rem;
   text-indent: -0.2rem;
+  padding: 0 0 0 7.5%;
 `;
 
 const ButtonWrapper = styled.div`
@@ -137,16 +136,14 @@ const DEPARTMENTINFO = {
 function DepartmentBox({part, p, target}) {
   return (
     <QuestionBox>
-      <BoxSize>
-        <Question>{`${DEPARTMENTINFO[part].department}${p}`}</Question>
-        <ul>
-          {DEPARTMENTINFO[part][target].map((item, index) => (
-            <Answer key={index}>
-              <Number>{`${index + 1}.`}</Number> {item}
-            </Answer>
-          ))}
-        </ul>
-      </BoxSize>
+      <Question>{`${DEPARTMENTINFO[part].department}${p}`}</Question>
+      <ul>
+        {DEPARTMENTINFO[part][target].map((item, index) => (
+          <Answer key={index}>
+            <Number>{`${index + 1}.`}</Number> {item}
+          </Answer>
+        ))}
+      </ul>
     </QuestionBox>
   );
 }
