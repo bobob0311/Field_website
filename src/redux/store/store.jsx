@@ -1,8 +1,10 @@
 import {configureStore} from '@reduxjs/toolkit';
-import campYearReducer from '../campYearSlice';
+import campTitleReducer from '../campTitleSlice';
+import monthTitleReducer from '../monthFieldSlice';
 
 export const store = configureStore({
   reducer: {
-    campYear: campYearReducer,
+    campTitle: campTitleReducer,
+    monthTitle: monthTitleReducer,
   },
 });

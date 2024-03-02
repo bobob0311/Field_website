@@ -8,18 +8,15 @@ const H2 = styled.h2`
   text-align: center;
 `;
 
-const Image = styled.img`
-  margin: ${props => props.margin || '0'};
-  width: ${props => props.width || ''};
-  border-radius: ${props => props.radius || ''};
+const NanumH2 = styled(H2)`
+  font-family: 'Nanum Myeongjo', serif;
+  font-weight: 700;
 `;
 
 const Card = styled.article`
   display: flex;
   flex-direction: column;
-  border: 2px solid white;
   padding: 0 1rem;
-  border-radius: 1rem;
   margin: ${props => props.margin || '0'};
 `;
 
@@ -29,6 +26,8 @@ const Dt = styled.dt`
 
 const Dd = styled.dd`
   font-size: 1rem;
+  word-break: keep-all;
+  line-height: 1.2;
 `;
 
 const Dl = styled.dl`
@@ -78,11 +77,13 @@ const ActivityUl = styled.ul`
   gap: 0.5rem;
   border: 2px solid white;
   border-radius: 1rem;
-  padding: 1rem 2rem;
+  padding: 1rem 0.3rem 1rem 1.3rem;
+  text-indent: -0.8rem;
+  word-break: keep-all;
 `;
 
 const ActivityLi = styled.li`
-  font-size: 1.25rem;
+  font-size: 1rem;
 `;
 
 const Button = styled.button`
@@ -91,6 +92,7 @@ const Button = styled.button`
   cursor: pointer;
   width: 25%;
   border: none;
+  padding: 0.375rem 0;
   border-radius: 1rem;
   font-size: 0.8rem;
 
@@ -136,9 +138,7 @@ function DepartmentIntro() {
 
   return (
     <>
-      <H2 margin='2rem 0'>부서소개</H2>
-      {/* 통신 */}
-      <Image width='100%' src='./../../public/fieldIntro1.png' alt='' />
+      <NanumH2 margin='2rem 0'>부서소개</NanumH2>
       <ButtonWrapper>
         {category.map(item => (
           <Button
@@ -151,7 +151,7 @@ function DepartmentIntro() {
         ))}
       </ButtonWrapper>
       <CardContainer visible={selectCategory === '기획부'}>
-        <Card margin='2rem 0'>
+        <Card margin='1rem 0'>
           <Dl>
             <Dt>기획부</Dt>
             <Dd>FIELD 인적, 학술적 교류를 활성화하기 위한 컨텐츠를 기획하고 진행, 총괄하는 부서</Dd>
@@ -180,7 +180,7 @@ function DepartmentIntro() {
             <span>Planning Department</span>
           </FlexCenter>
         </H3>
-        <ActivityUl margin='2rem 0'>
+        <ActivityUl margin='1rem 0'>
           <ActivityLi>- FIELD 유튜브 콘텐츠 기획 및 촬영</ActivityLi>
           <ActivityLi>- FIELD CAMP 레크레이션</ActivityLi>
           <ActivityLi>- 산공인의 밤 기획 및 총괄</ActivityLi>
@@ -188,7 +188,7 @@ function DepartmentIntro() {
         </ActivityUl>
       </CardContainer>
       <CardContainer visible={selectCategory === '대외협력부'}>
-        <Card margin='2rem 0'>
+        <Card margin='1rem 0'>
           <Dl>
             <Dt>대외협력부</Dt>
             <Dd>
@@ -228,9 +228,9 @@ function DepartmentIntro() {
         </ActivityUl>
       </CardContainer>
       <CardContainer visible={selectCategory === '컴페티션부'}>
-        <Card margin='2rem 0'>
+        <Card margin='1rem 0'>
           <Dl>
-            <Dt>대외협력부</Dt>
+            <Dt>컴페티션부</Dt>
             <Dd>
               FIELD 내 진행하는 학술교류에 관한 업무와 FIELD CAMP 컴페티션에 대한 자료와 평가기준을
               만드는 부서
@@ -269,7 +269,7 @@ function DepartmentIntro() {
         </ActivityUl>
       </CardContainer>
       <CardContainer visible={selectCategory === '홍보부'}>
-        <Card margin='2rem 0'>
+        <Card margin='1rem 0'>
           <Dl>
             <Dt>홍보부</Dt>
             <Dd>FIELD와 산업공학을 알리는 전반적인 홍보물을 기획하고 제작하는 부서</Dd>

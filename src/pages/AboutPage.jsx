@@ -1,12 +1,9 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import DepartmentIntro from '../components/About/DepartmentIntro';
+import {ProfileApi} from '../lib/Apiservice';
 import theme from '../theme';
-
-const Header = styled.header`
-  height: 10vh;
-  background-color: gray;
-`;
+import TimeLine from '../components/TimeLine';
 
 const AccessibilityHidden = styled.h1`
   position: absolute;
@@ -24,13 +21,24 @@ const TitleContainer = styled.section`
   display: flex;
   flex-direction: column;
   position: relative;
-  margin: 0 10%;
+  margin: 0 7.5%;
 `;
 
 const H2 = styled.h2`
-  font-size: 1.875rem;
+  font-size: 1.7rem;
   margin: ${props => props.margin || '0'};
   text-align: center;
+`;
+
+const NanumH2 = styled(H2)`
+  font-family: 'Nanum Myeongjo', serif;
+  line-height: 1.3;
+  word-break: keep-all;
+`;
+
+const GoblinH2 = styled(H2)`
+  font-family: 'Goblin One';
+  font-size: 1.875rem;
 `;
 
 const FlexCenter = styled.div`
@@ -73,6 +81,11 @@ const P = styled.p`
   font-size: ${props => (props.size ? props.size : '1rem')};
   display: flex;
   flex-direction: column;
+  font-weight: ${props => (props.weight ? props.weight : '')};
+`;
+
+const GoblinP = styled(P)`
+  font-family: 'Goblin One';
 `;
 
 const FirstAlphabet = styled.span`
@@ -83,10 +96,11 @@ const Image = styled.img`
   margin: ${props => props.margin || '0'};
   width: ${props => props.width || ''};
   border-radius: ${props => props.radius || ''};
+  height: ${props => props.height || ''};
 `;
 
 const MainSection = styled.section`
-  margin: 0 10%;
+  margin: 7.5%;
   display: flex;
   flex-direction: column;
 `;
@@ -104,13 +118,48 @@ const Li = styled.li`
 `;
 
 function AboutPage() {
+  const [profileData, setProfileData] = useState([]);
+  const imageUrl = `${import.meta.env.VITE_API_URL}/api/files/i4n7e8c0u8882do/`;
+  const getProfile = async () => {
+    try {
+      const localData = localStorage.getItem('profileData');
+      if (localData) {
+        setProfileData(JSON.parse(localData));
+      } else {
+        const response = await ProfileApi();
+        setProfileData(response);
+        localStorage.setItem('profileData', JSON.stringify(response));
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getProfile();
+  }, []);
+
+  const leader = profileData.slice(0, 2);
+  const depart = profileData.slice(2, 6);
+
+  const data = {
+    2008: [{title: 'FIELD의 시작', get: '서울대학교, KAIST, POSTECH에서 학술 및 인적 교류 시작'}],
+    2009: [{title: '첫 FIELD CAMP 개최', get: '고려대학교, 연세대학교 참여 시작'}],
+    2016: [
+      {title: '대한산업공학회 산하공식단체 인준', get: '전국 대학교 학생 대상 캠프 주최 및 참여'},
+    ],
+    2017: [{title: '전국단위 활동', get: '전국 단위 FIELD 활동'}],
+    2018: [{title: '고교방문 설명회 진행', get: '고등학생들을 대상으로 한 멘토링 진행'}],
+    2022: [{title: 'FIELD 유튜브 개설', get: '산업공학 관련 영상 제작'}],
+    2023: [{title: '코로나 이후 FIELD', get: '2년 만에 성황리에 개최된 FIELD CAMP'}],
+  };
+
   return (
     <>
-      <Header />
       <AccessibilityHidden>어바웃 필드</AccessibilityHidden>
       <TitleContainer>
-        <H2 margin='2rem 0'>전국 대학생 산업공학도 모임</H2>
-        <P size='2.25rem'>
+        <NanumH2 margin='2rem 0'>전국 대학생 산업공학도 모임</NanumH2>
+        <GoblinP size='2.25rem' line='1.5'>
           <span>
             <FirstAlphabet color='red'>F</FirstAlphabet>uture
           </span>
@@ -121,96 +170,66 @@ function AboutPage() {
             <FirstAlphabet color='yellow'>E</FirstAlphabet>ngineering
           </span>
           <span>
-            <FirstAlphabet color='blue'>L</FirstAlphabet>eaders
+            <FirstAlphabet color='blue'>L</FirstAlphabet>eaders&
           </span>
           <span>
             <FirstAlphabet color='blue'>D</FirstAlphabet>reamers
           </span>
-        </P>
-        <P line='1.5' margin='2rem 0 0 0'>
+        </GoblinP>
+        <P line='1.5' margin='2rem 0 0 0' size='1rem'>
           FIELD란, ‘Future Industrial Engineering Leaders and Dreamers’ 의 약자로, 미래의 핵심
           리더들이 될 산업 공학도들이 모여 서로의 꿈과 비전, 생각 등을 공유할 수 있는 교류의 장을
           만든다는 목표 아래 모인 &apos;전국 대학생 산업공학도 동아리&apos; 입니다.
         </P>
         <FlexCenter>
           <Figure position='absolute'>
-            <Icon src='/scrollDown.png' alt='아래로 스크롤하세요' />
+            <Icon src='/scrollDown.png' />
             <IconFigcaption>아래로 스크롤하세요</IconFigcaption>
           </Figure>
         </FlexCenter>
       </TitleContainer>
       <MainSection>
-        <H2>Road of FIELD</H2>
+        <GoblinH2>Road of FIELD</GoblinH2>
+        <TimeLine data={data} height='100' />
       </MainSection>
       <MainSection>
-        <H2>16기 단장단과 함께 여러분의 꿈을 실현하세요.</H2>
+        <NanumH2>16기 단장단과 함께 여러분의 꿈을 실현하세요.</NanumH2>
         <Ul margin='2rem 0'>
-          <li>
-            <Figure>
-              <Image src='/profile1.png' alt='총기획단장' />
-              <Figcaption>
-                <P>16기 총기획단장</P>
-                <P>이민재</P>
-              </Figcaption>
-            </Figure>
-            <P>
-              안녕하세요! 16기 총기획단장 이민재입니다! FIELD가 앞으로도 지속적으로 전국
-              산업공학도들의 인적, 학술적 교류의 장이 될 수 있도록 열심히, 최선을 다해
-              활동하겠습니다. FIELD에 많은 관심 부탁드립니다.
-            </P>
-          </li>
-          <li>
-            <Figure>
-              <Image src='/profile1.png' alt='총기획단장' />
-              <Figcaption>
-                <P>16기 총기획단장</P>
-                <P>이민재</P>
-              </Figcaption>
-            </Figure>
-            <P>
-              안녕하세요! 16기 총기획단장 이민재입니다! FIELD가 앞으로도 지속적으로 전국
-              산업공학도들의 인적, 학술적 교류의 장이 될 수 있도록 열심히, 최선을 다해
-              활동하겠습니다. FIELD에 많은 관심 부탁드립니다.
-            </P>
-          </li>
+          {leader.map(item => (
+            <li>
+              <Figure>
+                <Image
+                  src={`${imageUrl}${item.id}/${item.photo}`}
+                  width='120px'
+                  height='150px'
+                  radius='50%'
+                />
+                <Figcaption margin='1rem 0'>
+                  <P weight='900'>{item.department}</P>
+                  <P weight='900'>{item.name}</P>
+                </Figcaption>
+              </Figure>
+              <P line='1.5'>{item.intro}</P>
+            </li>
+          ))}
         </Ul>
         <Ul>
-          <Li>
-            <Figure>
-              <Image src='/profile1.png' alt='총기획단장' />
-              <Figcaption>
-                <P>16기 총기획단장</P>
-                <P>이민재</P>
-              </Figcaption>
-            </Figure>
-          </Li>
-          <Li>
-            <Figure>
-              <Image src='/profile1.png' alt='총기획단장' />
-              <Figcaption>
-                <P>16기 총기획단장</P>
-                <P>이민재</P>
-              </Figcaption>
-            </Figure>
-          </Li>
-          <Li>
-            <Figure>
-              <Image src='/profile1.png' alt='총기획단장' />
-              <Figcaption>
-                <P>16기 총기획단장</P>
-                <P>이민재</P>
-              </Figcaption>
-            </Figure>
-          </Li>
-          <Li>
-            <Figure>
-              <Image src='/profile1.png' alt='총기획단장' />
-              <Figcaption>
-                <P>16기 총기획단장</P>
-                <P>이민재</P>
-              </Figcaption>
-            </Figure>
-          </Li>
+          {depart.map(item => (
+            <Li>
+              <Figure>
+                <Image
+                  src={`${imageUrl}${item.id}/${item.photo}`}
+                  width='120px'
+                  height='150px'
+                  radius='50%'
+                />
+                <Figcaption margin='1rem 0'>
+                  <P weight='900'>{item.department}</P>
+                  <P weight='900'>{item.name}</P>
+                </Figcaption>
+              </Figure>
+            </Li>
+          ))}
         </Ul>
       </MainSection>
       <MainSection>

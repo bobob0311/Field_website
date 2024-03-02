@@ -7,11 +7,12 @@ type=button
   background: ${theme.colors.white};
   color: ${theme.colors.black};
   width: 8rem;
-  padding: .625rem;
+  padding: 0.75rem;
   margin-bottom: 1.25rem;
   border: none;
   border-radius: 5rem;
-  font-weight: bold;
+  font-family: SUIT;
+  font-weight: 800;
   font-size: .9375rem;
   word-break: keep-all;
   box-shadow: 0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.3);

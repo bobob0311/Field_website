@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Section = styled.section`
-  height: 80vh;
+  height: calc(100vh - 4.5rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,34 +16,40 @@ const Section = styled.section`
 `;
 
 const H2 = styled.h2`
+  position: relative;
+  bottom: 8rem;
   font-size: 1.5625rem;
   color: white;
   text-align: center;
-  padding: ${props => (props.padding ? props.padding : '')};
+  padding: 0 7.5%;
+  font-family: 'Goblin One';
   font-weight: bold;
 `;
 
 const P = styled.p`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   font-size: 1.5rem;
   color: white;
   text-align: center;
-  padding: ${props => (props.padding ? props.padding : '')};
+  padding: 0 10% 1rem 10%;
   letter-spacing: -0.1em;
   font-weight: bold;
 `;
 
-const Div = styled.div`
-  margin: ${props => (props.margin ? props.margin : '')};
+const Span = styled.span`
+  margin: 0 0 1rem 0;
 `;
 
 function CampImageSection({img, title, firstLine = '', secondLine = '', thirdLine = ''}) {
   return (
     <Section src={img}>
-      <H2 padding='0 10% 2rem 10%'>{title}</H2>
-      <P padding='0 10% 1rem 10%'>
-        <Div margin='0 0 1rem 0'>{firstLine}</Div>
-        <Div margin='0 0 1rem 0'>{secondLine}</Div>
-        <Div margin='0 0 1rem 0'>{thirdLine}</Div>
+      <H2>{title}</H2>
+      <P>
+        <Span>{firstLine}</Span>
+        <Span>{secondLine}</Span>
+        <Span>{thirdLine}</Span>
       </P>
     </Section>
   );
