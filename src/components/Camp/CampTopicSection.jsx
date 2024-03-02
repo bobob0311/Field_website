@@ -6,6 +6,7 @@ import theme from '../../theme';
 import Button from '../Button';
 import {CampApi} from '../../lib/Apiservice';
 import {setCampTitle} from '../../redux/campTitleSlice';
+import Dropdown from '../Dropdown';
 
 const Section = styled.section`
   display: flex;
@@ -107,6 +108,7 @@ function CampTopicSection() {
 
   return (
     <Section>
+      <Dropdown title='역대 FIELD CAMP' titleArr={campDataYear} />
       <ModalSection
         title='역대 FIELD CAMP'
         font='Nanum Myeongjo'

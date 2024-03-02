@@ -54,8 +54,8 @@ function NewsPage() {
     setSelectCategory(item);
     navigate(`/news?category=${item}`);
   };
-  const monthLocalData = JSON.parse(localStorage.getItem('monthFieldTitle'));
 
+  console.log(urlCategory);
   const fetchNewsData = async category => {
     let response = JSON.parse(localStorage.getItem(category));
     if (!response) {
@@ -84,18 +84,23 @@ function NewsPage() {
   };
 
   const getDataMonthField = async () => {
+    setLoading(true);
+    const monthLocalData = JSON.parse(localStorage.getItem('monthFieldTitle'));
     let response;
     try {
-      if (monthLocalData && monthFieldTitle === monthLocalData.photo) {
-        response = JSON.parse(monthLocalData);
+      if (monthLocalData && monthFieldTitle === monthLocalData[0].title) {
+        response = monthLocalData;
+        console.log('asd');
       } else {
         response = await NewsMonthApi(monthFieldTitle);
         localStorage.setItem('monthFieldTitle', JSON.stringify(response));
+        console.log('zxc');
       }
       setShowedMonthField(response[0]);
-      setLoading(false);
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false); // 데이터 로딩 완료
     }
   };
 
@@ -107,7 +112,7 @@ function NewsPage() {
     if (selectCategory === '월간필드' && monthFieldTitle !== '') {
       getDataMonthField(monthFieldTitle);
     }
-  }, [monthFieldTitle]);
+  }, [monthFieldTitle, selectCategory]);
 
   let content;
 
