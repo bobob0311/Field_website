@@ -112,6 +112,7 @@ function CampTopicSection() {
         font='Nanum Myeongjo'
         timeDatalst={campDataYear}
         name='FIELD CAMP'
+        $margin='4rem 0 1rem 0'
       />
       <H3>{campYear} FIELD CAMP</H3>
       {showedCampData.map((camp, index) => (

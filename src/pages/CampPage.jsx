@@ -16,18 +16,18 @@ function CampPage() {
       <CampImageSection
         title='ON/OFF blended'
         img={Camp1}
-        firstLine='본 캠프는 2박 3일을 포함하여'
+        firstLine='본 캠프는 2박 3일 오프라인 캠프 전'
         secondLine='사전 데모데이를 통해 팀원들과'
-        thirdLine='친해지세요.'
+        thirdLine='교류할 수 있는 기회를 제공합니다'
       />
       <CampImageSection
         title='Various Program'
         img={Camp2}
-        firstLine='다양한 인적 교류 활성화'
+        firstLine='다양한 인적, 학술적 교류 활성화'
         secondLine='프로그램을 진행합니다.'
       />
       <CampImageSection
-        title='Connection with Professor'
+        title='Connection with Specialist'
         img={Camp3}
         firstLine='산업공학과 출신 기업인,'
         secondLine='교수님과 소통하세요'

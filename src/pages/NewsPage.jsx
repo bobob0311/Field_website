@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import styled from 'styled-components';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import 'swiper/swiper-bundle.css';
+import {useLocation, useNavigate} from 'react-router-dom';
 import CategoryButton from '../components/CategoryButton';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ModalSection from '../components/ModalSection';
@@ -37,16 +38,21 @@ const ButtonWrapper = styled.div`
 `;
 
 function NewsPage() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const urlCategory = searchParams.get('category') || '월간필드';
   const monthFieldTitle = useSelector(state => state.monthTitle.value);
   const [loading, setLoading] = useState(true);
   const [showedMonthField, setShowedMonthField] = useState({});
-  const [selectCategory, setSelectCategory] = useState('월간필드');
+  const [selectCategory, setSelectCategory] = useState(urlCategory);
   const categoryArr = ['월간필드', '취업/진로', 'FIELD', '공모전'];
   const [newsData, setNewsData] = useState([]);
   const imageUrl = `${import.meta.env.VITE_API_URL}/api/files/damzbyg116zhar4/`;
   const handleButtonClick = item => {
     setSelectCategory(item);
+    navigate(`/news?category=${item}`);
   };
   const monthLocalData = JSON.parse(localStorage.getItem('monthFieldTitle'));
 
@@ -117,7 +123,13 @@ function NewsPage() {
           $margin='3rem 0'
         />
         <SwiperContainer>
-          <Swiper slidesPerView={1.2} spaceBetween={20} centeredSlides='true'>
+          <Swiper
+            slidesPerView={1.2}
+            spaceBetween={20}
+            initialSlide={0}
+            centeredSlides='true'
+            key={monthFieldTitle}
+          >
             {showedMonthField.photo.map(item => (
               <SwiperSlide key={item}>
                 <Image src={`${imageUrl}${showedMonthField.id}/${item}`} alt={showedMonthField} />

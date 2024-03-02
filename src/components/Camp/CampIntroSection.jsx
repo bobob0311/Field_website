@@ -10,7 +10,7 @@ const Section = styled.section`
 
 const H2 = styled.h2`
   font-size: 1.625rem;
-  margin: ${props => (props.margin ? props.margin : '2.5rem 0 0 0')};
+  margin: 4rem 0 0 0;
   text-align: center;
   font-family: Nanum Myeongjo;
   font-weight: 800;

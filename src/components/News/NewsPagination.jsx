@@ -1,19 +1,8 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import {Pagination} from '@mui/material';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import LoadingSpinner from '../LoadingSpinner';
-
-const AccessibilityHidden = styled.h2`
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-`;
 
 const PageWrapper = styled.div`
   display: flex;
@@ -45,12 +34,15 @@ const CustomPagination = styled(Pagination)`
 `;
 
 function NewsPagination({newsData, category}) {
+  const navigate = useNavigate();
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
-  const handlePageChange = page => {
-    setCurrentPage(page);
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+    const searchParams = new URLSearchParams(window.location.search);
+    searchParams.set('page', value);
+    navigate(`?${searchParams.toString()}`);
   };
-
   const currentItemPerPage = newsData.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage,
