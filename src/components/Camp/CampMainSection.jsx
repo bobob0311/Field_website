@@ -46,12 +46,11 @@ const Figure = styled.figure`
 const Img = styled.img`
   width: 1.875rem;
   height: 1.875rem;
-  object-fit: cover;
-  align-self: ${props => (props.alignSelf ? props.alignSelf : '')};
+  order: 2;
 `;
 
 const Figcaption = styled.figcaption`
-  color: ${props => (props.color ? theme.colors[props.color] : theme.colors.white)};
+  font-size: 0.625rem;
 `;
 
 const ButtonWapper = styled.div`
