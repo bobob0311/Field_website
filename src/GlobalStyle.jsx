@@ -11,10 +11,6 @@ html{
     @media (min-width: 768px) {
   font-size: 24px;
   }
-
-  @media (min-width: 1024px) {
-    font-size: 32px;
-  }
 },
 body
 {
