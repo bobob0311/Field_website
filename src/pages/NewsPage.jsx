@@ -102,10 +102,10 @@ function NewsPage() {
   useEffect(() => {
     getDataNews();
   }, [selectCategory]);
+
   useEffect(() => {
     const urlCategory = new URLSearchParams(location.search).get('category') || '월간필드';
-    setSelectCategory(urlCategory); // URL에서 가져온 카테고리로 상태 업데이트
-    // 필요한 경우, 해당 카테고리에 대한 데이터를 불러오는 로직 추가
+    setSelectCategory(urlCategory);
   }, [location.search]);
 
   useEffect(() => {
