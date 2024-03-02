@@ -41,12 +41,10 @@ function NewsPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const urlCategory = searchParams.get('category') || '월간필드';
   const monthFieldTitle = useSelector(state => state.monthTitle.value);
   const [loading, setLoading] = useState(true);
   const [showedMonthField, setShowedMonthField] = useState({});
-  const [selectCategory, setSelectCategory] = useState(urlCategory);
+  const [selectCategory, setSelectCategory] = useState('월간필드');
   const categoryArr = ['월간필드', '취업/진로', 'FIELD', '공모전'];
   const [newsData, setNewsData] = useState([]);
   const imageUrl = `${import.meta.env.VITE_API_URL}/api/files/damzbyg116zhar4/`;
@@ -55,7 +53,6 @@ function NewsPage() {
     navigate(`/news?category=${item}`);
   };
 
-  console.log(urlCategory);
   const fetchNewsData = async category => {
     let response = JSON.parse(localStorage.getItem(category));
     if (!response) {
@@ -90,11 +87,9 @@ function NewsPage() {
     try {
       if (monthLocalData && monthFieldTitle === monthLocalData[0].title) {
         response = monthLocalData;
-        console.log('asd');
       } else {
         response = await NewsMonthApi(monthFieldTitle);
         localStorage.setItem('monthFieldTitle', JSON.stringify(response));
-        console.log('zxc');
       }
       setShowedMonthField(response[0]);
     } catch (err) {
@@ -107,6 +102,11 @@ function NewsPage() {
   useEffect(() => {
     getDataNews();
   }, [selectCategory]);
+  useEffect(() => {
+    const urlCategory = new URLSearchParams(location.search).get('category') || '월간필드';
+    setSelectCategory(urlCategory); // URL에서 가져온 카테고리로 상태 업데이트
+    // 필요한 경우, 해당 카테고리에 대한 데이터를 불러오는 로직 추가
+  }, [location.search]);
 
   useEffect(() => {
     if (selectCategory === '월간필드' && monthFieldTitle !== '') {
