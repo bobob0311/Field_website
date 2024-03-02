@@ -30,9 +30,8 @@ const SubTitle = styled.h2`
   font-weight: 800;
 `;
 
-const OneLine = styled.span`
-  display: block;
-  margin: 0 0 0.2rem 0;
+const OneLine = styled.div`
+  margin: 0 0 0 0.2rem;
   text-indent: ${props => (props.$textIndent ? props.$textIndent : '')};
 `;
 
@@ -52,6 +51,8 @@ const DateP = styled(P)`
   text-align: left;
   font-weight: 700;
   letter-spacing: -1.5px;
+  display: flex;
+  padding: 0 0 0 0.2rem;
 `;
 
 const AddressLink = styled.a`
@@ -62,7 +63,7 @@ const AddressLink = styled.a`
   margin: 0 0.4rem 0 0;
 `;
 const BoxSize = styled.div`
-  width: 100%;
+  margin: 0 auto;
 `;
 
 const spin = keyframes`
@@ -180,14 +181,15 @@ export default function Content() {
       <>
         <DateP>{`📄 서류 접수: ${dateData[0]} ~ ${dateData[1]}`}</DateP>
         <DateP>{`✅ 1차 서류 전형 합격자 발표: ${dateData[2]}`}</DateP>
+
         <DateP>
-          <OneLine>
-            {`💬 2차 면접: ${dateData[3]} ~ ${dateData[4] ? dateData[4].slice(8) : ''}`}
-          </OneLine>
-          <OneLine $textIndent='4.8rem'>
-            {`${dateData[5]} ~ ${dateData[6] ? dateData[6].slice(8) : ''}`}
-          </OneLine>
+          💬 2차 면접:
+          <span>
+            <OneLine>{` ${dateData[3]} ~ ${dateData[4] ? dateData[4].slice(8) : ''}`}</OneLine>
+            <OneLine>{`${dateData[5]} ~ ${dateData[6] ? dateData[6].slice(8) : ''}`}</OneLine>
+          </span>
         </DateP>
+        <DateP>{`✅ 최종 합격자 발표: ${dateData[7]}`}</DateP>
       </>
     );
   } else {

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const ContentWrapper = styled.section`
-  margin: 3rem 0;
+  margin: ${props => (props.$margin ? props.$margin : '3rem 0')};
   display: flex;
   flex-direction: column;
   align-items: center;

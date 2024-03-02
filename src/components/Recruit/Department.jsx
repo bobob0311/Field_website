@@ -6,7 +6,6 @@ import ContentWrapper from './UI/ContentWrapper';
 const SubTitle = styled.h2`
   font-size: 1.5rem;
   text-align: center;
-  padding: 0 1rem 0 0;
   margin: 0 0 1rem 0;
   font-weight: 800;
 `;
@@ -39,9 +38,8 @@ const Answer = styled.li`
   font-weight: 700;
   margin: 0 0 1rem 0.25rem;
   word-break: keep-all;
-  text-indent: -1rem;
   letter-spacing: -0.05rem;
-  padding: 0 0 0 0.8rem;
+  text-indent: -0.2rem;
 `;
 
 const ButtonWrapper = styled.div`
@@ -70,6 +68,11 @@ const DepartmentButton = styled.button`
   background: ${theme.colors.black};
   color: ${theme.colors.white};
   font-weight: 600;
+`;
+
+const Number = styled.span`
+  display: inline-block;
+  width: 0.7rem;
 `;
 
 const DEPARTMENTINFO = {
@@ -138,7 +141,9 @@ function DepartmentBox({part, p, target}) {
         <Question>{`${DEPARTMENTINFO[part].department}${p}`}</Question>
         <ul>
           {DEPARTMENTINFO[part][target].map((item, index) => (
-            <Answer key={index}>{`${index + 1}. ${item}`}</Answer>
+            <Answer key={index}>
+              <Number>{`${index + 1}.`}</Number> {item}
+            </Answer>
           ))}
         </ul>
       </BoxSize>
@@ -152,7 +157,7 @@ export default function Department() {
     setSelectedDepartment(name);
   }
   return (
-    <ContentWrapper>
+    <ContentWrapper $margin='5rem 0'>
       <SubTitle>모집 분야</SubTitle>
       <ButtonWrapper $activelink={selectedDepartment}>
         {Object.keys(DEPARTMENTINFO).map(item => (
