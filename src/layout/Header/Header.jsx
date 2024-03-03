@@ -15,7 +15,7 @@ const MainHeaderWrapper = styled.div`
   display: flex;
   background: #141414;
   align-items: center;
-  height: 4.5rem;
+  height: 58px;
   padding: 0 7.5%;
   justify-content: space-between;
   z-index: 10;
@@ -31,12 +31,12 @@ const HomeFigure = styled.figure`
   align-items: center;
 `;
 const HomeLogo = styled.img`
-  height: 2.2rem;
+  height: 30px;
 `;
 
 const HomeTitle = styled.figcaption`
   margin: 0.1rem 0 0 0.4rem;
-  font-size: 2.2rem;
+  font-size: 30px;
   font-weight: 900;
 `;
 
@@ -45,6 +45,9 @@ const MenuButton = styled.button`
   background: none;
   border: none;
   padding: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  font-size: 0;
 `;
 
 export default function Header() {
