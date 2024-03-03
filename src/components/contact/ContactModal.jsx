@@ -53,16 +53,6 @@ const Modal = styled.section`
   animation: ${slideDownAnimation} 0.5s ease-in-out;
   border-radius: 2rem;
   align-items: center;
-  &::before {
-    position: absolute;
-    content: '';
-    background: url('fieldLogo.png') no-repeat;
-    width: 4rem;
-    height: 4rem;
-    top: -0.5rem;
-    left: -0.5rem;
-    background-size: cover;
-  }
 `;
 
 const ModalButton = styled.button`
