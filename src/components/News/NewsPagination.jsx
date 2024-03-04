@@ -15,16 +15,46 @@ const Ul = styled.ul`
 `;
 
 const Li = styled.li`
-  font-size: 1rem;
+  display: grid; // 이 부분 추가
+  grid-template-areas:
+    'thumbnail title1'
+    'thumbnail title2'
+    'thumbnail date';
+  font-size: 1.125rem;
   color: white;
   border: None;
   border-bottom: solid 0.0625rem;
   padding: 0.5rem 0;
+  text-align: end;
   a {
     border: none;
     color: inherit;
     text-decoration: none;
+    display: contents;
   }
+`;
+
+const Thumbnail = styled.img`
+  grid-area: thumbnail;
+  width: 100px;
+  height: 70px;
+`;
+
+const TitleSpan = styled.span`
+  grid-area: title1;
+  font-weight: 800;
+`;
+
+const Title2Span = styled.span`
+  margin: 0.625rem 0 0 0;
+  grid-area: title2;
+  font-weight: 800;
+`;
+
+const DateSpan = styled.span`
+  grid-area: date;
+  font-size: 0.625rem;
+  margin: 1.125rem 0 0 0;
 `;
 
 const CustomPagination = styled(Pagination)`
@@ -33,10 +63,11 @@ const CustomPagination = styled(Pagination)`
   }
 `;
 
-function NewsPagination({newsData, category}) {
+function NewsPagination({newsData, category, loading}) {
   const navigate = useNavigate();
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
+  const imageUrl = `${import.meta.env.VITE_API_URL}/api/files/`;
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
     const searchParams = new URLSearchParams(window.location.search);
@@ -47,13 +78,17 @@ function NewsPagination({newsData, category}) {
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage,
   );
-  return newsData.length > 0 && newsData[0].category === category ? (
+
+  return !loading && newsData.length > 0 && newsData[0].category === category ? (
     <>
       <Ul>
         {currentItemPerPage.map(item => (
           <Li key={item.id}>
             <Link to={`/detail/${item.newsId}`}>
-              {item.title1} {item.title2}
+              <Thumbnail src={`${imageUrl}/${item.collectionId}/${item.id}/${item.thumbnail}`} />
+              <TitleSpan>{item.title1} </TitleSpan>
+              {item.title2 ? <Title2Span>{item.title2}</Title2Span> : ''}
+              <DateSpan>{item.actDate.slice(0, 10)}</DateSpan>
             </Link>
           </Li>
         ))}

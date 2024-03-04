@@ -6,7 +6,7 @@ import NewsPagination from '../components/News/NewsPagination';
 import {NewsApi} from '../lib/Apiservice';
 
 const NewsMain = styled.section`
-  height: calc(100vh - 4.5rem - 140.78px);
+  height: calc(100vh - 58px - 112px);
 `;
 
 const H1 = styled.h1`
@@ -23,11 +23,10 @@ const ButtonWrapper = styled.div`
 export default function NewsPage() {
   const navigate = useNavigate();
   const location = useLocation();
-  const categoryArr = ['월간필드', '취업/진로', 'FIELD', '공모전'];
+  const categoryArr = ['월간필드', '취업/진로', '공모전', '공지'];
   const [selectCategory, setSelectCategory] = useState('월간필드');
   const [loading, setLoading] = useState(true);
   const [newsData, setNewsData] = useState([]);
-  const imageUrl = `${import.meta.env.VITE_API_URL}/api/files/damzbyg116zhar4/`;
   const handleButtonClick = item => {
     setSelectCategory(item);
     navigate(`/news?category=${item}`);
@@ -37,6 +36,7 @@ export default function NewsPage() {
     try {
       const response = await NewsApi(selectCategory);
       setNewsData(response);
+      localStorage.setItem(selectCategory, JSON.stringify(response));
     } catch (err) {
       console.log(err);
     } finally {
@@ -66,7 +66,7 @@ export default function NewsPage() {
           />
         ))}
       </ButtonWrapper>
-      <NewsPagination newsData={newsData} category={selectCategory} />;
+      <NewsPagination newsData={newsData} category={selectCategory} loading={loading} />
     </NewsMain>
   );
 }
