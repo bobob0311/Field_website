@@ -52,7 +52,9 @@ function NewsPagination({newsData, category}) {
       <Ul>
         {currentItemPerPage.map(item => (
           <Li key={item.id}>
-            <Link to={`/detail/${item.newsId}`}>{item.title}</Link>
+            <Link to={`/detail/${item.newsId}`}>
+              {item.title1} {item.title2}
+            </Link>
           </Li>
         ))}
       </Ul>
