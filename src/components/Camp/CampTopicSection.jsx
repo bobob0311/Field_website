@@ -18,6 +18,14 @@ const Section = styled.section`
   gap: 0.25rem;
 `;
 
+const H2 = styled.h2`
+  margin: 6rem 7.5% 1rem 7.5%;
+  font-size: 1.625rem;
+  color: ${props => (props.$color ? theme.colors[props.$color] : 'white')};
+  font-family: Nanum Myeongjo;
+  font-weight: 900;
+`;
+
 const H3 = styled.h3`
   font-size: 1rem;
   font-weight: bold;
@@ -69,24 +77,19 @@ function CampTopicSection() {
 
   const getDataFieldYear = async () => {
     try {
+      let response;
       if (localData) {
-        const jsonData = JSON.parse(localData);
-        const years = jsonData.map(item => item.year);
-        const uniqueYears = [...new Set(years)];
-        const maxYear = Math.max(...uniqueYears);
-        setCampFullData(jsonData);
-        setCampDataYear(uniqueYears);
-        dispatch(setCampTitle(maxYear));
+        response = JSON.parse(localData);
       } else {
-        const response = await CampApi();
-        const years = response.map(item => item.year);
-        const uniqueYears = [...new Set(years)];
-        const maxYear = Math.max(...uniqueYears);
+        response = await CampApi();
         localStorage.setItem('fieldData', JSON.stringify(response));
-        setCampFullData(response);
-        setCampDataYear(uniqueYears);
-        dispatch(setCampTitle(maxYear));
       }
+      const years = response.map(item => item.year);
+      const uniqueYears = [...new Set(years)];
+      const maxYear = Math.max(...uniqueYears);
+      setCampFullData(response);
+      setCampDataYear(uniqueYears);
+      dispatch(setCampTitle(maxYear));
     } catch (err) {
       console.log(err);
     }
@@ -108,14 +111,8 @@ function CampTopicSection() {
 
   return (
     <Section>
+      <H2>역대 FIELD CAMP</H2>
       <Dropdown title='역대 FIELD CAMP' titleArr={campDataYear} />
-      <ModalSection
-        title='역대 FIELD CAMP'
-        font='Nanum Myeongjo'
-        timeDatalst={campDataYear}
-        name='FIELD CAMP'
-        $margin='4rem 0 1rem 0'
-      />
       {showedCampData.map((camp, index) => (
         <ButtonWrapper key={camp.id}>
           <Figure key={camp.id}>

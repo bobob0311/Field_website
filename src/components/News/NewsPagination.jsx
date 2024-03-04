@@ -87,7 +87,7 @@ function NewsPagination({newsData, category, loading}) {
             <Link to={`/detail/${item.newsId}`}>
               <Thumbnail src={`${imageUrl}/${item.collectionId}/${item.id}/${item.thumbnail}`} />
               <TitleSpan>{item.title1} </TitleSpan>
-              {item.title2 ? <Title2Span>{item.title2}</Title2Span> : ''}
+              <Title2Span>{item.title2 ? item.title2 : ''}</Title2Span>
               <DateSpan>{item.actDate.slice(0, 10)}</DateSpan>
             </Link>
           </Li>

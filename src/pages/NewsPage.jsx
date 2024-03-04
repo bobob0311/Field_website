@@ -33,14 +33,22 @@ export default function NewsPage() {
   };
 
   const getDataNews = async () => {
-    try {
-      const response = await NewsApi(selectCategory);
-      setNewsData(response);
-      localStorage.setItem(selectCategory, JSON.stringify(response));
-    } catch (err) {
-      console.log(err);
-    } finally {
+    const localData = JSON.parse(localStorage.getItem(selectCategory));
+    if (localData) {
+      setNewsData(localData);
+      console.log(localData);
       setLoading(false);
+    } else {
+      try {
+        console.log('csd');
+        const response = await NewsApi(selectCategory);
+        setNewsData(response);
+        localStorage.setItem(selectCategory, JSON.stringify(response));
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -66,6 +74,7 @@ export default function NewsPage() {
           />
         ))}
       </ButtonWrapper>
+      {/* {selectCategory === '월간필드'&&  } */}
       <NewsPagination newsData={newsData} category={selectCategory} loading={loading} />
     </NewsMain>
   );
