@@ -21,13 +21,15 @@ const Card = styled.article`
 `;
 
 const Dt = styled.dt`
-  font-size: 1.5rem;
+  font-size: 1.5625rem;
+  font-weight: 900;
 `;
 
 const Dd = styled.dd`
   font-size: 1rem;
   word-break: keep-all;
   line-height: 1.2;
+  margin: 0.5rem 0 1.1rem 0;
 `;
 
 const Dl = styled.dl`
@@ -40,7 +42,7 @@ const Dl = styled.dl`
 const CardUl = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
 `;
 
 const CardKeyWordLi = styled.li`
@@ -53,10 +55,10 @@ const CardKeyWordSpan = styled.span`
   background-color: ${props => props.color || ''};
   /* 투명도를 조절하기 위해 rgba 값을 사용합니다. */
   background-color: ${props => (props.color ? `rgba(${props.color}, 0.5)` : '')};
-  padding: 0.3rem 2rem;
+  padding: 0.4rem 2rem;
   text-align: center;
   border: 2px solid white;
-  border-radius: 3rem;
+  border-radius: 1.875rem;
   font-size: 1.4rem;
 `;
 
@@ -170,7 +172,7 @@ function DepartmentIntro() {
               <CardKeyWordSpan color='255, 134, 46'>창의력</CardKeyWordSpan>
             </CardKeyWordLi>
           </CardUl>
-          <CardHashTagUl margin='1rem 0'>
+          <CardHashTagUl margin='2rem 0'>
             <CardHashTagLi>#FIELD인싸</CardHashTagLi>
             <CardHashTagLi>#FIELD에너지</CardHashTagLi>
             <CardHashTagLi>#즐거움이공존하는이곳</CardHashTagLi>
@@ -210,7 +212,7 @@ function DepartmentIntro() {
               <CardKeyWordSpan color='30, 154, 244'>친화력</CardKeyWordSpan>
             </CardKeyWordLi>
           </CardUl>
-          <CardHashTagUl margin='1rem 0'>
+          <CardHashTagUl margin='2rem 0'>
             <CardHashTagLi>#FIELD연결고리</CardHashTagLi>
             <CardHashTagLi>#FIELD의심장</CardHashTagLi>
             <CardHashTagLi>#소통과화합이중시되는곳</CardHashTagLi>
@@ -250,7 +252,7 @@ function DepartmentIntro() {
               <CardKeyWordSpan color='30, 244, 52'>자기주장력</CardKeyWordSpan>
             </CardKeyWordLi>
           </CardUl>
-          <CardHashTagUl margin='1rem 0'>
+          <CardHashTagUl margin='2rem 0'>
             <CardHashTagLi>#FIELD열정맨</CardHashTagLi>
             <CardHashTagLi>#FIELD브레인</CardHashTagLi>
             <CardHashTagLi>#지식과열정이융합되는곳</CardHashTagLi>
@@ -288,7 +290,7 @@ function DepartmentIntro() {
               <CardKeyWordSpan color='251, 76, 139'>창의성</CardKeyWordSpan>
             </CardKeyWordLi>
           </CardUl>
-          <CardHashTagUl margin='1rem 0'>
+          <CardHashTagUl margin='2rem 0'>
             <CardHashTagLi>#FIELD알리미</CardHashTagLi>
             <CardHashTagLi>#FIELD소통창구</CardHashTagLi>
             <CardHashTagLi>#창의와개성이표출되는곳</CardHashTagLi>
