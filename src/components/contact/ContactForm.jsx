@@ -117,9 +117,15 @@ const Option = styled.option`
 `;
 
 const Check = styled.span`
-  color: red;
+  color: green;
   padding: 0 0 0.5rem 0.4rem;
   font-size: 1.2rem;
+`;
+
+const Star = styled.span`
+  color: red;
+  padding: 0 0 0.5rem 0.2rem;
+  font-size: 1.4rem;
 `;
 
 const initialValidationState = {
@@ -136,7 +142,7 @@ function InputBox({validName, imgSrc, imgAlt, name, children}) {
       <VerticalCenter>
         <Img src={imgSrc} alt={imgAlt} />
         {name}
-        {!validName ? <Check> ✔</Check> : null}
+        {!validName ? <Star>*</Star> : <Check> ✔</Check>}
       </VerticalCenter>
       {children}
     </InputLabel>
