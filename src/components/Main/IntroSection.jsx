@@ -40,7 +40,7 @@ function IntroSection() {
         <span>꿈과 비전, 생각을 공유하는</span>
         <span>교류의 장을 만든다</span>
       </NanumH3>
-      <Image src='./../../public/fieldLogo.png' alt='필드 로고' $margin='10rem 0 10rem 0' />
+      <Image src='fieldLogo.png' alt='필드 로고' $margin='10rem 0 10rem 0' />
     </MainSection>
   );
 }
