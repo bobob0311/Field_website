@@ -4,10 +4,10 @@ import styled from 'styled-components'; // styled-components를 불러옵니다.
 
 // 텍스트 애니메이션을 담당하는 컨테이너를 스타일드 컴포넌트로 정의합니다.
 const TextGenerateContainer = styled.div`
-  font-size: 1.7rem; // 폰트 크기를 설정합니다.
+  font-size: 1.3rem; // 폰트 크기를 설정합니다.
   font-weight: bold; // 폰트 굵기를 설정합니다.
   text-align: center; // 텍스트를 가운데 정렬합니다.
-  line-height: 1.5;
+  line-height: 2;
   font-family: 'Goblin One', cursive; // 폰트를 설정합니다.
   margin: 5rem 0 10rem 0;
 `;
