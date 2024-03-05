@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import {Swiper, SwiperSlide} from 'swiper/react';
+import 'swiper/css/pagination';
+import {Pagination} from 'swiper/modules';
 import {useEffect, useState} from 'react';
 import theme from '../../theme';
 
@@ -36,11 +38,11 @@ const Card = styled.article`
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     url(${props => props.src});
   background-color: ${theme.colors.blue};
-  padding: 2rem 1rem;
+  padding: 1rem;
   background-position: center;
   border-radius: 0.625rem;
   ${props => props.$border && 'border: 2px solid white;'}
-  height: 30rem;
+  height: 25rem;
   position: relative;
 `;
 
@@ -51,13 +53,14 @@ const P = styled.p`
   color: ${props => (props.color ? theme.colors[props.color] : '')};
   font-size: ${props => (props.size ? props.size : '1rem')};
   text-align: ${props => props.align || ''};
+  font-weight: ${props => props.weight || ''};
 `;
 
 const H3 = styled.h3`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  font-size: 1.5rem;
+  font-size: 1.5625rem;
+  font-weight: 900;
   margin: ${props => props.$margin || '0'};
 `;
 
@@ -89,18 +92,26 @@ function ReviewSection() {
         How was your FIELD?
       </GoblinH2>
       <SwiperContainer $margin='2rem 0'>
-        <Swiper slidesPerView={1.2} spaceBetween={20} centeredSlides='true'>
+        <Swiper
+          modules={[Pagination]}
+          slidesPerView={1.2}
+          spaceBetween={20}
+          centeredSlides='true'
+          pagination={{clickable: true}}
+        >
           {reviewData.map(item => (
             <SwiperSlide key={item.id}>
               <Card $border='true'>
                 <Article>
-                  <H3 $margin='1rem 0 2rem 0'>{item.firstQuestion}</H3>
-                  <P $margin='2rem 0'>{item.firstAnswer}</P>
+                  <H3 $margin='0.5rem 0 1rem 0'>{item.firstQuestion}</H3>
+                  <P $margin='1rem 0' size='0.875rem'>
+                    {item.firstAnswer}
+                  </P>
                   <WriterContainer>
-                    <P color='yellow' size='1.2rem'>
+                    <P color='yellow' size='1.125rem' weight='800'>
                       {item.school}
                     </P>
-                    <P color='yellow' size='1.2rem'>
+                    <P color='yellow' size='1.125rem' weight='800'>
                       {item.author}
                     </P>
                   </WriterContainer>

@@ -9,7 +9,7 @@ const TextGenerateContainer = styled.div`
   text-align: center; // 텍스트를 가운데 정렬합니다.
   line-height: 2;
   font-family: 'Goblin One', cursive; // 폰트를 설정합니다.
-  margin: 5rem 0 10rem 0;
+  margin: 0 0.3rem;
 `;
 
 // 텍스트 애니메이션 예시를 담당하는 함수형 컴포넌트를 정의합니다.

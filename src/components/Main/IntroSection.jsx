@@ -21,6 +21,7 @@ const NanumH3 = styled(H3)`
   font-weight: 700;
   gap: 2rem;
   font-size: 1.625rem;
+  margin: 10rem 0 5rem 0;
 `;
 
 const Image = styled.img`
