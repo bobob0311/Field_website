@@ -1,13 +1,14 @@
-import PocketBase from 'pocketbase';
 import {useEffect, useState} from 'react';
 import styled, {keyframes} from 'styled-components';
 import theme from '../../theme';
+import {LoadDateData} from '../../lib/Apiservice';
+import ContentWrapper from './UI/ContentWrapper';
 
 const P = styled.p`
-  font-size: ${props => (props.$fontSize ? props.$fontSize : '1rem')};
+  font-size: 1rem;
   color: ${props => (props.$color ? theme.colors[props.$color] : theme.colors.black)};
-  font-weight: ${props => (props.$fontWeight ? props.$fontWeight : 300)};
-  text-align: ${props => (props.$textAlign ? props.$textAlign : 'center')};
+  font-weight: 700;
+  text-align: center;
   margin: ${props => (props.$margin ? props.$margin : '1rem 0')};
   word-break: keep-all;
 `;
@@ -15,14 +16,12 @@ const P = styled.p`
 const ContentBox = styled.div`
   background: rgba(255, 255, 255, 0.7);
   border-radius: 0.65rem;
-  padding: 0.5rem;
+  padding: 0.5rem 0;
   display: flex;
   justify-content: center;
+  width: 100%;
 `;
 
-const ContentWrapper = styled.section`
-  margin: 5rem 7.5% 5rem 7.5%;
-`;
 const SubTitle = styled.h2`
   font-size: 1.5rem;
   text-align: center;
@@ -33,7 +32,7 @@ const SubTitle = styled.h2`
 
 const OneLine = styled.span`
   display: block;
-  margin: 0 0 0.2rem 0;
+  margin: 0 0 0 0.2rem;
   text-indent: ${props => (props.$textIndent ? props.$textIndent : '')};
 `;
 
@@ -53,6 +52,8 @@ const DateP = styled(P)`
   text-align: left;
   font-weight: 700;
   letter-spacing: -1.5px;
+  display: flex;
+  padding: 0 0 0 0.2rem;
 `;
 
 const AddressLink = styled.a`
@@ -63,7 +64,7 @@ const AddressLink = styled.a`
   margin: 0 0.4rem 0 0;
 `;
 const BoxSize = styled.div`
-  width: 20rem;
+  margin: 0 auto;
 `;
 
 const spin = keyframes`
@@ -82,7 +83,7 @@ const LoadingSpin = styled.div`
   animation: ${spin} 0.5s linear infinite;
 `;
 
-function Contanier({subtitle, content}) {
+function InfoGroup({subtitle, content}) {
   return (
     <ContentWrapper>
       <SubTitle>{subtitle}</SubTitle>
@@ -90,7 +91,8 @@ function Contanier({subtitle, content}) {
     </ContentWrapper>
   );
 }
-function ContanierWithContentBox({subtitle, content}) {
+
+function InfoGroupWithBox({subtitle, content}) {
   return (
     <ContentWrapper>
       <SubTitle>{subtitle}</SubTitle>
@@ -103,7 +105,7 @@ function ContanierWithContentBox({subtitle, content}) {
 
 const APPLYMETHOD = (
   <>
-    <P $fontWeight='700' $margin='0.5rem 0 0.5rem 0'>
+    <P $margin='0.5rem 0 0.5rem 0'>
       <OneLine>필드 리틀리 혹은 필드 블로그에서 지원서 </OneLine>
       <OneLine>다운로드 후 서류 작성하여 아래 이메일로 제출</OneLine>
     </P>
@@ -121,12 +123,12 @@ const APPLYMETHOD = (
 );
 
 export default function Content() {
-  const [data, setData] = useState([]);
+  const [dateData, setDateData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
   function dateFormatChange(date) {
-    const formattedDateArray = date.map(item => {
+    return date.map(item => {
       const inputDate = new Date(item.Date);
 
       const year = inputDate.getFullYear();
@@ -138,19 +140,21 @@ export default function Content() {
 
       return `${year}.${month}.${day} (${dayOfWeek})`;
     });
-    return formattedDateArray;
   }
 
-  async function RecuitData() {
+  function dateDataLocalStored(dateArray) {
+    const localdateArray = {key: dateArray};
+    localStorage.setItem('date', JSON.stringify(localdateArray));
+  }
+
+  async function initialSetup() {
     setIsLoading(true);
-    const pb = new PocketBase(import.meta.env.VITE_API_URL);
     try {
-      const respone = await pb.collection('Recruit').getFullList();
-      const dateArray = dateFormatChange(respone);
-      const localdateArray = {key: dateArray};
-      setData(dateArray);
+      const respone = await LoadDateData();
+      const fomattedDate = dateFormatChange(respone);
+      dateDataLocalStored(fomattedDate);
+      setDateData(fomattedDate);
       setIsLoading(false);
-      localStorage.setItem('date', JSON.stringify(localdateArray));
     } catch {
       setIsError(true);
     }
@@ -159,47 +163,46 @@ export default function Content() {
   useEffect(() => {
     const storedObject = JSON.parse(localStorage.getItem('date'));
     if (!storedObject) {
-      RecuitData();
+      initialSetup();
     } else {
-      setData(storedObject.key);
+      setDateData(storedObject.key);
     }
   }, []);
 
-  let recruitDate;
+  let recruitmentContent;
   if (isError === true) {
-    recruitDate = (
+    recruitmentContent = (
       <>
-        <P $fontWeight='900'>데이터를 불러오지 못했습니다</P>
-        <P $fontWeight='900'>새로고침을 통해 다시 한번 시도해주세요</P>
+        <P>데이터를 불러오지 못했습니다</P>
+        <P>새로고침을 통해 다시 한번 시도해주세요</P>
       </>
     );
   } else if (isLoading === false) {
-    recruitDate = (
+    recruitmentContent = (
       <>
+        <DateP>{`📄 서류 접수: ${dateData[0]} ~ ${dateData[1]}`}</DateP>
+        <DateP>{`✅ 1차 서류 전형 합격자 발표: ${dateData[2]}`}</DateP>
+
         <DateP>
-          📄서류 접수: {data[0]} ~ {data[1]}
+          💬 2차 면접:
+          <span>
+            <OneLine>{` ${dateData[3]} ~ ${dateData[4] ? dateData[4].slice(8) : ''}`}</OneLine>
+            <OneLine>{`${dateData[5]} ~ ${dateData[6] ? dateData[6].slice(8) : ''}`}</OneLine>
+          </span>
         </DateP>
-        <DateP>✅1차 서류 전형 합격자 발표: {data[2]}</DateP>
-        <DateP>
-          <OneLine>
-            💬2차 면접: {data[3]} ~ {data[4] ? data[4].slice(8) : ''}
-          </OneLine>
-          <OneLine $textIndent='4.8rem'>
-            {data[5]} ~ {data[6] ? data[6].slice(8) : ''}
-          </OneLine>
-        </DateP>
+        <DateP>{`✅ 최종 합격자 발표: ${dateData[7]}`}</DateP>
       </>
     );
   } else {
-    recruitDate = <LoadingSpin />;
+    recruitmentContent = <LoadingSpin />;
   }
 
   return (
     <>
-      <Contanier subtitle='😀 지원자격' content='산업공학을 주/복수/부전공하는 대학생' />
-      <ContanierWithContentBox subtitle='💎 지원 방법' content={APPLYMETHOD} />
-      <Contanier subtitle='📚 활동 기간' content='매년 3월 ~ 12월 (10개월)' />
-      <ContanierWithContentBox subtitle='📆 모집 일정' content={recruitDate} />
+      <InfoGroup subtitle='😀 지원자격' content='산업공학을 주/복수/부전공하는 대학생' />
+      <InfoGroupWithBox subtitle='💎 지원 방법' content={APPLYMETHOD} />
+      <InfoGroup subtitle='📚 활동 기간' content='매년 3월 ~ 12월 (10개월)' />
+      <InfoGroupWithBox subtitle='📆 모집 일정' content={recruitmentContent} />
     </>
   );
 }

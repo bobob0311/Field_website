@@ -38,6 +38,6 @@ export function DepartmentApi() {
   return pb.collection('Department').getFullList();
 }
 
-export function RecruitApi() {
+export function LoadDateData() {
   return pb.collection('Recruit').getFullList();
 }

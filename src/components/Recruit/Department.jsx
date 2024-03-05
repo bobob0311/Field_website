@@ -1,31 +1,25 @@
 import {useState} from 'react';
 import styled from 'styled-components';
 import theme from '../../theme';
-
-const DepartmentSection = styled.section`
-  margin: 0 7.5%;
-`;
+import ContentWrapper from './UI/ContentWrapper';
 
 const SubTitle = styled.h2`
   font-size: 1.5rem;
   text-align: center;
-  padding: 0 1rem 0 0;
   margin: 0 0 1rem 0;
   font-weight: 800;
 `;
 
 const QuestionBox = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   background: rgba(255, 255, 255, 0.7);
   border-radius: 0.65rem;
   color: ${theme.colors.black};
   margin: 0 0 2rem 0;
-  padding: 1rem 0 0.5rem 0.5rem;
   font-weight: 400;
-`;
-const BoxSize = styled.div`
-  width: 19rem;
+  width: 100%;
 `;
 
 const Question = styled.h3`
@@ -33,6 +27,8 @@ const Question = styled.h3`
   letter-spacing: -0.05rem;
   font-weight: 900;
   margin: 0 0 1.25rem 0;
+  width: 100%;
+  padding: 1rem 0 0 7.5%;
 `;
 
 const Answer = styled.li`
@@ -40,15 +36,17 @@ const Answer = styled.li`
   font-weight: 700;
   margin: 0 0 1rem 0.25rem;
   word-break: keep-all;
-  text-indent: -1rem;
   letter-spacing: -0.05rem;
-  padding: 0 0 0 0.8rem;
+  text-indent: -0.2rem;
+  padding: 0 0 0 7.5%;
 `;
 
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   margin: 0 0 1rem 0;
+  width: 100%;
+  max-width: 500px;
 
   ${props =>
     props.$activelink &&
@@ -71,7 +69,12 @@ const DepartmentButton = styled.button`
   font-weight: 600;
 `;
 
-const allDepartment = {
+const Number = styled.span`
+  display: inline-block;
+  width: 0.7rem;
+`;
+
+const DEPARTMENTINFO = {
   planning: {
     department: '기획부',
     explain: [
@@ -133,43 +136,35 @@ const allDepartment = {
 function DepartmentBox({part, p, target}) {
   return (
     <QuestionBox>
-      <BoxSize>
-        <Question>{`${allDepartment[part].department}${p}`}</Question>
-        <ul>
-          {allDepartment[part][target].map((item, index) => (
-            <Answer key={index}>{`${index + 1}. ${item}`}</Answer>
-          ))}
-        </ul>
-      </BoxSize>
+      <Question>{`${DEPARTMENTINFO[part].department}${p}`}</Question>
+      <ul>
+        {DEPARTMENTINFO[part][target].map((item, index) => (
+          <Answer key={index}>
+            <Number>{`${index + 1}.`}</Number> {item}
+          </Answer>
+        ))}
+      </ul>
     </QuestionBox>
   );
 }
 
 export default function Department() {
   const [selectedDepartment, setSelectedDepartment] = useState('planning');
-
   function DepartmentHandler(name) {
     setSelectedDepartment(name);
   }
   return (
-    <DepartmentSection>
+    <ContentWrapper $margin='5rem 0'>
       <SubTitle>모집 분야</SubTitle>
       <ButtonWrapper $activelink={selectedDepartment}>
-        <DepartmentButton name='planning' onClick={() => DepartmentHandler('planning')}>
-          기획부
-        </DepartmentButton>
-        <DepartmentButton name='external' onClick={() => DepartmentHandler('external')}>
-          대외협력부
-        </DepartmentButton>
-        <DepartmentButton name='competition' onClick={() => DepartmentHandler('competition')}>
-          컴페티션부
-        </DepartmentButton>
-        <DepartmentButton name='relation' onClick={() => DepartmentHandler('relation')}>
-          홍보부
-        </DepartmentButton>
+        {Object.keys(DEPARTMENTINFO).map(item => (
+          <DepartmentButton key={item} name={item} onClick={() => DepartmentHandler(item)}>
+            {DEPARTMENTINFO[item].department}
+          </DepartmentButton>
+        ))}
       </ButtonWrapper>
       <DepartmentBox part={selectedDepartment} p='는 어떤 인재를 원하나요! 🔍' target='explain' />
       <DepartmentBox part={selectedDepartment} p='는 어떤 활동을 하나요! 💪' target='activity' />
-    </DepartmentSection>
+    </ContentWrapper>
   );
 }

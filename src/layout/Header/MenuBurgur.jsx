@@ -7,7 +7,7 @@ const downRight = keyframes`
     transform-origin: left top; 
   }
   100% {
-    transform: rotate(45deg) translate(10px,-12px);
+    transform: rotate(45deg) translate(6px,-5px);
     transform-origin: left top; 
   }
 `;
@@ -18,30 +18,30 @@ const upLeft = keyframes`
     transform-origin: left bottom; 
   }
   100% {
-    transform: rotate(-45deg) translate(10px,12px);
+    transform: rotate(-45deg) translate(6px,5px);
     transform-origin: left bottom;
   }
 `;
 
 const RotatingLines = styled.svg`
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
 `;
 
 const RotatingGroup = styled.g`
   stroke: ${theme.colors.white};
-  stroke-width: 4;
+  stroke-width: 3;
 `;
 
 const RotatingLine = styled.line`
   stroke: ${theme.colors.white};
-  stroke-width: 4;
+  stroke-width: 3;
   display: ${({open}) => (open ? 'none' : '')};
 `;
 
 const RotatingLineTop = styled.line`
   stroke: ${theme.colors.white};
-  stroke-width: 4;
+  stroke-width: 3;
   animation: ${({open}) =>
     open
       ? css`
@@ -52,7 +52,7 @@ const RotatingLineTop = styled.line`
 
 const RotatingLineBottom = styled.line`
   stroke: ${theme.colors.white};
-  stroke-width: 4;
+  stroke-width: 3;
   animation: ${({open}) =>
     open
       ? css`
@@ -67,9 +67,9 @@ export default function MenuBurgur(props) {
   return (
     <RotatingLines xmlns='http://www.w3.org/2000/svg'>
       <RotatingGroup>
-        <RotatingLineTop open={open} x1='5' y1='12.5' x2='45' y2='12.5' />
-        <RotatingLine open={open} x1='5' y1='25' x2='45' y2='25' />
-        <RotatingLineBottom open={open} x1='5' y1='37.5' x2='45' y2='37.5' />
+        <RotatingLineTop open={open} x1='0' y1='5' x2='30' y2='5' />
+        <RotatingLine open={open} x1='0' y1='15' x2='30' y2='15' />
+        <RotatingLineBottom open={open} x1='0' y1='25' x2='30' y2='25' />
       </RotatingGroup>
     </RotatingLines>
   );

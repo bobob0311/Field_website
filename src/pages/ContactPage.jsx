@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import ContactForm from '../components/contact/ContactForm';
 
 const ContactMain = styled.main`
-  margin: 0 7.5%;
+  margin: 0 7.5% 2rem 7.5%;
 `;
 
 const Title = styled.h1`

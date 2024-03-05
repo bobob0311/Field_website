@@ -6,6 +6,7 @@ import CampTopicSection from '../components/Camp/CampTopicSection';
 import Camp1 from '../assets/camp1.png';
 import Camp2 from '../assets/camp2.png';
 import Camp3 from '../assets/camp3.png';
+import CampTimeLine from '../components/Camp/CampTimeLine';
 
 function CampPage() {
   return (
@@ -32,6 +33,7 @@ function CampPage() {
         secondLine='교수님과 소통하세요'
       />
       <CampTopicSection />
+      <CampTimeLine />
     </main>
   );
 }

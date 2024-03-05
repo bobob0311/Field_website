@@ -41,7 +41,7 @@ const Img = styled.img`
 
 const Figcaption = styled.figcaption`
   text-align: center;
-  color: ${props => (props.color ? theme.colors[props.color] : theme.colors.red)};
+  color: ${props => (props.$color ? theme.colors[props.$color] : theme.colors.red)};
   font-family: 'Goblin One';
   font-size: 1.25rem;
 `;
@@ -64,15 +64,28 @@ function CampTopicSection() {
     setShowedCampData(campFullData.filter(camp => camp.year === year));
   };
 
+  const localData = localStorage.getItem('fieldData');
+
   const getDataFieldYear = async () => {
     try {
-      const response = await CampApi();
-      const years = response.map(item => item.year);
-      const uniqueYears = [...new Set(years)];
-      const maxYear = Math.max(...uniqueYears);
-      setCampFullData(response);
-      setCampDataYear(uniqueYears);
-      dispatch(setCampTitle(maxYear));
+      if (localData) {
+        const jsonData = JSON.parse(localData);
+        const years = jsonData.map(item => item.year);
+        const uniqueYears = [...new Set(years)];
+        const maxYear = Math.max(...uniqueYears);
+        setCampFullData(jsonData);
+        setCampDataYear(uniqueYears);
+        dispatch(setCampTitle(maxYear));
+      } else {
+        const response = await CampApi();
+        const years = response.map(item => item.year);
+        const uniqueYears = [...new Set(years)];
+        const maxYear = Math.max(...uniqueYears);
+        localStorage.setItem('fieldData', JSON.stringify(response));
+        setCampFullData(response);
+        setCampDataYear(uniqueYears);
+        dispatch(setCampTitle(maxYear));
+      }
     } catch (err) {
       console.log(err);
     }
@@ -118,7 +131,7 @@ function CampTopicSection() {
             {camp.topic === '1st' ? (
               <Figcaption>{camp.topic} TOPIC</Figcaption>
             ) : (
-              <Figcaption color='blue'>{camp.topic} TOPIC</Figcaption>
+              <Figcaption $color='blue'>{camp.topic} TOPIC</Figcaption>
             )}
           </Figure>
           <Button

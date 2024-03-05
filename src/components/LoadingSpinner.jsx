@@ -18,7 +18,6 @@ const LoadingSpin = styled.div`
   animation: ${spin} 0.5s linear infinite;
 `;
 
-// 화면 전체를 감싸는 Wrapper 추가
 const LoadingWrapper = styled.div`
   display: flex;
   flex-direction: column;
