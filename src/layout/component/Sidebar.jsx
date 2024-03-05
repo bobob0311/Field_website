@@ -62,26 +62,26 @@ const IconWrapper = styled.aside`
   position: fixed;
   display: flex;
   flex-direction: column;
-  bottom: 10%;
+  bottom: 5%;
   right: 1rem;
   z-index: 2;
 `;
 
 const BaseIcon = styled.button`
-  width: 3rem;
-  height: 3rem;
+  width: 48px;
+  height: 48px;
   border: none;
   background: ${theme.colors.white};
   border-radius: 50%;
-  margin: 0.25rem 0;
+  margin: 4px 0;
 `;
 
 const Icon = styled.a`
   animation: ${props => props.$move} 0.5s ease-in-out;
-  width: 3rem;
-  height: 3rem;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  margin: 0.25rem 0;
+  margin: 4px 0;
 `;
 
 const Plus = styled.svg`
