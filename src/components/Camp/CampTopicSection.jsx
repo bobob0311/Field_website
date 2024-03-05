@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import styled from 'styled-components';
-import ModalSection from '../ModalSection';
 import theme from '../../theme';
 import Button from '../Button';
 import {CampApi} from '../../lib/Apiservice';
