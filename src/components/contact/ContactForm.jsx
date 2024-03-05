@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {useRef, useState} from 'react';
+import {useEffect, useState, useRef} from 'react';
 import PocketBase from 'pocketbase';
 import theme from '../../theme';
 import ContactModal from './ContactModal';
@@ -131,22 +131,36 @@ const Notice = styled.span`
 `;
 
 const initialValidationState = {
-  isNameValid: undefined,
-  isPhoneValid: undefined,
-  isEmailValid: undefined,
-  isTitleValid: undefined,
-  isContentValid: undefined,
+  isNameValid: false,
+  isPhoneValid: false,
+  isEmailValid: false,
+  isTitleValid: false,
+  isContentValid: false,
 };
 
+function InputBox({left, validName, imgSrc, imgAlt, name, children}) {
+  return (
+    <InputLabel>
+      {!validName ? <Notice $left={left} /> : null}
+      <VerticalCenter>
+        <Img src={imgSrc} alt={imgAlt} />
+        {name}
+      </VerticalCenter>
+      {children}
+    </InputLabel>
+  );
+}
+
 export default function ContactForm() {
-  const enteredData = {
-    type: useRef(null),
-    name: useRef(null),
-    email: useRef(null),
-    phoneNumber: useRef(null),
-    content: useRef(null),
-    title: useRef(null),
-  };
+  const timeoutIdRef = useRef(null);
+  const [enteredData, setEnteredData] = useState({
+    type: '',
+    name: '',
+    email: '',
+    phoneNumber: '',
+    content: '',
+    title: '',
+  });
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState();
   const [isOpen, setIsOpen] = useState(false);
@@ -206,21 +220,31 @@ export default function ContactForm() {
     return isEveryThingValid;
   };
 
+  function changeHandler(e) {
+    const {name, value} = e.target;
+
+    if (timeoutIdRef.current) {
+      clearTimeout(timeoutIdRef.current);
+    }
+
+    timeoutIdRef.current = setTimeout(() => {
+      setEnteredData(prev => ({
+        ...prev,
+        [name]: value,
+      }));
+    }, 300);
+  }
+
+  useEffect(() => {
+    Validation(enteredData);
+  }, [enteredData]);
+
   const enterdDataHandler = event => {
     event.preventDefault();
     setIsOpen(true);
-    const submittedData = {
-      type: enteredData.type.current.value,
-      name: enteredData.name.current.value,
-      email: enteredData.email.current.value,
-      phoneNumber: enteredData.phoneNumber.current.value,
-      content: enteredData.content.current.value,
-      title: enteredData.title.current.value,
-    };
 
-    const validationResult = Validation(submittedData);
-    if (validationResult) {
-      SendMessage(submittedData);
+    if (isValid) {
+      SendMessage(enteredData);
     }
   };
 
@@ -232,81 +256,105 @@ export default function ContactForm() {
 
   function NumberInputHandler(e) {
     e.target.value = e.target.value.replace(/\D/g, '');
+    const {name, value} = e.target;
+    if (timeoutIdRef.current) {
+      clearTimeout(timeoutIdRef.current);
+    }
+
+    timeoutIdRef.current = setTimeout(() => {
+      setEnteredData(prev => ({
+        ...prev,
+        [name]: value,
+      }));
+    }, 500);
   }
 
   return (
     <>
       <ContactSection>
         <Form onSubmit={enterdDataHandler}>
-          <InputLabel>
-            {validationState.isNameValid === false ? <Notice $left='7.8rem' /> : null}
-            <VerticalCenter>
-              <Img src='happy.png' alt='웃는 아이콘' />
-              이름 (회사)
-            </VerticalCenter>
-            <Input type='text' name='name' ref={enteredData.name} autoComplete='name' />
-          </InputLabel>
+          <div>
+            <InputBox
+              left='7.8rem'
+              validName={validationState.isNameValid}
+              imgSrc='happy.png'
+              imgAlt='웃는 아이콘'
+              name='이름 (회사)'
+            >
+              <Input type='text' name='name' onChange={e => changeHandler(e)} autoComplete='name' />
+            </InputBox>
 
-          <InputLabel>
-            {validationState.isPhoneValid === false ? <Notice $left='5.5rem' /> : null}
-            <VerticalCenter>
-              <Img src='Phone.png' alt='핸드폰 아이콘' />
-              연락처
-            </VerticalCenter>
-            <Input
-              id='Num'
-              placeholder='01012345678'
-              type='tel'
-              name='phonenumber'
-              ref={enteredData.phoneNumber}
-              autoComplete='tel'
-              onInput={e => NumberInputHandler(e)}
-              pattern='[0-9]{9,11}'
-              maxLength='11'
-            />
-          </InputLabel>
+            <InputBox
+              left='5.5rem'
+              validName={validationState.isPhoneValid}
+              imgSrc='Phone.png'
+              imgAlt='핸드폰 아이콘'
+              name='연락처'
+            >
+              <Input
+                id='Num'
+                placeholder='01012345678'
+                type='tel'
+                name='phoneNumber'
+                autoComplete='tel'
+                onInput={e => NumberInputHandler(e)}
+                pattern='[0-9]{9,11}'
+                maxLength='11'
+              />
+            </InputBox>
 
-          <InputLabel>
-            {validationState.isEmailValid === false ? <Notice $left='5.5rem' /> : null}
-            <VerticalCenter>
-              <Img src='Message.png' alt='메세지 아이콘' />
-              Email
-            </VerticalCenter>
-            <Input type='email' name='email' ref={enteredData.email} autoComplete='email' />
-          </InputLabel>
+            <InputBox
+              left='5.5rem'
+              validName={validationState.isEmailValid}
+              imgSrc='Message.png'
+              imgAlt='메세지 아이콘'
+              name='Email'
+            >
+              <Input
+                type='email'
+                name='email'
+                onChange={e => changeHandler(e)}
+                autoComplete='email'
+              />
+            </InputBox>
+          </div>
+          <div>
+            <InputBox
+              left='4.5rem'
+              validName={validationState.isTitleValid}
+              imgSrc='Check.png'
+              imgAlt='체크모양 아이콘'
+              name='제목'
+            >
+              <Input type='text' name='title' onChange={e => changeHandler(e)} autoComplete='off' />
+            </InputBox>
 
-          <InputLabel>
-            {validationState.isTitleValid === false ? <Notice $left='4.5rem' /> : null}
-            <VerticalCenter>
-              <Img src='Check.png' alt='체크모양 아이콘' />
-              제목
-            </VerticalCenter>
-            <Input type='text' name='title' ref={enteredData.title} autoComplete='off' />
-          </InputLabel>
+            <TypeLabel>
+              <TypeSelect name='type' onChange={e => changeHandler(e)} autoComplete='off'>
+                <Option value='선택하지않음'>문의유형</Option>
+                <Option value='서비스 이용'>서비스 이용</Option>
+                <Option value='후원'>후원</Option>
+                <Option value='문의'>문의</Option>
+                <Option value='기타'>기타</Option>
+              </TypeSelect>
+            </TypeLabel>
 
-          <TypeLabel>
-            <TypeSelect name='Type' ref={enteredData.type} autoComplete='off'>
-              <Option value='선택하지않음'>문의유형</Option>
-              <Option value='후원'>후원</Option>
-              <Option value='문의'>문의</Option>
-              <Option value='기타'>기타</Option>
-            </TypeSelect>
-          </TypeLabel>
-
-          <InputLabel>
-            {validationState.isContentValid === false ? <Notice $left='4.5rem' /> : null}
-            <VerticalCenter>
-              <Img src='Chat_alt_3.png' alt='대화창 아이콘' width={30} />
-              내용
-            </VerticalCenter>
-            <TextArea
-              placeholder='내용을 입력하세요.'
-              name='content'
-              rows={20}
-              ref={enteredData.content}
-              autoComplete='off'
-            />
-          </InputLabel>
+            <InputBox
+              left='4.5rem'
+              validName={validationState.isContentValid}
+              imgSrc='Chat_alt_3.png'
+              imgAlt='대화창 아이콘'
+              name='내용'
+            >
+              <TextArea
+                placeholder='내용을 입력하세요.'
+                name='content'
+                rows={15}
+                onChange={e => changeHandler(e)}
+                autoComplete='off'
+              />
+            </InputBox>
+          </div>
 
           <SubmitButton type='submit'>
             SEND

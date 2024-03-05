@@ -33,7 +33,7 @@ const Data = styled.div`
   }
 `;
 const Title = styled.h3`
-  color: #F76363;
+  color: #f76363;
 `;
 
 const P = styled.p`
