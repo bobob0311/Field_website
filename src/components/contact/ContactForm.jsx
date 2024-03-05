@@ -116,18 +116,10 @@ const Option = styled.option`
   font-size: 1rem;
 `;
 
-const Notice = styled.span`
-  position: relative;
-
-  &::before {
-    content: '*';
-    color: #ff0202;
-    position: absolute;
-    margin: 0;
-    font-size: 1.5rem;
-    left: ${props => (props.$left ? props.$left : '')};
-    top: -0.2rem;
-  }
+const Check = styled.span`
+  color: red;
+  padding: 0 0 0.5rem 0.4rem;
+  font-size: 1.2rem;
 `;
 
 const initialValidationState = {
@@ -138,13 +130,13 @@ const initialValidationState = {
   isContentValid: false,
 };
 
-function InputBox({left, validName, imgSrc, imgAlt, name, children}) {
+function InputBox({validName, imgSrc, imgAlt, name, children}) {
   return (
     <InputLabel>
-      {!validName ? <Notice $left={left} /> : null}
       <VerticalCenter>
         <Img src={imgSrc} alt={imgAlt} />
         {name}
+        {!validName ? <Check> ✔</Check> : null}
       </VerticalCenter>
       {children}
     </InputLabel>
@@ -275,7 +267,6 @@ export default function ContactForm() {
         <Form onSubmit={enterdDataHandler}>
           <div>
             <InputBox
-              left='7.8rem'
               validName={validationState.isNameValid}
               imgSrc='happy.png'
               imgAlt='웃는 아이콘'
@@ -285,7 +276,6 @@ export default function ContactForm() {
             </InputBox>
 
             <InputBox
-              left='5.5rem'
               validName={validationState.isPhoneValid}
               imgSrc='Phone.png'
               imgAlt='핸드폰 아이콘'
@@ -304,7 +294,6 @@ export default function ContactForm() {
             </InputBox>
 
             <InputBox
-              left='5.5rem'
               validName={validationState.isEmailValid}
               imgSrc='Message.png'
               imgAlt='메세지 아이콘'
@@ -320,7 +309,6 @@ export default function ContactForm() {
           </div>
           <div>
             <InputBox
-              left='4.5rem'
               validName={validationState.isTitleValid}
               imgSrc='Check.png'
               imgAlt='체크모양 아이콘'
@@ -340,7 +328,6 @@ export default function ContactForm() {
             </TypeLabel>
 
             <InputBox
-              left='4.5rem'
               validName={validationState.isContentValid}
               imgSrc='Chat_alt_3.png'
               imgAlt='대화창 아이콘'
