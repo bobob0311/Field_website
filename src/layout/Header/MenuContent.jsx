@@ -16,21 +16,20 @@ const slideDownAnimation = keyframes`
 
 const HeaderContentSection = styled.div`
   position: fixed;
-  top: 4.5rem;
-  height: calc(100vh - 4.5rem);
+  top: 57px;
+  height: 100vh;
   width: 100vw;
   background: rgba(0, 0, 0, 0.5);
   z-index: 2;
-  // margin: 0 7.5%;
 `;
 
 const HeaderContent = styled.nav`
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   background: #141414;
   animation: ${slideDownAnimation} 0.3s ease-in-out;
-  padding: 0.5rem 0;
+  padding: 5px 0;
 `;
 
 const MenuContainer = styled.ul`
@@ -45,17 +44,16 @@ const MenuContainer = styled.ul`
 `;
 
 const OneMenu = styled.li`
-  height: 4rem;
+  height: 50px;
   a {
     font-family: 'Goblin One';
     display: flex;
     align-items: center;
     height: inherit;
-    width: 100vw;
-    font-size: 1.5rem;
+    font-size: 20px;
     text-decoration: none;
     color: ${theme.colors.white};
-    padding: 0 7.5%;
+    padding: 0 0 0 7.5%;
   }
 `;
 
