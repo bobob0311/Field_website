@@ -129,7 +129,7 @@ export default function NewsPage() {
     getDataYear();
     getDataNews(urlPage, urlCategory);
     setSelectCategory(urlCategory);
-  }, [location.search, selectCategory]);
+  }, [location.search]);
 
   return (
     <NewsMain>
