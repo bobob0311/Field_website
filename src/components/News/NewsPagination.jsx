@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {Pagination} from '@mui/material';
 import {Link, useNavigate} from 'react-router-dom';
@@ -66,7 +66,6 @@ const CustomPagination = styled(Pagination)`
 `;
 
 function NewsPagination({newsData, category, loading, newsDataLength}) {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
@@ -76,11 +75,15 @@ function NewsPagination({newsData, category, loading, newsDataLength}) {
     searchParams.set('page', value);
     navigate(`?${searchParams.toString()}`);
     setCurrentPage(value);
-    dispatch(setMonthTitle(value));
+    console.log(value);
   };
-  console.log(newsDataLength);
+
+  useEffect(() => {
+    const urlPage = new URLSearchParams(window.location.search).get('page') || 1;
+    setCurrentPage(urlPage);
+  }, [category]);
   const currentItemPerPage = newsData.items;
-  console.log(currentItemPerPage);
+
   return !loading &&
     currentItemPerPage.length > 0 &&
     currentItemPerPage[0].category === category ? (
