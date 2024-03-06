@@ -2,7 +2,9 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import {Pagination} from '@mui/material';
 import {Link, useNavigate} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
 import LoadingSpinner from '../LoadingSpinner';
+import {setMonthTitle} from '../../redux/monthFieldSlice';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -11,7 +13,7 @@ const PageWrapper = styled.div`
 `;
 
 const Ul = styled.ul`
-  margin: 2rem 7.5%;
+  margin: 0.75rem 7.5%;
 `;
 
 const Li = styled.li`
@@ -63,23 +65,25 @@ const CustomPagination = styled(Pagination)`
   }
 `;
 
-function NewsPagination({newsData, category, loading}) {
+function NewsPagination({newsData, category, loading, newsDataLength}) {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const itemsPerPage = 10;
+  const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
   const imageUrl = `${import.meta.env.VITE_API_URL}/api/files/`;
   const handlePageChange = (event, value) => {
-    setCurrentPage(value);
     const searchParams = new URLSearchParams(window.location.search);
     searchParams.set('page', value);
     navigate(`?${searchParams.toString()}`);
+    setCurrentPage(value);
+    dispatch(setMonthTitle(value));
   };
-  const currentItemPerPage = newsData.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage,
-  );
-
-  return !loading && newsData.length > 0 && newsData[0].category === category ? (
+  console.log(newsDataLength);
+  const currentItemPerPage = newsData.items;
+  console.log(currentItemPerPage);
+  return !loading &&
+    currentItemPerPage.length > 0 &&
+    currentItemPerPage[0].category === category ? (
     <>
       <Ul>
         {currentItemPerPage.map(item => (
@@ -88,14 +92,14 @@ function NewsPagination({newsData, category, loading}) {
               <Thumbnail src={`${imageUrl}/${item.collectionId}/${item.id}/${item.thumbnail}`} />
               <TitleSpan>{item.title1} </TitleSpan>
               <Title2Span>{item.title2 ? item.title2 : ''}</Title2Span>
-              <DateSpan>{item.actDate.slice(0, 10)}</DateSpan>
+              <DateSpan />
             </Link>
           </Li>
         ))}
       </Ul>
       <PageWrapper>
         <CustomPagination
-          count={Math.ceil(newsData.length / itemsPerPage)}
+          count={Math.ceil(newsDataLength / itemsPerPage)}
           color='primary'
           defaultPage={1}
           page={currentPage}

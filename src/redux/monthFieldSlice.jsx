@@ -3,7 +3,7 @@ import {createSlice} from '@reduxjs/toolkit';
 export const monthTitleSlice = createSlice({
   name: 'monthTitle',
   initialState: {
-    value: '',
+    value: 1,
   },
   reducers: {
     setMonthTitle: (state, action) => {
