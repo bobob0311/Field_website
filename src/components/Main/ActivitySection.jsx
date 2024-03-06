@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Swiper, SwiperSlide} from 'swiper/react';
+import 'swiper/swiper-bundle.css';
+import 'swiper/css/pagination';
+import {Pagination} from 'swiper/modules';
 import ActivityIntro from './ActivityIntro';
 import ActivityCamp from '../../../public/ActivityCamp.png';
 import ActivityLT from '../../../public/ActivityLt.png';
@@ -31,7 +34,13 @@ function ActivitySection() {
       <NanumH2 $margin='2rem 7.5% 1rem 7.5%'>인적, 학술적 교류를</NanumH2>
       <NanumH2 $margin='0 7.5% 2rem 7.5%'>실현하는 다양한 활동들</NanumH2>
       <SwiperContainer $margin='2rem 0'>
-        <Swiper slidesPerView={1.2} spaceBetween={20} centeredSlides='true'>
+        <Swiper
+          modules={[Pagination]}
+          slidesPerView={1.2}
+          spaceBetween={20}
+          centeredSlides='true'
+          pagination={{clickable: true}}
+        >
           <SwiperSlide>
             <ActivityIntro
               backgroundImage={ActivityLT}

@@ -21,10 +21,10 @@ export function NewsYearApi(category) {
   });
 }
 
-export function NewsApi(first, last, category) {
-  return pb.collection('News').getList(first, last, {
+export function NewsApi(first, category) {
+  return pb.collection('News').getList(first, 5, {
     filter: `category="${category}"`,
-    sort: '-created',
+    sort: '-created', // '-created'는 생성일 기준 내림차순 정렬을 의미합니다.
   });
 }
 
