@@ -32,13 +32,13 @@ const Question = styled.h3`
 `;
 
 const Answer = styled.li`
+  display: flex;
   font-size: 1rem;
   font-weight: 700;
-  margin: 0 0 1rem 0.25rem;
+  margin: 0 0 1rem 0.1rem;
   word-break: keep-all;
   letter-spacing: -0.05rem;
-  text-indent: -0.2rem;
-  padding: 0 0 0 7.5%;
+  padding: 0 5% 0 6%;
 `;
 
 const ButtonWrapper = styled.div`
@@ -72,6 +72,7 @@ const DepartmentButton = styled.button`
 const Number = styled.span`
   display: inline-block;
   width: 0.7rem;
+  padding: 0 0.2rem 0 0;
 `;
 
 const DEPARTMENTINFO = {
@@ -92,10 +93,10 @@ const DEPARTMENTINFO = {
   external: {
     department: '대외협력부',
     explain: [
-      '타인과 소통하며 협업 하기를 원하는 분!',
-      '인적, 학술적 교류 활성화를 중요시 하는 분!',
-      '컨텐츠 제작 및 기획에 관심이 많으신 분!',
-      '리더십있고 창의력이 넘치시는 분!',
+      '커뮤네케이션 및 협업 능력이 투철하신 분!',
+      '유연성과 적응력이 뛰어나신 분!',
+      '항상 적극적인 자세가 갖춰져 있는 분!',
+      '자기 효능감이 뛰어나신 분!',
     ],
     activity: [
       '고교 산업공학과 진로지도 강연',
@@ -120,10 +121,10 @@ const DEPARTMENTINFO = {
   relation: {
     department: '홍보부',
     explain: [
-      '타인과 소통하며 협업 하기를 원하는 분!',
-      '인적, 학술적 교류 활성화를 중요시 하는 분!',
-      '컨텐츠 제작 및 기획에 관심이 많으신 분!',
-      '리더십있고 창의력이 넘치시는 분!',
+      '부서 활동에 열정을 보여줄 수 있는 분!',
+      '팀워크를 중요시하는 분!',
+      '필드와 트렌드를 만들고 싶은 분!',
+      '산업공학 홍보에 관심이 많으신 분!',
     ],
     activity: [
       '산업공학과 및 FIELD 홍보 카드뉴스 제작',
@@ -140,7 +141,8 @@ function DepartmentBox({part, p, target}) {
       <ul>
         {DEPARTMENTINFO[part][target].map((item, index) => (
           <Answer key={index}>
-            <Number>{`${index + 1}.`}</Number> {item}
+            <Number>{`${index + 1}.`}</Number>
+            {item}
           </Answer>
         ))}
       </ul>

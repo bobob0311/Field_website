@@ -53,7 +53,7 @@ const DateP = styled(P)`
   font-weight: 700;
   letter-spacing: -1.5px;
   display: flex;
-  padding: 0 0 0 0.2rem;
+  padding: 0 0.5rem 0 0;
 `;
 
 const AddressLink = styled.a`
