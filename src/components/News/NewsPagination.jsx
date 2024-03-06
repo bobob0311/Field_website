@@ -77,13 +77,8 @@ function NewsPagination({newsData, category, loading, newsDataLength}) {
     setCurrentPage(value);
     console.log(value);
   };
-
-  useEffect(() => {
-    const urlPage = new URLSearchParams(window.location.search).get('page') || 1;
-    setCurrentPage(urlPage);
-  }, [category]);
-  const currentItemPerPage = newsData.items;
-
+  console.log(newsData.length);
+  const currentItemPerPage = newsData;
   return !loading &&
     currentItemPerPage.length > 0 &&
     currentItemPerPage[0].category === category ? (
