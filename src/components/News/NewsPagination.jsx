@@ -65,7 +65,7 @@ const CustomPagination = styled(Pagination)`
   }
 `;
 
-function NewsPagination({newsData, category, loading, newsDataLength}) {
+function NewsPagination({newsData, category, loading, filter}) {
   const navigate = useNavigate();
   const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
@@ -74,14 +74,22 @@ function NewsPagination({newsData, category, loading, newsDataLength}) {
     const searchParams = new URLSearchParams(window.location.search);
     searchParams.set('page', value);
     navigate(`?${searchParams.toString()}`);
-    setCurrentPage(value);
-    console.log(value);
   };
-  console.log(newsData.length);
-  const currentItemPerPage = newsData;
-  return !loading &&
-    currentItemPerPage.length > 0 &&
-    currentItemPerPage[0].category === category ? (
+
+  useEffect(() => {
+    const urlPage = new URLSearchParams(window.location.search).get('page');
+    setCurrentPage(parseInt(urlPage, 10) || 1);
+  }, [category, window.location.search]);
+
+  useEffect(() => {
+    if (filter) {
+      setCurrentPage(1);
+    }
+  }, [newsData]);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentItemPerPage = newsData.slice(startIndex, endIndex);
+  return !loading && currentItemPerPage.length > 0 ? (
     <>
       <Ul>
         {currentItemPerPage.map(item => (
@@ -97,7 +105,7 @@ function NewsPagination({newsData, category, loading, newsDataLength}) {
       </Ul>
       <PageWrapper>
         <CustomPagination
-          count={Math.ceil(newsDataLength / itemsPerPage)}
+          count={Math.ceil(newsData.length / itemsPerPage)}
           color='primary'
           defaultPage={1}
           page={currentPage}
