@@ -8,9 +8,23 @@ export function CampApi() {
   return pb.collection('camp').getFullList({});
 }
 
-export function NewsApi(selectCategory) {
+// export function NewsApi(selectCategory) {
+//   return pb.collection('News').getFullList({
+//     filter: `category="${selectCategory}"`,
+//   });
+// }
+
+export function NewsYearApi(category) {
   return pb.collection('News').getFullList({
-    filter: `category="${selectCategory}"`,
+    filter: `category="${category}"`,
+    fields: 'year, month',
+  });
+}
+
+export function NewsApi(first, last, category) {
+  return pb.collection('News').getList(first, last, {
+    filter: `category="${category}"`,
+    sort: '-created',
   });
 }
 

@@ -26,7 +26,7 @@ function App() {
           <Route path='/recruit' element={<RecruitPage />} />
           <Route path='/news' element={<NewsPage />} />
           <Route path='detail/:id' element={<NewsDetailPage />} />
-          <Route path='*' element={<NotFound />}></Route>
+          <Route path='*' element={<NotFound />} />
         </Route>
       </Routes>
     </ThemeProvider>
