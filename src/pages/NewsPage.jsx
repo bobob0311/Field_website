@@ -124,11 +124,7 @@ export default function NewsPage() {
 
   const getDataNews = async () => {
     try {
-      const response = await NewsApi(
-        (currentPage - 1) * 5 + 1,
-        (currentPage - 1) * 5 + 5,
-        selectCategory,
-      );
+      const response = await NewsApi(1, 5, selectCategory);
       setNewsData(response);
       console.log(response);
       setLoading(false);
