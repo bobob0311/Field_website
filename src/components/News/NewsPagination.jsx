@@ -78,9 +78,8 @@ function NewsPagination({newsData, category, loading, newsDataLength}) {
     setCurrentPage(value);
     dispatch(setMonthTitle(value));
   };
-  console.log(newsDataLength);
-  const currentItemPerPage = newsData.items;
-  console.log(currentItemPerPage);
+  console.log(newsData.length);
+  const currentItemPerPage = newsData;
   return !loading &&
     currentItemPerPage.length > 0 &&
     currentItemPerPage[0].category === category ? (
