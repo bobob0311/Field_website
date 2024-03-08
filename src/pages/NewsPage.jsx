@@ -63,65 +63,90 @@ export default function NewsPage() {
   const [renderData, setRenderData] = useState([]);
   const [filter, setFilter] = useState(false);
   const [selectedYear, setSelectedYear] = useState('선택하지않음');
+  const [selectedMonth, setSelectedMonth] = useState('선택하지않음');
 
   const handleYearChange = e => {
+    navigate(`?category=월간필드&year=${e.target.value}`);
     setSelectedYear(e.target.value);
-    let monthByYear;
-    if (e.target.value === '선택하지않음') {
-      setRenderData(newsData);
-      setNewsMonth(
-        [...new Set(response1.map(item => item.month).filter(month => month !== 0))].sort(
-          (a, b) => a - b,
-        ),
-      );
-    } else {
-      const yearFilterData = newsData.filter(item => item.year === parseInt(e.target.value, 10));
-      monthByYear = [...new Set(yearFilterData.map(item => item.month))];
-      setRenderData(yearFilterData);
-      console.log(yearFilterData);
-      setFilter(true);
-    }
-    console.log(monthByYear);
-    setNewsMonth(monthByYear);
   };
 
   const handleMonthChange = e => {
-    let monthFilterData;
-    if (e.target.value === '선택하지않음') {
-      monthFilterData = newsData.filter(item =>
-        selectedYear === '선택하지않음' ? item : item.year === parseInt(selectedYear, 10),
+    navigate(`?category=월간필드&year=${selectedYear}&month=${e.target.value}`);
+    setSelectedMonth(e.target.value);
+  };
+
+  function yearFilter(data, filterYear) {
+    setSelectedYear(filterYear);
+    let monthByYear;
+    if (filterYear === '선택하지않음') {
+      setRenderData(data);
+      monthByYear = [...new Set(data.map(item => item.month))];
+    } else {
+      const yearFilterData = data.filter(item => item.year === parseInt(filterYear, 10));
+      monthByYear = [...new Set(yearFilterData.map(item => item.month))];
+      setRenderData(yearFilterData);
+      setFilter(true);
+    }
+    setSelectedMonth('선택하지않음');
+    setNewsMonth(monthByYear);
+  }
+
+  function monthFilter(data, filterYear, filterMonth) {
+    setSelectedMonth(filterMonth);
+    let monthFilteredData;
+    if (filterMonth === '선택하지않음') {
+      monthFilteredData = data.filter(item =>
+        filterYear === '선택하지않음' ? item : item.year === parseInt(filterYear, 10),
       );
     } else {
-      monthFilterData = newsData.filter(
+      monthFilteredData = data.filter(
         item =>
-          item.month === parseInt(e.target.value, 10) &&
-          (selectedYear === '선택하지않음' ? true : item.year === parseInt(selectedYear, 10)),
+          item.month === parseInt(filterMonth, 10) &&
+          (filterYear === '선택하지않음' ? true : item.year === parseInt(filterYear, 10)),
       );
     }
-    setRenderData(monthFilterData);
+    setRenderData(monthFilteredData);
     setFilter(true);
-  };
+  }
 
   const handleButtonClick = item => {
     setSelectCategory(item);
-    navigate(`/news?category=${item}`);
+    if (item === '월간필드') {
+      navigate(`/news?category=월간필드&year=선택하지않음&month=선택하지않음`);
+    } else {
+      navigate(`/news?category=${item}`);
+    }
   };
+
+  function initialYearMonth(response) {
+    const uniqueYears = [
+      ...new Set(response.map(item => item.year).filter(year => year !== 0)),
+    ].sort((a, b) => b - a);
+    const uniqueMonths = [
+      ...new Set(response.map(item => item.month).filter(month => month !== 0)),
+    ].sort((a, b) => a - b);
+    setNewsYear(uniqueYears);
+    setNewsMonth(uniqueMonths);
+  }
 
   const getDataNews = async category => {
     try {
-      const response1 = await NewsApi(category);
-      console.log(response1);
-      setNewsData(response1);
-      setRenderData(response1);
+      let response;
+      const categoryData = JSON.parse(localStorage.getItem(`${category}`));
+      if (categoryData) {
+        response = categoryData;
+      } else {
+        response = await NewsApi(category);
+        localStorage.setItem(`${category}`, JSON.stringify(response));
+      }
+      setNewsData(response);
+
       if (category === '월간필드') {
-        const uniqueYears = [
-          ...new Set(response1.map(item => item.year).filter(year => year !== 0)),
-        ].sort((a, b) => b - a);
-        const uniqueMonths = [
-          ...new Set(response1.map(item => item.month).filter(month => month !== 0)),
-        ].sort((a, b) => a - b);
-        setNewsYear(uniqueYears);
-        setNewsMonth(uniqueMonths);
+        initialYearMonth(response);
+        const urlYear = new URLSearchParams(location.search).get('year') || '선택하지않음';
+        const urlMonth = new URLSearchParams(location.search).get('month') || '선택하지않음';
+        yearFilter(response, urlYear);
+        monthFilter(response, urlYear, urlMonth);
       }
       setLoading(false);
     } catch (error) {
@@ -130,9 +155,12 @@ export default function NewsPage() {
   };
 
   useEffect(() => {
-    const urlCategory = new URLSearchParams(location.search).get('category') || '월간필드';
     setLoading(true);
+    const urlCategory = new URLSearchParams(location.search).get('category') || '월간필드';
     getDataNews(urlCategory);
+    setSelectCategory(urlCategory);
+    console.log(newsData);
+    setLoading(false);
   }, [location.search]);
 
   return (
@@ -150,7 +178,12 @@ export default function NewsPage() {
       </ButtonWrapper>
       {selectCategory === '월간필드' && (
         <DropdownWrapper>
-          <TypeSelect name='Type' autoComplete='off' onChange={handleYearChange}>
+          <TypeSelect
+            value={selectedYear}
+            name='Type'
+            autoComplete='off'
+            onChange={handleYearChange}
+          >
             <Option value='선택하지않음'>년도</Option>
             {newsYear.map(item => (
               <Option value={item} key={item}>
@@ -158,7 +191,13 @@ export default function NewsPage() {
               </Option>
             ))}
           </TypeSelect>
-          <TypeSelect name='Type' autoComplete='off' width='4.25rem' onChange={handleMonthChange}>
+          <TypeSelect
+            value={selectedMonth}
+            name='Type'
+            autoComplete='off'
+            width='4.25rem'
+            onChange={handleMonthChange}
+          >
             <Option value='선택하지않음'>월</Option>
             {newsMonth.map(item => (
               <Option value={item} key={item}>
