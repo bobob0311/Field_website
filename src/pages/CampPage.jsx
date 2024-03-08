@@ -16,9 +16,8 @@ function CampPage() {
       <CampImageSection
         title='ON/OFF blended'
         img={Camp1}
-        firstLine='본 캠프는 2박 3일 오프라인 캠프 전'
-        secondLine='사전 데모데이를 통해 팀원들과'
-        thirdLine='교류할 수 있는 기회를 제공합니다'
+        firstLine='사전 데모데이를 통해 팀원들과'
+        secondLine='교류할 수 있는 기회를 제공합니다'
       />
       <CampImageSection
         title='Various Program'

@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {useNavigate, useLocation} from 'react-router-dom';
-import {useSelector} from 'react-redux';
 import CategoryButton from '../components/CategoryButton';
 import NewsPagination from '../components/News/NewsPagination';
-import {NewsApi, NewsYearApi} from '../lib/Apiservice';
+import {NewsApi} from '../lib/Apiservice';
 import theme from '../theme';
 
 const NewsMain = styled.section`
@@ -55,34 +54,34 @@ const DropdownWrapper = styled.div`
 export default function NewsPage() {
   const navigate = useNavigate();
   const location = useLocation();
-  const currentPage = useSelector(state => state.monthTitle.value);
   const categoryArr = ['월간필드', '취업/진로', '공모전', '공지'];
   const [selectCategory, setSelectCategory] = useState('월간필드');
   const [loading, setLoading] = useState(false);
   const [newsYear, setNewsYear] = useState([]);
   const [newsData, setNewsData] = useState([]);
   const [newsMonth, setNewsMonth] = useState([]);
-  const [datalength, setDataLength] = useState(0);
   const [renderData, setRenderData] = useState([]);
+  const [filter, setFilter] = useState(false);
   const [selectedYear, setSelectedYear] = useState('선택하지않음');
 
   const handleYearChange = e => {
-    console.log(newsData);
     setSelectedYear(e.target.value);
-    console.log(e.target.value);
-    let dataSize;
     let monthByYear;
     if (e.target.value === '선택하지않음') {
       setRenderData(newsData);
-      dataSize = newsData.length;
-      monthByYear = [...new Set(newsData.map(item => item.month))];
+      setNewsMonth(
+        [...new Set(response1.map(item => item.month).filter(month => month !== 0))].sort(
+          (a, b) => a - b,
+        ),
+      );
     } else {
       const yearFilterData = newsData.filter(item => item.year === parseInt(e.target.value, 10));
       monthByYear = [...new Set(yearFilterData.map(item => item.month))];
-      dataSize = yearFilterData.length;
       setRenderData(yearFilterData);
+      console.log(yearFilterData);
+      setFilter(true);
     }
-    setDataLength(dataSize);
+    console.log(monthByYear);
     setNewsMonth(monthByYear);
   };
 
@@ -93,18 +92,14 @@ export default function NewsPage() {
         selectedYear === '선택하지않음' ? item : item.year === parseInt(selectedYear, 10),
       );
     } else {
-      console.log(newsData);
-      console.log(selectedYear);
       monthFilterData = newsData.filter(
         item =>
           item.month === parseInt(e.target.value, 10) &&
           (selectedYear === '선택하지않음' ? true : item.year === parseInt(selectedYear, 10)),
       );
     }
-    const dataSize = monthFilterData.length;
-    console.log(monthFilterData);
-    setDataLength(dataSize);
     setRenderData(monthFilterData);
+    setFilter(true);
   };
 
   const handleButtonClick = item => {
@@ -112,84 +107,32 @@ export default function NewsPage() {
     navigate(`/news?category=${item}`);
   };
 
-  // const filteredNewsData = newsData.filter(item => {
-  //   const year = item.actDate.slice(0, 4);
-  //   const month = item.actDate.slice(5, 7);
-  //   return (!selectedYear || year === selectedYear) && (!selectedMonth || month === selectedMonth);
-  // });
-
-  // const getDataYear = async () => {
-  //   const localYearData = JSON.parse(localStorage.getItem('년도'));
-  //   const localMonthData = JSON.parse(localStorage.getItem('월'));
-  //   const localDataLength = parseInt(localStorage.getItem(`${selectCategory}개수`), 10);
-  //   if (localMonthData && localYearData && localDataLength) {
-  //     setNewsYear(localYearData);
-  //     setNewsMonth(localMonthData);
-  //     setDataLength(localDataLength);
-  //   } else {
-  //     try {
-  //       const response = await NewsYearApi(selectCategory);
-  //       console.log(response);
-  //       const initalDataSize = response.length;
-  //       setDataLength(initalDataSize);
-  //       if (selectCategory === '월간필드') {
-  //         const uniqueYears = [
-  //           ...new Set(response.map(item => item.year).filter(year => year !== 0)),
-  //         ].sort((a, b) => b - a);
-  //         const uniqueMonths = [
-  //           ...new Set(response.map(item => item.month).filter(month => month !== 0)),
-  //         ].sort((a, b) => a - b);
-  //         setNewsYear(uniqueYears);
-  //         setNewsMonth(uniqueMonths);
-  //         setRenderData(newsData);
-  //         console.log(newsData);
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  // };
-
-  const getDataNews = async () => {
+  const getDataNews = async category => {
     try {
-      const response1 = await NewsApi(
-        (currentPage - 1) * 5 + 1,
-        (currentPage - 1) * 5 + 5,
-        selectCategory,
-      );
-      console.log(response1.items);
-      setNewsData(response1.items);
-
-      setLoading(false);
-
-      const response = await NewsYearApi(selectCategory);
-      console.log(response);
-      const initalDataSize = response.length;
-      setDataLength(initalDataSize);
-      if (selectCategory === '월간필드') {
+      const response1 = await NewsApi(category);
+      console.log(response1);
+      setNewsData(response1);
+      setRenderData(response1);
+      if (category === '월간필드') {
         const uniqueYears = [
-          ...new Set(response.map(item => item.year).filter(year => year !== 0)),
+          ...new Set(response1.map(item => item.year).filter(year => year !== 0)),
         ].sort((a, b) => b - a);
         const uniqueMonths = [
-          ...new Set(response.map(item => item.month).filter(month => month !== 0)),
+          ...new Set(response1.map(item => item.month).filter(month => month !== 0)),
         ].sort((a, b) => a - b);
         setNewsYear(uniqueYears);
         setNewsMonth(uniqueMonths);
-        setRenderData(response1.items);
       }
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    setLoading(true);
-    getDataNews();
-  }, [selectCategory, currentPage]);
-
-  useEffect(() => {
     const urlCategory = new URLSearchParams(location.search).get('category') || '월간필드';
-    setSelectCategory(urlCategory);
+    setLoading(true);
+    getDataNews(urlCategory);
   }, [location.search]);
 
   return (
@@ -227,10 +170,11 @@ export default function NewsPage() {
       )}
       <NewsPagination
         // newsData={selectCategory === '월간필드' ? filteredNewsData : newsData}
-        newsDataLength={datalength}
         newsData={selectCategory === '월간필드' ? renderData : newsData}
+        // newsData={newsData}
         category={selectCategory}
         loading={loading}
+        filter={filter}
       />
     </NewsMain>
   );
