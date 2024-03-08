@@ -160,7 +160,6 @@ export default function NewsPage() {
     const urlCategory = new URLSearchParams(location.search).get('category') || '월간필드';
     getDataNews(urlCategory);
     setSelectCategory(urlCategory);
-    console.log(newsData);
     setLoading(false);
   }, [location.search]);
 
