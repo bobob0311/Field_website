@@ -1,17 +1,13 @@
-import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
-import {Swiper, SwiperSlide} from 'swiper/react';
-import 'swiper/swiper-bundle.css';
+import {useNavigate, useLocation} from 'react-router-dom';
 import CategoryButton from '../components/CategoryButton';
-import LoadingSpinner from '../components/LoadingSpinner';
-import ModalSection from '../components/ModalSection';
 import NewsPagination from '../components/News/NewsPagination';
-import {NewsApi, NewsMonthApi} from '../lib/Apiservice';
-import {setMonthTitle} from '../redux/monthFieldSlice';
+import {NewsApi} from '../lib/Apiservice';
+import theme from '../theme';
 
 const NewsMain = styled.section`
-  height: calc(100vh - 4.5rem - 140.78px);
+  height: calc(100vh - 58px - 112px);
 `;
 
 const H1 = styled.h1`
@@ -21,115 +17,152 @@ const H1 = styled.h1`
   text-align: center;
 `;
 
-const SwiperContainer = styled.div`
-  width: 100%;
-  margin: 3rem 0;
-`;
-
-const Image = styled.img`
-  width: 100%;
-  object-fit: cover;
-  border-radius: 1rem;
-`;
-
 const ButtonWrapper = styled.div`
   margin: 0 5%;
 `;
 
-function NewsPage() {
-  const dispatch = useDispatch();
-  const monthFieldTitle = useSelector(state => state.monthTitle.value);
-  const [loading, setLoading] = useState(true);
-  const [showedMonthField, setShowedMonthField] = useState({});
+const TypeSelect = styled.select`
+  margin: 1rem 0 0 0;
+  color: black;
+  appearance: none;
+  font-size: 1rem;
+  font-family: 'SUIT-Regular';
+  font-weight: 700;
+  background: ${theme.colors.lightgray} url('Expand_down.png') no-repeat 95% / 25px 25px;
+  border-radius: 1rem;
+  padding: 0.375rem 0 0.375rem 0.5rem;
+  width: ${props => props.width || '5.75rem'};
+  height: 2rem;
+  z-index: 0;
+`;
+
+const Option = styled.option`
+  color: black;
+  appearance: none;
+  font-family: 'SUIT-Regular';
+  font-weight: 900;
+  font-size: 1rem;
+`;
+
+const DropdownWrapper = styled.div`
+  margin: 0 7.5%;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: end;
+`;
+
+export default function NewsPage() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const categoryArr = ['월간필드', '취업/진로', '공모전', '공지'];
   const [selectCategory, setSelectCategory] = useState('월간필드');
-  const categoryArr = ['월간필드', '취업/진로', 'FIELD', '공모전'];
+  const [loading, setLoading] = useState(false);
+  const [newsYear, setNewsYear] = useState([]);
   const [newsData, setNewsData] = useState([]);
-  const imageUrl = `${import.meta.env.VITE_API_URL}/api/files/damzbyg116zhar4/`;
+  const [newsMonth, setNewsMonth] = useState([]);
+  const [renderData, setRenderData] = useState([]);
+  const [filter, setFilter] = useState(false);
+  const [selectedYear, setSelectedYear] = useState('선택하지않음');
+  const [selectedMonth, setSelectedMonth] = useState('선택하지않음');
+
+  const handleYearChange = e => {
+    navigate(`?category=월간필드&year=${e.target.value}`);
+    setSelectedYear(e.target.value);
+  };
+
+  const handleMonthChange = e => {
+    navigate(`?category=월간필드&year=${selectedYear}&month=${e.target.value}`);
+    setSelectedMonth(e.target.value);
+  };
+
+  function yearFilter(data, filterYear) {
+    setSelectedYear(filterYear);
+    let monthByYear;
+    if (filterYear === '선택하지않음') {
+      setRenderData(data);
+      monthByYear = [...new Set(data.map(item => item.month))];
+    } else {
+      const yearFilterData = data.filter(item => item.year === parseInt(filterYear, 10));
+      monthByYear = [...new Set(yearFilterData.map(item => item.month))];
+      setRenderData(yearFilterData);
+      setFilter(true);
+    }
+    setSelectedMonth('선택하지않음');
+    setNewsMonth(monthByYear);
+  }
+
+  function monthFilter(data, filterYear, filterMonth) {
+    setSelectedMonth(filterMonth);
+    let monthFilteredData;
+    if (filterMonth === '선택하지않음') {
+      monthFilteredData = data.filter(item =>
+        filterYear === '선택하지않음' ? item : item.year === parseInt(filterYear, 10),
+      );
+    } else {
+      monthFilteredData = data.filter(
+        item =>
+          item.month === parseInt(filterMonth, 10) &&
+          (filterYear === '선택하지않음' ? true : item.year === parseInt(filterYear, 10)),
+      );
+    }
+    setRenderData(monthFilteredData);
+    setFilter(true);
+  }
+
   const handleButtonClick = item => {
     setSelectCategory(item);
-  };
-  const monthLocalData = JSON.parse(localStorage.getItem('monthFieldTitle'));
-
-  const fetchNewsData = async category => {
-    let response = JSON.parse(localStorage.getItem(category));
-    if (!response) {
-      response = await NewsApi(category);
-      localStorage.setItem(category, JSON.stringify(response));
-    }
-    return response;
-  };
-
-  const updateMonthFieldTitle = (response, category, title) => {
-    if (category === '월간필드' && title === '') {
-      const titleArr = response.map(item => item.title);
-      dispatch(setMonthTitle(titleArr[titleArr.length - 1]));
+    if (item === '월간필드') {
+      navigate(`/news?category=월간필드&year=선택하지않음&month=선택하지않음`);
+    } else {
+      navigate(`/news?category=${item}`);
     }
   };
 
-  const getDataNews = async () => {
-    try {
-      const response = await fetchNewsData(selectCategory);
-      updateMonthFieldTitle(response, selectCategory, monthFieldTitle);
-      setNewsData(response);
-      setLoading(false);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const getDataMonthField = async () => {
-    let response;
-    try {
-      if (monthLocalData && monthFieldTitle === monthLocalData.photo) {
-        response = JSON.parse(monthLocalData);
-      } else {
-        response = await NewsMonthApi(monthFieldTitle);
-        localStorage.setItem('monthFieldTitle', JSON.stringify(response));
-      }
-      setShowedMonthField(response[0]);
-      setLoading(false);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    getDataNews();
-  }, [selectCategory]);
-
-  useEffect(() => {
-    if (selectCategory === '월간필드' && monthFieldTitle !== '') {
-      getDataMonthField(monthFieldTitle);
-    }
-  }, [monthFieldTitle]);
-
-  let content;
-
-  if (loading) {
-    content = <LoadingSpinner />;
-  } else if (selectCategory === '월간필드' && showedMonthField?.photo) {
-    content = (
-      <>
-        <ModalSection
-          timeDatalst={newsData.map(item => item.title)}
-          title={monthFieldTitle}
-          color='yellow'
-          $margin='3rem 0'
-        />
-        <SwiperContainer>
-          <Swiper slidesPerView={1.2} spaceBetween={20} centeredSlides='true'>
-            {showedMonthField.photo.map(item => (
-              <SwiperSlide key={item}>
-                <Image src={`${imageUrl}${showedMonthField.id}/${item}`} alt={showedMonthField} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </SwiperContainer>
-      </>
-    );
-  } else if (selectCategory !== '월간필드') {
-    content = <NewsPagination newsData={newsData} category={selectCategory} />;
+  function initialYearMonth(response) {
+    const uniqueYears = [
+      ...new Set(response.map(item => item.year).filter(year => year !== 0)),
+    ].sort((a, b) => b - a);
+    const uniqueMonths = [
+      ...new Set(response.map(item => item.month).filter(month => month !== 0)),
+    ].sort((a, b) => a - b);
+    setNewsYear(uniqueYears);
+    setNewsMonth(uniqueMonths);
   }
+
+  const getDataNews = async category => {
+    try {
+      let response;
+      const categoryData = JSON.parse(localStorage.getItem(`${category}`));
+      if (categoryData) {
+        response = categoryData;
+      } else {
+        response = await NewsApi(category);
+        localStorage.setItem(`${category}`, JSON.stringify(response));
+      }
+      setNewsData(response);
+
+      if (category === '월간필드') {
+        initialYearMonth(response);
+        const urlYear = new URLSearchParams(location.search).get('year') || '선택하지않음';
+        const urlMonth = new URLSearchParams(location.search).get('month') || '선택하지않음';
+        yearFilter(response, urlYear);
+        monthFilter(response, urlYear, urlMonth);
+      }
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    const urlCategory = new URLSearchParams(location.search).get('category') || '월간필드';
+    getDataNews(urlCategory);
+    setSelectCategory(urlCategory);
+    console.log(newsData);
+    setLoading(false);
+  }, [location.search]);
+
   return (
     <NewsMain>
       <H1>NEWS</H1>
@@ -143,9 +176,45 @@ function NewsPage() {
           />
         ))}
       </ButtonWrapper>
-      {content}
+      {selectCategory === '월간필드' && (
+        <DropdownWrapper>
+          <TypeSelect
+            value={selectedYear}
+            name='Type'
+            autoComplete='off'
+            onChange={handleYearChange}
+          >
+            <Option value='선택하지않음'>년도</Option>
+            {newsYear.map(item => (
+              <Option value={item} key={item}>
+                {item}년
+              </Option>
+            ))}
+          </TypeSelect>
+          <TypeSelect
+            value={selectedMonth}
+            name='Type'
+            autoComplete='off'
+            width='4.25rem'
+            onChange={handleMonthChange}
+          >
+            <Option value='선택하지않음'>월</Option>
+            {newsMonth.map(item => (
+              <Option value={item} key={item}>
+                {item}월
+              </Option>
+            ))}
+          </TypeSelect>
+        </DropdownWrapper>
+      )}
+      <NewsPagination
+        // newsData={selectCategory === '월간필드' ? filteredNewsData : newsData}
+        newsData={selectCategory === '월간필드' ? renderData : newsData}
+        // newsData={newsData}
+        category={selectCategory}
+        loading={loading}
+        filter={filter}
+      />
     </NewsMain>
   );
 }
-
-export default NewsPage;

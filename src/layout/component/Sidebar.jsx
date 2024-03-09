@@ -23,37 +23,12 @@ const turnLeft = keyframes`
   }
 `;
 
-const slideUp70 = keyframes`
+const slideUp = initialY => keyframes`
   0% {
-
-    transform: translateY(70%);
+    transform: translateY(${initialY}%);
   }
 
   100% {
- 
-    transform: translateY(0%);
-  }
-`;
-const slideUp190 = keyframes`
-  0% {
-
-    transform: translateY(190%);
-  }
-
-  100% {
- 
-    transform: translateY(0%);
-  }
-`;
-
-const slideUp310 = keyframes`
-  0% {
-
-    transform: translateY(310%);
-  }
-
-  100% {
- 
     transform: translateY(0%);
   }
 `;
@@ -67,7 +42,7 @@ const IconWrapper = styled.aside`
   z-index: 2;
 `;
 
-const BaseIcon = styled.button`
+const BaseIconButton = styled.button`
   width: 48px;
   height: 48px;
   border: none;
@@ -76,7 +51,7 @@ const BaseIcon = styled.button`
   margin: 4px 0;
 `;
 
-const Icon = styled.a`
+const SNSIcon = styled.a`
   animation: ${props => props.$move} 0.5s ease-in-out;
   width: 48px;
   height: 48px;
@@ -84,7 +59,7 @@ const Icon = styled.a`
   margin: 4px 0;
 `;
 
-const Plus = styled.svg`
+const BaseIcon = styled.svg`
   animation: ${({$toggle}) =>
     $toggle
       ? css`
@@ -95,11 +70,11 @@ const Plus = styled.svg`
         `};
 `;
 
-function LinkIcon({move, src, alt, href}) {
+function SNSIconLink({move, src, alt, href}) {
   return (
-    <Icon $move={move} href={href} target='_blank'>
+    <SNSIcon $move={move} href={href} target='_blank'>
       <img src={src} alt={alt} />
-    </Icon>
+    </SNSIcon>
   );
 }
 
@@ -113,28 +88,28 @@ export default function SideBar() {
     <IconWrapper onClick={() => openHandler()}>
       {toggle && (
         <>
-          <LinkIcon
-            move={slideUp310}
+          <SNSIconLink
+            move={slideUp(310)}
             src={KakaoTalk}
             alt='KakaoTalk Icon'
             href='http://pf.kakao.com/_uwNxeK'
           />
-          <LinkIcon
-            move={slideUp190}
+          <SNSIconLink
+            move={slideUp(190)}
             src={Instagram}
             alt='instagram Icon'
             href='https://www.instagram.com/iefield/'
           />
-          <LinkIcon
-            move={slideUp70}
+          <SNSIconLink
+            move={slideUp(70)}
             src={Youtube}
             alt='Youtube Icon'
             href='https://www.youtube.com/@field2023'
           />
         </>
       )}
-      <BaseIcon>
-        <Plus
+      <BaseIconButton>
+        <BaseIcon
           $toggle={toggle ? 'true' : undefined}
           xmlns='http://www.w3.org/2000/svg'
           viewBox='0 0 24 24'
@@ -148,8 +123,8 @@ export default function SideBar() {
         >
           <line x1='0' y1='12' x2='24' y2='12' />
           <line x1='12' y1='0' x2='12' y2='24' />
-        </Plus>
-      </BaseIcon>
+        </BaseIcon>
+      </BaseIconButton>
     </IconWrapper>
   );
 }
