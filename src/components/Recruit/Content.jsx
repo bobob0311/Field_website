@@ -143,8 +143,10 @@ export default function Content() {
   }
 
   function dateDataLocalStored(dateArray) {
+    const now = new Date();
     const localdateArray = {key: dateArray};
-    localStorage.setItem('date', JSON.stringify(localdateArray));
+    localStorage.setItem('모집일정', JSON.stringify(localdateArray));
+    localStorage.setItem('모집일정-lastUpdate', now.getTime().toString());
   }
 
   async function initialSetup() {
@@ -159,12 +161,14 @@ export default function Content() {
       setIsError(true);
     }
   }
-
   useEffect(() => {
-    const storedObject = JSON.parse(localStorage.getItem('date'));
-    if (!storedObject) {
+    const now = new Date();
+    const lastUpdate = localStorage.getItem(`모집일정-lastUpdate`);
+    const lastUpdateTime = lastUpdate ? new Date(parseInt(lastUpdate, 10)) : null;
+    if (!lastUpdate || now - lastUpdateTime > 60 * 60 * 1000) {
       initialSetup();
     } else {
+      const storedObject = JSON.parse(localStorage.getItem('모집일정'));
       setDateData(storedObject.key);
     }
   }, []);
