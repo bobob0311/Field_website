@@ -113,7 +113,7 @@ export default function ContactModal(props) {
       <>
         <div>
           <ModalP mg='2.2rem 0 0 0'>올바르지 않는 형식입니다.</ModalP>
-          <ModalP mg='0.7rem 0 0 0'>체크된 항목을 확인해주세요</ModalP>
+          <ModalP mg='0.7rem 0 0 0'>별표된 항목을 확인해주세요.</ModalP>
         </div>
         <ModalButton type='button' onClick={onClose}>
           확인하기

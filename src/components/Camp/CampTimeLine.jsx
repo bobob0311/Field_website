@@ -13,6 +13,7 @@ const Section = styled.section`
 const H2 = styled.h2`
   font-family: 'Goblin One';
   font-size: 1.875rem;
+  margin: 4rem 0 2rem 0;
 `;
 
 function CampTimeLine() {
