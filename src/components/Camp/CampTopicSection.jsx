@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import styled from 'styled-components';
-import ModalSection from '../ModalSection';
 import theme from '../../theme';
 import Button from '../Button';
 import {CampApi} from '../../lib/Apiservice';
 import {setCampTitle} from '../../redux/campTitleSlice';
+import Dropdown from '../Dropdown';
 
 const Section = styled.section`
   display: flex;
@@ -15,6 +15,14 @@ const Section = styled.section`
   text-align: center;
   align-items: center;
   gap: 0.25rem;
+`;
+
+const H2 = styled.h2`
+  margin: 6rem 7.5% 1rem 7.5%;
+  font-size: 1.625rem;
+  color: ${props => (props.$color ? theme.colors[props.$color] : 'white')};
+  font-family: Nanum Myeongjo;
+  font-weight: 900;
 `;
 
 const H3 = styled.h3`
@@ -68,24 +76,19 @@ function CampTopicSection() {
 
   const getDataFieldYear = async () => {
     try {
+      let response;
       if (localData) {
-        const jsonData = JSON.parse(localData);
-        const years = jsonData.map(item => item.year);
-        const uniqueYears = [...new Set(years)];
-        const maxYear = Math.max(...uniqueYears);
-        setCampFullData(jsonData);
-        setCampDataYear(uniqueYears);
-        dispatch(setCampTitle(maxYear));
+        response = JSON.parse(localData);
       } else {
-        const response = await CampApi();
-        const years = response.map(item => item.year);
-        const uniqueYears = [...new Set(years)];
-        const maxYear = Math.max(...uniqueYears);
+        response = await CampApi();
         localStorage.setItem('fieldData', JSON.stringify(response));
-        setCampFullData(response);
-        setCampDataYear(uniqueYears);
-        dispatch(setCampTitle(maxYear));
       }
+      const years = response.map(item => item.year);
+      const uniqueYears = [...new Set(years)];
+      const maxYear = Math.max(...uniqueYears);
+      setCampFullData(response);
+      setCampDataYear(uniqueYears);
+      dispatch(setCampTitle(maxYear));
     } catch (err) {
       console.log(err);
     }
@@ -107,13 +110,8 @@ function CampTopicSection() {
 
   return (
     <Section>
-      <ModalSection
-        title='역대 FIELD CAMP'
-        font='Nanum Myeongjo'
-        timeDatalst={campDataYear}
-        name='FIELD CAMP'
-      />
-      <H3>{campYear} FIELD CAMP</H3>
+      <H2>역대 FIELD CAMP</H2>
+      <Dropdown title='역대 FIELD CAMP' titleArr={campDataYear} />
       {showedCampData.map((camp, index) => (
         <ButtonWrapper key={camp.id}>
           <Figure key={camp.id}>

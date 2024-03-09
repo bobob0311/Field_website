@@ -77,6 +77,7 @@ function Modal({titleData, showModal, setShowModal, name = '', setModalItem}) {
               onClick={() => {
                 setShowModal(false);
                 dispatch(setModalItem(item));
+                console.log(item);
               }}
             >
               {item} {name}
