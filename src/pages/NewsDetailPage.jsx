@@ -8,7 +8,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 
 const Section = styled.section`
   margin: 0 7.5%;
-  height: 70vh;
+  height: calc(100vh - 58px - 112px);
 `;
 
 const H1 = styled.h1`
@@ -117,11 +117,11 @@ function NewsDetailPage() {
         <LoadingSpinner />
       ) : (
         <>
-          <H2>{detailNewsData.title}</H2>
+          <H2>{detailNewsData.title.length}</H2>
           <P>{detailNewsData.contents}</P>
           {detailNewsData.url && <A href={`${detailNewsData.url}`}>👉해당 공모전 보러가기</A>}
           <Wrapper>
-            {detailNewsData?.file ? (
+            {detailNewsData?.file.length > 0 ? (
               <A href={`${fileUrl}${detailNewsData.id}/${detailNewsData.file[0]}`} target='_blank'>
                 첨부파일
                 <Icon src={fileIcon} />

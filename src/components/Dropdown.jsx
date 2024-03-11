@@ -4,7 +4,7 @@ import {useDispatch} from 'react-redux';
 import {setCampTitle} from '../redux/campTitleSlice';
 
 const TypeSelect = styled.select`
-  margin: 1rem 7.5%;
+  margin: 1.25rem 7.5%;
   color: white;
   appearance: none;
   border: 0.11rem solid white;
@@ -34,7 +34,6 @@ function Dropdown({title, titleArr}) {
   const dispatch = useDispatch();
   const handleChange = event => {
     const selectedTitle = parseInt(event.target.value, 10);
-    console.log(selectedTitle);
     dispatch(setCampTitle(selectedTitle));
   };
 

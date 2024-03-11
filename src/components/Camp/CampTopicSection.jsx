@@ -25,13 +25,6 @@ const H2 = styled.h2`
   font-weight: 900;
 `;
 
-const H3 = styled.h3`
-  font-size: 1rem;
-  font-weight: bold;
-  font-family: SUIT-Heavy;
-  margin: 0 0 1rem 0;
-`;
-
 const Figure = styled.figure`
   display: flex;
   flex-direction: column;
@@ -42,8 +35,8 @@ const Figure = styled.figure`
 const Img = styled.img`
   width: 100%;
   height: 100%;
-  margin: 1rem 0;
   border-radius: 1rem;
+  margin: 0 0 1.25rem 0;
   order: 2;
 `;
 
@@ -52,9 +45,6 @@ const Figcaption = styled.figcaption`
   color: ${props => (props.$color ? theme.colors[props.$color] : theme.colors.red)};
   font-family: 'Goblin One';
   font-size: 1.25rem;
-`;
-
-const ButtonWrapper = styled.div`
   margin: 0 0 1.25rem 0;
 `;
 
@@ -113,30 +103,37 @@ function CampTopicSection() {
       <H2>역대 FIELD CAMP</H2>
       <Dropdown title='역대 FIELD CAMP' titleArr={campDataYear} />
       {showedCampData.map((camp, index) => (
-        <ButtonWrapper key={camp.id}>
+        <>
           <Figure key={camp.id}>
             {expandedIndex === index ? (
-              camp.file.map((file, fileIndex) => (
+              camp.file.map(file => (
                 <Img
-                  key={camp.id}
+                  key={`${camp.id}`}
                   src={`${imageUrl}${camp.id}/${file}`}
                   alt={`camp-image-${fileIndex}`}
                 />
               ))
             ) : (
-              <Img key={camp.id} src={`${imageUrl}${camp.id}/${camp.file[0]}`} alt='camp-image-0' />
+              <Img
+                key={`${camp.id}-0`}
+                src={`${imageUrl}${camp.id}/${camp.file[0]}`}
+                alt='camp-image-0'
+              />
             )}
             {camp.topic === '1st' ? (
-              <Figcaption>{camp.topic} TOPIC</Figcaption>
+              <Figcaption key={`${camp.id}-0`}>{camp.topic} TOPIC</Figcaption>
             ) : (
-              <Figcaption $color='blue'>{camp.topic} TOPIC</Figcaption>
+              <Figcaption key={`${camp.id}-1`} $color='blue'>
+                {camp.topic} TOPIC
+              </Figcaption>
             )}
           </Figure>
           <Button
+            key={`${camp.id}-0`}
             onClick={() => toggleImageDisplay(index)}
             label={expandedIndex === index ? '가리기' : `'주제${index + 1}'에 대해 더 알아보기`}
           />
-        </ButtonWrapper>
+        </>
       ))}
     </Section>
   );

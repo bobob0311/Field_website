@@ -11,7 +11,7 @@ const PageWrapper = styled.div`
 `;
 
 const Ul = styled.ul`
-  margin: 0.75rem 7.5%;
+  margin: 0.25rem 7.5%;
 `;
 
 const Li = styled.li`
@@ -92,6 +92,9 @@ function NewsPagination({newsData, category, loading}) {
               <Thumbnail src={`${imageUrl}/${item.collectionId}/${item.id}/${item.thumbnail}`} />
               <TitleSpan>{item.title1} </TitleSpan>
               <Title2Span>{item.title2 ? item.title2 : ''}</Title2Span>
+              <DateSpan>
+                {item.year}년 {item.month}월 {item.day}일
+              </DateSpan>
               <DateSpan />
             </Link>
           </Li>
