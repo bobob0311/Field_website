@@ -65,7 +65,7 @@ const CustomPagination = styled(Pagination)`
   }
 `;
 
-function NewsPagination({newsData, category, loading}) {
+function NewsPagination({newsData, category, loading, filter}) {
   const navigate = useNavigate();
   const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
@@ -81,11 +81,15 @@ function NewsPagination({newsData, category, loading}) {
     setCurrentPage(parseInt(urlPage, 10) || 1);
   }, [category, window.location.search]);
 
+  useEffect(() => {
+    if (filter) {
+      setCurrentPage(1);
+    }
+  }, [newsData]);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentItemPerPage = newsData.slice(startIndex, endIndex);
-
-  return !loading && currentItemPerPage.length > 0 && newsData[0].category === category ? (
+  return !loading && currentItemPerPage.length > 0 ? (
     <>
       <Ul>
         {currentItemPerPage.map(item => (
