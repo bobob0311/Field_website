@@ -51,6 +51,7 @@ const TypeSelect = styled.select`
 `;
 
 const Input = styled.input`
+  appearance: none;
   color: ${theme.colors.black};
   font-size: 1rem;
   font-weight: 600;

@@ -61,6 +61,7 @@ export default function NewsPage() {
   const [newsData, setNewsData] = useState([]);
   const [newsMonth, setNewsMonth] = useState([]);
   const [renderData, setRenderData] = useState([]);
+  const [filter, setFilter] = useState(false);
   const [selectedYear, setSelectedYear] = useState('선택하지않음');
   const [selectedMonth, setSelectedMonth] = useState('선택하지않음');
 
@@ -74,7 +75,7 @@ export default function NewsPage() {
     setSelectedMonth(e.target.value);
   };
 
-  const yearFilter = (data, filterYear) => {
+  function yearFilter(data, filterYear) {
     setSelectedYear(filterYear);
     let monthByYear;
     if (filterYear === '선택하지않음') {
@@ -84,12 +85,13 @@ export default function NewsPage() {
       const yearFilterData = data.filter(item => item.year === parseInt(filterYear, 10));
       monthByYear = [...new Set(yearFilterData.map(item => item.month))];
       setRenderData(yearFilterData);
+      setFilter(true);
     }
     setSelectedMonth('선택하지않음');
     setNewsMonth(monthByYear);
-  };
+  }
 
-  const monthFilter = (data, filterYear, filterMonth) => {
+  function monthFilter(data, filterYear, filterMonth) {
     setSelectedMonth(filterMonth);
     let monthFilteredData;
     if (filterMonth === '선택하지않음') {
@@ -104,7 +106,8 @@ export default function NewsPage() {
       );
     }
     setRenderData(monthFilteredData);
-  };
+    setFilter(true);
+  }
 
   const handleButtonClick = item => {
     setSelectCategory(item);
@@ -128,20 +131,16 @@ export default function NewsPage() {
 
   const getDataNews = async category => {
     try {
-      setLoading(true);
-      const now = new Date();
-      const lastUpdate = localStorage.getItem(`${category}-lastUpdate`);
-      const lastUpdateTime = lastUpdate ? new Date(parseInt(lastUpdate, 10)) : null;
       let response;
-      if (!lastUpdateTime || now - lastUpdateTime > 24 * 60 * 60 * 1000) {
+      const categoryData = JSON.parse(localStorage.getItem(`${category}`));
+      if (categoryData) {
+        response = categoryData;
+      } else {
         response = await NewsApi(category);
         localStorage.setItem(`${category}`, JSON.stringify(response));
-        localStorage.setItem(`${category}-lastUpdate`, now.getTime().toString());
-      } else {
-        const categoryData = localStorage.getItem(`${category}`);
-        response = categoryData ? JSON.parse(categoryData) : [];
       }
       setNewsData(response);
+
       if (category === '월간필드') {
         initialYearMonth(response);
         const urlYear = new URLSearchParams(location.search).get('year') || '선택하지않음';
@@ -209,11 +208,10 @@ export default function NewsPage() {
         </DropdownWrapper>
       )}
       <NewsPagination
-        // newsData={selectCategory === '월간필드' ? filteredNewsData : newsData}
         newsData={selectCategory === '월간필드' ? renderData : newsData}
-        // newsData={newsData}
         category={selectCategory}
         loading={loading}
+        filter={filter}
       />
     </NewsMain>
   );
