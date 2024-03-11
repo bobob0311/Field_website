@@ -1,6 +1,6 @@
 ---
 name: Bug template
-about: 버그 발생시 작성
+about: Create a report to help us improve
 title: "[Bug]: 설명..."
 labels: ''
 assignees: ''
