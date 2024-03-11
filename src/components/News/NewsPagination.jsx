@@ -2,9 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {Pagination} from '@mui/material';
 import {Link, useNavigate} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
 import LoadingSpinner from '../LoadingSpinner';
-import {setMonthTitle} from '../../redux/monthFieldSlice';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -65,7 +63,7 @@ const CustomPagination = styled(Pagination)`
   }
 `;
 
-function NewsPagination({newsData, category, loading, filter}) {
+function NewsPagination({newsData, category, loading}) {
   const navigate = useNavigate();
   const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
@@ -81,15 +79,11 @@ function NewsPagination({newsData, category, loading, filter}) {
     setCurrentPage(parseInt(urlPage, 10) || 1);
   }, [category, window.location.search]);
 
-  useEffect(() => {
-    if (filter) {
-      setCurrentPage(1);
-    }
-  }, [newsData]);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentItemPerPage = newsData.slice(startIndex, endIndex);
-  return !loading && currentItemPerPage.length > 0 ? (
+
+  return !loading && currentItemPerPage.length > 0 && newsData[0].category === category ? (
     <>
       <Ul>
         {currentItemPerPage.map(item => (
