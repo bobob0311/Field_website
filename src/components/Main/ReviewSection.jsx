@@ -4,6 +4,7 @@ import 'swiper/css/pagination';
 import {Pagination} from 'swiper/modules';
 import {useEffect, useState} from 'react';
 import theme from '../../theme';
+import {ReviewApi} from '../../lib/Apiservice';
 
 const H2 = styled.h2`
   font-size: 1.875rem;
@@ -35,7 +36,7 @@ const Article = styled.article`
 `;
 
 const Card = styled.article`
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url(${props => props.src});
   background-color: ${theme.colors.blue};
   padding: 1rem;

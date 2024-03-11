@@ -42,15 +42,24 @@ const Figcaption = styled.figcaption`
   line-height: 1.5;
 `;
 
+const Card = styled.div`
+  border: 2px solid white;
+  border-radius: 1rem;
+  padding: 2rem 1.5rem 0 1.5rem;
+  margin: 8rem 0;
+`;
+
 function FieldIntro({title, backgroundImage, content}) {
   return (
-    <Figure $margin='8rem 0'>
-      <H3 $margin='0 0 2rem 0'>{title}</H3>
-      <Image src={backgroundImage} alt='산업공학도' width='100%' radius='1.875rem' />
-      <Figcaption $margin='2rem 0'>
-        <P size='1.125rem'>{content}</P>
-      </Figcaption>
-    </Figure>
+    <Card>
+      <Figure>
+        <H3 $margin='0 0 2rem 0'>{title}</H3>
+        <Image src={backgroundImage} alt='산업공학도' width='100%' radius='1.875rem' />
+        <Figcaption $margin='2rem 0'>
+          <P size='1.125rem'>{content}</P>
+        </Figcaption>
+      </Figure>
+    </Card>
   );
 }
 

@@ -62,3 +62,9 @@ export function DepartmentApi() {
 export function LoadDateData() {
   return pb.collection('Recruit').getFullList();
 }
+
+export function DataTest() {
+  return pb.collection('Profile').getFullList({
+    fields: 'id, photo',
+  });
+}
