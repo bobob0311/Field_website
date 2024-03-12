@@ -65,18 +65,43 @@ const H3 = styled.h3`
   margin: ${props => props.$margin || '0'};
 `;
 
+// const EXPIRY_DURATION = 60 * 60 * 1000; // 1시간 후 만료
+
+// const getReview = async () => {
+//   try {
+//     const localData = localStorage.getItem('reviewData');
+//     const expiryTime = localStorage.getItem('expiryTime');
+//     // new Date().getTime() : 현재 시간
+//     // expiryTime : 만료 시간
+//     // new Date().getTime() + EXPIRY_DURATION : 만료 시간
+//     if (localData && expiryTime && new Date().getTime() < expiryTime) {
+//       setReviewData(JSON.parse(localData));
+//     } else {
+//       const response = await ReviewApi();
+//       setReviewData(response);
+//       localStorage.setItem('reviewData', JSON.stringify(response));
+//       localStorage.setItem('expiryTime', new Date().getTime() + EXPIRY_DURATION);
+//     }
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
+
 function ReviewSection() {
   const [reviewData, setReviewData] = useState([]);
+  const EXPIRY_DURATION = 365 * 24 * 60 * 60 * 1000;
 
   const getReview = async () => {
     try {
       const localData = localStorage.getItem('reviewData');
-      if (localData) {
+      const expiryTime = localStorage.getItem('expiryTime');
+      if (localData && expiryTime && new Date().getTime() < expiryTime) {
         setReviewData(JSON.parse(localData));
       } else {
         const response = await ReviewApi();
         setReviewData(response);
         localStorage.setItem('reviewData', JSON.stringify(response));
+        localStorage.setItem('expiryTime', new Date().getTime() + EXPIRY_DURATION);
       }
     } catch (err) {
       console.log(err);

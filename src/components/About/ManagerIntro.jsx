@@ -71,21 +71,25 @@ const P = styled.p`
 
 function ManagerIntro() {
   const [profileData, setProfileData] = useState([]);
+  const EXPIRY_DURATION = 365 * 24 * 60 * 60 * 1000;
+
   const getProfile = async () => {
     try {
       const localData = localStorage.getItem('profileData');
-      if (localData) {
+      const expiryTime = localStorage.getItem('expiryTime');
+      if (localData && expiryTime && new Date().getTime() < expiryTime) {
         setProfileData(JSON.parse(localData));
       } else {
         const response = await ProfileApi();
         setProfileData(response);
-        console.log(response);
         localStorage.setItem('profileData', JSON.stringify(response));
+        localStorage.setItem('expiryTime', new Date().getTime() + EXPIRY_DURATION);
       }
     } catch (err) {
       console.log(err);
     }
   };
+
   const imageUrl = `${import.meta.env.VITE_API_URL}/api/files/i4n7e8c0u8882do/`;
 
   useEffect(() => {
