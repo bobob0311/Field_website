@@ -48,7 +48,7 @@ const BaseIconButton = styled.button`
   border: none;
   background: ${theme.colors.white};
   border-radius: 50%;
-  margin: 4px 0;
+  margin: 5px 0;
 `;
 
 const SNSIcon = styled.a`
@@ -56,7 +56,7 @@ const SNSIcon = styled.a`
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  margin: 4px 0;
+  margin: 5px 0;
 `;
 
 const BaseIcon = styled.svg`
@@ -73,7 +73,7 @@ const BaseIcon = styled.svg`
 function SNSIconLink({move, src, alt, href}) {
   return (
     <SNSIcon $move={move} href={href} target='_blank'>
-      <img src={src} alt={alt} />
+      <img width='48px' src={src} alt={alt} />
     </SNSIcon>
   );
 }
