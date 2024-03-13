@@ -63,6 +63,14 @@ const H3 = styled.h3`
   font-size: 1.5625rem;
   font-weight: 900;
   margin: ${props => props.$margin || '0'};
+  word-break: keep-all;
+`;
+
+const StyledSwiper = styled(Swiper)`
+  .swiper-pagination {
+    position: relative;
+    bottom: -1px;
+  }
 `;
 
 function ReviewSection() {
@@ -96,7 +104,7 @@ function ReviewSection() {
         How was your FIELD?
       </GoblinH2>
       <SwiperContainer margin='2rem 0 5rem 0'>
-        <Swiper
+        <StyledSwiper
           modules={[Pagination]}
           slidesPerView={1.2}
           spaceBetween={20}
@@ -123,7 +131,7 @@ function ReviewSection() {
               </Card>
             </SwiperSlide>
           ))}
-        </Swiper>
+        </StyledSwiper>
       </SwiperContainer>
     </>
   );

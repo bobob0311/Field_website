@@ -47,12 +47,12 @@ const GoblinH2 = styled(H2)`
 function IntroSection() {
   return (
     <MainSection>
-      <GoblinH2 margin='10rem 0 5rem 0'>Our Goal</GoblinH2>
+      <GoblinH2 margin='5rem 0 2rem 0'>Our Goal</GoblinH2>
       <NanumH3>
         <span>꿈과 비전, 생각을 공유하는</span>
         <span>교류의 장을 만든다</span>
       </NanumH3>
-      <Image width='140px' src='fieldLogo.png' alt='필드 로고' $margin='10rem 0 10rem 0' />
+      <Image width='140px' src='fieldLogo.png' alt='필드 로고' $margin='3rem 0 3rem 0' />
     </MainSection>
   );
 }

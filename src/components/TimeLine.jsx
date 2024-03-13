@@ -37,6 +37,7 @@ const Title = styled.h3`
   font-size: 1.125rem;
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 `;
 
 const P = styled.p`

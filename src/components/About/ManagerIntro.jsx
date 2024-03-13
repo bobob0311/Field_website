@@ -28,7 +28,7 @@ const Ul = styled.ul`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  gap: 2rem;
+  gap: ${props => props.gap || '2rem'};
   margin: ${props => props.margin || '0'};
 `;
 
@@ -41,6 +41,7 @@ const Image = styled.img`
   width: ${props => props.width || ''};
   border-radius: ${props => props.radius || ''};
   height: ${props => props.height || ''};
+  object-fit: cover;
 `;
 
 const Figure = styled.figure`
@@ -100,11 +101,11 @@ function ManagerIntro() {
   const depart = profileData.slice(2, 6);
   return (
     <MainSection>
-      <NanumH2>
+      <NanumH2 margin='5rem 0'>
         <span>16기 단장단과 함께</span>
         <span>여러분의 꿈을 실현하세요.</span>
       </NanumH2>
-      <Ul margin='2rem 0'>
+      <Ul margin='2rem 0' gap='5rem'>
         {leader.map(item => (
           <li>
             <Figure>
@@ -123,7 +124,7 @@ function ManagerIntro() {
           </li>
         ))}
       </Ul>
-      <Ul>
+      <Ul margin='4rem 0'>
         {depart.map(item => (
           <Li>
             <Figure>

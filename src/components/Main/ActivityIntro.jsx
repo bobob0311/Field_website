@@ -9,6 +9,7 @@ const P = styled.p`
   color: ${props => (props.color ? theme.colors[props.color] : '')};
   font-size: 1.25rem;
   font-weight: 900;
+  text-align: center;
 `;
 
 const Card = styled.article`
