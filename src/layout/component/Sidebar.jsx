@@ -121,7 +121,7 @@ export default function SideBar() {
           width='24'
           height='24'
           fill='none'
-          stroke='currentColor'
+          stroke='black'
           strokeWidth='3'
           strokeLinecap='round'
           strokeLinejoin='round'
