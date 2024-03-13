@@ -1,9 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import backgroundImg from '../../assets/CampBackground.jpg';
-import scrollDown from '../../assets/transfer-down-light.svg';
-import theme from '../../theme';
 import Button from '../Button';
 
 const H1 = styled.h1`
@@ -69,10 +66,10 @@ function CampMainSection() {
       <TitleH2>여러분의 열정을 보여주세요!!</TitleH2>
       <ButtonWapper>
         <Link to='https://linktr.ee/iefieldcamp'>
-          <Button label='FIELD CAMP 지원하기✏️' />
+          <Button label='FIELD CAMP 지원하기' />
         </Link>
         <Figure>
-          <Img src={scrollDown} />
+          <Img src='transfer-down-light.svg' />
           <Figcaption>아래로 스크롤하세요</Figcaption>
         </Figure>
       </ButtonWapper>

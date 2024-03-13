@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {json, useNavigate, useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import styled from 'styled-components';
 import {NewsDetailApi} from '../lib/Apiservice';
-import fileIcon from '../assets/fileIcon.png';
 import backIcon from '../../public/Refund_back.png';
 import LoadingSpinner from '../components/LoadingSpinner';
 
@@ -50,6 +49,7 @@ const A = styled.a`
 
 const FlexGrowDiv = styled.div`
   flex-grow: 1;
+  margin: 0;
 `;
 
 const Icon = styled.img`
@@ -100,7 +100,7 @@ function NewsDetailPage() {
     <Section>
       <Wrapper $mg='2rem 0'>
         <Icon
-          src={backIcon}
+          src='Refund_back.png'
           onClick={handleBack}
           $cursor='pointer'
           $alignSelf='center'
@@ -124,7 +124,7 @@ function NewsDetailPage() {
             {detailNewsData?.file.length > 0 ? (
               <A href={`${fileUrl}${detailNewsData.id}/${detailNewsData.file[0]}`} target='_blank'>
                 첨부파일
-                <Icon src={fileIcon} />
+                <Icon src='fileIcon.png' />
               </A>
             ) : (
               <div style={{flex: 1}} />
