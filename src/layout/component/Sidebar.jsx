@@ -49,6 +49,10 @@ const BaseIconButton = styled.button`
   background: ${theme.colors.white};
   border-radius: 50%;
   margin: 5px 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const SNSIcon = styled.a`
@@ -68,6 +72,7 @@ const BaseIcon = styled.svg`
       : css`
           ${turnLeft} 0.3s forwards
         `};
+  margin: auto;
 `;
 
 function SNSIconLink({move, src, alt, href}) {
