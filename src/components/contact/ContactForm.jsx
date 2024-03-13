@@ -62,6 +62,7 @@ const Input = styled.input`
   padding: 0rem 0.2rem 0 0.1rem;
   box-sizing: border-box;
   background: none;
+  border-radius: 0;
 `;
 
 const TextArea = styled.textarea`
