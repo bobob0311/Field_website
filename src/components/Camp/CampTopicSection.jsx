@@ -67,11 +67,15 @@ function CampTopicSection() {
   const getDataFieldYear = async () => {
     try {
       let response;
-      if (localData) {
-        response = JSON.parse(localData);
-      } else {
+      const now = new Date();
+      const lastUpdate = localStorage.getItem('필드캠프-lastUpdate');
+      const lastUpdateTime = lastUpdate ? new Date(parseInt(lastUpdate, 10)) : null;
+      if (!lastUpdateTime || now - lastUpdateTime > 24 * 60 * 60 * 1000) {
         response = await CampApi();
         localStorage.setItem('fieldData', JSON.stringify(response));
+        localStorage.setItem('필드캠프-lastUpdate', now.getTime().toString());
+      } else {
+        response = JSON.parse(localData);
       }
       const years = response.map(item => item.year);
       const uniqueYears = [...new Set(years)];
@@ -92,6 +96,7 @@ function CampTopicSection() {
     if (campFullData.length > 0) {
       filterData(campYear);
     }
+    setExpandedIndex(null);
   }, [campYear, campFullData]);
 
   const toggleImageDisplay = index => {

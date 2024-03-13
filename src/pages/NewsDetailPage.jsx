@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import styled from 'styled-components';
 import {NewsDetailApi} from '../lib/Apiservice';
-import backIcon from '../../public/Refund_back.png';
 import LoadingSpinner from '../components/LoadingSpinner';
 
 const Section = styled.section`
@@ -100,7 +99,7 @@ function NewsDetailPage() {
     <Section>
       <Wrapper $mg='2rem 0'>
         <Icon
-          src='Refund_back.png'
+          src='/Refund_back.png'
           onClick={handleBack}
           $cursor='pointer'
           $alignSelf='center'

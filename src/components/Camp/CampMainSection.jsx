@@ -38,6 +38,7 @@ const Figure = styled.figure`
   align-items: center;
   display: flex;
   flex-direction: column;
+  margin: 2rem 0 0 0;
 `;
 
 const Img = styled.img`

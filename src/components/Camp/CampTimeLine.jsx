@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import TimeLine from '../TimeLine';
+import Button from '../Button';
 
 const Section = styled.section`
   margin: 0 7.5%;
@@ -26,6 +27,7 @@ function CampTimeLine() {
     <Section>
       <H2>Time Line</H2>
       <TimeLine data={data} height='80' />
+      <Button label='FIELD CAMP 지원하기' />
     </Section>
   );
 }

@@ -23,6 +23,7 @@ const H2 = styled.h2`
   text-align: center;
   font-family: 'Goblin One';
   font-weight: bold;
+  line-height: 2.5rem;
 `;
 
 const P = styled.p`
@@ -41,10 +42,13 @@ const Span = styled.span`
   margin: 0 0 1rem 0;
 `;
 
-function CampImageSection({img, title, firstLine = '', secondLine = '', thirdLine = ''}) {
+function CampImageSection({img, title1, title2, firstLine = '', secondLine = '', thirdLine = ''}) {
   return (
     <Section src={img}>
-      <H2>{title}</H2>
+      <H2>
+        <Span>{title1}</Span>
+        <Span>{title2}</Span>
+      </H2>
       <P>
         <Span>{firstLine}</Span>
         <Span>{secondLine}</Span>
