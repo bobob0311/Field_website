@@ -63,7 +63,7 @@ const ButtonWapper = styled.div`
 
 function CampMainSection() {
   return (
-    <TitleContainer src={backgroundImg}>
+    <TitleContainer src='camp1.png'>
       <H1>FIELD CAMP</H1>
       <TitleH2>FIELD CAMP를 통해</TitleH2>
       <TitleH2>여러분의 열정을 보여주세요!!</TitleH2>

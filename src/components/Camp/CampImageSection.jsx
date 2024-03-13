@@ -21,7 +21,6 @@ const H2 = styled.h2`
   font-size: 1.5625rem;
   color: white;
   text-align: center;
-  padding: 0 7.5%;
   font-family: 'Goblin One';
   font-weight: bold;
 `;

@@ -106,30 +106,23 @@ function CampTopicSection() {
         <>
           <Figure key={camp.id}>
             {expandedIndex === index ? (
-              camp.file.map(file => (
+              camp.file.map((file, fileIndex) => (
                 <Img
-                  key={`${camp.id}`}
+                  key={camp.id}
                   src={`${imageUrl}${camp.id}/${file}`}
                   alt={`camp-image-${fileIndex}`}
                 />
               ))
             ) : (
-              <Img
-                key={`${camp.id}-0`}
-                src={`${imageUrl}${camp.id}/${camp.file[0]}`}
-                alt='camp-image-0'
-              />
+              <Img key={camp.id} src={`${imageUrl}${camp.id}/${camp.file[0]}`} alt='camp-image-0' />
             )}
             {camp.topic === '1st' ? (
-              <Figcaption key={`${camp.id}-0`}>{camp.topic} TOPIC</Figcaption>
+              <Figcaption>{camp.topic} TOPIC</Figcaption>
             ) : (
-              <Figcaption key={`${camp.id}-1`} $color='blue'>
-                {camp.topic} TOPIC
-              </Figcaption>
+              <Figcaption $color='blue'>{camp.topic} TOPIC</Figcaption>
             )}
           </Figure>
           <Button
-            key={`${camp.id}-0`}
             onClick={() => toggleImageDisplay(index)}
             label={expandedIndex === index ? '가리기' : `'주제${index + 1}'에 대해 더 알아보기`}
           />

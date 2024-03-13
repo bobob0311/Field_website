@@ -7,7 +7,7 @@ import {NewsApi} from '../lib/Apiservice';
 import theme from '../theme';
 
 const NewsMain = styled.section`
-  height: calc(100vh - 58px - 112px);
+  height: 90vh;
 `;
 
 const H1 = styled.h1`
@@ -45,7 +45,7 @@ const Option = styled.option`
 `;
 
 const DropdownWrapper = styled.div`
-  margin: 0 7.5%;
+  padding: 0 7.5%;
   display: flex;
   gap: 0.5rem;
   justify-content: end;
