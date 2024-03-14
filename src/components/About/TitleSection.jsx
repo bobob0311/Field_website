@@ -26,6 +26,7 @@ const NanumH2 = styled(H2)`
   font-family: 'Nanum Myeongjo', serif;
   line-height: 1.3;
   word-break: keep-all;
+  font-weight: 800;
 `;
 
 const P = styled.p`
@@ -94,7 +95,7 @@ function TitleSection() {
             <FirstAlphabet color='blue'>D</FirstAlphabet>reamers
           </span>
         </GoblinP>
-        <P line='1.2' margin='2rem 0 0 0' size='1rem'>
+        <P line='1.5' margin='2rem 0 0 0' size='1rem'>
           FIELD란, ‘Future Industrial Engineering Leaders and Dreamers’ 의 약자로, 미래의 핵심
           리더들이 될 산업공학도들이 모여 서로의 꿈과 비전, 생각 등을 공유할 수 있는 교류의 장을
           만든다는 목표 아래 모인 &apos;전국 대학생 산업공학도 모임&apos; 입니다.

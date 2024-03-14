@@ -143,7 +143,7 @@ function DepartmentIntro() {
 
   return (
     <>
-      <NanumH2 margin='2rem 0'>부서소개</NanumH2>
+      <NanumH2 margin='3rem 0'>부서소개</NanumH2>
       <ButtonWrapper>
         {category.map(item => (
           <Button

@@ -28,7 +28,7 @@ const Ul = styled.ul`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  gap: 2rem;
+  gap: ${props => props.gap || '2rem'};
   margin: ${props => props.margin || '0'};
 `;
 
@@ -41,6 +41,7 @@ const Image = styled.img`
   width: ${props => props.width || ''};
   border-radius: ${props => props.radius || ''};
   height: ${props => props.height || ''};
+  object-fit: cover;
 `;
 
 const Figure = styled.figure`
@@ -71,21 +72,25 @@ const P = styled.p`
 
 function ManagerIntro() {
   const [profileData, setProfileData] = useState([]);
+  const EXPIRY_DURATION = 365 * 24 * 60 * 60 * 1000;
+
   const getProfile = async () => {
     try {
       const localData = localStorage.getItem('profileData');
-      if (localData) {
+      const expiryTime = localStorage.getItem('expiryTime');
+      if (localData && expiryTime && new Date().getTime() < expiryTime) {
         setProfileData(JSON.parse(localData));
       } else {
         const response = await ProfileApi();
         setProfileData(response);
-        console.log(response);
         localStorage.setItem('profileData', JSON.stringify(response));
+        localStorage.setItem('expiryTime', new Date().getTime() + EXPIRY_DURATION);
       }
     } catch (err) {
       console.log(err);
     }
   };
+
   const imageUrl = `${import.meta.env.VITE_API_URL}/api/files/i4n7e8c0u8882do/`;
 
   useEffect(() => {
@@ -96,11 +101,11 @@ function ManagerIntro() {
   const depart = profileData.slice(2, 6);
   return (
     <MainSection>
-      <NanumH2>
+      <NanumH2 margin='5rem 0'>
         <span>16기 단장단과 함께</span>
         <span>여러분의 꿈을 실현하세요.</span>
       </NanumH2>
-      <Ul margin='2rem 0'>
+      <Ul margin='2rem 0' gap='5rem'>
         {leader.map(item => (
           <li>
             <Figure>
@@ -119,7 +124,7 @@ function ManagerIntro() {
           </li>
         ))}
       </Ul>
-      <Ul>
+      <Ul margin='4rem 0'>
         {depart.map(item => (
           <Li>
             <Figure>

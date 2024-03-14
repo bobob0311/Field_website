@@ -63,20 +63,31 @@ const H3 = styled.h3`
   font-size: 1.5625rem;
   font-weight: 900;
   margin: ${props => props.$margin || '0'};
+  word-break: keep-all;
+`;
+
+const StyledSwiper = styled(Swiper)`
+  .swiper-pagination {
+    position: relative;
+    bottom: -1px;
+  }
 `;
 
 function ReviewSection() {
   const [reviewData, setReviewData] = useState([]);
+  const EXPIRY_DURATION = 365 * 24 * 60 * 60 * 1000;
 
   const getReview = async () => {
     try {
       const localData = localStorage.getItem('reviewData');
-      if (localData) {
+      const expiryTime = localStorage.getItem('expiryTime');
+      if (localData && expiryTime && new Date().getTime() < expiryTime) {
         setReviewData(JSON.parse(localData));
       } else {
         const response = await ReviewApi();
         setReviewData(response);
         localStorage.setItem('reviewData', JSON.stringify(response));
+        localStorage.setItem('expiryTime', new Date().getTime() + EXPIRY_DURATION);
       }
     } catch (err) {
       console.log(err);
@@ -92,8 +103,8 @@ function ReviewSection() {
       <GoblinH2 $margin='8rem 0 2rem 0' $size='1.25rem'>
         How was your FIELD?
       </GoblinH2>
-      <SwiperContainer $margin='2rem 0'>
-        <Swiper
+      <SwiperContainer margin='2rem 0 5rem 0'>
+        <StyledSwiper
           modules={[Pagination]}
           slidesPerView={1.2}
           spaceBetween={20}
@@ -120,7 +131,7 @@ function ReviewSection() {
               </Card>
             </SwiperSlide>
           ))}
-        </Swiper>
+        </StyledSwiper>
       </SwiperContainer>
     </>
   );
