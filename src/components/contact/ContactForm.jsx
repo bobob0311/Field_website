@@ -119,7 +119,7 @@ const Option = styled.option`
 `;
 
 const Check = styled.span`
-filter : brightness(0.4) invert(0.7) sepia(0.4) saturate(10000%) hue-rotate(70deg);
+  filter: brightness(0.4) invert(0.7) sepia(0.4) saturate(10000%) hue-rotate(70deg);
   padding: 0 0 0.5rem 0.3rem;
   font-size: 1.2rem;
 `;
