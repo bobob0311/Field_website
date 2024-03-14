@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import styled, {keyframes, css} from 'styled-components';
 import theme from '../../theme';
-import Instagram from '../../../public/InstagramIcon.png';
+import Instagram from '../../../public/InstagramIcon.jpg';
 import Youtube from '../../../public/YoutubeIcon.png';
 import KakaoTalk from '../../../public/KakaoTalkIcon.png';
 
@@ -79,10 +79,10 @@ const BaseIcon = styled.svg`
   margin: auto;
 `;
 
-function SNSIconLink({move, src, alt, href, height}) {
+function SNSIconLink({move, src, alt, href}) {
   return (
     <SNSIcon $move={move} href={href} target='_blank'>
-      <img height={height} src={src} alt={alt} />
+      <img height='48px' src={src} alt={alt} />
     </SNSIcon>
   );
 }
@@ -102,7 +102,6 @@ export default function SideBar() {
             src={KakaoTalk}
             alt='KakaoTalk Icon'
             href='http://pf.kakao.com/_uwNxeK'
-            height='50px'
           />
           <SNSIconLink
             move={slideUp(190)}
@@ -115,7 +114,6 @@ export default function SideBar() {
             src={Youtube}
             alt='Youtube Icon'
             href='https://www.youtube.com/@field2023'
-            height='40px'
           />
         </>
       )}
