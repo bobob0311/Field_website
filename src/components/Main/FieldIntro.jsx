@@ -34,6 +34,7 @@ const P = styled.p`
   line-height: 1.5;
   color: ${props => (props.color ? theme.colors[props.color] : '')};
   font-size: ${props => (props.size ? props.size : '1rem')};
+  text-align: center;
 `;
 
 const Figcaption = styled.figcaption`

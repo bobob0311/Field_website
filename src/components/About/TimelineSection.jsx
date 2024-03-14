@@ -22,12 +22,10 @@ function TimelineSection() {
     2022: [{title: 'FIELD 유튜브 개설', get: ' '}],
   };
   return (
-    // <MainSection>
     <>
-      <GoblinH2>Road of FIELD</GoblinH2>
+      <GoblinH2 margin='5rem 0'>Road of FIELD</GoblinH2>
       <TimeLine data={data} height='100' />
     </>
-    // </MainSection>
   );
 }
 

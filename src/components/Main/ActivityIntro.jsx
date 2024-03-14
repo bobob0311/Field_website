@@ -9,10 +9,11 @@ const P = styled.p`
   color: ${props => (props.color ? theme.colors[props.color] : '')};
   font-size: 1.25rem;
   font-weight: 900;
+  text-align: center;
 `;
 
 const Card = styled.article`
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url(${props => props.src});
   background-color: ${theme.colors.blue};
   padding: 2rem 1rem;

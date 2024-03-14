@@ -33,15 +33,26 @@ const Image = styled.img`
   border-radius: ${props => props.radius || ''};
 `;
 
+const H2 = styled.h2`
+  font-size: 1.7rem;
+  margin: ${props => props.margin || '0'};
+  text-align: center;
+`;
+
+const GoblinH2 = styled(H2)`
+  font-family: 'Goblin One';
+  font-size: 1.875rem;
+`;
+
 function IntroSection() {
   return (
     <MainSection>
-      <TextGenerator text='OUR GOAL' />
+      <GoblinH2 margin='5rem 0 2rem 0'>Our Goal</GoblinH2>
       <NanumH3>
         <span>꿈과 비전, 생각을 공유하는</span>
         <span>교류의 장을 만든다</span>
       </NanumH3>
-      <Image width='140px' src='fieldLogo.png' alt='필드 로고' $margin='10rem 0 10rem 0' />
+      <Image width='140px' src='fieldLogo.png' alt='필드 로고' $margin='3rem 0 3rem 0' />
     </MainSection>
   );
 }
