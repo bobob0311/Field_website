@@ -11,6 +11,7 @@ const SubTitle = styled.h2`
 `;
 
 const Box = styled.button`
+  border: none;
   font-family: 'SUIT';
   text-align: left;
   background: rgba(255, 255, 255, 0.7);

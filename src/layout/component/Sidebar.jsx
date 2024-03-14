@@ -42,21 +42,29 @@ const IconWrapper = styled.aside`
   z-index: 2;
 `;
 
-const BaseIconButton = styled.button`
+const commonIconStyle = `
   width: 48px;
   height: 48px;
-  border: none;
+    border: none;
   background: ${theme.colors.white};
+    border-radius: 50%;
+      margin: 5px 0;
+      display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const BaseIconButton = styled.button`
+  ${commonIconStyle}
   border-radius: 50%;
-  margin: 4px 0;
+  margin: 5px 0;
+  padding: 0;
 `;
 
 const SNSIcon = styled.a`
+  ${commonIconStyle}
   animation: ${props => props.$move} 0.5s ease-in-out;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  margin: 4px 0;
+  overflow: hidden;
 `;
 
 const BaseIcon = styled.svg`
@@ -68,12 +76,13 @@ const BaseIcon = styled.svg`
       : css`
           ${turnLeft} 0.3s forwards
         `};
+  margin: auto;
 `;
 
-function SNSIconLink({move, src, alt, href}) {
+function SNSIconLink({move, src, alt, href, height}) {
   return (
     <SNSIcon $move={move} href={href} target='_blank'>
-      <img src={src} alt={alt} />
+      <img height={height} src={src} alt={alt} />
     </SNSIcon>
   );
 }
@@ -93,6 +102,7 @@ export default function SideBar() {
             src={KakaoTalk}
             alt='KakaoTalk Icon'
             href='http://pf.kakao.com/_uwNxeK'
+            height='50px'
           />
           <SNSIconLink
             move={slideUp(190)}
@@ -105,6 +115,7 @@ export default function SideBar() {
             src={Youtube}
             alt='Youtube Icon'
             href='https://www.youtube.com/@field2023'
+            height='40px'
           />
         </>
       )}
@@ -116,7 +127,7 @@ export default function SideBar() {
           width='24'
           height='24'
           fill='none'
-          stroke='currentColor'
+          stroke='black'
           strokeWidth='3'
           strokeLinecap='round'
           strokeLinejoin='round'
