@@ -42,6 +42,8 @@ const Wrapper = styled.div`
 `;
 
 const A = styled.a`
+  font-size: 0.75rem;
+  font-weight: 900;
   display: flex;
   gap: 3px;
   align-items: center;
@@ -64,7 +66,8 @@ const Icon = styled.img`
 `;
 const DateP = styled.p`
   margin: 0 0 2rem 0;
-  font-size: 1rem;
+  font-size: 0.75rem;
+  font-weight: 900;
 `;
 
 const StyledSwiper = styled(Swiper)`

@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import styled from 'styled-components';
+import React, {useState, useRef, useEffect} from 'react';
+import styled, {keyframes} from 'styled-components';
 import theme from '../../theme';
 
 const H2 = styled.h2`
@@ -50,6 +50,14 @@ const CardKeyWordLi = styled.li`
   margin: ${props => props.margin || '0'};
 `;
 
+const wobble = keyframes`
+0% { transform: translateX(0%); }
+  15% { transform: translateX(-5%) rotate(-1deg); }
+  45% { transform: translateX(3%) rotate(3deg); }
+  60% { transform: translateX(-2%) rotate(-2deg); }
+  100% { transform: translateX(0%); }
+`;
+
 const CardKeyWordSpan = styled.span`
   display: inline-block;
   background-color: ${props => props.color || ''};
@@ -60,6 +68,7 @@ const CardKeyWordSpan = styled.span`
   border: 2px solid white;
   border-radius: 1.875rem;
   font-size: 1.4rem;
+  animation: ${wobble} 3s;
 `;
 
 const CardHashTagUl = styled.ul`
@@ -136,11 +145,31 @@ const FlexCenter = styled.div`
 function DepartmentIntro() {
   const [selectCategory, setSelectCategory] = useState('기획부');
   const category = ['기획부', '대외협력부', '컴페티션부', '홍보부'];
-
+  const [animate, setAnimate] = useState(false);
+  const cardRef = useRef(null);
   const handleButtonClick = item => {
     setSelectCategory(item);
   };
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setAnimate(true);
+        }
+      });
+    });
+
+    if (cardRef.current) {
+      observer.observe(cardRef.current);
+    }
+
+    return () => {
+      if (cardRef.current) {
+        observer.unobserve(cardRef.current);
+      }
+    };
+  }, []);
   return (
     <>
       <NanumH2 margin='3rem 0'>부서소개</NanumH2>
@@ -156,20 +185,20 @@ function DepartmentIntro() {
         ))}
       </ButtonWrapper>
       <CardContainer visible={selectCategory === '기획부'}>
-        <Card margin='1rem 0'>
+        <Card margin='1rem 0' ref={cardRef}>
           <Dl>
             <Dt>기획부</Dt>
             <Dd>FIELD 인적, 학술적 교류를 활성화하기 위한 컨텐츠를 기획하고 진행, 총괄하는 부서</Dd>
           </Dl>
           <CardUl>
             <CardKeyWordLi margin='0 0 0 35%'>
-              <CardKeyWordSpan color='255, 188, 19'>대인관계능력</CardKeyWordSpan>
+              {animate && <CardKeyWordSpan color='255, 188, 19'>대인관계능력</CardKeyWordSpan>}
             </CardKeyWordLi>
             <CardKeyWordLi margin='0 0 0 5%'>
-              <CardKeyWordSpan color='245, 215, 57'>리더십</CardKeyWordSpan>
+              {animate && <CardKeyWordSpan color='245, 215, 57'>리더십</CardKeyWordSpan>}
             </CardKeyWordLi>
             <CardKeyWordLi margin='0 0 0 35%'>
-              <CardKeyWordSpan color='255, 134, 46'>창의력</CardKeyWordSpan>
+              {animate && <CardKeyWordSpan color='255, 134, 46'>창의력</CardKeyWordSpan>}
             </CardKeyWordLi>
           </CardUl>
           <CardHashTagUl margin='2rem 0'>

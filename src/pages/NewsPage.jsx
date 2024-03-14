@@ -28,12 +28,13 @@ const TypeSelect = styled.select`
   font-size: 1rem;
   font-family: 'SUIT-Regular';
   font-weight: 700;
-  background: ${theme.colors.lightgray} url('Expand_down.png') no-repeat 95% / 25px 25px;
+  background: ${theme.colors.lightgray} url('down_arrow.png') no-repeat 90% 40% / 20px 20px;
   border-radius: 1rem;
   padding: 0.375rem 0 0.375rem 0.5rem;
   width: ${props => props.width || '5.75rem'};
   height: 2rem;
   z-index: 0;
+  border: none;
 `;
 
 const Option = styled.option`

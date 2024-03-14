@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Pagination} from 'swiper/modules';
 import {Swiper, SwiperSlide} from 'swiper/react';
+import theme from '../../theme';
 import 'swiper/swiper-bundle.css';
 import 'swiper/css/pagination';
-import {Pagination} from 'swiper/modules';
 import ActivityIntro from './ActivityIntro';
 import ActivityCamp from '../../../public/ActivityCamp.png';
 import ActivityLT from '../../../public/ActivityLt.png';
@@ -32,6 +33,13 @@ const StyledSwiper = styled(Swiper)`
   .swiper-pagination {
     position: relative;
     bottom: -1px;
+  }
+  .swiper-pagination-bullet {
+    background-color: white;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: ${theme.colors.blue};
   }
 `;
 

@@ -31,8 +31,8 @@ const IconFigcaption = styled.figcaption`
 function TitleSection() {
   return (
     <TitleContainer>
-      <TextGenerator text="Let's Lead The Industry" font='Goblin One' />
-      <TextGenerator text='To A Broader FIELD' font='Goblin One' />
+      <TextGenerator text="Let's Lead The Industry" font='Goblin One' spacing='0' />
+      <TextGenerator text='To A Broader FIELD' font='Goblin One' spacing='0' />
       <Figure $position='absolute'>
         <Icon src='scrollDown.png' />
         <IconFigcaption>아래로 스크롤하세요</IconFigcaption>
