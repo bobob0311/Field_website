@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import TextGenerator from '../TextGenerator';
-import scrollDown from '../../assets/transfer-down-light.svg';
 
 const TitleContainer = styled.section`
   height: 90vh;
@@ -35,7 +34,7 @@ function TitleSection() {
       <TextGenerator text="Let's Lead The Industry" font='Goblin One' />
       <TextGenerator text='To A Broader FIELD' font='Goblin One' />
       <Figure $position='absolute'>
-        <Icon src={scrollDown} />
+        <Icon src='scrollDown.png' />
         <IconFigcaption>아래로 스크롤하세요</IconFigcaption>
       </Figure>
     </TitleContainer>
