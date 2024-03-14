@@ -41,8 +41,8 @@ const TypeSelect = styled.select`
   font-size: 1rem;
   font-family: 'SUIT-Regular';
   font-weight: 900;
-  background: url('Expand_down.png') no-repeat 100% 10%;
-  background-size: 2rem 2rem;
+  background: url('down_arrow.png') no-repeat 90% 25%;
+  background-size: 1.5rem 1.5rem;
   border-radius: 0.7rem;
   padding: 0 0 0 0.5rem;
   width: 7.3rem;

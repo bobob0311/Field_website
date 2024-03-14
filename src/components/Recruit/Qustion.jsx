@@ -21,7 +21,7 @@ const Box = styled.button`
   max-height: ${({$expanded}) => ($expanded === 'true' ? '8rem' : '4rem')};
   transition: max-height 0.5s ease;
   div img {
-    transform: rotate(${({$expanded}) => ($expanded === 'true' ? '180deg' : '0deg')});
+    transform: rotate(${({$expanded}) => ($expanded === 'true' ? '0deg' : '180deg')});
     transition: transform 0.3s ease;
   }
 
@@ -40,6 +40,7 @@ const P = styled.p`
 
 const DownImg = styled.img`
   margin: 0 0.5rem 0 0;
+  width: 2rem;
 `;
 
 const QueBox = styled.div`
