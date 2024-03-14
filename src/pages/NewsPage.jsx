@@ -7,7 +7,7 @@ import {NewsApi} from '../lib/Apiservice';
 import theme from '../theme';
 
 const NewsMain = styled.section`
-  height: 90vh;
+  min-height: calc(100vh - 112px - 58px);
 `;
 
 const H1 = styled.h1`
@@ -22,7 +22,7 @@ const ButtonWrapper = styled.div`
 `;
 
 const TypeSelect = styled.select`
-  margin: 1rem 0 0 0;
+  margin: 1.25rem 0 0 0;
   color: black;
   appearance: none;
   font-size: 1rem;

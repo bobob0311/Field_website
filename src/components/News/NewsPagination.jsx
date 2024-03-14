@@ -11,7 +11,7 @@ const PageWrapper = styled.div`
 `;
 
 const Ul = styled.ul`
-  margin: 0.25rem 7.5%;
+  margin: 1.25rem 7.5%;
 `;
 
 const Li = styled.li`
@@ -46,7 +46,7 @@ const TitleSpan = styled.span`
 `;
 
 const Title2Span = styled.span`
-  margin: 0.625rem 0 0 0;
+  margin: 0.5rem 0 0 0;
   grid-area: title2;
   font-weight: 800;
 `;
@@ -60,6 +60,7 @@ const DateSpan = styled.span`
 const CustomPagination = styled(Pagination)`
   .MuiPaginationItem-root {
     color: white;
+    margin: 0 0.25rem 1rem 0.25rem;
   }
 `;
 

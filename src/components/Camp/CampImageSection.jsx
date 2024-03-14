@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import styled from 'styled-components';
+import TextGenerator from '../TextGenerator';
 
 const Section = styled.section`
   height: calc(100vh - 4.5rem);
@@ -42,13 +43,32 @@ const Span = styled.span`
   margin: 0 0 1rem 0;
 `;
 
-function CampImageSection({img, title1, title2, firstLine = '', secondLine = '', thirdLine = ''}) {
+function CampImageSection({img, title, firstLine = '', secondLine = '', thirdLine = ''}) {
+  const h2Ref = useRef(null);
+  const [animate, setAnimate] = useState(false);
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setAnimate(true);
+        }
+      });
+    });
+
+    if (h2Ref.current) {
+      observer.observe(h2Ref.current);
+    }
+
+    return () => {
+      if (h2Ref.current) {
+        observer.unobserve(h2Ref.current);
+      }
+    };
+  }, []);
+
   return (
     <Section src={img}>
-      <H2>
-        <Span>{title1}</Span>
-        <Span>{title2}</Span>
-      </H2>
+      <H2 ref={h2Ref}>{animate && <TextGenerator text={title} size='1.5625rem' />}</H2>
       <P>
         <Span>{firstLine}</Span>
         <Span>{secondLine}</Span>

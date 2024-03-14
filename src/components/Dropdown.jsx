@@ -30,7 +30,7 @@ const Option = styled.option`
   background-color: transparent;
 `;
 
-function Dropdown({title, titleArr}) {
+function Dropdown({titleArr}) {
   const dispatch = useDispatch();
   const handleChange = event => {
     const selectedTitle = parseInt(event.target.value, 10);

@@ -11,21 +11,20 @@ function CampPage() {
       <CampMainSection />
       <CampIntroSection />
       <CampImageSection
-        title1='ON/OFF blended'
+        title='ON/OFF blended'
         img='camp2.png'
         firstLine='사전 데모데이를 통해'
         secondLine='팀원들과 교류할 수 있는'
         thirdLine='기회를 제공합니다.'
       />
       <CampImageSection
-        title2='Various Program'
+        title='Various Program'
         img='camp3.png'
         firstLine='다양한 인적, 학술적 교류 활성화'
         secondLine='프로그램을 진행합니다.'
       />
       <CampImageSection
-        title1='Connection with '
-        title2='Specialist'
+        title='Connection with Specialist'
         img='camp4.jpg'
         firstLine='산업공학과 출신 기업인,'
         secondLine='교수님과 소통하세요.'

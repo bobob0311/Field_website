@@ -1,12 +1,15 @@
 import React, {useEffect, useState} from 'react';
+import {Swiper, SwiperSlide} from 'swiper/react';
 import {useNavigate, useParams} from 'react-router-dom';
 import styled from 'styled-components';
+import {Pagination} from 'swiper/modules';
 import {NewsDetailApi} from '../lib/Apiservice';
 import LoadingSpinner from '../components/LoadingSpinner';
+import theme from '../theme';
 
 const Section = styled.section`
   margin: 0 7.5%;
-  height: calc(100vh - 58px - 112px);
+  min-height: calc(100vh - 58px - 112px);
 `;
 
 const H1 = styled.h1`
@@ -24,7 +27,7 @@ const H2 = styled.h2`
 
 const P = styled.p`
   font-size: 1rem;
-  margin: 2.5rem 0;
+  margin: 1rem 0;
   font-weight: 500;
   line-height: 1.5;
   word-break: keep-all;
@@ -60,7 +63,31 @@ const Icon = styled.img`
   transform: ${props => props.$transform || ''};
 `;
 const DateP = styled.p`
+  margin: 0 0 2rem 0;
   font-size: 1rem;
+`;
+
+const StyledSwiper = styled(Swiper)`
+  margin: 1rem 0;
+  .swiper-pagination {
+    position: relative;
+    bottom: -1px;
+    margin: 0.5rem 0 1rem 0;
+  }
+
+  .swiper-pagination-bullet {
+    background-color: white;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: ${theme.colors.blue};
+  }
+`;
+
+const SlideImg = styled.img`
+  width: 100%;
+  height: 400px;
+  object-fit: fill;
 `;
 
 function NewsDetailPage() {
@@ -116,7 +143,20 @@ function NewsDetailPage() {
         <LoadingSpinner />
       ) : (
         <>
-          <H2>{detailNewsData.title.length}</H2>
+          <H2>{detailNewsData.title}</H2>
+          <StyledSwiper
+            modules={[Pagination]}
+            // spaceBetween={20}
+            centeredSlides='true'
+            pagination={{clickable: true}}
+          >
+            {detailNewsData.photo.length > 0 &&
+              detailNewsData.photo.map(item => (
+                <SwiperSlide>
+                  <SlideImg src={`${fileUrl}${detailNewsData.id}/${item}`} alt={`${item}`} />
+                </SwiperSlide>
+              ))}
+          </StyledSwiper>
           <P>{detailNewsData.contents}</P>
           {detailNewsData.url && <A href={`${detailNewsData.url}`}>👉해당 공모전 보러가기</A>}
           <Wrapper>

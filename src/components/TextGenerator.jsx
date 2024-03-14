@@ -4,7 +4,7 @@ import styled from 'styled-components'; // styled-components를 불러옵니다.
 
 // 텍스트 애니메이션을 담당하는 컨테이너를 스타일드 컴포넌트로 정의합니다.
 const TextGenerateContainer = styled.div`
-  font-size: 1.3rem; // 폰트 크기를 설정합니다.
+  font-size: ${props => props.$size || '1.3rem'}; // 폰트 크기를 설정합니다.
   font-weight: bold; // 폰트 굵기를 설정합니다.
   text-align: center; // 텍스트를 가운데 정렬합니다.
   line-height: 2;
@@ -13,7 +13,7 @@ const TextGenerateContainer = styled.div`
 `;
 
 // 텍스트 애니메이션 예시를 담당하는 함수형 컴포넌트를 정의합니다.
-function TextGenerator({text}) {
+function TextGenerator({text, size}) {
   const animationControl = useAnimation(); // 애니메이션을 제어하는 useAnimation 훅을 사용합니다.
   const wordsArray = text.split(' '); // 주어진 텍스트를 공백을 기준으로 분할하여 단어 배열로 만듭니다.
 
@@ -28,7 +28,7 @@ function TextGenerator({text}) {
   }, [animationControl]); // useEffect의 종속성 배열에 animationControl을 추가하여 애니메이션이 업데이트될 때마다 실행됩니다.
 
   return (
-    <TextGenerateContainer>
+    <TextGenerateContainer $size={size}>
       <AnimatePresence>
         {' '}
         {/* AnimatePresence 컴포넌트를 사용하여 애니메이션을 관리합니다. */}
