@@ -5,7 +5,8 @@ import {LoadDateData} from '../../lib/Apiservice';
 import ContentWrapper from './UI/ContentWrapper';
 
 const P = styled.p`
-  font-size: 1rem;
+  font-size: ${props => (props.$fontSize ? props.$fontSize : '1rem')};
+  font-weight: 700;
   color: ${props => (props.$color ? theme.colors[props.$color] : theme.colors.black)};
   font-weight: 700;
   text-align: center;
@@ -83,11 +84,17 @@ const LoadingSpin = styled.div`
   animation: ${spin} 0.5s linear infinite;
 `;
 
+const Emoji = styled.span`
+  margin: 0 0.35rem 0 0;
+`;
+
 function InfoGroup({subtitle, content}) {
   return (
     <ContentWrapper>
       <SubTitle>{subtitle}</SubTitle>
-      <P $color='white'>{content}</P>
+      <P $fontSize='1.25rem' $color='white'>
+        {content}
+      </P>
     </ContentWrapper>
   );
 }
@@ -184,17 +191,25 @@ export default function Content() {
   } else if (isLoading === false) {
     recruitmentContent = (
       <>
-        <DateP>{`📄 서류 접수: ${dateData[0]} ~ ${dateData[1]}`}</DateP>
-        <DateP>{`✅ 1차 서류 전형 합격자 발표: ${dateData[2]}`}</DateP>
+        <DateP>
+          <Emoji>📄</Emoji>
+          {`서류 접수: ${dateData[0]} ~ ${dateData[1]}`}
+        </DateP>
+        <DateP>
+          <Emoji>✅</Emoji> {`1차 서류 전형 합격자 발표: ${dateData[2]}`}
+        </DateP>
 
         <DateP>
-          💬 2차 면접:
+          <Emoji>💬</Emoji> 2차 면접:
           <span>
             <OneLine>{` ${dateData[3]} ~ ${dateData[4] ? dateData[4].slice(8) : ''}`}</OneLine>
             <OneLine>{`${dateData[5]} ~ ${dateData[6] ? dateData[6].slice(8) : ''}`}</OneLine>
           </span>
         </DateP>
-        <DateP>{`✅ 최종 합격자 발표: ${dateData[7]}`}</DateP>
+        <DateP>
+          <Emoji>✅</Emoji>
+          {` 최종 합격자 발표: ${dateData[7]}`}
+        </DateP>
       </>
     );
   } else {
