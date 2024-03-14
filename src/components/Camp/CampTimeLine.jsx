@@ -27,7 +27,7 @@ function CampTimeLine() {
     <Section>
       <H2>Time Line</H2>
       <TimeLine data={data} height='80' />
-      <Button label='FIELD CAMP 지원하기' />
+      <Button label='FIELD CAMP 지원하기' animate />
     </Section>
   );
 }

@@ -67,7 +67,7 @@ function CampMainSection() {
       <TitleH2>여러분의 열정을 보여주세요!!</TitleH2>
       <ButtonWapper>
         <Link to='https://linktr.ee/iefieldcamp'>
-          <Button label='FIELD CAMP 지원하기' />
+          <Button label='FIELD CAMP 지원하기' animate />
         </Link>
         <Figure>
           <Img src='transfer-down-light.svg' />

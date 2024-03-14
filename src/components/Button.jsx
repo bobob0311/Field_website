@@ -1,9 +1,17 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, {keyframes, css} from 'styled-components';
 import theme from '../theme';
 
+const buttonAnimation = keyframes`
+  30% { transform: scale(1.1); }
+  40%, 60% { transform: rotate(-10deg) scale(1.1); }
+  50% { transform: rotate(10deg) scale(1.1); }
+  70% { transform: rotate(0deg) scale(1.1); }
+  100% { transform: scale(1); }
+}
+`;
+
 const WhiteButton = styled.button`
-type=button
   background: ${theme.colors.white};
   color: ${theme.colors.black};
   width: 8rem;
@@ -13,13 +21,22 @@ type=button
   border-radius: 5rem;
   font-family: SUIT;
   font-weight: 800;
-  font-size: .9375rem;
+  font-size: 0.9375rem;
   word-break: keep-all;
   box-shadow: 0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.3);
+  ${props =>
+    props.$animate &&
+    css`
+      animation: ${buttonAnimation} 3s infinite;
+    `}
 `;
 
-function Button({label, onClick}) {
-  return <WhiteButton onClick={onClick}>{label}</WhiteButton>;
+function Button({label, onClick, animate}) {
+  return (
+    <WhiteButton $animate={animate} onClick={onClick}>
+      {label}
+    </WhiteButton>
+  );
 }
 
 export default Button;
