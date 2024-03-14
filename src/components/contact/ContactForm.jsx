@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {useEffect, useState, useRef} from 'react';
+import {useState, useRef} from 'react';
 import PocketBase from 'pocketbase';
 import theme from '../../theme';
 import ContactModal from './ContactModal';
@@ -82,32 +82,30 @@ const Option = styled.option`
 `;
 
 export default function ContactForm() {
-  const foo = {
-    type: useRef({value: '', valid: false}),
+  const enteredData = {
+    type: useRef({value: '', valid: true}),
     name: useRef({value: '', valid: false}),
     email: useRef({value: '', valid: false}),
-    phoneNumber: useRef({value: '', valid: false}),
+    phone: useRef({value: '', valid: false}),
     content: useRef({value: '', valid: false}),
     title: useRef({value: '', valid: false}),
   };
-
+  const [isValid, setIsValid] = useState(false);
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState();
   const [isOpen, setIsOpen] = useState(false);
-  const [isValid, setIsValid] = useState(false);
   const emailValid = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   const phoneValid = /^[0-9]{9,11}$/;
 
-  async function SendMessage({type, name, email, phoneNumber, content, title}) {
+  async function SendMessage() {
     const pb = new PocketBase(import.meta.env.VITE_API_URL);
-    const data = {
-      Name: name,
-      Type: type,
-      Phone: phoneNumber,
-      Email: email,
-      Title: title,
-      Content: content,
-    };
+    const data = {};
+
+    Object.keys(enteredData).forEach(key => {
+      const dataKey = key.charAt(0).toUpperCase() + key.slice(1);
+      const dataValue = enteredData[key].current.value;
+      data[dataKey] = dataValue;
+    });
 
     setIsLoading(true);
 
@@ -131,26 +129,33 @@ export default function ContactForm() {
 
   const enteredDataHandler = event => {
     event.preventDefault();
-    // setIsOpen(true);
-    console.log(foo);
-    if (isValid) {
-      SendMessage(enteredData);
+    setIsOpen(true);
+    let isEveryValid = true;
+    Object.keys(enteredData).forEach(key => {
+      const isOneValid = enteredData[key].current.valid;
+      isEveryValid = isEveryValid && isOneValid;
+    });
+    setIsValid(isEveryValid);
+    if (isEveryValid) {
+      SendMessage();
     }
   };
 
-  useEffect(() => {
-    console.log('상위 컴포넌트 렌더링!');
-  });
-
   function up(data, name) {
-    foo[name].current = data;
-    console.log(foo);
+    enteredData[name].current = data;
   }
 
   function modalCloseHandler() {
     setIsOpen(false);
     setError(false);
     if (isValid && !error) window.location.reload();
+  }
+
+  function handleTypeChange(e) {
+    enteredData.type.current = {
+      value: e.target.value,
+      valid: true,
+    };
   }
 
   return (
@@ -174,7 +179,7 @@ export default function ContactForm() {
               imgAlt='핸드폰 아이콘'
               title='연락처'
               inputType='tel'
-              inputName='phoneNumber'
+              inputName='phone'
               validFn={phoneNumberisValid}
               autoComplete='tel'
               changeFn={(data, name) => up(data, name)}
@@ -206,7 +211,7 @@ export default function ContactForm() {
             />
 
             <TypeLabel>
-              <TypeSelect name='type' onChange={e => changeHandler(e)} autoComplete='off'>
+              <TypeSelect name='type' onChange={e => handleTypeChange(e)} autoComplete='off'>
                 <Option value='선택하지않음'>문의유형</Option>
                 <Option value='서비스 이용'>서비스 이용</Option>
                 <Option value='후원'>후원</Option>

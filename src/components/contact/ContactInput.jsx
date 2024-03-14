@@ -121,10 +121,6 @@ export default function ContactInput({
     changeFn(data, inputName);
   }, [enteredData]);
 
-  useEffect(() => {
-    console.log('하위 컴포넌트 렌더링');
-  });
-
   return (
     <InputBox valid={isValid} imgSrc={imgSrc} imgAlt={imgAlt} name={title}>
       <Label
