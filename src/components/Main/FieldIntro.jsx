@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 
 const H3 = styled.h3`
   display: flex;
@@ -43,11 +43,20 @@ const Figcaption = styled.figcaption`
   line-height: 1.5;
 `;
 
+const shadowAnimation = keyframes`
+  0% { box-shadow: 0px 0px 15px 5px #2b3382; } 
+  30% { box-shadow: 0px 0px 15px 5px #5761c7; } 
+  60% { box-shadow: 0px 0px 15px 5px #1a86d5 } 
+  100% { box-shadow: 0px 0px 15px 5px #2b3382; }
+`;
+
 const Card = styled.div`
-  border: 2px solid white;
+  // border: 2px solid white;
   border-radius: 1rem;
   padding: 2rem 1.5rem 0 1.5rem;
   margin: 8rem 0;
+  box-shadow: 0px 0px 15px 5px #2b3382;
+  animation: ${shadowAnimation} 3s infinite;
 `;
 
 function FieldIntro({title, backgroundImage, content}) {

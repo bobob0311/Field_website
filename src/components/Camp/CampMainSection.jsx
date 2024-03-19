@@ -1,9 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import backgroundImg from '../../assets/CampBackground.jpg';
-import scrollDown from '../../assets/transfer-down-light.svg';
-import theme from '../../theme';
 import Button from '../Button';
 
 const H1 = styled.h1`
@@ -41,6 +38,7 @@ const Figure = styled.figure`
   align-items: center;
   display: flex;
   flex-direction: column;
+  margin: 2rem 0 0 0;
 `;
 
 const Img = styled.img`
@@ -63,16 +61,16 @@ const ButtonWapper = styled.div`
 
 function CampMainSection() {
   return (
-    <TitleContainer src={backgroundImg}>
+    <TitleContainer src='camp1.png'>
       <H1>FIELD CAMP</H1>
       <TitleH2>FIELD CAMP를 통해</TitleH2>
       <TitleH2>여러분의 열정을 보여주세요!!</TitleH2>
       <ButtonWapper>
         <Link to='https://linktr.ee/iefieldcamp'>
-          <Button label='FIELD CAMP 지원하기✏️' />
+          <Button label='FIELD CAMP 지원하기' animate />
         </Link>
         <Figure>
-          <Img src={scrollDown} />
+          <Img src='transfer-down-light.svg' />
           <Figcaption>아래로 스크롤하세요</Figcaption>
         </Figure>
       </ButtonWapper>

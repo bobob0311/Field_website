@@ -71,6 +71,13 @@ const StyledSwiper = styled(Swiper)`
     position: relative;
     bottom: -1px;
   }
+  .swiper-pagination-bullet {
+    background-color: white;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: ${theme.colors.blue};
+  }
 `;
 
 function ReviewSection() {

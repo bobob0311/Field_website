@@ -2,9 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {Pagination} from '@mui/material';
 import {Link, useNavigate} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
 import LoadingSpinner from '../LoadingSpinner';
-import {setMonthTitle} from '../../redux/monthFieldSlice';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -13,7 +11,7 @@ const PageWrapper = styled.div`
 `;
 
 const Ul = styled.ul`
-  margin: 0.75rem 7.5%;
+  margin: 1.25rem 7.5%;
 `;
 
 const Li = styled.li`
@@ -48,7 +46,7 @@ const TitleSpan = styled.span`
 `;
 
 const Title2Span = styled.span`
-  margin: 0.625rem 0 0 0;
+  margin: 0.5rem 0 0 0;
   grid-area: title2;
   font-weight: 800;
 `;
@@ -62,10 +60,11 @@ const DateSpan = styled.span`
 const CustomPagination = styled(Pagination)`
   .MuiPaginationItem-root {
     color: white;
+    margin: 0 0.25rem 1rem 0.25rem;
   }
 `;
 
-function NewsPagination({newsData, category, loading, filter}) {
+function NewsPagination({newsData, category, loading}) {
   const navigate = useNavigate();
   const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
@@ -81,15 +80,11 @@ function NewsPagination({newsData, category, loading, filter}) {
     setCurrentPage(parseInt(urlPage, 10) || 1);
   }, [category, window.location.search]);
 
-  useEffect(() => {
-    if (filter) {
-      setCurrentPage(1);
-    }
-  }, [newsData]);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentItemPerPage = newsData.slice(startIndex, endIndex);
-  return !loading && currentItemPerPage.length > 0 ? (
+
+  return !loading && currentItemPerPage.length > 0 && newsData[0].category === category ? (
     <>
       <Ul>
         {currentItemPerPage.map(item => (
@@ -98,6 +93,9 @@ function NewsPagination({newsData, category, loading, filter}) {
               <Thumbnail src={`${imageUrl}/${item.collectionId}/${item.id}/${item.thumbnail}`} />
               <TitleSpan>{item.title1} </TitleSpan>
               <Title2Span>{item.title2 ? item.title2 : ''}</Title2Span>
+              <DateSpan>
+                {item.year}년 {item.month}월 {item.day}일
+              </DateSpan>
               <DateSpan />
             </Link>
           </Li>

@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {setCampTitle} from '../redux/campTitleSlice';
 
 const TypeSelect = styled.select`
-  margin: 1rem 7.5%;
+  margin: 1.25rem 7.5%;
   color: white;
   appearance: none;
   border: 0.11rem solid white;
@@ -30,17 +30,15 @@ const Option = styled.option`
   background-color: transparent;
 `;
 
-function Dropdown({title, titleArr}) {
+function Dropdown({titleArr}) {
   const dispatch = useDispatch();
   const handleChange = event => {
     const selectedTitle = parseInt(event.target.value, 10);
-    console.log(selectedTitle);
     dispatch(setCampTitle(selectedTitle));
   };
-
+  const campYear = useSelector(state => state.campTitle.value);
   return (
-    <TypeSelect name='Type' autoComplete='off' onChange={handleChange}>
-      <Option value='선택하지않음'>{title}</Option>
+    <TypeSelect name='Type' autoComplete='off' onChange={handleChange} value={campYear}>
       {titleArr.map(item => (
         <Option key={item} value={item}>
           {item} FIELD CAMP
