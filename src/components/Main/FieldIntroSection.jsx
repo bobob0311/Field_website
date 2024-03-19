@@ -9,6 +9,9 @@ const MainSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media screen and (min-width: 769px) {
+    margin: 0 15%;
+  }
 `;
 
 function FieldIntroSection() {

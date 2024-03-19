@@ -1,5 +1,23 @@
 import styled from 'styled-components';
-import TimeLine from '../TimeLine';
+import TimelineDetail from './TimelineDetail';
+
+const Container = styled.div`
+  width: 95%;
+  padding: 50px 0;
+  position: relative;
+  margin: 50px auto;
+  overflow: hidden;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -1px;
+    width: 2px;
+    height: 100%;
+    background: #f5f7fa;
+  }
+`;
 
 const H2 = styled.h2`
   font-size: 1.7rem;
@@ -13,18 +31,60 @@ const GoblinH2 = styled(H2)`
 `;
 
 function TimelineSection() {
-  const data = {
-    2008: [{title: 'FIELD의 시작', get: ' '}],
-    2009: [{title: '첫 FIELD CAMP 개최', get: ' '}],
-    2016: [{title: '대한산업공학회', title2: '산하 공식 단체 인준', get: ' '}],
-    2017: [{title: '전국 단위 활동', get: ' '}],
-    2018: [{title: '고교방문 설명회 진행', get: ' '}],
-    2022: [{title: 'FIELD 유튜브 개설', get: ' '}],
-  };
   return (
     <>
       <GoblinH2 margin='5rem 0'>Road of FIELD</GoblinH2>
-      <TimeLine data={data} height='100' />
+      <Container>
+        <TimelineDetail
+          float='right'
+          direction='ltr'
+          firstTitle='FIELD의 시작'
+          year='2008'
+          description='2008년 필드는 3개의 학교 (서울대학교, KAIST, POSTECH)에서 첫 학술 및 인적 교류를
+            시작했습니다.'
+        />
+
+        <TimelineDetail
+          float='left'
+          direction='rtl'
+          firstTitle='첫 FILED CAMP 개최'
+          year='2009'
+          description='고려대학교, 연세대학교 참여시작 매년 동부 인재 개발원의 후원을 받아 캠프 주최 및 참여
+            자체 세미나 진행 FIELD SNS 생성'
+        />
+
+        <TimelineDetail
+          float='right'
+          direction='ltr'
+          firstTitle='대안산업공학회'
+          secondTitle='산하 공식 단체 인준'
+          description='전국 대학교를 대상으로 모든 산업공학도의 캠프 주최 및 참여'
+        />
+
+        <TimelineDetail
+          float='left'
+          direction='rtl'
+          firstTitle='전국 단위 활동'
+          year='2017'
+          description='전국 단위 FIELD 활동 및 삼성 SDS 시연회에 FIELD STAFF로 참가'
+        />
+
+        <TimelineDetail
+          float='right'
+          direction='ltr'
+          firstTitle='고교 방문 설명회 진행'
+          year='2018'
+          description='고등학생들을 대상으로 한 멘토링 진행'
+        />
+
+        <TimelineDetail
+          float='left'
+          direction='rtl'
+          firstTitle='FIELD 유튜브 개설'
+          year='2022'
+          description='FIELD 유튜브 계정 개설 및 산업공학 관련 영상 제작'
+        />
+      </Container>
     </>
   );
 }

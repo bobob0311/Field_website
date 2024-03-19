@@ -17,6 +17,7 @@ const H2 = styled.h2`
   font-size: 1.875rem;
   margin: ${props => props.$margin || '0'};
   text-align: center;
+  font-weight: 700;
 `;
 
 const SwiperContainer = styled.div`
@@ -26,6 +27,9 @@ const SwiperContainer = styled.div`
 
 const NanumH2 = styled(H2)`
   font-family: 'Nanum Myeongjo', serif;
+  @media screen and (min-width: 769px) {
+    font-size: 40px;
+  }
 `;
 
 const StyledSwiper = styled(Swiper)`
@@ -43,10 +47,17 @@ function ActivitySection() {
       <SwiperContainer $margin='2rem 0'>
         <StyledSwiper
           modules={[Pagination]}
-          slidesPerView={1.2}
           spaceBetween={20}
           centeredSlides='true'
           pagination={{clickable: true}}
+          breakpoints={{
+            320: {
+              slidesPerView: 1.2,
+            },
+            768: {
+              slidesPerView: 2.5,
+            },
+          }}
         >
           <SwiperSlide>
             <ActivityIntro
