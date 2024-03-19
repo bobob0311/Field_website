@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import styled from 'styled-components';
+import TextGenerator from '../TextGenerator';
 
 const Section = styled.section`
   height: calc(100vh - 4.5rem);
@@ -21,9 +22,9 @@ const H2 = styled.h2`
   font-size: 1.5625rem;
   color: white;
   text-align: center;
-  padding: 0 7.5%;
   font-family: 'Goblin One';
   font-weight: bold;
+  line-height: 2.5rem;
 `;
 
 const P = styled.p`
@@ -43,9 +44,31 @@ const Span = styled.span`
 `;
 
 function CampImageSection({img, title, firstLine = '', secondLine = '', thirdLine = ''}) {
+  const h2Ref = useRef(null);
+  const [animate, setAnimate] = useState(false);
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setAnimate(true);
+        }
+      });
+    });
+
+    if (h2Ref.current) {
+      observer.observe(h2Ref.current);
+    }
+
+    return () => {
+      if (h2Ref.current) {
+        observer.unobserve(h2Ref.current);
+      }
+    };
+  }, []);
+
   return (
     <Section src={img}>
-      <H2>{title}</H2>
+      <H2 ref={h2Ref}>{animate && <TextGenerator text={title} size='1.5625rem' />}</H2>
       <P>
         <Span>{firstLine}</Span>
         <Span>{secondLine}</Span>

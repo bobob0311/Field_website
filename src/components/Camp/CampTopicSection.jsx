@@ -25,13 +25,6 @@ const H2 = styled.h2`
   font-weight: 900;
 `;
 
-const H3 = styled.h3`
-  font-size: 1rem;
-  font-weight: bold;
-  font-family: SUIT-Heavy;
-  margin: 0 0 1rem 0;
-`;
-
 const Figure = styled.figure`
   display: flex;
   flex-direction: column;
@@ -42,8 +35,8 @@ const Figure = styled.figure`
 const Img = styled.img`
   width: 100%;
   height: 100%;
-  margin: 1rem 0;
   border-radius: 1rem;
+  margin: 0 0 1.25rem 0;
   order: 2;
 `;
 
@@ -52,9 +45,6 @@ const Figcaption = styled.figcaption`
   color: ${props => (props.$color ? theme.colors[props.$color] : theme.colors.red)};
   font-family: 'Goblin One';
   font-size: 1.25rem;
-`;
-
-const ButtonWrapper = styled.div`
   margin: 0 0 1.25rem 0;
 `;
 
@@ -77,11 +67,15 @@ function CampTopicSection() {
   const getDataFieldYear = async () => {
     try {
       let response;
-      if (localData) {
-        response = JSON.parse(localData);
-      } else {
+      const now = new Date();
+      const lastUpdate = localStorage.getItem('필드캠프-lastUpdate');
+      const lastUpdateTime = lastUpdate ? new Date(parseInt(lastUpdate, 10)) : null;
+      if (!lastUpdateTime || now - lastUpdateTime > 24 * 60 * 60 * 1000) {
         response = await CampApi();
         localStorage.setItem('fieldData', JSON.stringify(response));
+        localStorage.setItem('필드캠프-lastUpdate', now.getTime().toString());
+      } else {
+        response = JSON.parse(localData);
       }
       const years = response.map(item => item.year);
       const uniqueYears = [...new Set(years)];
@@ -102,6 +96,7 @@ function CampTopicSection() {
     if (campFullData.length > 0) {
       filterData(campYear);
     }
+    setExpandedIndex(null);
   }, [campYear, campFullData]);
 
   const toggleImageDisplay = index => {
@@ -113,7 +108,7 @@ function CampTopicSection() {
       <H2>역대 FIELD CAMP</H2>
       <Dropdown title='역대 FIELD CAMP' titleArr={campDataYear} />
       {showedCampData.map((camp, index) => (
-        <ButtonWrapper key={camp.id}>
+        <>
           <Figure key={camp.id}>
             {expandedIndex === index ? (
               camp.file.map((file, fileIndex) => (
@@ -136,7 +131,7 @@ function CampTopicSection() {
             onClick={() => toggleImageDisplay(index)}
             label={expandedIndex === index ? '가리기' : `'주제${index + 1}'에 대해 더 알아보기`}
           />
-        </ButtonWrapper>
+        </>
       ))}
     </Section>
   );

@@ -7,7 +7,7 @@ import {NewsApi} from '../lib/Apiservice';
 import theme from '../theme';
 
 const NewsMain = styled.section`
-  height: calc(100vh - 58px - 112px);
+  min-height: calc(100vh - 112px - 58px);
 `;
 
 const H1 = styled.h1`
@@ -22,18 +22,19 @@ const ButtonWrapper = styled.div`
 `;
 
 const TypeSelect = styled.select`
-  margin: 1rem 0 0 0;
+  margin: 1.25rem 0 0 0;
   color: black;
   appearance: none;
   font-size: 1rem;
   font-family: 'SUIT-Regular';
   font-weight: 700;
-  background: ${theme.colors.lightgray} url('Expand_down.png') no-repeat 95% / 25px 25px;
+  background: ${theme.colors.lightgray} url('down_arrow.png') no-repeat 90% 40% / 20px 20px;
   border-radius: 1rem;
   padding: 0.375rem 0 0.375rem 0.5rem;
   width: ${props => props.width || '5.75rem'};
   height: 2rem;
   z-index: 0;
+  border: none;
 `;
 
 const Option = styled.option`
@@ -45,7 +46,7 @@ const Option = styled.option`
 `;
 
 const DropdownWrapper = styled.div`
-  margin: 0 7.5%;
+  padding: 0 7.5%;
   display: flex;
   gap: 0.5rem;
   justify-content: end;
@@ -61,7 +62,6 @@ export default function NewsPage() {
   const [newsData, setNewsData] = useState([]);
   const [newsMonth, setNewsMonth] = useState([]);
   const [renderData, setRenderData] = useState([]);
-  const [filter, setFilter] = useState(false);
   const [selectedYear, setSelectedYear] = useState('선택하지않음');
   const [selectedMonth, setSelectedMonth] = useState('선택하지않음');
 
@@ -75,7 +75,7 @@ export default function NewsPage() {
     setSelectedMonth(e.target.value);
   };
 
-  function yearFilter(data, filterYear) {
+  const yearFilter = (data, filterYear) => {
     setSelectedYear(filterYear);
     let monthByYear;
     if (filterYear === '선택하지않음') {
@@ -85,13 +85,12 @@ export default function NewsPage() {
       const yearFilterData = data.filter(item => item.year === parseInt(filterYear, 10));
       monthByYear = [...new Set(yearFilterData.map(item => item.month))];
       setRenderData(yearFilterData);
-      setFilter(true);
     }
     setSelectedMonth('선택하지않음');
     setNewsMonth(monthByYear);
-  }
+  };
 
-  function monthFilter(data, filterYear, filterMonth) {
+  const monthFilter = (data, filterYear, filterMonth) => {
     setSelectedMonth(filterMonth);
     let monthFilteredData;
     if (filterMonth === '선택하지않음') {
@@ -106,8 +105,7 @@ export default function NewsPage() {
       );
     }
     setRenderData(monthFilteredData);
-    setFilter(true);
-  }
+  };
 
   const handleButtonClick = item => {
     setSelectCategory(item);
@@ -131,16 +129,20 @@ export default function NewsPage() {
 
   const getDataNews = async category => {
     try {
+      setLoading(true);
+      const now = new Date();
+      const lastUpdate = localStorage.getItem(`${category}-lastUpdate`);
+      const lastUpdateTime = lastUpdate ? new Date(parseInt(lastUpdate, 10)) : null;
       let response;
-      const categoryData = JSON.parse(localStorage.getItem(`${category}`));
-      if (categoryData) {
-        response = categoryData;
-      } else {
+      if (!lastUpdateTime || now - lastUpdateTime > 24 * 60 * 60 * 1000) {
         response = await NewsApi(category);
         localStorage.setItem(`${category}`, JSON.stringify(response));
+        localStorage.setItem(`${category}-lastUpdate`, now.getTime().toString());
+      } else {
+        const categoryData = localStorage.getItem(`${category}`);
+        response = categoryData ? JSON.parse(categoryData) : [];
       }
       setNewsData(response);
-
       if (category === '월간필드') {
         initialYearMonth(response);
         const urlYear = new URLSearchParams(location.search).get('year') || '선택하지않음';
@@ -159,7 +161,6 @@ export default function NewsPage() {
     const urlCategory = new URLSearchParams(location.search).get('category') || '월간필드';
     getDataNews(urlCategory);
     setSelectCategory(urlCategory);
-    console.log(newsData);
     setLoading(false);
   }, [location.search]);
 
@@ -208,12 +209,9 @@ export default function NewsPage() {
         </DropdownWrapper>
       )}
       <NewsPagination
-        // newsData={selectCategory === '월간필드' ? filteredNewsData : newsData}
         newsData={selectCategory === '월간필드' ? renderData : newsData}
-        // newsData={newsData}
         category={selectCategory}
         loading={loading}
-        filter={filter}
       />
     </NewsMain>
   );

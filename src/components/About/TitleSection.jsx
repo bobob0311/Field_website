@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import theme from '../../theme';
+import TextGenerator from '../TextGenerator';
 
 const TitleContainer = styled.section`
   height: 90vh;
@@ -80,19 +81,69 @@ function TitleSection() {
       <ContentContainer>
         <GoblinP size='2.25rem' line='1.4'>
           <span>
-            <FirstAlphabet color='red'>F</FirstAlphabet>uture
+            <FirstAlphabet color='red'>F</FirstAlphabet>
+            <TextGenerator
+              text='u t u r e'
+              margin='0'
+              align=''
+              size='2.25rem'
+              weight='100'
+              height='0'
+              spacing='-6px'
+              time='0.1'
+            />
           </span>
           <span>
-            <FirstAlphabet color='yellow'>I</FirstAlphabet>ndustrial
+            <FirstAlphabet color='yellow'>I</FirstAlphabet>
+            <TextGenerator
+              text='n d u s t r i a l'
+              margin='0'
+              align=''
+              size='2.25rem'
+              weight='100'
+              height='0'
+              spacing='-6px'
+              time='0.1'
+            />
           </span>
           <span>
-            <FirstAlphabet color='yellow'>E</FirstAlphabet>ngineering
+            <FirstAlphabet color='yellow'>E</FirstAlphabet>
+            <TextGenerator
+              text='n g i n e e r i n g'
+              margin='0'
+              align=''
+              size='2.25rem'
+              weight='100'
+              height='0'
+              spacing='-6px'
+              time='0.1'
+            />
           </span>
           <span>
-            <FirstAlphabet color='blue'>L</FirstAlphabet>eaders&
+            <FirstAlphabet color='blue'>L</FirstAlphabet>
+            <TextGenerator
+              text='e a d e r s &'
+              margin='0'
+              align=''
+              size='2.25rem'
+              weight='100'
+              height='0'
+              spacing='-6px'
+              time='0.1'
+            />
           </span>
           <span>
-            <FirstAlphabet color='blue'>D</FirstAlphabet>reamers
+            <FirstAlphabet color='blue'>D</FirstAlphabet>
+            <TextGenerator
+              text='r e a m e r s'
+              margin='0'
+              align=''
+              size='2.25rem'
+              weight='100'
+              height='0'
+              spacing='-6px'
+              time='0.1'
+            />
           </span>
         </GoblinP>
         <P line='1.5' margin='2rem 0 0 0' size='1rem'>
