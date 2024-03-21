@@ -11,12 +11,12 @@ const TextArea = styled.textarea`
   border-radius: 0.7rem;
   border: 0.15rem solid ${theme.colors.black};
   font-family: 'SUIT-Regular';
-  font-size: 1rem;
+  font-size: 16px;
   background: none;
   font-weight: 700;
-  height: 20rem;
+  height: 320px;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     position: block;
     height: 10rem;
   }
@@ -47,7 +47,7 @@ const Star = styled.span`
 
 const InputLabel = styled.label`
   font-size: 1.2rem;
-  margin: 1rem 0 0 0;
+  margin: 16px 0 0 0;
   display: block;
   color: ${theme.colors.black};
   font-weight: 900;
@@ -63,7 +63,7 @@ const Input = styled.input`
   height: 1.7rem;
   border: none;
   border-bottom: 0.15rem solid ${theme.colors.black};
-  padding: 0rem 0.2rem 0 0.1rem;
+  padding: 0rem 0.2rem 0 0.3rem;
   box-sizing: border-box;
   background: none;
   border-radius: 0;
@@ -100,6 +100,7 @@ export default function ContactInput({
   changeFn,
   maxLength,
   placeholder,
+  width,
 }) {
   const Label = inputType === 'textArea' ? TextArea : Input;
 
@@ -143,6 +144,7 @@ export default function ContactInput({
         autoComplete={autoComplete}
         maxLength={maxLength}
         placeholder={placeholder}
+        $wd={width}
       />
     </InputBox>
   );
