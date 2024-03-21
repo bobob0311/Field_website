@@ -29,6 +29,12 @@ const WhiteButton = styled.button`
     css`
       animation: ${buttonAnimation} 3s infinite;
     `}
+  @media screen and (min-width: 1280px) {
+    font-size: 22px;
+    width: 200px;
+    height: 80px;
+    padding: 0;
+  }
 `;
 
 function Button({label, onClick, animate}) {
