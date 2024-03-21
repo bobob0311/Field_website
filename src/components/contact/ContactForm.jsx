@@ -8,15 +8,23 @@ import ContactInput from './ContactInput';
 const ContactSection = styled.section`
   background: ${theme.colors.white};
   border-radius: 1rem;
+  width: 100%;
+  max-width: 1024px;
 `;
 
 const Form = styled.form`
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
   padding: 3% 1%;
   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)),
     url('fieldLogo.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 50% auto;
+  @media (min-width: 1024px) {
+    background-size: 15rem;
+  }
 `;
 
 const InputLabel = styled.label`
@@ -32,7 +40,7 @@ const TypeLabel = styled(InputLabel)`
   position: absolute;
   margin: 0.8rem 0 0 0;
   display: flex;
-  right: 11%;
+  right: 2%;
 `;
 
 const TypeSelect = styled.select`
@@ -67,6 +75,9 @@ const SubmitButton = styled.button`
   box-shadow: 0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
+  @media (min-width: 1024px) {
+    margin: 1.5rem auto 0;
+  }
 `;
 const ButtonImg = styled.img`
   widht: 1.5rem;
@@ -79,6 +90,22 @@ const Option = styled.option`
   font-family: 'SUIT-Regular';
   font-weight: 900;
   font-size: 1rem;
+`;
+
+const ResponceDiv = styled.div`
+  @media (min-width: 1024px) {
+    display: flex;
+
+    > div {
+      width: 50%;
+    }
+
+    > div:first-child {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
 `;
 
 export default function ContactForm() {
@@ -162,76 +189,78 @@ export default function ContactForm() {
     <>
       <ContactSection>
         <Form onSubmit={enteredDataHandler}>
-          <div>
-            <ContactInput
-              imgSrc='happy.png'
-              imgAlt='웃는 아이콘'
-              title='이름 (회사)'
-              inputType='text'
-              inputName='name'
-              validFn={isEmpty}
-              autoComplete='name'
-              changeFn={(data, name) => up(data, name)}
-            />
+          <ResponceDiv>
+            <div className='columnEvenly'>
+              <ContactInput
+                imgSrc='happy.png'
+                imgAlt='웃는 아이콘'
+                title='이름 (회사)'
+                inputType='text'
+                inputName='name'
+                validFn={isEmpty}
+                autoComplete='name'
+                changeFn={(data, name) => up(data, name)}
+              />
 
-            <ContactInput
-              imgSrc='Phone.png'
-              imgAlt='핸드폰 아이콘'
-              title='연락처'
-              inputType='tel'
-              inputName='phone'
-              validFn={phoneNumberisValid}
-              autoComplete='tel'
-              changeFn={(data, name) => up(data, name)}
-              maxLength='11'
-              placeholder='01012345678'
-            />
+              <ContactInput
+                imgSrc='Phone.png'
+                imgAlt='핸드폰 아이콘'
+                title='연락처'
+                inputType='tel'
+                inputName='phone'
+                validFn={phoneNumberisValid}
+                autoComplete='tel'
+                changeFn={(data, name) => up(data, name)}
+                maxLength='11'
+                placeholder='01012345678'
+              />
 
-            <ContactInput
-              imgSrc='Message.png'
-              imgAlt='메세지 아이콘'
-              title='Email'
-              inputType='email'
-              inputName='email'
-              validFn={emailisValid}
-              autoComplete='email'
-              changeFn={(data, name) => up(data, name)}
-            />
-          </div>
-          <div>
-            <ContactInput
-              imgSrc='Check.png'
-              imgAlt='체크모양 아이콘'
-              title='제목'
-              inputType='text'
-              inputName='title'
-              validFn={isEmpty}
-              autoComplete='off'
-              changeFn={(data, name) => up(data, name)}
-            />
+              <ContactInput
+                imgSrc='Message.png'
+                imgAlt='메세지 아이콘'
+                title='Email'
+                inputType='email'
+                inputName='email'
+                validFn={emailisValid}
+                autoComplete='email'
+                changeFn={(data, name) => up(data, name)}
+              />
+            </div>
+            <div>
+              <ContactInput
+                imgSrc='Check.png'
+                imgAlt='체크모양 아이콘'
+                title='제목'
+                inputType='text'
+                inputName='title'
+                validFn={isEmpty}
+                autoComplete='off'
+                changeFn={(data, name) => up(data, name)}
+              />
 
-            <TypeLabel>
-              <TypeSelect name='type' onChange={e => handleTypeChange(e)} autoComplete='off'>
-                <Option value='선택하지않음'>문의유형</Option>
-                <Option value='서비스 이용'>서비스 이용</Option>
-                <Option value='후원'>후원</Option>
-                <Option value='문의'>문의</Option>
-                <Option value='기타'>기타</Option>
-              </TypeSelect>
-            </TypeLabel>
+              <TypeLabel>
+                <TypeSelect name='type' onChange={e => handleTypeChange(e)} autoComplete='off'>
+                  <Option value='선택하지않음'>문의유형</Option>
+                  <Option value='서비스 이용'>서비스 이용</Option>
+                  <Option value='후원'>후원</Option>
+                  <Option value='문의'>문의</Option>
+                  <Option value='기타'>기타</Option>
+                </TypeSelect>
+              </TypeLabel>
 
-            <ContactInput
-              imgSrc='Chat_alt_3.png'
-              imgAlt='대화창 아이콘'
-              title='내용'
-              inputType='textArea'
-              inputName='content'
-              validFn={isEmpty}
-              autoComplete='off'
-              changeFn={(data, name) => up(data, name)}
-              placeholder='내용을 입력하세요.'
-            />
-          </div>
+              <ContactInput
+                imgSrc='Chat_alt_3.png'
+                imgAlt='대화창 아이콘'
+                title='내용'
+                inputType='textArea'
+                inputName='content'
+                validFn={isEmpty}
+                autoComplete='off'
+                changeFn={(data, name) => up(data, name)}
+                placeholder='내용을 입력하세요.'
+              />
+            </div>
+          </ResponceDiv>
 
           <SubmitButton type='submit'>
             SEND

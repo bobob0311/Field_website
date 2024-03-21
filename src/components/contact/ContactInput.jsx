@@ -15,6 +15,11 @@ const TextArea = styled.textarea`
   background: none;
   font-weight: 700;
   height: 20rem;
+
+  @media (min-width: 1024px) {
+    position: block;
+    height: 10rem;
+  }
 `;
 
 const Img = styled.img`
@@ -25,6 +30,7 @@ const Img = styled.img`
 const VerticalCenter = styled.div`
   display: flex;
   align-items: center;
+  white-space: nowrap;
 `;
 
 const Check = styled.span`
@@ -61,6 +67,13 @@ const Input = styled.input`
   box-sizing: border-box;
   background: none;
   border-radius: 0;
+
+  &:-webkit-autofill {
+    -webkit-text-fill-color: ${theme.colors.black}; /* 텍스트 색상 설정 */
+    transition: background-color 5000s ease-in-out 0s; /* 배경색 전환을 길게 설정하여 자동완성 배경색이 유지되지 않도록 함 */
+    -webkit-box-shadow: 0 0 0px 1000px inset transparent; /* 투명한 배경 설정 */
+    box-shadow: 0 0 0px 1000px inset transparent;
+  }
 `;
 
 function InputBox({valid, imgSrc, imgAlt, name, children}) {

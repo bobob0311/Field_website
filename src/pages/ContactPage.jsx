@@ -3,6 +3,12 @@ import ContactForm from '../components/contact/ContactForm';
 
 const ContactMain = styled.main`
   margin: 0 7.5% 2rem 7.5%;
+  @media (min-width: 1024px) {
+    margin: 0 15% 2rem 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const Title = styled.h1`
