@@ -41,8 +41,8 @@ const TypeSelect = styled.select`
   font-size: 1rem;
   font-family: 'SUIT-Regular';
   font-weight: 900;
-  background: url('Expand_down.png') no-repeat 100% 10%;
-  background-size: 2rem 2rem;
+  background: url('down_arrow.png') no-repeat 90% 25%;
+  background-size: 1.5rem 1.5rem;
   border-radius: 0.7rem;
   padding: 0 0 0 0.5rem;
   width: 7.3rem;
@@ -51,6 +51,7 @@ const TypeSelect = styled.select`
 `;
 
 const Input = styled.input`
+  appearance: none;
   color: ${theme.colors.black};
   font-size: 1rem;
   font-weight: 600;
@@ -61,6 +62,7 @@ const Input = styled.input`
   padding: 0rem 0.2rem 0 0.1rem;
   box-sizing: border-box;
   background: none;
+  border-radius: 0;
 `;
 
 const TextArea = styled.textarea`
@@ -116,18 +118,16 @@ const Option = styled.option`
   font-size: 1rem;
 `;
 
-const Notice = styled.span`
-  position: relative;
+const Check = styled.span`
+  filter: brightness(0.4) invert(0.7) sepia(0.4) saturate(10000%) hue-rotate(70deg);
+  padding: 0 0 0.5rem 0.3rem;
+  font-size: 1.2rem;
+`;
 
-  &::before {
-    content: '*';
-    color: #ff0202;
-    position: absolute;
-    margin: 0;
-    font-size: 1.5rem;
-    left: ${props => (props.$left ? props.$left : '')};
-    top: -0.2rem;
-  }
+const Star = styled.span`
+  color: red;
+  padding: 0 0 0.5rem 0.2rem;
+  font-size: 1.4rem;
 `;
 
 const initialValidationState = {
@@ -138,13 +138,13 @@ const initialValidationState = {
   isContentValid: false,
 };
 
-function InputBox({left, validName, imgSrc, imgAlt, name, children}) {
+function InputBox({validName, imgSrc, imgAlt, name, children}) {
   return (
     <InputLabel>
-      {!validName ? <Notice $left={left} /> : null}
       <VerticalCenter>
         <Img src={imgSrc} alt={imgAlt} />
         {name}
+        {!validName ? <Star>*</Star> : <Check> ✔</Check>}
       </VerticalCenter>
       {children}
     </InputLabel>
@@ -275,7 +275,6 @@ export default function ContactForm() {
         <Form onSubmit={enterdDataHandler}>
           <div>
             <InputBox
-              left='7.8rem'
               validName={validationState.isNameValid}
               imgSrc='happy.png'
               imgAlt='웃는 아이콘'
@@ -285,7 +284,6 @@ export default function ContactForm() {
             </InputBox>
 
             <InputBox
-              left='5.5rem'
               validName={validationState.isPhoneValid}
               imgSrc='Phone.png'
               imgAlt='핸드폰 아이콘'
@@ -304,7 +302,6 @@ export default function ContactForm() {
             </InputBox>
 
             <InputBox
-              left='5.5rem'
               validName={validationState.isEmailValid}
               imgSrc='Message.png'
               imgAlt='메세지 아이콘'
@@ -320,7 +317,6 @@ export default function ContactForm() {
           </div>
           <div>
             <InputBox
-              left='4.5rem'
               validName={validationState.isTitleValid}
               imgSrc='Check.png'
               imgAlt='체크모양 아이콘'
@@ -340,7 +336,6 @@ export default function ContactForm() {
             </TypeLabel>
 
             <InputBox
-              left='4.5rem'
               validName={validationState.isContentValid}
               imgSrc='Chat_alt_3.png'
               imgAlt='대화창 아이콘'

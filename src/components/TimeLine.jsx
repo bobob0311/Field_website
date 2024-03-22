@@ -7,7 +7,7 @@ const TimeLineDiv = styled.div`
   margin: 2rem auto 0;
 `;
 const DataBox = styled.div`
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-family: 'Goblin One';
   position: absolute;
   top: ${props => props.$height};
@@ -17,7 +17,7 @@ const Data = styled.div`
   font-size: 1.25rem;
   font-weight: 900;
   position: absolute;
-  width: 160px;
+  width: 180px;
   word-break: keep-all;
   top: ${props => props.$top};
   left: 180px;
@@ -34,6 +34,9 @@ const Data = styled.div`
 `;
 const Title = styled.h3`
   color: #f76363;
+  font-size: 1.125rem;
+  display: flex;
+  flex-direction: column;
 `;
 
 const P = styled.p`
@@ -75,7 +78,11 @@ export default function TimeLine({data, height}) {
             <Data $top={`${index * height}px`}>
               {item.title && item.get ? (
                 <>
-                  <Title>{item.title}</Title>
+                  <Title>
+                    <span>{item.title}</span>
+                    <span>{item.title2}</span>
+                  </Title>
+
                   <P>{item.get}</P>
                 </>
               ) : (

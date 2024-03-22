@@ -11,6 +11,7 @@ const Button = styled.button`
   border-radius: 1rem;
   font-size: 1rem;
   font-family: inherit;
+  font-weight: 700;
   padding: 0.375rem 0;
   ${props =>
     props.isActive &&

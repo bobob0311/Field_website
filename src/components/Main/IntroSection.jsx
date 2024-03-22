@@ -21,6 +21,7 @@ const NanumH3 = styled(H3)`
   font-weight: 700;
   gap: 2rem;
   font-size: 1.625rem;
+  margin: 10rem 0 5rem 0;
 `;
 
 const Image = styled.img`
@@ -40,7 +41,7 @@ function IntroSection() {
         <span>꿈과 비전, 생각을 공유하는</span>
         <span>교류의 장을 만든다</span>
       </NanumH3>
-      <Image src='./../../public/fieldLogo.png' alt='필드 로고' $margin='10rem 0 10rem 0' />
+      <Image width='140px' src='fieldLogo.png' alt='필드 로고' $margin='10rem 0 10rem 0' />
     </MainSection>
   );
 }

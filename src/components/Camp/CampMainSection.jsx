@@ -46,12 +46,11 @@ const Figure = styled.figure`
 const Img = styled.img`
   width: 1.875rem;
   height: 1.875rem;
-  object-fit: cover;
-  align-self: ${props => (props.alignSelf ? props.alignSelf : '')};
+  order: 2;
 `;
 
 const Figcaption = styled.figcaption`
-  color: ${props => (props.color ? theme.colors[props.color] : theme.colors.white)};
+  font-size: 0.625rem;
 `;
 
 const ButtonWapper = styled.div`
@@ -66,11 +65,11 @@ function CampMainSection() {
   return (
     <TitleContainer src={backgroundImg}>
       <H1>FIELD CAMP</H1>
-      <TitleH2>팀원과 함께</TitleH2>
+      <TitleH2>FIELD CAMP를 통해</TitleH2>
       <TitleH2>여러분의 열정을 보여주세요!!</TitleH2>
       <ButtonWapper>
         <Link to='https://linktr.ee/iefieldcamp'>
-          <Button label='FIELD CAMP 지원하기' />
+          <Button label='FIELD CAMP 지원하기✏️' />
         </Link>
         <Figure>
           <Img src={scrollDown} />

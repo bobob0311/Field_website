@@ -21,13 +21,15 @@ const Card = styled.article`
 `;
 
 const Dt = styled.dt`
-  font-size: 1.5rem;
+  font-size: 1.5625rem;
+  font-weight: 900;
 `;
 
 const Dd = styled.dd`
   font-size: 1rem;
   word-break: keep-all;
   line-height: 1.2;
+  margin: 0.5rem 0 1.1rem 0;
 `;
 
 const Dl = styled.dl`
@@ -40,7 +42,7 @@ const Dl = styled.dl`
 const CardUl = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
 `;
 
 const CardKeyWordLi = styled.li`
@@ -50,11 +52,14 @@ const CardKeyWordLi = styled.li`
 
 const CardKeyWordSpan = styled.span`
   display: inline-block;
-  background-color: ${props => (props.color ? theme.colors[props.color] : '')};
-  padding: 0.7rem 2rem;
+  background-color: ${props => props.color || ''};
+  /* 투명도를 조절하기 위해 rgba 값을 사용합니다. */
+  background-color: ${props => (props.color ? `rgba(${props.color}, 0.5)` : '')};
+  padding: 0.4rem 2rem;
   text-align: center;
   border: 2px solid white;
-  border-radius: 1rem;
+  border-radius: 1.875rem;
+  font-size: 1.4rem;
 `;
 
 const CardHashTagUl = styled.ul`
@@ -157,18 +162,18 @@ function DepartmentIntro() {
             <Dd>FIELD 인적, 학술적 교류를 활성화하기 위한 컨텐츠를 기획하고 진행, 총괄하는 부서</Dd>
           </Dl>
           <CardUl>
-            <CardKeyWordLi margin='0 0 0 40%'>
-              <CardKeyWordSpan color='yellow'>대인관계능력</CardKeyWordSpan>
+            <CardKeyWordLi margin='0 0 0 35%'>
+              <CardKeyWordSpan color='255, 188, 19'>대인관계능력</CardKeyWordSpan>
             </CardKeyWordLi>
             <CardKeyWordLi margin='0 0 0 5%'>
-              <CardKeyWordSpan color='red'>리더십</CardKeyWordSpan>
+              <CardKeyWordSpan color='245, 215, 57'>리더십</CardKeyWordSpan>
             </CardKeyWordLi>
             <CardKeyWordLi margin='0 0 0 35%'>
-              <CardKeyWordSpan color='blue'>창의력</CardKeyWordSpan>
+              <CardKeyWordSpan color='255, 134, 46'>창의력</CardKeyWordSpan>
             </CardKeyWordLi>
           </CardUl>
-          <CardHashTagUl margin='1rem 0'>
-            <CardHashTagLi>#FIELD열정맨</CardHashTagLi>
+          <CardHashTagUl margin='2rem 0'>
+            <CardHashTagLi>#FIELD인싸</CardHashTagLi>
             <CardHashTagLi>#FIELD에너지</CardHashTagLi>
             <CardHashTagLi>#즐거움이공존하는이곳</CardHashTagLi>
           </CardHashTagUl>
@@ -197,17 +202,17 @@ function DepartmentIntro() {
             </Dd>
           </Dl>
           <CardUl>
-            <CardKeyWordLi margin='0 0 0 40%'>
-              <CardKeyWordSpan color='yellow'>말하기능력</CardKeyWordSpan>
-            </CardKeyWordLi>
             <CardKeyWordLi margin='0 0 0 5%'>
-              <CardKeyWordSpan color='red'>소통능력</CardKeyWordSpan>
+              <CardKeyWordSpan color='19, 99, 255'>말하기능력</CardKeyWordSpan>
             </CardKeyWordLi>
-            <CardKeyWordLi margin='0 0 0 35%'>
-              <CardKeyWordSpan color='blue'>친화력</CardKeyWordSpan>
+            <CardKeyWordLi margin='0 0 0 50%'>
+              <CardKeyWordSpan color='99, 202, 247'>소통능력</CardKeyWordSpan>
+            </CardKeyWordLi>
+            <CardKeyWordLi margin='0 0 0 15%'>
+              <CardKeyWordSpan color='30, 154, 244'>친화력</CardKeyWordSpan>
             </CardKeyWordLi>
           </CardUl>
-          <CardHashTagUl margin='1rem 0'>
+          <CardHashTagUl margin='2rem 0'>
             <CardHashTagLi>#FIELD연결고리</CardHashTagLi>
             <CardHashTagLi>#FIELD의심장</CardHashTagLi>
             <CardHashTagLi>#소통과화합이중시되는곳</CardHashTagLi>
@@ -237,18 +242,18 @@ function DepartmentIntro() {
             </Dd>
           </Dl>
           <CardUl>
-            <CardKeyWordLi margin='0 0 0 40%'>
-              <CardKeyWordSpan color='yellow'>봉사심</CardKeyWordSpan>
+            <CardKeyWordLi margin='0 0 0 55%'>
+              <CardKeyWordSpan color='192, 255, 162'>봉사심</CardKeyWordSpan>
             </CardKeyWordLi>
             <CardKeyWordLi margin='0 0 0 5%'>
-              <CardKeyWordSpan color='red'>열정</CardKeyWordSpan>
+              <CardKeyWordSpan color='42, 284, 108'>열정</CardKeyWordSpan>
             </CardKeyWordLi>
-            <CardKeyWordLi margin='0 0 0 35%'>
-              <CardKeyWordSpan color='blue'>자기주장력</CardKeyWordSpan>
+            <CardKeyWordLi margin='0 0 0 30%'>
+              <CardKeyWordSpan color='30, 244, 52'>자기주장력</CardKeyWordSpan>
             </CardKeyWordLi>
           </CardUl>
-          <CardHashTagUl margin='1rem 0'>
-            <CardHashTagLi>#FIELD머리</CardHashTagLi>
+          <CardHashTagUl margin='2rem 0'>
+            <CardHashTagLi>#FIELD열정맨</CardHashTagLi>
             <CardHashTagLi>#FIELD브레인</CardHashTagLi>
             <CardHashTagLi>#지식과열정이융합되는곳</CardHashTagLi>
           </CardHashTagUl>
@@ -275,17 +280,17 @@ function DepartmentIntro() {
             <Dd>FIELD와 산업공학을 알리는 전반적인 홍보물을 기획하고 제작하는 부서</Dd>
           </Dl>
           <CardUl>
-            <CardKeyWordLi margin='0 0 0 40%'>
-              <CardKeyWordSpan color='yellow'>팀워크</CardKeyWordSpan>
-            </CardKeyWordLi>
             <CardKeyWordLi margin='0 0 0 5%'>
-              <CardKeyWordSpan color='red'>열정</CardKeyWordSpan>
+              <CardKeyWordSpan color='180, 19, 255'>팀워크</CardKeyWordSpan>
             </CardKeyWordLi>
-            <CardKeyWordLi margin='0 0 0 35%'>
-              <CardKeyWordSpan color='blue'>창의성</CardKeyWordSpan>
+            <CardKeyWordLi margin='0 0 0 60%'>
+              <CardKeyWordSpan color='244, 99, 247'>열정</CardKeyWordSpan>
+            </CardKeyWordLi>
+            <CardKeyWordLi margin='0 0 0 25%'>
+              <CardKeyWordSpan color='251, 76, 139'>창의성</CardKeyWordSpan>
             </CardKeyWordLi>
           </CardUl>
-          <CardHashTagUl margin='1rem 0'>
+          <CardHashTagUl margin='2rem 0'>
             <CardHashTagLi>#FIELD알리미</CardHashTagLi>
             <CardHashTagLi>#FIELD소통창구</CardHashTagLi>
             <CardHashTagLi>#창의와개성이표출되는곳</CardHashTagLi>

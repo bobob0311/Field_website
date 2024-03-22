@@ -5,7 +5,8 @@ import {LoadDateData} from '../../lib/Apiservice';
 import ContentWrapper from './UI/ContentWrapper';
 
 const P = styled.p`
-  font-size: 1rem;
+  font-size: ${props => (props.$fontSize ? props.$fontSize : '1rem')};
+  font-weight: 700;
   color: ${props => (props.$color ? theme.colors[props.$color] : theme.colors.black)};
   font-weight: 700;
   text-align: center;
@@ -53,7 +54,7 @@ const DateP = styled(P)`
   font-weight: 700;
   letter-spacing: -1.5px;
   display: flex;
-  padding: 0 0 0 0.2rem;
+  padding: 0 0.5rem 0 0;
 `;
 
 const AddressLink = styled.a`
@@ -83,11 +84,17 @@ const LoadingSpin = styled.div`
   animation: ${spin} 0.5s linear infinite;
 `;
 
+const Emoji = styled.span`
+  margin: 0 0.35rem 0 0;
+`;
+
 function InfoGroup({subtitle, content}) {
   return (
     <ContentWrapper>
       <SubTitle>{subtitle}</SubTitle>
-      <P $color='white'>{content}</P>
+      <P $fontSize='1.25rem' $color='white'>
+        {content}
+      </P>
     </ContentWrapper>
   );
 }
@@ -143,8 +150,10 @@ export default function Content() {
   }
 
   function dateDataLocalStored(dateArray) {
+    const now = new Date();
     const localdateArray = {key: dateArray};
-    localStorage.setItem('date', JSON.stringify(localdateArray));
+    localStorage.setItem('모집일정', JSON.stringify(localdateArray));
+    localStorage.setItem('모집일정-lastUpdate', now.getTime().toString());
   }
 
   async function initialSetup() {
@@ -159,12 +168,14 @@ export default function Content() {
       setIsError(true);
     }
   }
-
   useEffect(() => {
-    const storedObject = JSON.parse(localStorage.getItem('date'));
-    if (!storedObject) {
+    const now = new Date();
+    const lastUpdate = localStorage.getItem(`모집일정-lastUpdate`);
+    const lastUpdateTime = lastUpdate ? new Date(parseInt(lastUpdate, 10)) : null;
+    if (!lastUpdate || now - lastUpdateTime > 60 * 60 * 1000) {
       initialSetup();
     } else {
+      const storedObject = JSON.parse(localStorage.getItem('모집일정'));
       setDateData(storedObject.key);
     }
   }, []);
@@ -180,17 +191,25 @@ export default function Content() {
   } else if (isLoading === false) {
     recruitmentContent = (
       <>
-        <DateP>{`📄 서류 접수: ${dateData[0]} ~ ${dateData[1]}`}</DateP>
-        <DateP>{`✅ 1차 서류 전형 합격자 발표: ${dateData[2]}`}</DateP>
+        <DateP>
+          <Emoji>📄</Emoji>
+          {`서류 접수: ${dateData[0]} ~ ${dateData[1]}`}
+        </DateP>
+        <DateP>
+          <Emoji>✅</Emoji> {`1차 서류 전형 합격자 발표: ${dateData[2]}`}
+        </DateP>
 
         <DateP>
-          💬 2차 면접:
+          <Emoji>💬</Emoji> 2차 면접:
           <span>
             <OneLine>{` ${dateData[3]} ~ ${dateData[4] ? dateData[4].slice(8) : ''}`}</OneLine>
             <OneLine>{`${dateData[5]} ~ ${dateData[6] ? dateData[6].slice(8) : ''}`}</OneLine>
           </span>
         </DateP>
-        <DateP>{`✅ 최종 합격자 발표: ${dateData[7]}`}</DateP>
+        <DateP>
+          <Emoji>✅</Emoji>
+          {` 최종 합격자 발표: ${dateData[7]}`}
+        </DateP>
       </>
     );
   } else {
