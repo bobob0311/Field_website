@@ -122,8 +122,10 @@ function NewsPagination({newsData, category, loading}) {
         {currentItemPerPage.map(item => (
           <Li key={item.id}>
             <Link to={`/detail/${item.newsId}`}>
-              <Thumbnail src={`${imageUrl}/${item.collectionId}/${item.id}/${item.thumbnail}`} />
-
+              <Thumbnail
+                src={`${imageUrl}/${item.collectionId}/${item.id}/${item.expand.newsId.photo[0]}`}
+              />
+              <p>{item.expand.newsId.contents}</p>
               <TitleSpan>{item.title1} </TitleSpan>
               <Title2Span>{item.title2 ? item.title2 : ''}</Title2Span>
               <DateSpan>
