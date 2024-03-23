@@ -38,9 +38,9 @@ const Img = styled.img`
   border-radius: 1rem;
   margin: 0 0 1.25rem 0;
   order: 2;
-  @media screen and (min-width: 1280px) {
-    width: 50%;
-    height: 60%;
+  @media screen and (min-width: 1024px) {
+    width: 350px;
+    height: 350px;
   }
 `;
 
@@ -54,7 +54,8 @@ const Figcaption = styled.figcaption`
 `;
 
 const FigureWrapper = styled.div`
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1024px) {
+    width: 100%;
     display: flex;
     justify-content: space-evenly;
   }
@@ -141,6 +142,7 @@ function CampTopicSection() {
             <Button
               onClick={() => toggleImageDisplay(index)}
               label={expandedIndex === index ? '가리기' : `'주제${index + 1}'에 대해 더 알아보기`}
+              order='3'
             />
           </Figure>
         ))}

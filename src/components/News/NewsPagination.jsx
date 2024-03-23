@@ -12,17 +12,20 @@ const PageWrapper = styled.div`
 
 const Ul = styled.ul`
   margin: 1.25rem 7.5%;
+  @media screen and (min-width: 1024px) {
+    margin: 1.25rem 15%;
+  }
 `;
 
 const Li = styled.li`
-  display: grid; // 이 부분 추가
+  display: grid;
   grid-template-areas:
     'thumbnail title1'
     'thumbnail title2'
     'thumbnail date';
   font-size: 1.125rem;
   color: white;
-  border: None;
+  border: none;
   border-bottom: solid 0.0625rem;
   padding: 0.5rem 0;
   text-align: end;
@@ -32,29 +35,58 @@ const Li = styled.li`
     text-decoration: none;
     display: contents;
   }
+  @media screen and (min-width: 1024px) {
+    font-size: 24px;
+    display: flex;
 `;
 
 const Thumbnail = styled.img`
   grid-area: thumbnail;
   width: 100px;
   height: 70px;
+  @media screen and (min-width: 769px) {
+    width: 160px;
+    height: 110px;
+    margin-right: 10px;
+  }
+`;
+
+const TitleWrapper = styled.div`
+  @media screen and (min-width: 1024px) {
+    display: flex;
+    justify-content: start;
+  }
 `;
 
 const TitleSpan = styled.span`
   grid-area: title1;
   font-weight: 800;
+  @media screen and (min-width: 1024px) {
+    justify-self: start;
+  }
 `;
 
 const Title2Span = styled.span`
   margin: 0.5rem 0 0 0;
   grid-area: title2;
   font-weight: 800;
+  @media screen and (min-width: 1024px) {
+    justify-self: start;
+    margin: 0 0 0 4px;
+  }
 `;
 
 const DateSpan = styled.span`
   grid-area: date;
   font-size: 0.625rem;
   margin: 1.125rem 0 0 0;
+  font-weight: 700;
+  align-self: end;
+  @media screen and (min-width: 1024px) {
+    font-size: 16px;
+    justify-self: end;
+    margin-left: auto;
+  }
 `;
 
 const CustomPagination = styled(Pagination)`
@@ -91,12 +123,12 @@ function NewsPagination({newsData, category, loading}) {
           <Li key={item.id}>
             <Link to={`/detail/${item.newsId}`}>
               <Thumbnail src={`${imageUrl}/${item.collectionId}/${item.id}/${item.thumbnail}`} />
+
               <TitleSpan>{item.title1} </TitleSpan>
               <Title2Span>{item.title2 ? item.title2 : ''}</Title2Span>
               <DateSpan>
                 {item.year}년 {item.month}월 {item.day}일
               </DateSpan>
-              <DateSpan />
             </Link>
           </Li>
         ))}

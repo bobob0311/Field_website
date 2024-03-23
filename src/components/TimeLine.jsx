@@ -17,7 +17,7 @@ const Data = styled.div`
   font-size: 1.25rem;
   font-weight: 900;
   position: absolute;
-  width: 180px;
+  width: 130px;
   word-break: keep-all;
   top: ${props => props.$top};
   left: 180px;
@@ -30,6 +30,9 @@ const Data = styled.div`
     left: -49px;
     z-index: 1;
     background: ${theme.colors.yellow};
+  }
+  @media screen and (min-width: 769px) {
+    width: 240px;
   }
 `;
 const Title = styled.h3`

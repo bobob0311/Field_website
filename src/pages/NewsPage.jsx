@@ -18,7 +18,10 @@ const H1 = styled.h1`
 `;
 
 const ButtonWrapper = styled.div`
-  margin: 0 5%;
+  margin: 0 7.5%;
+  @media screen and (min-width: 1024px) {
+    margin: 0 15%;
+  }
 `;
 
 const TypeSelect = styled.select`
@@ -50,6 +53,9 @@ const DropdownWrapper = styled.div`
   display: flex;
   gap: 0.5rem;
   justify-content: end;
+  @media screen and (min-width: 1024px) {
+    padding: 0 15%;
+  }
 `;
 
 export default function NewsPage() {

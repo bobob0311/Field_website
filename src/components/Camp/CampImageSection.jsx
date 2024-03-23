@@ -14,7 +14,7 @@ const Section = styled.section`
   background-position: center;
   background-size: ${props => (props.size ? props.size : 'cover')};
   background-repeat: no-repeat;
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1024px) {
     flex: 1;
     width: 1/3;
   }
@@ -29,7 +29,7 @@ const H2 = styled.h2`
   font-family: 'Goblin One';
   font-weight: bold;
   line-height: 2.5rem;
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1024px) {
     font-size: 30px;
   }
 `;
@@ -44,7 +44,7 @@ const P = styled.p`
   padding: 0 10% 1rem 10%;
   letter-spacing: -0.1em;
   font-weight: bold;
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1024px) {
     font-size: 25px;
   }
 `;
