@@ -83,7 +83,9 @@ const CardKeyWordSpan = styled.span`
   border: 2px solid white;
   border-radius: 1.875rem;
   font-size: 1.4rem;
-  animation: ${wobble} 3s;
+  @media screen and (max-width: 768px) {
+    animation: ${wobble} 3s;
+  }
 `;
 
 const CardHashTagUl = styled.ul`

@@ -10,6 +10,9 @@ const P = styled.p`
   font-size: 1.25rem;
   font-weight: 900;
   text-align: center;
+  @media screen and (min-width: 768px) {
+    margin: 6rem 0 0 0;
+  }
   @media screen and (min-width: 896px) {
     margin: 4rem 0 0 0;
     font-size: 18px;
@@ -28,9 +31,9 @@ const Card = styled.article`
   aspect-ratio: 1/1.2;
   border-radius: 0.625rem;
   ${props => props.$border && 'border: 2px solid white;'}
-  @media screen and (min-width: 896px) {
-    width: 430px;
-    height: 350px;
+  @media screen and (min-width: 768px) {
+    width: 550px;
+    height: 400px;
   }
 `;
 
