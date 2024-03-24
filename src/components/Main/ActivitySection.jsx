@@ -45,6 +45,11 @@ const StyledSwiper = styled(Swiper)`
   .swiper-pagination-bullet-active {
     background-color: ${theme.colors.blue};
   }
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 function ActivitySection() {
@@ -55,7 +60,7 @@ function ActivitySection() {
       <SwiperContainer $margin='2rem 0'>
         <StyledSwiper
           modules={[Pagination]}
-          centeredSlides='true'
+          centeredSlides
           pagination={{clickable: true}}
           breakpoints={{
             320: {
@@ -63,7 +68,7 @@ function ActivitySection() {
               spaceBetween: 20,
             },
             896: {
-              slidesPerView: 2.4,
+              slidesPerView: 2,
               spaceBetween: 20,
             },
           }}

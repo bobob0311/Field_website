@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const TimelineBlock = styled.div`
   width: -webkit-calc(50% + 12px);
   width: -moz-calc(50% + 12px);
-  width: calc(50% + 10px);
+  width: calc(50% + 12px);
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -38,17 +38,17 @@ const P = styled.p`
 `;
 
 const Marker = styled.div`
-  width: 21px;
+  width: 22px;
   height: 16px;
   border-radius: 50%;
   border: 2px solid #f5f7fa;
   background: #4fc1e9;
   margin-top: 10px;
-  z-index: 9999;
+  z-index: 50;
 `;
 
 const TimelineContent = styled.div`
-  width: 95%;
+  width: calc(100% - 24px);
   padding: 0 15px;
   color: white;
 `;

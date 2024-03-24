@@ -7,7 +7,6 @@ const MainSection = styled.section`
   display: flex;
   flex-direction: column;
   @media screen and (min-width: 1280px) {
-    max-width: 896px;
     margin: 0 15%;
   }
 `;

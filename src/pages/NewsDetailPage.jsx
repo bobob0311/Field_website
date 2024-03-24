@@ -128,7 +128,7 @@ function NewsDetailPage() {
       console.log(error);
     }
   };
-  const fileUrl = `${import.meta.env.VITE_API_URL}/api/files/damzbyg116zhar4/`;
+  const fileUrl = `${import.meta.env.VITE_API_URL}/api/files/cd f/`;
 
   const handleBack = () => {
     navigate(-1);

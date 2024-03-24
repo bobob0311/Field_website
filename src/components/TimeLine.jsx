@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {useEffect, useState} from 'react';
 import theme from '../theme';
 
 const TimeLineDiv = styled.div`
@@ -52,7 +53,21 @@ const P = styled.p`
 export default function TimeLine({data, height}) {
   const dataLabel = Object.keys(data);
   const contentStartPoint = 40;
-
+  const [position, setPosition] = useState(144);
+  const handleResize = () => {
+    if (window.innerWidth >= 768) {
+      setPosition(147.5);
+    } else {
+      setPosition(144);
+    }
+  };
+  useEffect(() => {
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   const arrayLength = dataLabel.reduce(
     (dataLengthArray, label) => {
       dataLengthArray.push(
@@ -107,7 +122,7 @@ export default function TimeLine({data, height}) {
         strokeLinecap='round'
         strokeLinejoin='round'
       >
-        <path d={`M 145 1  v${MaxHeight + 50}`} />
+        <path d={`M ${position} 1  v${MaxHeight + 50}`} />
         <path d={`M 175  ${MaxHeight + 25} l-30 30-30-30`} />
       </svg>
     </TimeLineDiv>

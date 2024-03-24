@@ -7,6 +7,7 @@ import MenuContent from './MenuContent';
 const MenuBar = styled.header`
   position: sticky;
   top: 0;
+  z-index: 100;
 `;
 
 const MainHeaderWrapper = styled.div`

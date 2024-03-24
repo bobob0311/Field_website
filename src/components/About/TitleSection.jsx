@@ -9,7 +9,7 @@ const TitleContainer = styled.section`
   position: relative;
   margin: 0 7.5%;
   justify-content: space-around;
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1024px) {
     margin: 0 15%;
   }
 `;

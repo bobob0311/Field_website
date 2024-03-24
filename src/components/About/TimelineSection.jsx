@@ -53,7 +53,7 @@ function TimelineSection() {
         <TimelineDetail
           float='left'
           direction='rtl'
-          firstTitle='첫 FILED CAMP 개최'
+          firstTitle='첫 FIELD CAMP 개최'
           year='2009'
           description='고려대학교, 연세대학교 참여시작 매년 동부 인재 개발원의 후원을 받아 캠프 주최 및 참여
             자체 세미나 진행 FIELD SNS 생성'
