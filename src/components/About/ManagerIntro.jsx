@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
+import {ProfileApi} from '../../lib/Apiservice';
 
 const MainSection = styled.section`
   margin: 7.5%;
@@ -14,10 +15,13 @@ const H2 = styled.h2`
 `;
 
 const NanumH2 = styled(H2)`
-  font-size: 1.5rem;
+  font-size: 1.625rem;
   font-family: 'Nanum Myeongjo', serif;
   line-height: 1.3;
   word-break: keep-all;
+  display: flex;
+  font-weight: 600;
+  flex-direction: column;
 `;
 
 const Ul = styled.ul`
@@ -67,7 +71,6 @@ const P = styled.p`
 
 function ManagerIntro() {
   const [profileData, setProfileData] = useState([]);
-  const imageUrl = `${import.meta.env.VITE_API_URL}/api/files/i4n7e8c0u8882do/`;
   const getProfile = async () => {
     try {
       const localData = localStorage.getItem('profileData');
@@ -76,12 +79,14 @@ function ManagerIntro() {
       } else {
         const response = await ProfileApi();
         setProfileData(response);
+        console.log(response);
         localStorage.setItem('profileData', JSON.stringify(response));
       }
     } catch (err) {
       console.log(err);
     }
   };
+  const imageUrl = `${import.meta.env.VITE_API_URL}/api/files/i4n7e8c0u8882do/`;
 
   useEffect(() => {
     getProfile();
@@ -91,7 +96,10 @@ function ManagerIntro() {
   const depart = profileData.slice(2, 6);
   return (
     <MainSection>
-      <NanumH2>16기 단장단과 함께 여러분의 꿈을 실현하세요.</NanumH2>
+      <NanumH2>
+        <span>16기 단장단과 함께</span>
+        <span>여러분의 꿈을 실현하세요.</span>
+      </NanumH2>
       <Ul margin='2rem 0'>
         {leader.map(item => (
           <li>

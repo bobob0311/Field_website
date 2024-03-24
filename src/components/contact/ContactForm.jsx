@@ -41,8 +41,8 @@ const TypeSelect = styled.select`
   font-size: 1rem;
   font-family: 'SUIT-Regular';
   font-weight: 900;
-  background: url('Expand_down.png') no-repeat 100% 10%;
-  background-size: 2rem 2rem;
+  background: url('down_arrow.png') no-repeat 90% 25%;
+  background-size: 1.5rem 1.5rem;
   border-radius: 0.7rem;
   padding: 0 0 0 0.5rem;
   width: 7.3rem;
@@ -51,6 +51,7 @@ const TypeSelect = styled.select`
 `;
 
 const Input = styled.input`
+  appearance: none;
   color: ${theme.colors.black};
   font-size: 1rem;
   font-weight: 600;
@@ -61,6 +62,7 @@ const Input = styled.input`
   padding: 0rem 0.2rem 0 0.1rem;
   box-sizing: border-box;
   background: none;
+  border-radius: 0;
 `;
 
 const TextArea = styled.textarea`
@@ -117,8 +119,8 @@ const Option = styled.option`
 `;
 
 const Check = styled.span`
-  color: green;
-  padding: 0 0 0.5rem 0.4rem;
+  filter: brightness(0.4) invert(0.7) sepia(0.4) saturate(10000%) hue-rotate(70deg);
+  padding: 0 0 0.5rem 0.3rem;
   font-size: 1.2rem;
 `;
 
