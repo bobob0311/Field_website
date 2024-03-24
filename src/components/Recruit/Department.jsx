@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import styled from 'styled-components';
 import theme from '../../theme';
-import ContentWrapper from './UI/ContentWrapper';
+import {BigContentWrapper} from './UI/ContentWrapper';
 
 const SubTitle = styled.h2`
   font-size: 1.5rem;
@@ -20,13 +20,18 @@ const QuestionBox = styled.div`
   margin: 0 0 2rem 0;
   font-weight: 400;
   width: 100%;
+  box-sizing: border-box;
+  padding: 0 0 0.5rem 0;
+  @media (min-width: 768px) {
+    padding: 0 0 0.5rem 5%;
+  }
 `;
 
 const Question = styled.h3`
   font-size: 1.2rem;
   letter-spacing: -0.05rem;
   font-weight: 900;
-  margin: 0 0 1.25rem 0;
+  margin: 0 0 0.8rem 0;
   width: 100%;
   padding: 1rem 0 0 7.5%;
 `;
@@ -35,7 +40,7 @@ const Answer = styled.li`
   display: flex;
   font-size: 1rem;
   font-weight: 700;
-  margin: 0 0 1rem 0.1rem;
+  margin: 1rem 0 1rem 0.1rem;
   word-break: keep-all;
   letter-spacing: -0.05rem;
   padding: 0 5% 0 6%;
@@ -44,7 +49,7 @@ const Answer = styled.li`
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
-  margin: 0 0 1rem 0;
+  margin: 0.5rem 0 1rem 0;
   width: 100%;
   max-width: 500px;
 
@@ -55,6 +60,10 @@ const ButtonWrapper = styled.div`
 
   }
 `}
+
+  @media (min-width: 768px) {
+    max-width: 600px;
+  }
 `;
 
 const DepartmentButton = styled.button`
@@ -67,6 +76,10 @@ const DepartmentButton = styled.button`
   background: ${theme.colors.black};
   color: ${theme.colors.white};
   font-weight: 600;
+
+  @media (min-width: 768px) {
+    padding: 0.5rem 1.3rem;
+  }
 `;
 
 const Number = styled.span`
@@ -156,7 +169,7 @@ export default function Department() {
     setSelectedDepartment(name);
   }
   return (
-    <ContentWrapper $margin='5rem 0'>
+    <BigContentWrapper $margin='5rem 0'>
       <SubTitle>모집 분야</SubTitle>
       <ButtonWrapper $activelink={selectedDepartment}>
         {Object.keys(DEPARTMENTINFO).map(item => (
@@ -167,6 +180,6 @@ export default function Department() {
       </ButtonWrapper>
       <DepartmentBox part={selectedDepartment} p='는 어떤 인재를 원하나요! 🔍' target='explain' />
       <DepartmentBox part={selectedDepartment} p='는 어떤 활동을 하나요! 💪' target='activity' />
-    </ContentWrapper>
+    </BigContentWrapper>
   );
 }

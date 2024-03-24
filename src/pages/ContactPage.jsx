@@ -3,6 +3,9 @@ import ContactForm from '../components/contact/ContactForm';
 
 const ContactMain = styled.main`
   margin: 0 7.5% 2rem 7.5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Title = styled.h1`

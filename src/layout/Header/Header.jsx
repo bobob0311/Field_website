@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import theme from '../../theme';
 import MenuBurgur from './MenuBurgur';
 import MenuContent from './MenuContent';
@@ -7,7 +7,6 @@ import MenuContent from './MenuContent';
 const MenuBar = styled.header`
   position: sticky;
   top: 0;
-  z-index: 5;
 `;
 
 const MainHeaderWrapper = styled.div`
@@ -18,7 +17,10 @@ const MainHeaderWrapper = styled.div`
   height: 58px;
   padding: 0 7.5%;
   justify-content: space-between;
-  z-index: 10;
+
+  @media (min-width: 1024px) {
+    padding: 0 15%;
+  }
 `;
 
 const Home = styled.a`
@@ -48,6 +50,13 @@ const MenuButton = styled.button`
   -webkit-appearance: none;
   -moz-appearance: none;
   font-size: 0;
+  &:hover {
+    cursor: pointer;
+  }
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
 `;
 
 export default function Header() {
@@ -55,6 +64,18 @@ export default function Header() {
   function showHandler() {
     setIsOpen(!isOpen);
   }
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const HomeDirection = (
     <Home href='/'>
@@ -73,7 +94,7 @@ export default function Header() {
           <MenuBurgur open={isOpen} />
         </MenuButton>
       </MainHeaderWrapper>
-      {isOpen && <MenuContent onClose={() => showHandler()} />}
+      <MenuContent isOpen={isOpen} onClose={() => showHandler()} />
     </MenuBar>
   );
 }
