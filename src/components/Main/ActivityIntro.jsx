@@ -4,15 +4,20 @@ import theme from '../../theme';
 
 const P = styled.p`
   word-break: keep-all;
-  margin: ${props => props.$margin || '0'};
+  margin: 12rem 0 0 0;
   line-height: 1.5;
   color: ${props => (props.color ? theme.colors[props.color] : '')};
   font-size: 1.25rem;
   font-weight: 900;
   text-align: center;
+  @media screen and (min-width: 896px) {
+    margin: 4rem 0 0 0;
+    font-size: 18px;
+  }
 `;
 
 const Card = styled.article`
+  box-sizing: border-box;
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url(${props => props.src});
   background-color: ${theme.colors.blue};
@@ -23,13 +28,17 @@ const Card = styled.article`
   aspect-ratio: 1/1.2;
   border-radius: 0.625rem;
   ${props => props.$border && 'border: 2px solid white;'}
+  @media screen and (min-width: 896px) {
+    width: 430px;
+    height: 350px;
+  }
 `;
 
 const H3 = styled.h3`
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 1rem;
   margin: ${props => props.$margin || '0'};
 `;
 
@@ -37,15 +46,18 @@ const CardTitle = styled(H3)`
   display: inline;
   border: 1px solid white;
   border-radius: 0.625rem;
-  padding: 0.5rem 2rem;
+  padding: 0.3rem 1.5rem;
   font-weight: 700;
+  @media screen and (min-width: 896px) {
+    font-size: 30px;
+  }
 `;
 
 function ActivityIntro({backgroundImage, title, content}) {
   return (
     <Card src={backgroundImage}>
       <CardTitle>{title}</CardTitle>
-      <P $margin='8rem 0 0 0'>{content}</P>
+      <P>{content}</P>
     </Card>
   );
 }

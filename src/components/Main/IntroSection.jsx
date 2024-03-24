@@ -1,12 +1,14 @@
 import {useRef, useEffect} from 'react';
 import styled from 'styled-components';
-import TextGenerator from '../TextGenerator';
 
 const MainSection = styled.section`
   margin: 0 7.5%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media screen and (min-width: 1024px) {
+    margin: 0 15%;
+  }
 `;
 
 const H3 = styled.h3`
@@ -23,17 +25,23 @@ const NanumH3 = styled(H3)`
   gap: 2rem;
   font-size: 1.625rem;
   margin: 10rem 0 5rem 0;
+  @media screen and (min-width: 1024px) {
+    font-size: 40px;
+  }
 `;
 
 const Image = styled.img`
   margin: ${props => props.$margin || '0'};
-  width: ${props => props.width || ''};
+  width: 140px;
   height: auto;
   aspect-ratio: 1;
   object-fit: cover;
   border-radius: ${props => props.radius || ''};
   opacity: 0;
   transition: 3s;
+  @media screen and (min-width: 1024px) {
+    width: 160px;
+  }
 `;
 
 const H2 = styled.h2`
@@ -45,6 +53,9 @@ const H2 = styled.h2`
 const GoblinH2 = styled(H2)`
   font-family: 'Goblin One';
   font-size: 1.875rem;
+  @media screen and (min-width: 1024px) {
+    font-size: 40px;
+  }
 `;
 
 function IntroSection() {
@@ -70,18 +81,12 @@ function IntroSection() {
   }, []);
   return (
     <MainSection>
-      <GoblinH2 margin='5rem 0 2rem 0'>Our Goal</GoblinH2>
+      <GoblinH2 margin='5rem 0 2rem 0'>OUR GOAL</GoblinH2>
       <NanumH3>
         <span>꿈과 비전, 생각을 공유하는</span>
         <span>교류의 장을 만든다</span>
       </NanumH3>
-      <Image
-        ref={imgRef}
-        width='140px'
-        src='fieldLogo.png'
-        alt='필드 로고'
-        $margin='3rem 0 3rem 0'
-      />
+      <Image ref={imgRef} src='fieldLogo.png' alt='필드 로고' $margin='3rem 0 3rem 0' />
     </MainSection>
   );
 }

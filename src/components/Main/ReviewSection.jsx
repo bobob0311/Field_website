@@ -15,10 +15,12 @@ const H2 = styled.h2`
 const GoblinH2 = styled(H2)`
   font-family: 'Goblin One';
   font-size: ${props => props.$size || '1.875rem'};
+  @media screen and (min-width: 769px) {
+    font-size: 40px;
+  }
 `;
 
 const SwiperContainer = styled.div`
-  width: 100%;
   margin: ${props => props.margin || '0'};
 `;
 
@@ -36,6 +38,7 @@ const Article = styled.article`
 `;
 
 const Card = styled.article`
+  box-sizing: border-box;
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url(${props => props.src});
   background-color: ${theme.colors.blue};
@@ -45,16 +48,23 @@ const Card = styled.article`
   ${props => props.$border && 'border: 2px solid white;'}
   height: 25rem;
   position: relative;
+  @media screen and (min-width: 1024px) {
+    width: 550px;
+    height: 400px;
+    padding: 20px;
+  }
 `;
 
 const P = styled.p`
-  word-break: keep-all;
   margin: ${props => props.$margin || '0'};
   line-height: 1.5;
   color: ${props => (props.color ? theme.colors[props.color] : '')};
   font-size: ${props => (props.size ? props.size : '1rem')};
   text-align: ${props => props.align || ''};
   font-weight: ${props => props.weight || ''};
+  @media screen and (min-width: 1024px) {
+    font-size: ${props => props.desktopSize || '1rem'};
+  }
 `;
 
 const H3 = styled.h3`
@@ -64,6 +74,9 @@ const H3 = styled.h3`
   font-weight: 900;
   margin: ${props => props.$margin || '0'};
   word-break: keep-all;
+  @media screen and (min-width: 1024px) {
+    font-size: 24px;
+  }
 `;
 
 const StyledSwiper = styled(Swiper)`
@@ -107,23 +120,30 @@ function ReviewSection() {
 
   return (
     <>
-      <GoblinH2 $margin='8rem 0 2rem 0' $size='1.25rem'>
+      <GoblinH2 $margin='8rem 0 4rem 0' $size='1.25rem'>
         How was your FIELD?
       </GoblinH2>
       <SwiperContainer margin='2rem 0 5rem 0'>
         <StyledSwiper
           modules={[Pagination]}
-          slidesPerView={1.2}
           spaceBetween={20}
           centeredSlides='true'
           pagination={{clickable: true}}
+          breakpoints={{
+            320: {
+              slidesPerView: 1.2,
+            },
+            896: {
+              slidesPerView: 2.4,
+            },
+          }}
         >
           {reviewData.map(item => (
             <SwiperSlide key={item.id}>
               <Card $border='true'>
                 <Article>
                   <H3 $margin='0.5rem 0 1rem 0'>{item.firstQuestion}</H3>
-                  <P $margin='1rem 0' size='0.875rem'>
+                  <P $margin='1rem 0' size='0.875rem' desktopSize='0.9rem'>
                     {item.firstAnswer}
                   </P>
                   <WriterContainer>
