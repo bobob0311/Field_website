@@ -10,13 +10,14 @@ const P = styled.p`
   font-size: 1.25rem;
   font-weight: 900;
   text-align: center;
-  @media screen and (min-width: 769px) {
-    margin: 8rem 0 0 0;
+  @media screen and (min-width: 896px) {
+    margin: 4rem 0 0 0;
     font-size: 18px;
   }
 `;
 
 const Card = styled.article`
+  box-sizing: border-box;
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url(${props => props.src});
   background-color: ${theme.colors.blue};
@@ -27,7 +28,7 @@ const Card = styled.article`
   aspect-ratio: 1/1.2;
   border-radius: 0.625rem;
   ${props => props.$border && 'border: 2px solid white;'}
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 896px) {
     width: 430px;
     height: 350px;
   }
@@ -47,7 +48,7 @@ const CardTitle = styled(H3)`
   border-radius: 0.625rem;
   padding: 0.3rem 1.5rem;
   font-weight: 700;
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 896px) {
     font-size: 30px;
   }
 `;

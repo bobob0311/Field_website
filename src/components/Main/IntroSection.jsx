@@ -6,6 +6,9 @@ const MainSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media screen and (min-width: 1024px) {
+    margin: 0 15%;
+  }
 `;
 
 const H3 = styled.h3`
@@ -22,7 +25,7 @@ const NanumH3 = styled(H3)`
   gap: 2rem;
   font-size: 1.625rem;
   margin: 10rem 0 5rem 0;
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 1024px) {
     font-size: 40px;
   }
 `;
@@ -36,7 +39,7 @@ const Image = styled.img`
   border-radius: ${props => props.radius || ''};
   opacity: 0;
   transition: 3s;
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 1024px) {
     width: 160px;
   }
 `;
@@ -50,7 +53,7 @@ const H2 = styled.h2`
 const GoblinH2 = styled(H2)`
   font-family: 'Goblin One';
   font-size: 1.875rem;
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 1024px) {
     font-size: 40px;
   }
 `;

@@ -28,7 +28,7 @@ const SwiperContainer = styled.div`
 
 const NanumH2 = styled(H2)`
   font-family: 'Nanum Myeongjo', serif;
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 768px) {
     font-size: 40px;
   }
 `;
@@ -55,15 +55,16 @@ function ActivitySection() {
       <SwiperContainer $margin='2rem 0'>
         <StyledSwiper
           modules={[Pagination]}
-          spaceBetween={20}
           centeredSlides='true'
           pagination={{clickable: true}}
           breakpoints={{
             320: {
               slidesPerView: 1.2,
+              spaceBetween: 20,
             },
-            768: {
-              slidesPerView: 2.5,
+            896: {
+              slidesPerView: 2.4,
+              spaceBetween: 20,
             },
           }}
         >

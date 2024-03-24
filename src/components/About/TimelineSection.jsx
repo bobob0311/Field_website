@@ -30,9 +30,15 @@ const GoblinH2 = styled(H2)`
   font-size: 1.875rem;
 `;
 
+const MainSection = styled.section`
+  @media screen and (min-width: 1280px) {
+    margin: 0 15%;
+  }
+`;
+
 function TimelineSection() {
   return (
-    <>
+    <MainSection>
       <GoblinH2 margin='5rem 0'>Road of FIELD</GoblinH2>
       <Container>
         <TimelineDetail
@@ -85,7 +91,7 @@ function TimelineSection() {
           description='FIELD 유튜브 계정 개설 및 산업공학 관련 영상 제작'
         />
       </Container>
-    </>
+    </MainSection>
   );
 }
 

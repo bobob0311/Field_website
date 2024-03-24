@@ -10,7 +10,7 @@ const MainSection = styled.section`
   flex-direction: column;
   align-items: center;
   @media screen and (min-width: 769px) {
-    margin: 0 15%;
+    margin: 10rem 15%;
   }
 `;
 

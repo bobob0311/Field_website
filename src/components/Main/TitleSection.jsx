@@ -8,8 +8,9 @@ const TitleContainer = styled.section`
   justify-content: center;
   align-items: center;
   position: relative;
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 1024px) {
     font-size: 3.125rem;
+    margin: 0 15%;
   }
 `;
 
@@ -19,7 +20,7 @@ const Figure = styled.figure`
   align-items: center;
   position: ${props => props.$position || ''};
   bottom: 1rem;
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 1024px) {
     display: none;
   }
 `;
