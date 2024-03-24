@@ -14,8 +14,19 @@ const Title = styled.h1`
 `;
 
 const NotificationSection = styled.section`
-  height: 55vh;
+  height: 30rem;
   background: linear-gradient(to bottom, #313131 60%, ${theme.colors.black} 100%);
+`;
+
+const ContentSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 7.5%;
+
+  @media (min-width: 1024px) {
+    margin: 0 15%;
+  }
 `;
 
 export default function RecruitPage() {
@@ -25,13 +36,11 @@ export default function RecruitPage() {
         <Title>RECRUIT</Title>
         <Notification />
       </NotificationSection>
-      <section
-        style={{display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '0 7.5%'}}
-      >
+      <ContentSection>
         <Content />
         <Department />
         <Question />
-      </section>
+      </ContentSection>
     </main>
   );
 }

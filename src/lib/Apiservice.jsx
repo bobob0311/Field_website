@@ -11,6 +11,7 @@ export function CampApi() {
 export function NewsApi(selectCategory) {
   return pb.collection('News').getFullList({
     filter: `category="${selectCategory}"`,
+    expand: `newsId`,
   });
 }
 

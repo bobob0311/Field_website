@@ -2,11 +2,10 @@ import {useEffect, useState} from 'react';
 import styled, {keyframes} from 'styled-components';
 import theme from '../../theme';
 import {LoadDateData} from '../../lib/Apiservice';
-import ContentWrapper from './UI/ContentWrapper';
+import {SmallContentWrapper} from './UI/ContentWrapper';
 
 const P = styled.p`
   font-size: ${props => (props.$fontSize ? props.$fontSize : '1rem')};
-  font-weight: 700;
   color: ${props => (props.$color ? theme.colors[props.$color] : theme.colors.black)};
   font-weight: 700;
   text-align: center;
@@ -33,7 +32,7 @@ const SubTitle = styled.h2`
 
 const OneLine = styled.span`
   display: block;
-  margin: 0 0 0 0.2rem;
+  margin: 0 0 0.5rem 0;
   text-indent: ${props => (props.$textIndent ? props.$textIndent : '')};
 `;
 
@@ -51,8 +50,6 @@ const WhiteMessage = styled.img`
 
 const DateP = styled(P)`
   text-align: left;
-  font-weight: 700;
-  letter-spacing: -1.5px;
   display: flex;
   padding: 0 0.5rem 0 0;
 `;
@@ -90,29 +87,29 @@ const Emoji = styled.span`
 
 function InfoGroup({subtitle, content}) {
   return (
-    <ContentWrapper>
+    <SmallContentWrapper>
       <SubTitle>{subtitle}</SubTitle>
-      <P $fontSize='1.25rem' $color='white'>
+      <P $fontSize='1.25rem' $color='white' $>
         {content}
       </P>
-    </ContentWrapper>
+    </SmallContentWrapper>
   );
 }
 
 function InfoGroupWithBox({subtitle, content}) {
   return (
-    <ContentWrapper>
+    <SmallContentWrapper>
       <SubTitle>{subtitle}</SubTitle>
       <ContentBox>
         <BoxSize>{content}</BoxSize>
       </ContentBox>
-    </ContentWrapper>
+    </SmallContentWrapper>
   );
 }
 
 const APPLYMETHOD = (
   <>
-    <P $margin='0.5rem 0 0.5rem 0'>
+    <P $margin='0.5rem 0 0.8rem 0'>
       <OneLine>필드 리틀리 혹은 필드 블로그에서 지원서 </OneLine>
       <OneLine>다운로드 후 서류 작성하여 아래 이메일로 제출</OneLine>
     </P>
@@ -208,7 +205,7 @@ export default function Content() {
         </DateP>
         <DateP>
           <Emoji>✅</Emoji>
-          {` 최종 합격자 발표: ${dateData[7]}`}
+          {` 최종 합격자 발표: ${dateData[7]} 개별 문자 발표`}
         </DateP>
       </>
     );

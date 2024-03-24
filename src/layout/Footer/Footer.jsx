@@ -4,9 +4,20 @@ import theme from '../../theme';
 const FooterArea = styled.footer`
   background: #141414;
   padding: 10px 7.5%;
+
+  @media (min-width: 1024px) {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 15%;
+  }
 `;
 
-const FooterContent = styled.div`
+const FooterContentWrapper = styled.span`
+  display: flex;
+  flex-direction: column;
+`;
+
+const FooterContent = styled.span`
   font-size: 10px;
   margin: 5px 0 0 0;
   font-weight: 900;
@@ -17,10 +28,18 @@ const FooterImg = styled.img`
   height: ${props => (props.height ? props.height : '32px')};
 `;
 
-const ImgWrapper = styled.div`
+const ImgWrapper = styled.span`
   display: flex;
   margin: 12px 0 0 0;
   align-items: center;
+
+  a:last-child {
+    margin: 0;
+  }
+
+  @media (min-width: 1024px) {
+    margin: auto 0;
+  }
 `;
 
 const ImgLink = styled.a`
@@ -41,12 +60,13 @@ const AddressLink = styled.a`
 export default function Footer() {
   return (
     <FooterArea>
-      <FooterContent>FIELD (필드, 전국 대학생 산업공학도 모임)</FooterContent>
-      <FooterContent>Copyrightⓒ2024.FIELD. All rights reserved.</FooterContent>
-      <AddressLink href='mailto:iefieldcamp24@gmail.com' target='_blank'>
-        iefieldcamp24@gmail.com
-      </AddressLink>
-
+      <FooterContentWrapper>
+        <FooterContent>FIELD (필드, 전국 대학생 산업공학도 모임)</FooterContent>
+        <FooterContent>Copyrightⓒ2024.FIELD. All rights reserved.</FooterContent>
+        <AddressLink href='mailto:iefieldcamp24@gmail.com' target='_blank'>
+          iefieldcamp24@gmail.com
+        </AddressLink>
+      </FooterContentWrapper>
       <ImgWrapper>
         <ImgLink href='http://pf.kakao.com/_uwNxeK' target='_blank'>
           <FooterImg src='/KakaoTalk.png' alt='kakaotalk 아이콘' width='28px' height='28px' />

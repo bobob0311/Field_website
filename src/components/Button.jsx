@@ -29,11 +29,18 @@ const WhiteButton = styled.button`
     css`
       animation: ${buttonAnimation} 3s infinite;
     `}
+  @media screen and (min-width: 1024px) {
+    font-size: 22px;
+    width: 200px;
+    height: 80px;
+    padding: 0;
+  }
+  order: ${props => props.$order || ''};
 `;
 
-function Button({label, onClick, animate}) {
+function Button({label, onClick, animate, order = ''}) {
   return (
-    <WhiteButton $animate={animate} onClick={onClick}>
+    <WhiteButton $animate={animate} onClick={onClick} $order={order}>
       {label}
     </WhiteButton>
   );
