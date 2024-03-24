@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import styled from 'styled-components';
 import theme from '../../theme';
-import ContentWrapper from './UI/ContentWrapper';
+import {BigContentWrapper} from './UI/ContentWrapper';
 
 const SubTitle = styled.h2`
   font-size: 1.5rem;
@@ -26,6 +26,10 @@ const Box = styled.button`
   }
 
   margin: 0 0 1.5rem 0;
+
+  @media (min-width: 768px) {
+    padding: 0.5rem 0 0.5rem 0.3rem;
+  }
 `;
 
 const P = styled.p`
@@ -97,11 +101,11 @@ function QuestionBox({qes, ans}) {
 
 export default function Question() {
   return (
-    <ContentWrapper>
+    <BigContentWrapper>
       <SubTitle>자주 묻는 질문</SubTitle>
       {QUSANS.map(item => (
         <QuestionBox key={item.id} qes={item.qes} ans={item.ans} />
       ))}
-    </ContentWrapper>
+    </BigContentWrapper>
   );
 }
