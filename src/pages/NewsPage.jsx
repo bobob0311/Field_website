@@ -18,7 +18,10 @@ const H1 = styled.h1`
 `;
 
 const ButtonWrapper = styled.div`
-  margin: 0 5%;
+  margin: 0 7.5%;
+  @media screen and (min-width: 1024px) {
+    margin: 0 15%;
+  }
 `;
 
 const TypeSelect = styled.select`
@@ -50,6 +53,9 @@ const DropdownWrapper = styled.div`
   display: flex;
   gap: 0.5rem;
   justify-content: end;
+  @media screen and (min-width: 1024px) {
+    padding: 0 15%;
+  }
 `;
 
 export default function NewsPage() {
@@ -86,6 +92,7 @@ export default function NewsPage() {
       monthByYear = [...new Set(yearFilterData.map(item => item.month))];
       setRenderData(yearFilterData);
     }
+    monthByYear = [...monthByYear].sort((a, b) => a - b);
     setSelectedMonth('선택하지않음');
     setNewsMonth(monthByYear);
   };
@@ -116,7 +123,7 @@ export default function NewsPage() {
     }
   };
 
-  function initialYearMonth(response) {
+  const initialYearMonth = response => {
     const uniqueYears = [
       ...new Set(response.map(item => item.year).filter(year => year !== 0)),
     ].sort((a, b) => b - a);
@@ -125,7 +132,7 @@ export default function NewsPage() {
     ].sort((a, b) => a - b);
     setNewsYear(uniqueYears);
     setNewsMonth(uniqueMonths);
-  }
+  };
 
   const getDataNews = async category => {
     try {

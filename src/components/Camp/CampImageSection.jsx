@@ -14,6 +14,10 @@ const Section = styled.section`
   background-position: center;
   background-size: ${props => (props.size ? props.size : 'cover')};
   background-repeat: no-repeat;
+  @media screen and (min-width: 1024px) {
+    flex: 1;
+    width: 1/3;
+  }
 `;
 
 const H2 = styled.h2`
@@ -25,6 +29,9 @@ const H2 = styled.h2`
   font-family: 'Goblin One';
   font-weight: bold;
   line-height: 2.5rem;
+  @media screen and (min-width: 1024px) {
+    font-size: 30px;
+  }
 `;
 
 const P = styled.p`
@@ -37,6 +44,9 @@ const P = styled.p`
   padding: 0 10% 1rem 10%;
   letter-spacing: -0.1em;
   font-weight: bold;
+  @media screen and (min-width: 1024px) {
+    font-size: 25px;
+  }
 `;
 
 const Span = styled.span`
@@ -46,6 +56,7 @@ const Span = styled.span`
 function CampImageSection({img, title, firstLine = '', secondLine = '', thirdLine = ''}) {
   const h2Ref = useRef(null);
   const [animate, setAnimate] = useState(false);
+  const [fontSize, setFontSize] = useState('');
   useEffect(() => {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -66,9 +77,17 @@ function CampImageSection({img, title, firstLine = '', secondLine = '', thirdLin
     };
   }, []);
 
+  useEffect(() => {
+    if (h2Ref.current) {
+      const computedStyle = getComputedStyle(h2Ref.current);
+      const currentFontSize = computedStyle.fontSize;
+      setFontSize(currentFontSize);
+    }
+  }, [h2Ref.current]);
+
   return (
     <Section src={img}>
-      <H2 ref={h2Ref}>{animate && <TextGenerator text={title} size='1.5625rem' />}</H2>
+      <H2 ref={h2Ref}>{animate && <TextGenerator text={title} size={fontSize} />}</H2>
       <P>
         <Span>{firstLine}</Span>
         <Span>{secondLine}</Span>

@@ -10,12 +10,19 @@ import theme from '../theme';
 const Section = styled.section`
   margin: 0 7.5%;
   min-height: calc(100vh - 58px - 112px);
+  @media screen and (min-width: 1024px) {
+    width: 600px;
+    margin: 0 auto;
+  }
 `;
 
 const H1 = styled.h1`
   font-size: 1.875rem;
   font-family: 'Goblin one';
   text-align: center;
+  @media screen and (min-width: 1024px) {
+    font-size: 40px;
+  }
 `;
 
 const H2 = styled.h2`
@@ -31,6 +38,9 @@ const P = styled.p`
   font-weight: 500;
   line-height: 1.5;
   word-break: keep-all;
+  @media screen and (min-width: 1024px) {
+    font-size: 21px;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -83,7 +93,7 @@ const StyledSwiper = styled(Swiper)`
   }
 
   .swiper-pagination-bullet-active {
-    background-color: ${theme.colors.blue};
+    background-color: ${theme.colors.yellow};
   }
 `;
 
@@ -91,6 +101,9 @@ const SlideImg = styled.img`
   width: 100%;
   height: 400px;
   object-fit: fill;
+  @media screen and (min-width: 1024px) {
+    height: 750px;
+  }
 `;
 
 function NewsDetailPage() {

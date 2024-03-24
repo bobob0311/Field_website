@@ -6,6 +6,9 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   margin: 0 7.5%;
+  @media screen and (min-width: 1024px) {
+    margin: 0 15%;
+  }
 `;
 
 const H2 = styled.h2`

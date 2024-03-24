@@ -5,7 +5,7 @@ import Button from '../Button';
 
 const H1 = styled.h1`
   position: absolute;
-  top: 5rem;
+  top: 80px;
   font-family: 'Goblin One';
   font-size: 1.875rem;
   text-align: center;
@@ -27,10 +27,8 @@ const TitleContainer = styled.section`
 
 const TitleH2 = styled.h2`
   font-size: 2.5rem;
-  padding: 0 10%;
   text-align: center;
-  font-family: 'Nanum Brush Script', cursive;
-  letter-spacing: -0.05em;
+  font-family: 'Nanum Brush Script';
 `;
 
 const Figure = styled.figure`
@@ -39,6 +37,9 @@ const Figure = styled.figure`
   display: flex;
   flex-direction: column;
   margin: 2rem 0 0 0;
+  @media screen and (min-width: 1024px) {
+    visibility: hidden;
+  }
 `;
 
 const Img = styled.img`
@@ -54,9 +55,11 @@ const Figcaption = styled.figcaption`
 const ButtonWapper = styled.div`
   position: absolute;
   bottom: 1rem;
-  transform: 50%;
   display: flex;
   flex-direction: column;
+  @media screen and (min-width: 1024px) {
+    bottom: -50px;
+  }
 `;
 
 function CampMainSection() {

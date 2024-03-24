@@ -38,6 +38,10 @@ const Img = styled.img`
   border-radius: 1rem;
   margin: 0 0 1.25rem 0;
   order: 2;
+  @media screen and (min-width: 1024px) {
+    width: 350px;
+    height: 350px;
+  }
 `;
 
 const Figcaption = styled.figcaption`
@@ -46,6 +50,15 @@ const Figcaption = styled.figcaption`
   font-family: 'Goblin One';
   font-size: 1.25rem;
   margin: 0 0 1.25rem 0;
+  order: 1;
+`;
+
+const FigureWrapper = styled.div`
+  @media screen and (min-width: 1024px) {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+  }
 `;
 
 function CampTopicSection() {
@@ -107,8 +120,8 @@ function CampTopicSection() {
     <Section>
       <H2>역대 FIELD CAMP</H2>
       <Dropdown title='역대 FIELD CAMP' titleArr={campDataYear} />
-      {showedCampData.map((camp, index) => (
-        <>
+      <FigureWrapper>
+        {showedCampData.map((camp, index) => (
           <Figure key={camp.id}>
             {expandedIndex === index ? (
               camp.file.map((file, fileIndex) => (
@@ -126,13 +139,14 @@ function CampTopicSection() {
             ) : (
               <Figcaption $color='blue'>{camp.topic} TOPIC</Figcaption>
             )}
+            <Button
+              onClick={() => toggleImageDisplay(index)}
+              label={expandedIndex === index ? '가리기' : `'주제${index + 1}'에 대해 더 알아보기`}
+              order='3'
+            />
           </Figure>
-          <Button
-            onClick={() => toggleImageDisplay(index)}
-            label={expandedIndex === index ? '가리기' : `'주제${index + 1}'에 대해 더 알아보기`}
-          />
-        </>
-      ))}
+        ))}
+      </FigureWrapper>
     </Section>
   );
 }
