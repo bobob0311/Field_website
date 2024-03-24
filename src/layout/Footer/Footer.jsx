@@ -8,7 +8,7 @@ const FooterArea = styled.footer`
   @media (min-width: 1024px) {
     display: flex;
     justify-content: space-between;
-    padding: 10px 15%;
+    padding: 15px 15%;
   }
 `;
 
