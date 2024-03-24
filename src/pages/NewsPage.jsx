@@ -92,6 +92,7 @@ export default function NewsPage() {
       monthByYear = [...new Set(yearFilterData.map(item => item.month))];
       setRenderData(yearFilterData);
     }
+    monthByYear = [...monthByYear].sort((a, b) => a - b);
     setSelectedMonth('선택하지않음');
     setNewsMonth(monthByYear);
   };
@@ -122,7 +123,7 @@ export default function NewsPage() {
     }
   };
 
-  function initialYearMonth(response) {
+  const initialYearMonth = response => {
     const uniqueYears = [
       ...new Set(response.map(item => item.year).filter(year => year !== 0)),
     ].sort((a, b) => b - a);
@@ -131,7 +132,7 @@ export default function NewsPage() {
     ].sort((a, b) => a - b);
     setNewsYear(uniqueYears);
     setNewsMonth(uniqueMonths);
-  }
+  };
 
   const getDataNews = async category => {
     try {

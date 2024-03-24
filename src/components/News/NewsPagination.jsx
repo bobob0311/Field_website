@@ -37,7 +37,8 @@ const Li = styled.li`
   }
   @media screen and (min-width: 1024px) {
     font-size: 24px;
-    display: flex;
+    grid-template-columns: auto 1fr;
+  }
 `;
 
 const Thumbnail = styled.img`
@@ -54,7 +55,6 @@ const Thumbnail = styled.img`
 const TitleWrapper = styled.div`
   @media screen and (min-width: 1024px) {
     display: flex;
-    justify-content: start;
   }
 `;
 
@@ -73,6 +73,16 @@ const Title2Span = styled.span`
   @media screen and (min-width: 1024px) {
     justify-self: start;
     margin: 0 0 0 4px;
+  }
+`;
+
+const ContentSpan = styled.span`
+  visibility: hidden;
+  @media screen and (min-width: 1024px) {
+    visibility: visible;
+    text-align: start;
+    font-size: 16px;
+    word-break: keep-all;
   }
 `;
 
@@ -125,9 +135,16 @@ function NewsPagination({newsData, category, loading}) {
               <Thumbnail
                 src={`${imageUrl}/${item.collectionId}/${item.id}/${item.expand.newsId.photo[0]}`}
               />
-              <p>{item.expand.newsId.contents}</p>
-              <TitleSpan>{item.title1} </TitleSpan>
-              <Title2Span>{item.title2 ? item.title2 : ''}</Title2Span>
+              <TitleWrapper>
+                <TitleSpan>{item.title1} </TitleSpan>
+                <Title2Span>{item.title2 ? item.title2 : ''}</Title2Span>
+              </TitleWrapper>
+
+              <ContentSpan>
+                {item.expand.newsId.contents.length < 200
+                  ? item.expand.newsId.contents
+                  : `${item.expand.newsId.contents.slice(0, 100)}...`}
+              </ContentSpan>
               <DateSpan>
                 {item.year}년 {item.month}월 {item.day}일
               </DateSpan>
