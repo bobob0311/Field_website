@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const TimelineBlock = styled.div`
   width: -webkit-calc(50% + 12px);
   width: -moz-calc(50% + 12px);
-  width: calc(50% + 10px);
+  width: calc(50% + 12px);
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;

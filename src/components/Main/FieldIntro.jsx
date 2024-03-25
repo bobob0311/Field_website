@@ -81,7 +81,6 @@ const Card = styled.div`
   margin: 8rem 0;
   box-shadow: 0px 0px 15px 5px #2b3382;
   animation: ${shadowAnimation} 3s infinite;
-  max-width: 1008px;
   @media screen and (min-width: 1024px) {
     margin: 3rem 0;
   }

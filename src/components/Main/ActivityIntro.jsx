@@ -29,8 +29,8 @@ const Card = styled.article`
   border-radius: 0.625rem;
   ${props => props.$border && 'border: 2px solid white;'}
   @media screen and (min-width: 896px) {
-    width: 430px;
-    height: 350px;
+    width: 550px;
+    height: 400px;
   }
 `;
 

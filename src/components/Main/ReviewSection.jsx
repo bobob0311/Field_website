@@ -34,6 +34,8 @@ const WriterContainer = styled.div`
 `;
 
 const Article = styled.article`
+  display: flex;
+  flex-direction: column;
   width: 100%;
 `;
 
