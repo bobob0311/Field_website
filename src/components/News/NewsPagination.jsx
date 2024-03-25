@@ -21,6 +21,7 @@ const Li = styled.li`
   display: grid;
   grid-template-areas:
     'thumbnail title1'
+    'thumbnail title2'
     'thumbnail date';
   font-size: 1.125rem;
   color: white;
@@ -56,6 +57,7 @@ const TitleWrapper = styled.div`
   flex-direction: column;
   @media screen and (min-width: 1024px) {
     display: flex;
+    flex-direction: row;
   }
 `;
 
@@ -89,7 +91,7 @@ const ContentSpan = styled.span`
 const DateSpan = styled.span`
   grid-area: date;
   font-size: 0.625rem;
-  margin: 1.125rem 0 0 0;
+  // margin: 1.125rem 0 0 0;
   font-weight: 700;
   align-self: end;
   @media screen and (min-width: 1024px) {
@@ -109,6 +111,7 @@ const CustomPagination = styled(Pagination)`
 function NewsPagination({newsData, category, loading}) {
   const navigate = useNavigate();
   const itemsPerPage = 5;
+  const [IsShowContent, setIsShowContent] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const imageUrl = `${import.meta.env.VITE_API_URL}/api/files/`;
   const handlePageChange = (event, value) => {
@@ -122,6 +125,21 @@ function NewsPagination({newsData, category, loading}) {
     setCurrentPage(parseInt(urlPage, 10) || 1);
   }, [category, window.location.search]);
 
+  const handleResize = () => {
+    if (window.innerWidth >= 1024) {
+      setIsShowContent(true);
+    } else {
+      setIsShowContent(false);
+    }
+  };
+  useEffect(() => {
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentItemPerPage = newsData.slice(startIndex, endIndex);
@@ -132,19 +150,19 @@ function NewsPagination({newsData, category, loading}) {
         {currentItemPerPage.map(item => (
           <Li key={item.id}>
             <Link to={`/detail/${item.newsId}`}>
-              <Thumbnail
-                src={`${imageUrl}/${item.collectionId}/${item.id}/${item.expand.newsId.photo[0]}`}
-              />
+              <Thumbnail src={`${imageUrl}/${item.collectionId}/${item.id}/${item.thumbnail}`} />
               <TitleWrapper>
                 <TitleSpan>{item.title1} </TitleSpan>
                 <Title2Span>{item.title2 ? item.title2 : ''}</Title2Span>
               </TitleWrapper>
 
-              <ContentSpan>
-                {item.expand.newsId.contents.length < 200
-                  ? item.expand.newsId.contents
-                  : `${item.expand.newsId.contents.slice(0, 100)}...`}
-              </ContentSpan>
+              {IsShowContent && (
+                <ContentSpan>
+                  {item.expand.newsId.contents.length < 200
+                    ? item.expand.newsId.contents
+                    : `${item.expand.newsId.contents.slice(0, 100)}...`}
+                </ContentSpan>
+              )}
               <DateSpan>
                 {item.year}년 {item.month}월 {item.day}일
               </DateSpan>

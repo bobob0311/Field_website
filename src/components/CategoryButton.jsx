@@ -14,7 +14,7 @@ const Button = styled.button`
   font-weight: 700;
   padding: 0.375rem 0;
   ${props =>
-    props.isActive &&
+    props.$isActive &&
     `
     background-color: ${theme.colors.gray};
     color: white;
@@ -23,7 +23,7 @@ const Button = styled.button`
 
 function CategoryButton({label, onClick, isActive}) {
   return (
-    <Button onClick={onClick} isActive={isActive}>
+    <Button onClick={onClick} $isActive={isActive}>
       {label}
     </Button>
   );

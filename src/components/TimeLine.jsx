@@ -87,14 +87,13 @@ export default function TimeLine({data, height}) {
   }));
 
   const MaxHeight = count * height;
-
   return (
     <TimeLineDiv>
       {result.map(content => (
-        <DataBox $height={`${content.start}px`}>
+        <DataBox key={`${content.label}`} $height={`${content.start}px`}>
           {content.label}
           {data[content.label].map((item, index) => (
-            <Data $top={`${index * height}px`}>
+            <Data key={item} $top={`${index * height}px`}>
               {item.title && item.get ? (
                 <>
                   <Title>
