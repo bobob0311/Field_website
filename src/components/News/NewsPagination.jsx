@@ -131,7 +131,7 @@ function NewsPagination({newsData, category, loading}) {
       <Ul>
         {currentItemPerPage.map(item => (
           <Li key={item.id}>
-            <Link to={`/detail/${item.newsId}`}>
+            <Link to={`/news/detail/${item.newsId}`}>
               <Thumbnail
                 src={`${imageUrl}/${item.collectionId}/${item.id}/${item.expand.newsId.photo[0]}`}
               />
