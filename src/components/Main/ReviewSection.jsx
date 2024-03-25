@@ -33,12 +33,6 @@ const WriterContainer = styled.div`
   text-align: center;
 `;
 
-const Article = styled.article`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
-
 const Card = styled.article`
   box-sizing: border-box;
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
@@ -50,10 +44,13 @@ const Card = styled.article`
   ${props => props.$border && 'border: 2px solid white;'}
   height: 25rem;
   position: relative;
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 768px) {
     width: 550px;
     height: 400px;
-    padding: 20px;
+  }
+  @media screen and (min-width: 1024px) {
+    width: 550px;
+    height: 500px;
   }
 `;
 
@@ -92,6 +89,11 @@ const StyledSwiper = styled(Swiper)`
 
   .swiper-pagination-bullet-active {
     background-color: ${theme.colors.blue};
+  }
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
@@ -134,29 +136,33 @@ function ReviewSection() {
           breakpoints={{
             320: {
               slidesPerView: 1.2,
+              spaceBetween: 20,
             },
             896: {
-              slidesPerView: 2.4,
+              slidesPerView: 1.5,
+              spaceBetween: 20,
+            },
+            1024: {
+              slidesPerView: 2,
+              spaceBetween: 20,
             },
           }}
         >
           {reviewData.map(item => (
             <SwiperSlide key={item.id}>
               <Card $border='true'>
-                <Article>
-                  <H3 $margin='0.5rem 0 1rem 0'>{item.firstQuestion}</H3>
-                  <P $margin='1rem 0' size='0.875rem' desktopSize='0.9rem'>
-                    {item.firstAnswer}
+                <H3 $margin='0.5rem 0 1rem 0'>{item.firstQuestion}</H3>
+                <P $margin='1rem 0' size='0.875rem' desktopSize='0.9rem'>
+                  {item.firstAnswer}
+                </P>
+                <WriterContainer>
+                  <P color='yellow' size='1.125rem' weight='800'>
+                    {item.school}
                   </P>
-                  <WriterContainer>
-                    <P color='yellow' size='1.125rem' weight='800'>
-                      {item.school}
-                    </P>
-                    <P color='yellow' size='1.125rem' weight='800'>
-                      {item.author}
-                    </P>
-                  </WriterContainer>
-                </Article>
+                  <P color='yellow' size='1.125rem' weight='800'>
+                    {item.author}
+                  </P>
+                </WriterContainer>
               </Card>
             </SwiperSlide>
           ))}

@@ -21,7 +21,6 @@ const Li = styled.li`
   display: grid;
   grid-template-areas:
     'thumbnail title1'
-    'thumbnail title2'
     'thumbnail date';
   font-size: 1.125rem;
   color: white;
@@ -53,6 +52,8 @@ const Thumbnail = styled.img`
 `;
 
 const TitleWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   @media screen and (min-width: 1024px) {
     display: flex;
   }
@@ -68,7 +69,6 @@ const TitleSpan = styled.span`
 
 const Title2Span = styled.span`
   margin: 0.5rem 0 0 0;
-  grid-area: title2;
   font-weight: 800;
   @media screen and (min-width: 1024px) {
     justify-self: start;
