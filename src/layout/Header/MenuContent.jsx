@@ -127,10 +127,12 @@ export default function MenuContent(props) {
   ];
 
   const location = useLocation();
+  const category = location.pathname.split('/')[1];
+
   return (
     <HeaderContentSection $isOpen={isOpen} onClick={onClose}>
       <HeaderContent>
-        <MenuContainer className={location.pathname.replace('/', '')}>
+        <MenuContainer className={category}>
           {Menus.map(Menu => (
             <OneMenu key={Menu.title}>
               <Link name={Menu.link} to={`/${Menu.link}`}>

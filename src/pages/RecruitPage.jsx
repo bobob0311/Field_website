@@ -14,7 +14,7 @@ const Title = styled.h1`
 `;
 
 const NotificationSection = styled.section`
-  height: 30rem;
+  height: 32rem;
   background: linear-gradient(to bottom, #313131 60%, ${theme.colors.black} 100%);
 `;
 
