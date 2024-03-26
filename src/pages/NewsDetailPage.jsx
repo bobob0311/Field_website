@@ -38,6 +38,7 @@ const P = styled.p`
   font-weight: 500;
   line-height: 1.5;
   word-break: keep-all;
+  white-space: pre-wrap;
   @media screen and (min-width: 1024px) {
     font-size: 21px;
   }
