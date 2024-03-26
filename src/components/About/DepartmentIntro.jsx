@@ -62,7 +62,7 @@ const CardKeyWordLi = styled.li`
   padding: 0;
   margin: ${props => props.margin || '0'};
   @media screen and (min-width: 1280px) {
-    margin: ${props => props.desktopMargin || ''};
+    margin: ${props => props.$desktopMargin || ''};
   }
 `;
 
@@ -144,7 +144,7 @@ const Button = styled.button`
   font-size: 0.8rem;
 
   ${props =>
-    props.isActive &&
+    props.$isActive &&
     `
     background-color: ${theme.colors.gray};
     color: white;
@@ -242,7 +242,7 @@ function DepartmentIntro() {
         {category.map(item => (
           <Button
             key={item}
-            isActive={selectCategory === item}
+            $isActive={selectCategory === item}
             onClick={() => handleButtonClick(item)}
           >
             {item}
@@ -250,7 +250,7 @@ function DepartmentIntro() {
         ))}
       </ButtonWrapper>
 
-      <CardContainer visible={selectCategory === '기획부'}>
+      <CardContainer visible={(selectCategory === '기획부').toString()}>
         <FlexRow>
           <Card margin='1rem 0' ref={cardRef}>
             <Dl>
@@ -260,7 +260,7 @@ function DepartmentIntro() {
               </Dd>
             </Dl>
             <CardUl>
-              <CardKeyWordLi margin='0 0 0 35%' desktopMargin='0 0 0 50%'>
+              <CardKeyWordLi margin='0 0 0 35%' $desktopMargin='0 0 0 50%'>
                 {animate && <CardKeyWordSpan color='255, 188, 19'>대인관계능력</CardKeyWordSpan>}
               </CardKeyWordLi>
               <CardKeyWordLi margin='0 0 0 5%'>
@@ -293,7 +293,7 @@ function DepartmentIntro() {
         </FlexRow>
       </CardContainer>
 
-      <CardContainer visible={selectCategory === '대외협력부'}>
+      <CardContainer visible={(selectCategory === '대외협력부').toString()}>
         <FlexRow>
           <Card margin='1rem 0'>
             <Dl>
@@ -307,10 +307,10 @@ function DepartmentIntro() {
               <CardKeyWordLi margin='0 0 0 5%'>
                 <CardKeyWordSpan color='19, 99, 255'>말하기능력</CardKeyWordSpan>
               </CardKeyWordLi>
-              <CardKeyWordLi margin='0 0 0 50%' desktopMargin='0 0 0 60%'>
+              <CardKeyWordLi margin='0 0 0 50%' $desktopMargin='0 0 0 60%'>
                 <CardKeyWordSpan color='99, 202, 247'>소통능력</CardKeyWordSpan>
               </CardKeyWordLi>
-              <CardKeyWordLi margin='0 0 0 15%' desktopMargin='0 0 0 25%'>
+              <CardKeyWordLi margin='0 0 0 15%' $desktopMargin='0 0 0 25%'>
                 <CardKeyWordSpan color='30, 154, 244'>친화력</CardKeyWordSpan>
               </CardKeyWordLi>
             </CardUl>
@@ -337,7 +337,7 @@ function DepartmentIntro() {
         </FlexRow>
       </CardContainer>
 
-      <CardContainer visible={selectCategory === '컴페티션부'}>
+      <CardContainer visible={(selectCategory === '컴페티션부').toString()}>
         <FlexRow>
           <Card margin='1rem 0'>
             <Dl>
@@ -382,7 +382,7 @@ function DepartmentIntro() {
         </FlexRow>
       </CardContainer>
 
-      <CardContainer visible={selectCategory === '홍보부'}>
+      <CardContainer visible={(selectCategory === '홍보부').toString()}>
         <FlexRow>
           <Card margin='1rem 0'>
             <Dl>

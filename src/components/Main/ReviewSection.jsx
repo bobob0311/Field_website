@@ -16,12 +16,12 @@ const GoblinH2 = styled(H2)`
   font-family: 'Goblin One';
   font-size: ${props => props.$size || '1.875rem'};
   @media screen and (min-width: 769px) {
-    font-size: 40px;
+    font-size: 2rem;
   }
 `;
 
 const SwiperContainer = styled.div`
-  margin: ${props => props.margin || '0'};
+  margin: ${props => props.$margin || '0'};
 `;
 
 const WriterContainer = styled.div`
@@ -31,6 +31,11 @@ const WriterContainer = styled.div`
   flex-direction: column;
   bottom: 1rem;
   text-align: center;
+  @media screen and (min-width: 1024px) {
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.5rem;
+  }
 `;
 
 const Card = styled.article`
@@ -60,9 +65,9 @@ const P = styled.p`
   color: ${props => (props.color ? theme.colors[props.color] : '')};
   font-size: ${props => (props.size ? props.size : '1rem')};
   text-align: ${props => props.align || ''};
-  font-weight: ${props => props.weight || ''};
+  font-weight: ${props => props.$weight || ''};
   @media screen and (min-width: 1024px) {
-    font-size: ${props => props.desktopSize || '1rem'};
+    font-size: ${props => props.$desktopSize || '1rem'};
   }
 `;
 
@@ -74,7 +79,7 @@ const H3 = styled.h3`
   margin: ${props => props.$margin || '0'};
   word-break: keep-all;
   @media screen and (min-width: 1024px) {
-    font-size: 24px;
+    font-size: 1.2rem;
   }
 `;
 
@@ -127,7 +132,7 @@ function ReviewSection() {
       <GoblinH2 $margin='8rem 0 4rem 0' $size='1.25rem'>
         How was your FIELD?
       </GoblinH2>
-      <SwiperContainer margin='2rem 0 5rem 0'>
+      <SwiperContainer $margin='2rem 0 5rem 0'>
         <StyledSwiper
           modules={[Pagination]}
           spaceBetween={20}
@@ -152,14 +157,14 @@ function ReviewSection() {
             <SwiperSlide key={item.id}>
               <Card $border='true'>
                 <H3 $margin='0.5rem 0 1rem 0'>{item.firstQuestion}</H3>
-                <P $margin='1rem 0' size='0.875rem' desktopSize='0.9rem'>
+                <P $margin='1rem 0' size='0.875rem' $desktopSize='0.9rem'>
                   {item.firstAnswer}
                 </P>
                 <WriterContainer>
-                  <P color='yellow' size='1.125rem' weight='800'>
+                  <P color='yellow' size='1.125rem' $weight='800' $desktopSize='1rem'>
                     {item.school}
                   </P>
-                  <P color='yellow' size='1.125rem' weight='800'>
+                  <P color='yellow' size='1.125rem' $weight='800' $desktopSize='1rem'>
                     {item.author}
                   </P>
                 </WriterContainer>
