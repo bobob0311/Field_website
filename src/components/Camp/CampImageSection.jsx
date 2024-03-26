@@ -3,16 +3,20 @@ import styled from 'styled-components';
 import TextGenerator from '../TextGenerator';
 
 const Section = styled.section`
-  height: calc(100vh - 4.5rem);
+  height: calc(100vh - 58px);
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
     url(${props => props.src});
   background-position: center;
   background-size: ${props => (props.size ? props.size : 'cover')};
   background-repeat: no-repeat;
+  @media screen and (max-width: 1024px) {
+    justify-content: center;
+  }
   @media screen and (min-width: 1024px) {
+    justify-content: space-evenly;
     position: relative;
     flex: 1;
     width: 1/3;
@@ -26,9 +30,12 @@ const H2 = styled.h2`
   font-family: 'Goblin One';
   font-weight: bold;
   line-height: 2rem;
-  // margin-top: 100px;
+  position: relative;
+  width: 100%;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
   @media screen and (min-width: 1024px) {
-    width: 550px;
     position: absolute;
     font-size: 30px;
     left: 50%;

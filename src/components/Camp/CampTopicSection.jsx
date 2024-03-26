@@ -126,7 +126,7 @@ function CampTopicSection() {
             {expandedIndex === index ? (
               camp.file.map((file, fileIndex) => (
                 <Img
-                  key={camp.id}
+                  key={file}
                   src={`${imageUrl}${camp.id}/${file}`}
                   alt={`camp-image-${fileIndex}`}
                 />
