@@ -35,6 +35,9 @@ const NanumH2 = styled(H2)`
   line-height: 1.3;
   word-break: keep-all;
   font-weight: 800;
+  @media screen and (min-width: 1024px) {
+    font-size: 2rem;
+  }
 `;
 
 const P = styled.p`
@@ -47,7 +50,7 @@ const P = styled.p`
   flex-direction: column;
   font-weight: ${props => (props.weight ? props.weight : '')};
   @media screen and (min-width: 1280px) {
-    font-size: 20px;
+    font-size: 1rem;
     justify-content: end;
   }
 `;

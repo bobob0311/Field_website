@@ -19,8 +19,12 @@ const FooterContentWrapper = styled.span`
 
 const FooterContent = styled.span`
   font-size: 10px;
-  margin: 5px 0 0 0;
+  margin: 0 0 5px 0;
   font-weight: 900;
+
+  @media (min-width: 1024px) {
+    margin: 0 0 8px 0;
+  }
 `;
 
 const FooterImg = styled.img`
