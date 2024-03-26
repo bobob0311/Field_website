@@ -104,8 +104,8 @@ const P = styled.p`
   max-width: 408px;
   font-weight: ${props => (props.weight ? props.weight : '')};
   @media screen and (min-width: 1280px) {
-    font-size: ${props => (props.desktopSize ? props.desktopSize : '')};
-    margin-top: ${props => props.desktopMargin || ''};
+    font-size: ${props => (props.$desktopSize ? props.desktopSize : '')};
+    margin-top: ${props => props.$desktopMargin || ''};
   }
 `;
 
@@ -147,7 +147,7 @@ function ManagerIntro() {
       </NanumH2>
       <Ul margin='2rem 0' gap='5rem'>
         {leader.map(item => (
-          <ProfileLi>
+          <ProfileLi key={item.id}>
             <Figure>
               <Image
                 src={`${imageUrl}${item.id}/${item.photo}`}
@@ -156,28 +156,34 @@ function ManagerIntro() {
                 radius='50%'
               />
               <Figcaption margin='1rem 0'>
-                <P weight='900' desktopSize='1rem'>
+                <P weight='900' $desktopSize='1rem'>
                   {item.department}
                 </P>
-                <P weight='900' desktopSize='1rem'>
+                <P weight='900' $desktopSize='1rem'>
                   {item.name}
                 </P>
               </Figcaption>
             </Figure>
             <Container>
-              <P desktopSize='0.8rem' line='1.5' weight='800' desktopMargin='1rem'>
+              <P $desktopSize='0.8rem' line='1.5' weight='800' $desktopMargin='1rem'>
                 {item.introTitle}
               </P>
-              <P size='1rem' line='2' margin='1rem 0 0 0' desktopSize='0.8rem' desktopMargin='2rem'>
+              <P
+                size='1rem'
+                line='2'
+                margin='1rem 0 0 0'
+                $desktopSize='0.8rem'
+                $desktopMargin='2rem'
+              >
                 {item.intro}
               </P>
             </Container>
           </ProfileLi>
         ))}
       </Ul>
-      <Ul margin='2rem 0' gap='5rem'>
+      <Ul margin='4rem 0' gap='5rem'>
         {secondLeader.map(item => (
-          <ProfileLi>
+          <ProfileLi key={item.id}>
             <Figure>
               <Image
                 src={`${imageUrl}${item.id}/${item.photo}`}
@@ -186,28 +192,34 @@ function ManagerIntro() {
                 radius='50%'
               />
               <Figcaption margin='1rem 0'>
-                <P weight='900' desktopSize='1rem'>
+                <P weight='900' $desktopSize='1rem'>
                   {item.department}
                 </P>
-                <P weight='900' desktopSize='1rem'>
+                <P weight='900' $desktopSize='1rem'>
                   {item.name}
                 </P>
               </Figcaption>
             </Figure>
             <Container order='-1'>
-              <P desktopSize='0.8rem' line='1.5' weight='800' desktopMargin='1rem'>
+              <P $desktopSize='0.8rem' line='1.5' weight='800' $desktopMargin='1rem'>
                 {item.introTitle}
               </P>
-              <P size='1rem' line='2' margin='1rem 0 0 0' desktopSize='0.8rem' desktopMargin='2rem'>
+              <P
+                size='1rem'
+                line='2'
+                margin='1rem 0 0 0'
+                $desktopSize='0.8rem'
+                $desktopMargin='2rem'
+              >
                 {item.intro}
               </P>
             </Container>
           </ProfileLi>
         ))}
       </Ul>
-      <Ul margin='4rem 0' desktopMargin='8rem 0'>
+      <Ul margin='4rem 0' $desktopMargin='8rem 0'>
         {depart.map(item => (
-          <Li>
+          <Li key={item.id}>
             <Figure>
               <Image
                 src={`${imageUrl}${item.id}/${item.photo}`}
@@ -216,10 +228,10 @@ function ManagerIntro() {
                 radius='50%'
               />
               <Figcaption margin='1rem 0'>
-                <P weight='900' desktopSize='0.8rem'>
+                <P weight='900' $desktopSize='0.8rem'>
                   {item.department}
                 </P>
-                <P weight='900' desktopSize='0.8rem'>
+                <P weight='900' $desktopSize='0.8rem'>
                   {item.name}
                 </P>
               </Figcaption>

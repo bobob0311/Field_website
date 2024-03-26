@@ -9,9 +9,11 @@ const H3 = styled.h3`
   margin: ${props => props.$margin || '0'};
   font-weight: 900;
   @media screen and (min-width: 1024px) {
-    font-size: 30px;
+    font-size: 1.8rem;
     grid-row: 1 / 2;
     grid-column: 2 / 4;
+    justify-self: start;
+    align-self: center;
     margin: 0;
   }
 `;
@@ -25,9 +27,8 @@ const Figure = styled.figure`
   margin: ${props => props.$margin || '0'};
   @media screen and (min-width: 1024px) {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr;
     gird-template-rows: 1fr 2fr;
-    column-gap: 2rem;
     place-items: center;
   }
 `;
@@ -54,6 +55,10 @@ const P = styled.p`
   color: ${props => (props.color ? theme.colors[props.color] : '')};
   font-size: ${props => (props.size ? props.size : '1rem')};
   text-align: center;
+  @media screen and (min-width: 1024px) {
+    text-align: left;
+    font-size: 1.2rem;
+  }
 `;
 
 const Figcaption = styled.figcaption`
@@ -63,7 +68,7 @@ const Figcaption = styled.figcaption`
   @media screen and (min-width: 1024px) {
     grid-row: 2 / 3;
     grid-column: 2 / 4;
-    font-size: 1.125rem;
+    margin: 0;
   }
 `;
 
@@ -82,7 +87,7 @@ const Card = styled.div`
   box-shadow: 0px 0px 15px 5px #2b3382;
   animation: ${shadowAnimation} 3s infinite;
   @media screen and (min-width: 1024px) {
-    margin: 3rem 0;
+    margin: 8rem 0;
   }
 `;
 
