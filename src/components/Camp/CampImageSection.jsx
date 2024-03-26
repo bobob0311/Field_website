@@ -6,42 +6,43 @@ const Section = styled.section`
   height: calc(100vh - 4.5rem);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+  justify-content: space-evenly;
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
     url(${props => props.src});
   background-position: center;
   background-size: ${props => (props.size ? props.size : 'cover')};
   background-repeat: no-repeat;
   @media screen and (min-width: 1024px) {
+    position: relative;
     flex: 1;
     width: 1/3;
   }
 `;
 
 const H2 = styled.h2`
-  position: relative;
-  bottom: 8rem;
   font-size: 1.5625rem;
   color: white;
   text-align: center;
   font-family: 'Goblin One';
   font-weight: bold;
-  line-height: 2.5rem;
+  line-height: 2rem;
+  // margin-top: 100px;
   @media screen and (min-width: 1024px) {
+    width: 550px;
+    position: absolute;
     font-size: 30px;
+    left: 50%;
+    top: 20%;
+    transform: translateX(-50%);
   }
 `;
 
 const P = styled.p`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   font-size: 1.5rem;
   color: white;
   text-align: center;
-  padding: 0 10% 1rem 10%;
   letter-spacing: -0.1em;
   font-weight: bold;
   @media screen and (min-width: 1024px) {
@@ -77,14 +78,20 @@ function CampImageSection({img, title, firstLine = '', secondLine = '', thirdLin
     };
   }, []);
 
-  useEffect(() => {
-    if (h2Ref.current) {
-      const computedStyle = getComputedStyle(h2Ref.current);
-      const currentFontSize = computedStyle.fontSize;
-      setFontSize(currentFontSize);
+  const handleResize = () => {
+    if (window.innerWidth >= 768) {
+      setFontSize('30px');
+    } else {
+      setFontSize('25px');
     }
-  }, [h2Ref.current]);
-
+  };
+  useEffect(() => {
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   return (
     <Section src={img}>
       <H2 ref={h2Ref}>{animate && <TextGenerator text={title} size={fontSize} />}</H2>

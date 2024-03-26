@@ -30,10 +30,10 @@ const Dt = styled.dt`
 
 const Dd = styled.dd`
   font-size: 1rem;
-  margin: 0 0 2.5rem 0;
   font-weight: 500;
   line-height: 1.5;
   word-break: keep-all;
+  margin: ${props => props.$margin || '0 0 2.5rem 0'};
 `;
 
 function CampIntroSection() {
@@ -54,7 +54,7 @@ function CampIntroSection() {
           나아가기 위한 역량을 기를 수 있습니다.
         </Dd>
         <Dt>컴페티션</Dt>
-        <Dd>
+        <Dd $margin='0 0 10rem 0'>
           컴페티션이란 FIELD CAMP의 핵심 행사로서, 전국의 산업공학도들이 함께 모여 제시되는 문제에
           대하여 산업공학적 시각으로 함께 해결하고 겨루는 단기 프로젝트 공모전입니다. 해마다 달리
           주어지는 주제에 맞추어 문제를 정의하고, 산업공학적 지식을 활용하여 참신한 해결방안을
