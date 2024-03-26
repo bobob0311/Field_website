@@ -128,7 +128,7 @@ function NewsDetailPage() {
       console.log(error);
     }
   };
-  const fileUrl = `${import.meta.env.VITE_API_URL}/api/files/cd f/`;
+  const fileUrl = `${import.meta.env.VITE_API_URL}/api/files/damzbyg116zhar4/`;
 
   const handleBack = () => {
     navigate(-1);
@@ -160,16 +160,15 @@ function NewsDetailPage() {
       ) : (
         <>
           <H2>{detailNewsData.title}</H2>
-          <StyledSwiper
-            modules={[Pagination]}
-            // spaceBetween={20}
-            centeredSlides='true'
-            pagination={{clickable: true}}
-          >
+          <StyledSwiper modules={[Pagination]} centeredSlides='true' pagination={{clickable: true}}>
             {detailNewsData.photo.length > 0 &&
               detailNewsData.photo.map(item => (
-                <SwiperSlide>
-                  <SlideImg src={`${fileUrl}${detailNewsData.id}/${item}`} alt={`${item}`} />
+                <SwiperSlide key={item}>
+                  <SlideImg
+                    key={item}
+                    src={`${fileUrl}${detailNewsData.id}/${item}`}
+                    alt={`${item}`}
+                  />
                 </SwiperSlide>
               ))}
           </StyledSwiper>

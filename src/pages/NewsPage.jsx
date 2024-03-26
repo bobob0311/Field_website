@@ -7,7 +7,10 @@ import {NewsApi} from '../lib/Apiservice';
 import theme from '../theme';
 
 const NewsMain = styled.section`
-  min-height: calc(100vh - 112px - 58px);
+  min-height: calc(100vh - 106px - 58px);
+  @media screen and (min-width: 1024px) {
+    min-height: calc(100vh - 70px - 58px);
+  }
 `;
 
 const H1 = styled.h1`
