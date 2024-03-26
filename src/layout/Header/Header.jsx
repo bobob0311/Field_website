@@ -91,7 +91,7 @@ export default function Header() {
     <MenuBar>
       <MainHeaderWrapper>
         {HomeDirection}
-        <MenuButton id='MenuButton' onClick={() => showHandler()}>
+        <MenuButton aria-label='MenuButton' onClick={() => showHandler()}>
           <MenuBurgur open={isOpen} />
         </MenuButton>
       </MainHeaderWrapper>
