@@ -23,7 +23,7 @@ const H2 = styled.h2`
 
 const SwiperContainer = styled.div`
   width: 100%;
-  margin: ${props => props.margin || '0'};
+  margin: ${props => props.$margin || '0'};
 `;
 
 const NanumH2 = styled(H2)`

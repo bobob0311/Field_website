@@ -1,5 +1,6 @@
 import {AnimatePresence, motion, useAnimation} from 'framer-motion'; // framer-motion에서 motion, useAnimation, AnimatePresence를 불러옵니다.
 import {useEffect} from 'react'; // 리액트의 useEffect 훅을 불러옵니다.
+import {v4 as uuidv4} from 'uuid'; // uuid 라이브러리에서 v4를 불러옵니다.
 import styled from 'styled-components'; // styled-components를 불러옵니다.
 
 // 텍스트 애니메이션을 담당하는 컨테이너를 스타일드 컴포넌트로 정의합니다.
@@ -12,10 +13,22 @@ const TextGenerateContainer = styled.span`
   margin: ${props => props.$margin || '0 0.3rem'};
   letter-spacing: ${props => props.$spacing || ''};
   text-rendering: optimizeSpeed;
+  @media screen and (min-width: 1024px) {
+    font-size: ${props => props.$desktopSize || ''};
 `;
 
 // 텍스트 애니메이션 예시를 담당하는 함수형 컴포넌트를 정의합니다.
-function TextGenerator({text, size, align, margin, weight, height, spacing, time = 0.3}) {
+function TextGenerator({
+  text,
+  size,
+  align,
+  margin,
+  weight,
+  height,
+  spacing,
+  time = 0.3,
+  $desktopSize,
+}) {
   const animationControl = useAnimation(); // 애니메이션을 제어하는 useAnimation 훅을 사용합니다.
   const wordsArray = text.split(' '); // 주어진 텍스트를 공백을 기준으로 분할하여 단어 배열로 만듭니다.
 
@@ -37,6 +50,7 @@ function TextGenerator({text, size, align, margin, weight, height, spacing, time
       $weight={weight}
       $height={height}
       $spacing={spacing}
+      $desktopSize={$desktopSize}
     >
       <AnimatePresence>
         {' '}
@@ -58,7 +72,7 @@ function TextGenerator({text, size, align, margin, weight, height, spacing, time
                 // wordsArray의 마지막 요소인 경우 패딩 적용
                 paddingRight: idx === wordsArray.length - 1 ? '10px' : '',
               }}
-              key={word}
+              key={uuidv4()} // 고유한 키를 생성합니다.
               variants={{
                 visible: {opacity: 1, y: 0}, // visible 상태의 애니메이션 속성을 정의합니다.
                 hidden: {opacity: 0, y: 20}, // hidden 상태의 애니메이션 속성을 정의합니다.
