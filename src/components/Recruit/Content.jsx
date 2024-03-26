@@ -52,6 +52,10 @@ const DateP = styled(P)`
   text-align: left;
   display: flex;
   padding: 0 0.5rem 0 0;
+  letter-spacing: -2px;
+  @media (min-width: 768px) {
+    letter-spacing: 0;
+  }
 `;
 
 const AddressLink = styled.a`
