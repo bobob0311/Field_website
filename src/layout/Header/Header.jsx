@@ -81,7 +81,7 @@ export default function Header() {
   const HomeDirection = (
     <Home href='/'>
       <HomeFigure>
-        <HomeLogo src='/fieldLogo.png' />
+        <HomeLogo src='/fieldLogo.png' alt='fieldLogo' />
         <HomeTitle>FIELD</HomeTitle>
       </HomeFigure>
     </Home>
@@ -91,7 +91,7 @@ export default function Header() {
     <MenuBar>
       <MainHeaderWrapper>
         {HomeDirection}
-        <MenuButton onClick={() => showHandler()}>
+        <MenuButton id='MenuButton' onClick={() => showHandler()}>
           <MenuBurgur open={isOpen} />
         </MenuButton>
       </MainHeaderWrapper>
