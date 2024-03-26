@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Pagination} from 'swiper/modules';
 import {Swiper, SwiperSlide} from 'swiper/react';
+import theme from '../../theme';
 import 'swiper/swiper-bundle.css';
 import 'swiper/css/pagination';
-import {Pagination} from 'swiper/modules';
 import ActivityIntro from './ActivityIntro';
 import ActivityCamp from '../../../public/ActivityCamp.png';
 import ActivityLT from '../../../public/ActivityLt.png';
@@ -17,15 +18,38 @@ const H2 = styled.h2`
   font-size: 1.875rem;
   margin: ${props => props.$margin || '0'};
   text-align: center;
+  font-weight: 700;
 `;
 
 const SwiperContainer = styled.div`
   width: 100%;
-  margin: ${props => props.margin || '0'};
+  margin: ${props => props.$margin || '0'};
 `;
 
 const NanumH2 = styled(H2)`
   font-family: 'Nanum Myeongjo', serif;
+  @media screen and (min-width: 768px) {
+    font-size: 40px;
+  }
+`;
+
+const StyledSwiper = styled(Swiper)`
+  .swiper-pagination {
+    position: relative;
+    bottom: -1px;
+  }
+  .swiper-pagination-bullet {
+    background-color: white;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: ${theme.colors.blue};
+  }
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 function ActivitySection() {
@@ -34,12 +58,20 @@ function ActivitySection() {
       <NanumH2 $margin='2rem 7.5% 1rem 7.5%'>인적, 학술적 교류를</NanumH2>
       <NanumH2 $margin='0 7.5% 2rem 7.5%'>실현하는 다양한 활동들</NanumH2>
       <SwiperContainer $margin='2rem 0'>
-        <Swiper
+        <StyledSwiper
           modules={[Pagination]}
-          slidesPerView={1.2}
-          spaceBetween={20}
-          centeredSlides='true'
+          centeredSlides
           pagination={{clickable: true}}
+          breakpoints={{
+            320: {
+              slidesPerView: 1.2,
+              spaceBetween: 20,
+            },
+            896: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+          }}
         >
           <SwiperSlide>
             <ActivityIntro
@@ -59,7 +91,7 @@ function ActivitySection() {
             <ActivityIntro
               backgroundImage={ActivityInterview}
               title='기업인 인터뷰'
-              content='산업공학의 다양한 분야에서 활동 중인 전문가들과의 대화를 통해 진로에 대한 영감을 얻고, 현업에서의 성공비법을 배워보세요'
+              content='산업공학의 다양한 분야에서 활동 중인 전문가들과의 대화를 통해 진로에 대한 영감을 얻고, 현업에서의 성공비법을 배워보세요.'
             />
           </SwiperSlide>
           <SwiperSlide>
@@ -80,7 +112,7 @@ function ActivitySection() {
             <ActivityIntro
               backgroundImage={ActivityIntroduce}
               title='고교방문설명회'
-              content='문제해결 능력을 키우는 산업공학의 매력을 전하며, 진로 선택에 도움을 주고자 합니다. 함께하면서 미래의 혁신을 주도할 준비를 하는 첫걸음을 함께 나아가요!'
+              content='문제해결 능력을 키우는 산업공학의 매력을 전하며, 진로 선택에 도움을 주고자 합니다.'
             />
           </SwiperSlide>
           <SwiperSlide>
@@ -90,7 +122,7 @@ function ActivitySection() {
               content='매년 8월, 다양한 산업공학도들과 함께 인적, 학술적 교류의 기회를 제공합니다. 우리와 함께 미래를 열어가는 여정에 참여하세요!'
             />
           </SwiperSlide>
-        </Swiper>
+        </StyledSwiper>
       </SwiperContainer>
     </section>
   );

@@ -1,14 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import backgroundImg from '../../assets/CampBackground.jpg';
-import scrollDown from '../../assets/transfer-down-light.svg';
-import theme from '../../theme';
 import Button from '../Button';
 
 const H1 = styled.h1`
   position: absolute;
-  top: 5rem;
+  top: 80px;
   font-family: 'Goblin One';
   font-size: 1.875rem;
   text-align: center;
@@ -30,10 +27,11 @@ const TitleContainer = styled.section`
 
 const TitleH2 = styled.h2`
   font-size: 2.5rem;
-  padding: 0 10%;
   text-align: center;
-  font-family: 'Nanum Brush Script', cursive;
-  letter-spacing: -0.05em;
+  font-family: 'Nanum Brush Script';
+  @media screen and (min-width: 1024px) {
+    margin: ${props => props.$margin || ''};
+  }
 `;
 
 const Figure = styled.figure`
@@ -41,6 +39,10 @@ const Figure = styled.figure`
   align-items: center;
   display: flex;
   flex-direction: column;
+  margin: 2rem 0 0 0;
+  @media screen and (min-width: 1024px) {
+    visibility: hidden;
+  }
 `;
 
 const Img = styled.img`
@@ -56,23 +58,25 @@ const Figcaption = styled.figcaption`
 const ButtonWapper = styled.div`
   position: absolute;
   bottom: 1rem;
-  transform: 50%;
   display: flex;
   flex-direction: column;
+  @media screen and (min-width: 1024px) {
+    bottom: -50px;
+  }
 `;
 
 function CampMainSection() {
   return (
-    <TitleContainer src={backgroundImg}>
+    <TitleContainer src='camp1.png'>
       <H1>FIELD CAMP</H1>
       <TitleH2>FIELD CAMP를 통해</TitleH2>
-      <TitleH2>여러분의 열정을 보여주세요!!</TitleH2>
+      <TitleH2 $margin='10px 0 0 0 '>여러분의 열정을 보여주세요!!</TitleH2>
       <ButtonWapper>
         <Link to='https://linktr.ee/iefieldcamp'>
-          <Button label='FIELD CAMP 지원하기✏️' />
+          <Button label='FIELD CAMP 지원하기' animate />
         </Link>
         <Figure>
-          <Img src={scrollDown} />
+          <Img src='transfer-down-light.svg' />
           <Figcaption>아래로 스크롤하세요</Figcaption>
         </Figure>
       </ButtonWapper>

@@ -12,7 +12,7 @@ const P = styled.p`
 export default function Notification() {
   return (
     <>
-      <P $fontSize='1.5rem' $fontWeight='600' $margin='5rem 0 2rem 0'>
+      <P $fontSize='1.5rem' $fontWeight='600' $margin='10rem 0 4rem 0'>
         지금은 모집기간이 아닙니다.
       </P>
       <P>필드는 매년 1월에 새로운 멤버를 모집합니다.</P>

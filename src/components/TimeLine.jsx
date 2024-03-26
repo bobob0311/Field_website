@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {useEffect, useState} from 'react';
 import theme from '../theme';
 
 const TimeLineDiv = styled.div`
@@ -7,7 +8,7 @@ const TimeLineDiv = styled.div`
   margin: 2rem auto 0;
 `;
 const DataBox = styled.div`
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-family: 'Goblin One';
   position: absolute;
   top: ${props => props.$height};
@@ -17,7 +18,7 @@ const Data = styled.div`
   font-size: 1.25rem;
   font-weight: 900;
   position: absolute;
-  width: 160px;
+  width: 130px;
   word-break: keep-all;
   top: ${props => props.$top};
   left: 180px;
@@ -31,9 +32,16 @@ const Data = styled.div`
     z-index: 1;
     background: ${theme.colors.yellow};
   }
+  @media screen and (min-width: 769px) {
+    width: 240px;
+  }
 `;
 const Title = styled.h3`
   color: #f76363;
+  font-size: 1.125rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 `;
 
 const P = styled.p`
@@ -45,7 +53,21 @@ const P = styled.p`
 export default function TimeLine({data, height}) {
   const dataLabel = Object.keys(data);
   const contentStartPoint = 40;
-
+  const [position, setPosition] = useState(144);
+  const handleResize = () => {
+    if (window.innerWidth >= 768) {
+      setPosition(147.5);
+    } else {
+      setPosition(144);
+    }
+  };
+  useEffect(() => {
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   const arrayLength = dataLabel.reduce(
     (dataLengthArray, label) => {
       dataLengthArray.push(
@@ -65,17 +87,20 @@ export default function TimeLine({data, height}) {
   }));
 
   const MaxHeight = count * height;
-
   return (
     <TimeLineDiv>
       {result.map(content => (
-        <DataBox $height={`${content.start}px`}>
+        <DataBox key={`${content.label}`} $height={`${content.start}px`}>
           {content.label}
           {data[content.label].map((item, index) => (
-            <Data $top={`${index * height}px`}>
+            <Data key={item} $top={`${index * height}px`}>
               {item.title && item.get ? (
                 <>
-                  <Title>{item.title}</Title>
+                  <Title>
+                    <span>{item.title}</span>
+                    <span>{item.title2}</span>
+                  </Title>
+
                   <P>{item.get}</P>
                 </>
               ) : (
@@ -96,7 +121,7 @@ export default function TimeLine({data, height}) {
         strokeLinecap='round'
         strokeLinejoin='round'
       >
-        <path d={`M 145 1  v${MaxHeight + 50}`} />
+        <path d={`M ${position} 1  v${MaxHeight + 50}`} />
         <path d={`M 175  ${MaxHeight + 25} l-30 30-30-30`} />
       </svg>
     </TimeLineDiv>

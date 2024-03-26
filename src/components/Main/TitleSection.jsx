@@ -8,6 +8,10 @@ const TitleContainer = styled.section`
   justify-content: center;
   align-items: center;
   position: relative;
+  @media screen and (min-width: 1024px) {
+    font-size: 3.125rem;
+    margin: 0 15%;
+  }
 `;
 
 const Figure = styled.figure`
@@ -16,6 +20,9 @@ const Figure = styled.figure`
   align-items: center;
   position: ${props => props.$position || ''};
   bottom: 1rem;
+  @media screen and (min-width: 1024px) {
+    display: none;
+  }
 `;
 
 const Icon = styled.img`
@@ -31,8 +38,13 @@ const IconFigcaption = styled.figcaption`
 function TitleSection() {
   return (
     <TitleContainer>
-      <TextGenerator text="Let's Lead The Industry" font='Goblin One' />
-      <TextGenerator text='To A Broader FIELD' font='Goblin One' />
+      <TextGenerator
+        text="Let's Lead The Industry"
+        font='Goblin One'
+        spacing='0'
+        $desktopSize='2rem'
+      />
+      <TextGenerator text='To A Broader FIELD' font='Goblin One' spacing='0' $desktopSize='2rem' />
       <Figure $position='absolute'>
         <Icon src='scrollDown.png' />
         <IconFigcaption>아래로 스크롤하세요</IconFigcaption>

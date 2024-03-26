@@ -7,7 +7,10 @@ import {NewsApi} from '../lib/Apiservice';
 import theme from '../theme';
 
 const NewsMain = styled.section`
-  height: calc(100vh - 58px - 112px);
+  min-height: calc(100vh - 106px - 58px);
+  @media screen and (min-width: 1024px) {
+    min-height: calc(100vh - 70px - 58px);
+  }
 `;
 
 const H1 = styled.h1`
@@ -18,22 +21,26 @@ const H1 = styled.h1`
 `;
 
 const ButtonWrapper = styled.div`
-  margin: 0 5%;
+  margin: 0 7.5%;
+  @media screen and (min-width: 1024px) {
+    margin: 0 15%;
+  }
 `;
 
 const TypeSelect = styled.select`
-  margin: 1rem 0 0 0;
+  margin: 1.25rem 0 0 0;
   color: black;
   appearance: none;
   font-size: 1rem;
   font-family: 'SUIT-Regular';
   font-weight: 700;
-  background: ${theme.colors.lightgray} url('Expand_down.png') no-repeat 95% / 25px 25px;
+  background: ${theme.colors.lightgray} url('down_arrow.png') no-repeat 90% 40% / 20px 20px;
   border-radius: 1rem;
   padding: 0.375rem 0 0.375rem 0.5rem;
   width: ${props => props.width || '5.75rem'};
   height: 2rem;
   z-index: 0;
+  border: none;
 `;
 
 const Option = styled.option`
@@ -45,10 +52,13 @@ const Option = styled.option`
 `;
 
 const DropdownWrapper = styled.div`
-  margin: 0 7.5%;
+  padding: 0 7.5%;
   display: flex;
   gap: 0.5rem;
   justify-content: end;
+  @media screen and (min-width: 1024px) {
+    padding: 0 15%;
+  }
 `;
 
 export default function NewsPage() {
@@ -85,6 +95,7 @@ export default function NewsPage() {
       monthByYear = [...new Set(yearFilterData.map(item => item.month))];
       setRenderData(yearFilterData);
     }
+    monthByYear = [...monthByYear].sort((a, b) => a - b);
     setSelectedMonth('선택하지않음');
     setNewsMonth(monthByYear);
   };
@@ -115,7 +126,7 @@ export default function NewsPage() {
     }
   };
 
-  function initialYearMonth(response) {
+  const initialYearMonth = response => {
     const uniqueYears = [
       ...new Set(response.map(item => item.year).filter(year => year !== 0)),
     ].sort((a, b) => b - a);
@@ -124,7 +135,7 @@ export default function NewsPage() {
     ].sort((a, b) => a - b);
     setNewsYear(uniqueYears);
     setNewsMonth(uniqueMonths);
-  }
+  };
 
   const getDataNews = async category => {
     try {
@@ -208,9 +219,7 @@ export default function NewsPage() {
         </DropdownWrapper>
       )}
       <NewsPagination
-        // newsData={selectCategory === '월간필드' ? filteredNewsData : newsData}
         newsData={selectCategory === '월간필드' ? renderData : newsData}
-        // newsData={newsData}
         category={selectCategory}
         loading={loading}
       />

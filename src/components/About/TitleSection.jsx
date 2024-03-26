@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import theme from '../../theme';
+import TextGenerator from '../TextGenerator';
 
 const TitleContainer = styled.section`
   height: 90vh;
@@ -8,11 +9,18 @@ const TitleContainer = styled.section`
   position: relative;
   margin: 0 7.5%;
   justify-content: space-around;
+  @media screen and (min-width: 1024px) {
+    margin: 0 15%;
+  }
 `;
 
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
+  @media screen and (min-width: 1280px) {
+    flex-direction: row;
+    gap: 20px;
+  }
 `;
 
 const H2 = styled.h2`
@@ -26,6 +34,10 @@ const NanumH2 = styled(H2)`
   font-family: 'Nanum Myeongjo', serif;
   line-height: 1.3;
   word-break: keep-all;
+  font-weight: 800;
+  @media screen and (min-width: 1024px) {
+    font-size: 2rem;
+  }
 `;
 
 const P = styled.p`
@@ -37,14 +49,30 @@ const P = styled.p`
   display: flex;
   flex-direction: column;
   font-weight: ${props => (props.weight ? props.weight : '')};
+  @media screen and (min-width: 1280px) {
+    font-size: 1rem;
+    justify-content: end;
+  }
 `;
 
-const GoblinP = styled(P)`
+const GoblinH3 = styled.h3`
+  word-break: keep-all;
+  margin: ${props => props.margin || '0'};
+  line-height: ${props => props.line || ''};
+  color: ${props => (props.color ? theme.colors[props.color] : '')};
+  font-size: ${props => (props.size ? props.size : '1rem')};
+  display: flex;
+  flex-direction: column;
+  font-weight: ${props => (props.weight ? props.weight : '')};
   font-family: 'Goblin One';
+  @media screen and (min-width: 1280px) {
+    min-width: 50%;
+  }
 `;
 
 const FirstAlphabet = styled.span`
   color: ${props => (props.color ? theme.colors[props.color] : '')};
+  display: inline;
 `;
 
 const Figure = styled.figure`
@@ -53,6 +81,9 @@ const Figure = styled.figure`
   align-items: center;
   position: ${props => props.position || ''};
   bottom: 1rem;
+  @media (min-width: 1280px) {
+    display: none;
+  }
 `;
 
 const Icon = styled.img`
@@ -72,29 +103,85 @@ const FlexCenter = styled.div`
   align-items: center;
 `;
 
+const Span = styled.span`
+  @media screen and (min-width: 1280px) {
+    display: inline;
+  }
+`;
+
 function TitleSection() {
   return (
     <TitleContainer>
       <NanumH2>전국 대학생 산업공학도 모임</NanumH2>
       <ContentContainer>
-        <GoblinP size='2.25rem' line='1.4'>
-          <span>
-            <FirstAlphabet color='red'>F</FirstAlphabet>uture
-          </span>
-          <span>
-            <FirstAlphabet color='yellow'>I</FirstAlphabet>ndustrial
-          </span>
-          <span>
-            <FirstAlphabet color='yellow'>E</FirstAlphabet>ngineering
-          </span>
-          <span>
-            <FirstAlphabet color='blue'>L</FirstAlphabet>eaders&
-          </span>
-          <span>
-            <FirstAlphabet color='blue'>D</FirstAlphabet>reamers
-          </span>
-        </GoblinP>
-        <P line='1.2' margin='2rem 0 0 0' size='1rem'>
+        <GoblinH3 size='2.25rem' line='1.4'>
+          <Span>
+            <FirstAlphabet color='red'>F</FirstAlphabet>
+            <TextGenerator
+              text='u t u r e'
+              margin='0'
+              align=''
+              size='2.25rem'
+              weight='100'
+              height='0'
+              spacing='-6px'
+              time='0.1'
+            />
+          </Span>
+          <Span>
+            <FirstAlphabet color='yellow'>I</FirstAlphabet>
+            <TextGenerator
+              text='n d u s t r i a l'
+              margin='0'
+              align=''
+              size='2.25rem'
+              weight='100'
+              height='0'
+              spacing='-6px'
+              time='0.1'
+            />
+          </Span>
+          <Span>
+            <FirstAlphabet color='yellow'>E</FirstAlphabet>
+            <TextGenerator
+              text='n g i n e e r i n g'
+              margin='0'
+              align=''
+              size='2.25rem'
+              weight='100'
+              height='0'
+              spacing='-6px'
+              time='0.1'
+            />
+          </Span>
+          <Span>
+            <FirstAlphabet color='blue'>L</FirstAlphabet>
+            <TextGenerator
+              text='e a d e r s &'
+              margin='0'
+              align=''
+              size='2.25rem'
+              weight='100'
+              height='0'
+              spacing='-6px'
+              time='0.1'
+            />
+          </Span>
+          <Span>
+            <FirstAlphabet color='blue'>D</FirstAlphabet>
+            <TextGenerator
+              text='r e a m e r s'
+              margin='0'
+              align=''
+              size='2.25rem'
+              weight='100'
+              height='0'
+              spacing='-6px'
+              time='0.1'
+            />
+          </Span>
+        </GoblinH3>
+        <P line='1.5' margin='2rem 0 0 0' size='1rem'>
           FIELD란, ‘Future Industrial Engineering Leaders and Dreamers’ 의 약자로, 미래의 핵심
           리더들이 될 산업공학도들이 모여 서로의 꿈과 비전, 생각 등을 공유할 수 있는 교류의 장을
           만든다는 목표 아래 모인 &apos;전국 대학생 산업공학도 모임&apos; 입니다.
