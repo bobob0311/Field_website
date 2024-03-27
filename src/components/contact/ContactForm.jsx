@@ -77,6 +77,10 @@ const SubmitButton = styled.button`
   box-shadow: 0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 const ButtonImg = styled.img`
   widht: 1.5rem;
