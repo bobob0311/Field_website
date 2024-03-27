@@ -13,7 +13,7 @@ const TimelineBlock = styled.div`
   -moz-box-pack: justify;
   justify-content: space-between;
   clear: both;
-  float: ${props => props.float || ''};
+  float: ${props => props.$float || ''};
   direction: ${props => props.direction || ''};
 `;
 
@@ -55,7 +55,7 @@ const TimelineContent = styled.div`
 
 function TimelineDetail({float, direction, firstTitle, secondTitle, year, description}) {
   return (
-    <TimelineBlock float={float} direction={direction}>
+    <TimelineBlock $float={float} direction={direction}>
       <Marker />
       <TimelineContent>
         <H3>{firstTitle}</H3>
