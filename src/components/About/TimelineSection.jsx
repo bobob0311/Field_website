@@ -20,7 +20,7 @@ const Container = styled.div`
 
 const H2 = styled.h2`
   font-size: 1.7rem;
-  margin: ${props => props.margin || '0'};
+  margin: ${props => props.$margin || '0'};
   text-align: center;
 `;
 
@@ -38,7 +38,7 @@ const MainSection = styled.section`
 function TimelineSection() {
   return (
     <MainSection>
-      <GoblinH2 margin='5rem 0'>Road of FIELD</GoblinH2>
+      <GoblinH2 $margin='5rem 0'>Road of FIELD</GoblinH2>
       <Container>
         <TimelineDetail
           float='right'
