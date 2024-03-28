@@ -29,7 +29,7 @@ function CampTimeLine() {
       <H2>Time Line</H2>
       <TimeLine data={data} height='80' />
       <Link to='https://linktr.ee/iefieldcamp'>
-        <Button label='FIELD CAMP 지원하기' animate />
+        <Button mg='3rem 0 5rem 0' label='FIELD CAMP 지원하기' animate />
       </Link>
     </Section>
   );
