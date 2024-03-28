@@ -8,6 +8,12 @@ const MenuBar = styled.header`
   position: sticky;
   top: 0;
   z-index: 100;
+  background: #141414;
+
+  @media (min-width: 1024px) {
+    display: flex;
+    justify-content: space-between;
+  }
 `;
 
 const MainHeaderWrapper = styled.div`
