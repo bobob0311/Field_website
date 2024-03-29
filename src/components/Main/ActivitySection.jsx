@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Pagination} from 'swiper/modules';
+import {Pagination, Autoplay} from 'swiper/modules';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import theme from '../../theme';
 import 'swiper/swiper-bundle.css';
@@ -29,7 +29,7 @@ const SwiperContainer = styled.div`
 const NanumH2 = styled(H2)`
   font-family: 'Nanum Myeongjo', serif;
   @media screen and (min-width: 768px) {
-    font-size: 40px;
+    font-size: 1.5rem;
   }
 `;
 
@@ -59,16 +59,17 @@ function ActivitySection() {
       <NanumH2 $margin='0 7.5% 2rem 7.5%'>실현하는 다양한 활동들</NanumH2>
       <SwiperContainer $margin='2rem 0'>
         <StyledSwiper
-          modules={[Pagination]}
+          modules={[Pagination, Autoplay]}
           centeredSlides
           pagination={{clickable: true}}
+          autoplay={{delay: 3000}}
           breakpoints={{
-            320: {
-              slidesPerView: 1.2,
-              spaceBetween: 20,
-            },
             896: {
               slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            320: {
+              slidesPerView: 1.2,
               spaceBetween: 20,
             },
           }}

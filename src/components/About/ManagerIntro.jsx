@@ -89,6 +89,8 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     order: ${props => props.order || ''};
+    justify-content: end;
+    margin-bottom: 3rem;
   }
 `;
 

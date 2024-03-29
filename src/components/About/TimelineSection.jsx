@@ -54,15 +54,16 @@ function TimelineSection() {
           direction='rtl'
           firstTitle='첫 FIELD CAMP 개최'
           year='2009'
-          description='고려대학교, 연세대학교 참여시작 매년 동부 인재 개발원의 후원을 받아 캠프 주최 및 참여
-            자체 세미나 진행 FIELD SNS 생성'
+          description='고려대학교, 연세대학교 참여시작 매년 동부 인재 개발원의 후원을 받아 캠프 주최 및 참여,
+            자체 세미나 진행, FIELD SNS 생성'
         />
 
         <TimelineDetail
           float='right'
           direction='ltr'
-          firstTitle='대안산업공학회'
+          firstTitle='대한산업공학회'
           secondTitle='산하 공식 단체 인준'
+          year='2016'
           description='전국 대학교를 대상으로 모든 산업공학도의 캠프 주최 및 참여'
         />
 

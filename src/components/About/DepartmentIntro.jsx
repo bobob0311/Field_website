@@ -24,6 +24,7 @@ const Card = styled.article`
   @media screen and (min-width: 1280px) {
     width: 56%;
     padding: 0;
+    margin: 0;
   }
 `;
 
@@ -47,6 +48,9 @@ const Dl = styled.dl`
   flex-direction: column;
   gap: 0.5rem;
   margin: 1rem 0;
+  @media screen and (min-width: 1280px) {
+    margin: 0;
+  }
 `;
 
 const CardUl = styled.ul`
@@ -54,7 +58,7 @@ const CardUl = styled.ul`
   flex-direction: column;
   gap: 2rem;
   @media screen and (min-width: 1280px) {
-    gap: 0;
+    gap: 1rem;
   }
 `;
 
@@ -98,6 +102,7 @@ const CardHashTagUl = styled.ul`
   @media screen and (min-width: 1280px) {
     flex-direction: row;
     gap: 0.2rem;
+    margin: 2.5rem 0 0 0;
   }
 `;
 
@@ -120,7 +125,7 @@ const ActivityUl = styled.ul`
   word-break: keep-all;
   @media screen and (min-width: 1280px) {
     gap: 1rem;
-    margin: 1rem 0;
+    margin: 1rem 0 0 0;
     height: 224px;
     justify-content: center;
   }
@@ -151,7 +156,7 @@ const Button = styled.button`
   `}
   @media screen and (min-width: 1280px) {
     font-size: 1rem;
-    width: 20%;
+    width: 25%;
   }
 `;
 
@@ -177,7 +182,7 @@ const H3 = styled.h3`
 const CardContainer = styled.div`
   display: ${props => (props.$visible ? 'block' : 'none')};
   @media screen and (min-width: 1280px) {
-    margin: 2rem 0 0 0;
+    margin: 3rem 0;
   }
 `;
 
