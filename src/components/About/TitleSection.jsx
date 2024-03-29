@@ -114,7 +114,7 @@ function TitleSection() {
     <TitleContainer>
       <NanumH2>전국 대학생 산업공학도 모임</NanumH2>
       <ContentContainer>
-        <GoblinH3 size='2.25rem' $line='1.4'>
+        <GoblinH3 size='2.25rem' $line='2'>
           <Span>
             <FirstAlphabet color='red'>F</FirstAlphabet>
             <TextGenerator
