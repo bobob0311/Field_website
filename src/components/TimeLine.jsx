@@ -68,6 +68,7 @@ export default function TimeLine({data, height}) {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
   const arrayLength = dataLabel.reduce(
     (dataLengthArray, label) => {
       dataLengthArray.push(
