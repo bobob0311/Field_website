@@ -71,6 +71,7 @@ const ModalButton = styled.button`
   color: ${theme.colors.white};
   margin: 1.2rem 0 0 0;
   font-weight: 600;
+  cursor: pointer;
 `;
 
 const ModalP = styled.p`
