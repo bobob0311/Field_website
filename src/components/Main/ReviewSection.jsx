@@ -16,7 +16,7 @@ const GoblinH2 = styled(H2)`
   font-family: 'Goblin One';
   font-size: ${props => props.$size || '1.875rem'};
   @media screen and (min-width: 769px) {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 `;
 
@@ -55,7 +55,7 @@ const Card = styled.article`
   }
   @media screen and (min-width: 1024px) {
     width: 550px;
-    height: 500px;
+    height: 380px;
   }
 `;
 

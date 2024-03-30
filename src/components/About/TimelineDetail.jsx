@@ -16,6 +16,7 @@ const TimelineBlock = styled.div`
   clear: both;
   float: ${props => props.$float || ''};
   direction: ${props => props.direction || ''};
+  margin-bottom: 2.5rem;
 `;
 
 const H3 = styled.h3`
