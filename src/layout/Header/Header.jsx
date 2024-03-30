@@ -26,7 +26,7 @@ const MainHeaderWrapper = styled.div`
   justify-content: space-between;
 
   @media (min-width: 1024px) {
-    padding: 0 15%;
+    padding: 0 0 0 15%;
   }
 `;
 
