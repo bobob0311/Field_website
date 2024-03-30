@@ -9,12 +9,14 @@ const TextGenerateContainer = styled.span`
   font-weight: ${props => props.$weight || 'bold'}; // 폰트 굵기를 설정합니다.
   text-align: ${props => props.$align || 'center'}; // 텍스트를 가운데 정렬합니다.
   line-height: ${props => props.$height || '2'};
-  font-family: 'Goblin One', cursive; // 폰트를 설정합니다.
-  margin: ${props => props.$margin || '0 0.3rem'};
+  font-family: ${props => props.$fontFamily || ''};
+  margin: ${props => props.$margin || ''};
   letter-spacing: ${props => props.$spacing || ''};
   text-rendering: optimizeSpeed;
   @media screen and (min-width: 1024px) {
     font-size: ${props => props.$desktopSize || ''};
+    align-self: ${props => props.$justify || ''};
+  }
 `;
 
 // 텍스트 애니메이션 예시를 담당하는 함수형 컴포넌트를 정의합니다.
@@ -22,12 +24,14 @@ function TextGenerator({
   text,
   size,
   align,
-  margin,
+  $margin,
   weight,
   height,
   spacing,
   time = 0.3,
   $desktopSize,
+  $justify,
+  $fontFamily,
 }) {
   const animationControl = useAnimation(); // 애니메이션을 제어하는 useAnimation 훅을 사용합니다.
   const wordsArray = text.split(' '); // 주어진 텍스트를 공백을 기준으로 분할하여 단어 배열로 만듭니다.
@@ -46,11 +50,13 @@ function TextGenerator({
     <TextGenerateContainer
       $size={size}
       $align={align}
-      $margin={margin}
+      $margin={$margin}
       $weight={weight}
       $height={height}
       $spacing={spacing}
       $desktopSize={$desktopSize}
+      $justify={$justify}
+      $fontFamily={$fontFamily}
     >
       <AnimatePresence>
         {' '}
@@ -68,6 +74,7 @@ function TextGenerator({
         >
           {wordsArray.map((word, idx) => (
             <motion.span
+              $justify={$justify}
               style={{
                 // wordsArray의 마지막 요소인 경우 패딩 적용
                 paddingRight: idx === wordsArray.length - 1 ? '10px' : '',

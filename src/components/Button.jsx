@@ -16,7 +16,7 @@ const WhiteButton = styled.button`
   color: ${theme.colors.black};
   width: 8rem;
   padding: 0.75rem;
-  margin-bottom: 1.25rem;
+  margin: ${props => props.$mg || ''};
   border: none;
   border-radius: 5rem;
   font-family: SUIT;
@@ -30,18 +30,32 @@ const WhiteButton = styled.button`
       animation: ${buttonAnimation} 3s infinite;
     `}
   @media screen and (min-width: 1024px) {
-    font-size: 22px;
-    width: 200px;
-    height: 80px;
-    padding: 0;
+    font-size: 18px;
+    width: 160px;
+    height: 70px;
+    padding: 0px;
+    &:hover {
+      background: #8c8c8c;
+      transition: all 0.5s ease-out;
+    }
   }
   order: ${props => props.$order || ''};
 `;
 
-function Button({label, onClick, animate, order = ''}) {
+function Button({mg, label, onClick, animate, order = ''}) {
+  const isMultiLine = label.includes('\n');
+  const splitLabel = label.split('\n');
+
   return (
-    <WhiteButton $animate={animate} onClick={onClick} $order={order}>
-      {label}
+    <WhiteButton $mg={mg} $animate={animate} onClick={onClick} $order={order}>
+      {isMultiLine
+        ? splitLabel.map((line, index) => (
+            <React.Fragment key={line}>
+              {line}
+              {index < splitLabel.length - 1 ? <br /> : ''}
+            </React.Fragment>
+          ))
+        : label}
     </WhiteButton>
   );
 }

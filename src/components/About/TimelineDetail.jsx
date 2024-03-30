@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const TimelineBlock = styled.div`
+  position: relative;
   width: -webkit-calc(50% + 12px);
   width: -moz-calc(50% + 12px);
   width: calc(50% + 12px);
@@ -15,6 +16,7 @@ const TimelineBlock = styled.div`
   clear: both;
   float: ${props => props.$float || ''};
   direction: ${props => props.direction || ''};
+  margin-bottom: 2.5rem;
 `;
 
 const H3 = styled.h3`
@@ -38,8 +40,9 @@ const P = styled.p`
 `;
 
 const Marker = styled.div`
-  width: 22px;
-  height: 16px;
+  position: absolute;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   border: 2px solid #f5f7fa;
   background: #4fc1e9;
@@ -49,7 +52,7 @@ const Marker = styled.div`
 
 const TimelineContent = styled.div`
   width: calc(100% - 24px);
-  padding: 0 15px;
+  padding: 0 36px;
   color: white;
 `;
 

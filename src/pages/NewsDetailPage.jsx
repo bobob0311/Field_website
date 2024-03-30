@@ -38,6 +38,7 @@ const P = styled.p`
   font-weight: 500;
   line-height: 1.5;
   word-break: keep-all;
+  white-space: pre-wrap;
   @media screen and (min-width: 1024px) {
     font-size: 21px;
   }
@@ -75,7 +76,8 @@ const Icon = styled.img`
   transform: ${props => props.$transform || ''};
 `;
 const DateP = styled.p`
-  margin: 0 0 2rem 0;
+  text-align: end;
+  margin: 1rem 0;
   font-size: 0.75rem;
   font-weight: 900;
 `;
@@ -160,6 +162,7 @@ function NewsDetailPage() {
       ) : (
         <>
           <H2>{detailNewsData.title}</H2>
+          <DateP>{detailNewsData.created ? detailNewsData.created.slice(0, 10) : ''}</DateP>
           <StyledSwiper modules={[Pagination]} centeredSlides='true' pagination={{clickable: true}}>
             {detailNewsData.photo.length > 0 &&
               detailNewsData.photo.map(item => (
@@ -183,7 +186,6 @@ function NewsDetailPage() {
             ) : (
               <div style={{flex: 1}} />
             )}
-            <DateP>일자: {detailNewsData.created ? detailNewsData.created.slice(0, 10) : ''}</DateP>
           </Wrapper>{' '}
         </>
       )}

@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import styled from 'styled-components';
 import theme from '../../theme';
-import {BigContentWrapper} from './UI/ContentWrapper';
+import ContentWrapper from './UI/ContentWrapper';
 
 const SubTitle = styled.h2`
   font-size: 1.5rem;
@@ -20,6 +20,7 @@ const Box = styled.button`
   width: 100%;
   max-height: ${({$expanded}) => ($expanded === 'true' ? '8rem' : '4rem')};
   transition: max-height 0.5s ease;
+  cursor: pointer;
   div img {
     transform: rotate(${({$expanded}) => ($expanded === 'true' ? '0deg' : '180deg')});
     transition: transform 0.3s ease;
@@ -92,7 +93,7 @@ function QuestionBox({qes, ans}) {
         <P $fontSize='0.875rem' $fontWeight='900'>
           {qes}
         </P>
-        <DownImg src='Expand_down.png' />
+        <DownImg src='Expand_down.png' alt='DownArrow' />
       </QueBox>
       {toggle && <P>{ans}</P>}
     </Box>
@@ -101,11 +102,11 @@ function QuestionBox({qes, ans}) {
 
 export default function Question() {
   return (
-    <BigContentWrapper>
+    <ContentWrapper>
       <SubTitle>자주 묻는 질문</SubTitle>
       {QUSANS.map(item => (
         <QuestionBox key={item.id} qes={item.qes} ans={item.ans} />
       ))}
-    </BigContentWrapper>
+    </ContentWrapper>
   );
 }
