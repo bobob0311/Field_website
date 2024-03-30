@@ -141,8 +141,9 @@ function CampTopicSection() {
             )}
             <Button
               onClick={() => toggleImageDisplay(index)}
-              label={expandedIndex === index ? '가리기' : `'주제${index + 1}'에 대해 더 알아보기`}
+              label={expandedIndex === index ? '가리기' : `'주제${index + 1}' \n 더 알아보기`}
               order='3'
+              mg='0 0 2rem 0'
             />
           </Figure>
         ))}

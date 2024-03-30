@@ -31,13 +31,13 @@ const TypeSelect = styled.select`
   margin: 1.25rem 0 0 0;
   color: black;
   appearance: none;
-  font-size: 1rem;
+  font-size: 0.75rem;
   font-family: 'SUIT-Regular';
   font-weight: 700;
-  background: ${theme.colors.lightgray} url('down_arrow.png') no-repeat 90% 40% / 20px 20px;
+  background: ${theme.colors.lightgray} url('/down_arrow.png') no-repeat 90% 45% / 16px 16px;
   border-radius: 1rem;
   padding: 0.375rem 0 0.375rem 0.5rem;
-  width: ${props => props.width || '5.75rem'};
+  width: ${props => props.width || '5rem'};
   height: 2rem;
   z-index: 0;
   border: none;
@@ -48,7 +48,7 @@ const Option = styled.option`
   appearance: none;
   font-family: 'SUIT-Regular';
   font-weight: 900;
-  font-size: 1rem;
+  font-size: 0.75rem;
 `;
 
 const DropdownWrapper = styled.div`
@@ -206,7 +206,7 @@ export default function NewsPage() {
             value={selectedMonth}
             name='Type'
             autoComplete='off'
-            width='4.25rem'
+            width='3rem'
             onChange={handleMonthChange}
           >
             <Option value='선택하지않음'>월</Option>
