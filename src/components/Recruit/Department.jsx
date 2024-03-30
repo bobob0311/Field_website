@@ -76,6 +76,7 @@ const DepartmentButton = styled.button`
   background: ${theme.colors.black};
   color: ${theme.colors.white};
   font-weight: 600;
+  cursor: pointer;
 
   @media (min-width: 768px) {
     padding: 0.5rem 1.3rem;
