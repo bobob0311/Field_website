@@ -20,6 +20,7 @@ const Box = styled.button`
   width: 100%;
   max-height: ${({$expanded}) => ($expanded === 'true' ? '8rem' : '4rem')};
   transition: max-height 0.5s ease;
+  cursor: pointer;
   div img {
     transform: rotate(${({$expanded}) => ($expanded === 'true' ? '0deg' : '180deg')});
     transition: transform 0.3s ease;

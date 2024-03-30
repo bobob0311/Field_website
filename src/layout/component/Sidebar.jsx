@@ -59,6 +59,7 @@ const BaseIconButton = styled.button`
   border-radius: 50%;
   margin: 5px 0;
   padding: 0;
+  cursor: pointer;
 `;
 
 const SNSIcon = styled.a`
