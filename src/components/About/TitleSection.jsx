@@ -166,11 +166,7 @@ function TitleSection() {
             />
           </Span>
         </GoblinH3>
-        {/* <P $line='1.5' $margin='2rem 0 0 0' size='1rem'>
-          FIELD란, ‘Future Industrial Engineering Leaders and Dreamers’ 의 약자로, 미래의 핵심
-          리더들이 될 산업공학도들이 모여 서로의 꿈과 비전, 생각 등을 공유할 수 있는 교류의 장을
-          만든다는 목표 아래 모인 &apos;전국 대학생 산업공학도 모임&apos; 입니다.
-        </P> */}
+
         <TextGenerator
           $size='1rem'
           $height='1.5'
@@ -178,9 +174,10 @@ function TitleSection() {
           text="FIELD란, ‘Future Industrial Engineering Leaders and Dreamers’ 의 약자로, 미래의 핵심
           리더들이 될 산업공학도들이 모여 서로의 꿈과 비전, 생각 등을 공유할 수 있는 교류의 장을
           만든다는 목표 아래 모인 '전국 대학생 산업공학도 모임' 입니다."
-          $desktopSize='1rem'
+          $desktopSize='0.8rem'
           time='0.03'
           $justify='end'
+          $desktopAlign='left'
         />
       </ContentContainer>
       <FlexCenter>

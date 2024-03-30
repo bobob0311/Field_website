@@ -16,6 +16,7 @@ const TextGenerateContainer = styled.span`
   @media screen and (min-width: 1024px) {
     font-size: ${props => props.$desktopSize || ''};
     align-self: ${props => props.$justify || ''};
+    text-align: ${props => props.$desktopAlign || ''};
   }
 `;
 
@@ -32,6 +33,7 @@ function TextGenerator({
   $desktopSize,
   $justify,
   $fontFamily,
+  $desktopAlign,
 }) {
   const animationControl = useAnimation(); // 애니메이션을 제어하는 useAnimation 훅을 사용합니다.
   const wordsArray = text.split(' '); // 주어진 텍스트를 공백을 기준으로 분할하여 단어 배열로 만듭니다.
@@ -57,6 +59,7 @@ function TextGenerator({
       $desktopSize={$desktopSize}
       $justify={$justify}
       $fontFamily={$fontFamily}
+      $desktopAlign={$desktopAlign}
     >
       <AnimatePresence>
         {' '}
