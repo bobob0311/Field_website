@@ -40,13 +40,18 @@ function TitleSection() {
     <TitleContainer>
       <TextGenerator
         text="Let's Lead The Industry"
-        font='Goblin One'
+        $fontFamily='Goblin One, cursive'
         spacing='0'
         $desktopSize='2rem'
       />
-      <TextGenerator text='To A Broader FIELD' font='Goblin One' spacing='0' $desktopSize='2rem' />
+      <TextGenerator
+        text='To A Broader FIELD'
+        $fontFamily='Goblin One, cursive'
+        spacing='0'
+        $desktopSize='2rem'
+      />
       <Figure $position='absolute'>
-        <Icon src='scrollDown.png' />
+        <Icon src='transfer-down-light.svg' />
         <IconFigcaption>아래로 스크롤하세요</IconFigcaption>
       </Figure>
     </TitleContainer>

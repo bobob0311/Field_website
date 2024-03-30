@@ -4,7 +4,7 @@ import theme from '../../theme';
 
 const H2 = styled.h2`
   font-size: 1.875rem;
-  margin: ${props => props.margin || '0'};
+  margin: ${props => props.$margin || '0'};
   text-align: center;
 `;
 
@@ -20,10 +20,11 @@ const Card = styled.article`
   display: flex;
   flex-direction: column;
   padding: 0 1rem;
-  margin: ${props => props.margin || '0'};
+  margin: ${props => props.$margin || '0'};
   @media screen and (min-width: 1280px) {
-    width: 60%;
+    width: 56%;
     padding: 0;
+    margin: 0;
   }
 `;
 
@@ -47,6 +48,9 @@ const Dl = styled.dl`
   flex-direction: column;
   gap: 0.5rem;
   margin: 1rem 0;
+  @media screen and (min-width: 1280px) {
+    margin: 0;
+  }
 `;
 
 const CardUl = styled.ul`
@@ -54,13 +58,13 @@ const CardUl = styled.ul`
   flex-direction: column;
   gap: 2rem;
   @media screen and (min-width: 1280px) {
-    gap: 0;
+    gap: 1rem;
   }
 `;
 
 const CardKeyWordLi = styled.li`
   padding: 0;
-  margin: ${props => props.margin || '0'};
+  margin: ${props => props.$margin || '0'};
   @media screen and (min-width: 1280px) {
     margin: ${props => props.$desktopMargin || ''};
   }
@@ -89,7 +93,7 @@ const CardKeyWordSpan = styled.span`
 `;
 
 const CardHashTagUl = styled.ul`
-  margin: ${props => props.margin || '0'};
+  margin: ${props => props.$margin || '0'};
   display: flex;
   flex-direction: column;
   color: ${theme.colors.yellow};
@@ -98,6 +102,7 @@ const CardHashTagUl = styled.ul`
   @media screen and (min-width: 1280px) {
     flex-direction: row;
     gap: 0.2rem;
+    margin: 2.5rem 0 0 0;
   }
 `;
 
@@ -111,7 +116,7 @@ const CardHashTagLi = styled.li`
 const ActivityUl = styled.ul`
   display: flex;
   flex-direction: column;
-  margin: ${props => props.margin || '0'};
+  margin: ${props => props.$margin || '0'};
   gap: 0.5rem;
   border: 2px solid white;
   border-radius: 1rem;
@@ -120,7 +125,7 @@ const ActivityUl = styled.ul`
   word-break: keep-all;
   @media screen and (min-width: 1280px) {
     gap: 1rem;
-    margin: 1rem 0;
+    margin: 1rem 0 0 0;
     height: 224px;
     justify-content: center;
   }
@@ -151,7 +156,7 @@ const Button = styled.button`
   `}
   @media screen and (min-width: 1280px) {
     font-size: 1rem;
-    width: 20%;
+    width: 25%;
   }
 `;
 
@@ -167,18 +172,17 @@ const ButtonWrapper = styled.div`
 const H3 = styled.h3`
   align-items: center;
   font-size: 1.25rem;
-  width: 100%;
   text-align: center;
   border: 2px solid white;
-  margin: ${props => props.margin || '0'};
+  margin: ${props => props.$margin || '0'};
   border-radius: 1rem;
   padding: 1rem 0;
 `;
 
 const CardContainer = styled.div`
-  display: ${props => (props.visible ? 'block' : 'none')};
+  display: ${props => (props.$visible ? 'block' : 'none')};
   @media screen and (min-width: 1280px) {
-    margin: 2rem 0 0 0;
+    margin: 3rem 0;
   }
 `;
 
@@ -191,7 +195,8 @@ const FlexRow = styled.div`
   @media screen and (min-width: 1280px) {
     display: flex;
     flex-direction: row;
-    gap: 2%;
+    justify-content: space-between;
+    gap: 4%;
   }
 `;
 
@@ -237,7 +242,7 @@ function DepartmentIntro() {
   }, []);
   return (
     <>
-      <NanumH2 margin='3rem 0'>부서소개</NanumH2>
+      <NanumH2 $margin='3rem 0'>부서소개</NanumH2>
       <ButtonWrapper>
         {category.map(item => (
           <Button
@@ -250,9 +255,9 @@ function DepartmentIntro() {
         ))}
       </ButtonWrapper>
 
-      <CardContainer visible={(selectCategory === '기획부').toString()}>
+      <CardContainer $visible={selectCategory === '기획부'}>
         <FlexRow>
-          <Card margin='1rem 0' ref={cardRef}>
+          <Card $margin='1rem 0' ref={cardRef}>
             <Dl>
               <Dt>기획부</Dt>
               <Dd>
@@ -260,17 +265,17 @@ function DepartmentIntro() {
               </Dd>
             </Dl>
             <CardUl>
-              <CardKeyWordLi margin='0 0 0 35%' $desktopMargin='0 0 0 50%'>
+              <CardKeyWordLi $margin='0 0 0 35%' $desktopMargin='0 0 0 50%'>
                 {animate && <CardKeyWordSpan color='255, 188, 19'>대인관계능력</CardKeyWordSpan>}
               </CardKeyWordLi>
-              <CardKeyWordLi margin='0 0 0 5%'>
+              <CardKeyWordLi $margin='0 0 0 5%'>
                 {animate && <CardKeyWordSpan color='245, 215, 57'>리더십</CardKeyWordSpan>}
               </CardKeyWordLi>
-              <CardKeyWordLi margin='0 0 0 35%'>
+              <CardKeyWordLi $margin='0 0 0 35%'>
                 {animate && <CardKeyWordSpan color='255, 134, 46'>창의력</CardKeyWordSpan>}
               </CardKeyWordLi>
             </CardUl>
-            <CardHashTagUl margin='2rem 0'>
+            <CardHashTagUl $margin='2rem 0'>
               <CardHashTagLi>#FIELD인싸</CardHashTagLi>
               <CardHashTagLi>#FIELD에너지</CardHashTagLi>
               <CardHashTagLi>#즐거움이공존하는이곳</CardHashTagLi>
@@ -283,7 +288,7 @@ function DepartmentIntro() {
                 <Span>Planning Department</Span>
               </FlexCenter>
             </H3>
-            <ActivityUl margin='1rem 0'>
+            <ActivityUl $margin='1rem 0'>
               <ActivityLi>- FIELD 유튜브 콘텐츠 기획 및 촬영</ActivityLi>
               <ActivityLi>- FIELD CAMP 레크레이션</ActivityLi>
               <ActivityLi>- 산공인의 밤 기획 및 총괄</ActivityLi>
@@ -293,9 +298,9 @@ function DepartmentIntro() {
         </FlexRow>
       </CardContainer>
 
-      <CardContainer visible={(selectCategory === '대외협력부').toString()}>
+      <CardContainer $visible={selectCategory === '대외협력부'}>
         <FlexRow>
-          <Card margin='1rem 0'>
+          <Card $margin='1rem 0'>
             <Dl>
               <Dt>대외협력부</Dt>
               <Dd>
@@ -304,17 +309,17 @@ function DepartmentIntro() {
               </Dd>
             </Dl>
             <CardUl>
-              <CardKeyWordLi margin='0 0 0 5%'>
+              <CardKeyWordLi $margin='0 0 0 5%'>
                 <CardKeyWordSpan color='19, 99, 255'>말하기능력</CardKeyWordSpan>
               </CardKeyWordLi>
-              <CardKeyWordLi margin='0 0 0 50%' $desktopMargin='0 0 0 60%'>
+              <CardKeyWordLi $margin='0 0 0 50%' $desktopMargin='0 0 0 60%'>
                 <CardKeyWordSpan color='99, 202, 247'>소통능력</CardKeyWordSpan>
               </CardKeyWordLi>
-              <CardKeyWordLi margin='0 0 0 15%' $desktopMargin='0 0 0 25%'>
+              <CardKeyWordLi $margin='0 0 0 15%' $desktopMargin='0 0 0 25%'>
                 <CardKeyWordSpan color='30, 154, 244'>친화력</CardKeyWordSpan>
               </CardKeyWordLi>
             </CardUl>
-            <CardHashTagUl margin='2rem 0'>
+            <CardHashTagUl $margin='2rem 0'>
               <CardHashTagLi>#FIELD연결고리</CardHashTagLi>
               <CardHashTagLi>#FIELD의심장</CardHashTagLi>
               <CardHashTagLi>#소통과화합이중시되는곳</CardHashTagLi>
@@ -327,7 +332,7 @@ function DepartmentIntro() {
                 <Span>External Cooperation Department</Span>
               </FlexCenter>
             </H3>
-            <ActivityUl margin='2rem 0'>
+            <ActivityUl $margin='2rem 0'>
               <ActivityLi>- 기업 컨텍 및 대외업무 총괄</ActivityLi>
               <ActivityLi>- 고교 산업공학과 진로지도 강연</ActivityLi>
               <ActivityLi>- 산업공학과 출신 기업인 인터뷰</ActivityLi>
@@ -337,9 +342,9 @@ function DepartmentIntro() {
         </FlexRow>
       </CardContainer>
 
-      <CardContainer visible={(selectCategory === '컴페티션부').toString()}>
+      <CardContainer $visible={selectCategory === '컴페티션부'}>
         <FlexRow>
-          <Card margin='1rem 0'>
+          <Card $margin='1rem 0'>
             <Dl>
               <Dt>컴페티션부</Dt>
               <Dd>
@@ -348,17 +353,17 @@ function DepartmentIntro() {
               </Dd>
             </Dl>
             <CardUl>
-              <CardKeyWordLi margin='0 0 0 55%'>
+              <CardKeyWordLi $margin='0 0 0 55%'>
                 <CardKeyWordSpan color='192, 255, 162'>봉사심</CardKeyWordSpan>
               </CardKeyWordLi>
-              <CardKeyWordLi margin='0 0 0 5%'>
+              <CardKeyWordLi $margin='0 0 0 5%'>
                 <CardKeyWordSpan color='42, 284, 108'>열정</CardKeyWordSpan>
               </CardKeyWordLi>
-              <CardKeyWordLi margin='0 0 0 30%'>
+              <CardKeyWordLi $margin='0 0 0 30%'>
                 <CardKeyWordSpan color='30, 244, 52'>자기주장력</CardKeyWordSpan>
               </CardKeyWordLi>
             </CardUl>
-            <CardHashTagUl margin='2rem 0'>
+            <CardHashTagUl $margin='2rem 0'>
               <CardHashTagLi>#FIELD열정맨</CardHashTagLi>
               <CardHashTagLi>#FIELD브레인</CardHashTagLi>
               <CardHashTagLi>#지식과열정이융합되는곳</CardHashTagLi>
@@ -371,7 +376,7 @@ function DepartmentIntro() {
                 <Span>Competition Department</Span>
               </FlexCenter>
             </H3>
-            <ActivityUl margin='2rem 0'>
+            <ActivityUl $margin='2rem 0'>
               <ActivityLi>- FIELD 전체 회의 세미나</ActivityLi>
               <ActivityLi>- FIELD 스터디 주관</ActivityLi>
               <ActivityLi>- FIELD 내,외부 학술 교류</ActivityLi>
@@ -382,25 +387,25 @@ function DepartmentIntro() {
         </FlexRow>
       </CardContainer>
 
-      <CardContainer visible={(selectCategory === '홍보부').toString()}>
+      <CardContainer $visible={selectCategory === '홍보부'}>
         <FlexRow>
-          <Card margin='1rem 0'>
+          <Card $margin='1rem 0'>
             <Dl>
               <Dt>홍보부</Dt>
               <Dd>FIELD와 산업공학을 알리는 전반적인 홍보물을 기획하고 제작하는 부서</Dd>
             </Dl>
             <CardUl>
-              <CardKeyWordLi margin='0 0 0 5%'>
+              <CardKeyWordLi $margin='0 0 0 5%'>
                 <CardKeyWordSpan color='180, 19, 255'>팀워크</CardKeyWordSpan>
               </CardKeyWordLi>
-              <CardKeyWordLi margin='0 0 0 60%'>
+              <CardKeyWordLi $margin='0 0 0 60%'>
                 <CardKeyWordSpan color='244, 99, 247'>열정</CardKeyWordSpan>
               </CardKeyWordLi>
-              <CardKeyWordLi margin='0 0 0 25%'>
+              <CardKeyWordLi $margin='0 0 0 25%'>
                 <CardKeyWordSpan color='251, 76, 139'>창의성</CardKeyWordSpan>
               </CardKeyWordLi>
             </CardUl>
-            <CardHashTagUl margin='2rem 0'>
+            <CardHashTagUl $margin='2rem 0'>
               <CardHashTagLi>#FIELD알리미</CardHashTagLi>
               <CardHashTagLi>#FIELD소통창구</CardHashTagLi>
               <CardHashTagLi>#창의와개성이표출되는곳</CardHashTagLi>
@@ -413,7 +418,7 @@ function DepartmentIntro() {
                 <Span>Public Relation Department</Span>
               </FlexCenter>
             </H3>
-            <ActivityUl margin='2rem 0'>
+            <ActivityUl $margin='2rem 0'>
               <ActivityLi>- FIELD 홍보 카드뉴스 제작</ActivityLi>
               <ActivityLi>- 산업공학 홍보 카드뉴스 제작</ActivityLi>
               <ActivityLi>- FIELD CAMP 홍보물 제작</ActivityLi>

@@ -34,6 +34,10 @@ const WhiteButton = styled.button`
     width: 160px;
     height: 70px;
     padding: 0px;
+    &:hover {
+      background: #8c8c8c;
+      transition: all 0.5s ease-out;
+    }
   }
   order: ${props => props.$order || ''};
 `;

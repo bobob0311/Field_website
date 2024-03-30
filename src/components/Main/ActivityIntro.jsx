@@ -14,7 +14,7 @@ const P = styled.p`
     margin: 6rem 0 0 0;
   }
   @media screen and (min-width: 896px) {
-    margin: 4rem 0 0 0;
+    margin: 7rem 0 0 0;
     font-size: 18px;
   }
 `;
@@ -52,7 +52,7 @@ const CardTitle = styled(H3)`
   padding: 0.3rem 1.5rem;
   font-weight: 700;
   @media screen and (min-width: 896px) {
-    font-size: 30px;
+    font-size: 1rem;
   }
 `;
 

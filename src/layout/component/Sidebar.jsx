@@ -59,6 +59,7 @@ const BaseIconButton = styled.button`
   border-radius: 50%;
   margin: 5px 0;
   padding: 0;
+  cursor: pointer;
 `;
 
 const SNSIcon = styled.a`
@@ -117,7 +118,7 @@ export default function SideBar() {
           />
         </>
       )}
-      <BaseIconButton>
+      <BaseIconButton aria-label='sideBarButton'>
         <BaseIcon
           $toggle={toggle ? 'true' : undefined}
           xmlns='http://www.w3.org/2000/svg'

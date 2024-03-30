@@ -25,7 +25,7 @@ const ContentContainer = styled.div`
 
 const H2 = styled.h2`
   font-size: 1.7rem;
-  margin: ${props => props.margin || '0'};
+  margin: ${props => props.$margin || '0'};
   text-align: center;
 `;
 
@@ -40,30 +40,15 @@ const NanumH2 = styled(H2)`
   }
 `;
 
-const P = styled.p`
-  word-break: keep-all;
-  margin: ${props => props.margin || '0'};
-  line-height: ${props => props.line || ''};
-  color: ${props => (props.color ? theme.colors[props.color] : '')};
-  font-size: ${props => (props.size ? props.size : '1rem')};
-  display: flex;
-  flex-direction: column;
-  font-weight: ${props => (props.weight ? props.weight : '')};
-  @media screen and (min-width: 1280px) {
-    font-size: 1rem;
-    justify-content: end;
-  }
-`;
-
 const GoblinH3 = styled.h3`
   word-break: keep-all;
-  margin: ${props => props.margin || '0'};
-  line-height: ${props => props.line || ''};
+  margin: ${props => props.$margin || '0'};
+  line-height: ${props => props.$line || ''};
   color: ${props => (props.color ? theme.colors[props.color] : '')};
   font-size: ${props => (props.size ? props.size : '1rem')};
   display: flex;
   flex-direction: column;
-  font-weight: ${props => (props.weight ? props.weight : '')};
+  font-weight: ${props => (props.$weight ? props.$weight : '')};
   font-family: 'Goblin One';
   @media screen and (min-width: 1280px) {
     min-width: 50%;
@@ -79,7 +64,7 @@ const Figure = styled.figure`
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: ${props => props.position || ''};
+  position: ${props => props.$position || ''};
   bottom: 1rem;
   @media (min-width: 1280px) {
     display: none;
@@ -114,15 +99,15 @@ function TitleSection() {
     <TitleContainer>
       <NanumH2>전국 대학생 산업공학도 모임</NanumH2>
       <ContentContainer>
-        <GoblinH3 size='2.25rem' line='1.4'>
+        <GoblinH3 size='2.25rem' $line='1.4'>
           <Span>
             <FirstAlphabet color='red'>F</FirstAlphabet>
             <TextGenerator
               text='u t u r e'
-              margin='0'
+              $margin='0'
               align=''
               size='2.25rem'
-              weight='100'
+              $weight='100'
               height='0'
               spacing='-6px'
               time='0.1'
@@ -132,10 +117,10 @@ function TitleSection() {
             <FirstAlphabet color='yellow'>I</FirstAlphabet>
             <TextGenerator
               text='n d u s t r i a l'
-              margin='0'
+              $margin='0'
               align=''
               size='2.25rem'
-              weight='100'
+              $weight='100'
               height='0'
               spacing='-6px'
               time='0.1'
@@ -145,10 +130,10 @@ function TitleSection() {
             <FirstAlphabet color='yellow'>E</FirstAlphabet>
             <TextGenerator
               text='n g i n e e r i n g'
-              margin='0'
+              $margin='0'
               align=''
               size='2.25rem'
-              weight='100'
+              $weight='100'
               height='0'
               spacing='-6px'
               time='0.1'
@@ -158,10 +143,10 @@ function TitleSection() {
             <FirstAlphabet color='blue'>L</FirstAlphabet>
             <TextGenerator
               text='e a d e r s &'
-              margin='0'
+              $margin='0'
               align=''
               size='2.25rem'
-              weight='100'
+              $weight='100'
               height='0'
               spacing='-6px'
               time='0.1'
@@ -171,25 +156,36 @@ function TitleSection() {
             <FirstAlphabet color='blue'>D</FirstAlphabet>
             <TextGenerator
               text='r e a m e r s'
-              margin='0'
+              $margin='0'
               align=''
               size='2.25rem'
-              weight='100'
+              $weight='100'
               height='0'
               spacing='-6px'
               time='0.1'
             />
           </Span>
         </GoblinH3>
-        <P line='1.5' margin='2rem 0 0 0' size='1rem'>
+        {/* <P $line='1.5' $margin='2rem 0 0 0' size='1rem'>
           FIELD란, ‘Future Industrial Engineering Leaders and Dreamers’ 의 약자로, 미래의 핵심
           리더들이 될 산업공학도들이 모여 서로의 꿈과 비전, 생각 등을 공유할 수 있는 교류의 장을
           만든다는 목표 아래 모인 &apos;전국 대학생 산업공학도 모임&apos; 입니다.
-        </P>
+        </P> */}
+        <TextGenerator
+          $size='1rem'
+          $height='1.5'
+          $margin='2rem 0 0 0'
+          text="FIELD란, ‘Future Industrial Engineering Leaders and Dreamers’ 의 약자로, 미래의 핵심
+          리더들이 될 산업공학도들이 모여 서로의 꿈과 비전, 생각 등을 공유할 수 있는 교류의 장을
+          만든다는 목표 아래 모인 '전국 대학생 산업공학도 모임' 입니다."
+          $desktopSize='1rem'
+          time='0.03'
+          $justify='end'
+        />
       </ContentContainer>
       <FlexCenter>
-        <Figure position='absolute'>
-          <Icon src='/scrollDown.png' />
+        <Figure $position='absolute'>
+          <Icon src='transfer-down-light.svg' />
           <IconFigcaption>아래로 스크롤하세요</IconFigcaption>
         </Figure>
       </FlexCenter>
