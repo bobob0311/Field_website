@@ -7,9 +7,6 @@ import NewTimeLine from '../NewTimeLine';
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  @media screen and (min-width: 1280px) {
-    margin-bottom: 3rem;
-  }
 `;
 
 function CampTimeLine() {
@@ -18,7 +15,7 @@ function CampTimeLine() {
       <NewTimeLine />
       <Container>
         <Link to='https://linktr.ee/iefieldcamp'>
-          <Button label='FIELD CAMP 지원하기' animate />
+          <Button mg='4rem 0' label='FIELD CAMP 지원하기' animate />
         </Link>
       </Container>
     </>
