@@ -12,7 +12,7 @@ const H1 = styled.h1`
 `;
 
 const TitleContainer = styled.section`
-  height: 90vh;
+  height: calc(100vh - 58px);
   display: flex;
   flex-direction: column;
   justify-content: center;

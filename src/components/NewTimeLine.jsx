@@ -108,8 +108,8 @@ export default function NewTimeLine() {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
-        setHeight(1700);
-        return 1700;
+        setHeight(1600);
+        return 1600;
       }
       setHeight(1500);
       return 1500;

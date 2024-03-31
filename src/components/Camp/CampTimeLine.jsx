@@ -15,7 +15,7 @@ function CampTimeLine() {
       <NewTimeLine />
       <Container>
         <Link to='https://linktr.ee/iefieldcamp'>
-          <Button label='FIELD CAMP 지원하기' animate />
+          <Button mg='4rem 0' label='FIELD CAMP 지원하기' animate />
         </Link>
       </Container>
     </>

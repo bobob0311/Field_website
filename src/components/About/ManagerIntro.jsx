@@ -34,7 +34,7 @@ const Ul = styled.ul`
   gap: ${props => props.$gap || '2rem'};
   margin: ${props => props.$margin || '0'};
   @media screen and (min-width: 1280px) {
-    margin: ${props => props.desktopMargin || ''};
+    margin: ${props => props.$desktopMargin || ''};
   }
 `;
 
@@ -229,7 +229,7 @@ function ManagerIntro() {
           </ProfileLi>
         ))}
       </Ul>
-      <Ul $margin='4rem 0' $desktopMargin='8rem 0'>
+      <Ul $margin='4rem 0' $desktopMargin='10rem 0'>
         {depart.map(item => (
           <Li key={item.id}>
             <Figure>
