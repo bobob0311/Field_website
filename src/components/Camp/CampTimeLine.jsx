@@ -7,9 +7,6 @@ import NewTimeLine from '../NewTimeLine';
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  @media screen and (min-width: 1280px) {
-    margin-bottom: 3rem;
-  }
 `;
 
 function CampTimeLine() {
